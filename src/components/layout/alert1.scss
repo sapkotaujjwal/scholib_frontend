@@ -1,0 +1,55 @@
+.ppwrtwv55{
+    width: 100%;
+    display: block;
+    margin: 10px auto;
+    position: relative;
+
+    .main{
+        width: min(100%);
+        background-color: rgba(130, 130, 130, 0.106);
+        margin: auto;
+        position: relative;
+        border-radius: 3px;
+
+        p{
+            text-align: center;
+            // color: rgb(245, 245, 245);
+            margin-bottom: 0;
+        }
+
+        .close{
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 30px;
+            border-radius: 15px;
+            background-color: rgb(255, 255, 255);
+            border: 1px solid rgba(0, 0, 0, 0.152);
+            color: rgb(45, 45, 45);
+            cursor: pointer;
+        }
+
+        .close:hover{
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        }
+    }
+
+    .progress{
+        position: absolute;
+        bottom: 3px;
+        width: 90%;
+        height: 4px;
+        background-color: rgba(128, 128, 128, 0.391);
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 6px;
+
+        .moving{
+            height: 100%;
+            background-color: blue;
+        }
+    }
+    
+}

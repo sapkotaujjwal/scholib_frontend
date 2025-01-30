@@ -1,0 +1,179 @@
+.dashboard001234c {
+  width: 100%;
+
+  .box {
+    .top {
+      padding-top: 33px;
+      padding-bottom: 20px;
+      max-width: 930px;
+      margin-left: auto;
+      margin-right: auto;
+      overflow: auto;
+
+      .each {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        display: inline-block;
+
+        min-width: 25%;
+
+        p {
+          margin-bottom: 0;
+          color: rgb(79, 79, 79);
+        }
+      }
+    }
+
+    .results {
+      width: min(94vw, 900px);
+      margin: auto;
+      // overflow: hidden;
+      .dropdowns {
+        justify-content: flex-end;
+        margin-bottom: 20px;
+        // width: 950px;
+        max-width: 94vw;
+        margin: 14px auto;
+
+        .dropdown {
+          buttons {
+            background-color: rgb(98, 98, 98);
+            font-size: 14px;
+          }
+        }
+      }
+
+      .resultTable {
+        width: 950px;
+        max-width: 94vw;
+        margin: auto;
+        min-height: 100px;
+        overflow: auto;
+      }
+    }
+
+    .absent {
+      width: min(94vw, 900px);
+      min-height: 200px;
+      margin: 30px auto;
+      padding: 10px 0;
+      margin-top: 50px;
+
+      .abs-container {
+        display: flex;
+        flex-wrap: wrap;
+
+        .each {
+          flex-grow: 1;
+          margin: 10px;
+        }
+
+        .left {
+          flex-basis: 400px;
+          // border: 1px solid rgb(215, 215, 215);
+          max-height: 210px;
+          border-radius: 4px;
+          max-width: 94vw;
+
+        }
+        .right {
+          flex-basis: 160px;
+          text-align: center;
+          display: none;
+
+          .circle {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background-color: #8353e2;
+            margin: auto;
+          }
+          .present-text {
+            color: rgb(42, 42, 42);
+          }
+        }
+      }
+    }
+
+    .account {
+      width: min(94vw, 900px);
+      min-height: 200px;
+      margin: 30px auto;
+      margin-top: 50px;
+
+      .abs-container {
+        // box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+        display: flex;
+        padding: 20px;
+        flex-wrap: wrap;
+        border-radius: 4px;
+        align-items: center;
+        justify-content: center;
+
+        .each {
+          flex-grow: 1;
+          margin: 10px;
+        }
+
+        .left {
+          flex-basis: 400px;
+          // border: 1px solid rgb(215, 215, 215);
+          // max-height: 210px;
+          border-radius: 4px;
+
+
+          .tableOuter {
+            margin: auto;
+            min-height: 100px;
+            overflow: hidden;
+            max-width: 94vw;
+
+            .heroTable02387{
+              overflow: auto;
+              max-width: 94vw;
+            }
+          }
+
+
+
+        }
+        .right {
+          flex-basis: 160px;
+          text-align: center;
+
+          .circle {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background-color: #8353e2;
+            margin: auto;
+          }
+          .present-text {
+            color: rgb(42, 42, 42);
+          }
+        }
+      }
+
+      .pay {
+        margin-top: 20px;
+
+        p {
+          color: rgb(57, 57, 57);
+        }
+        input {
+          padding: 13px;
+          width: 60%;
+          background-color: rgb(237, 237, 237);
+          border-radius: 4px;
+        }
+
+        button {
+          width: 35%;
+          margin-left: 5%;
+          min-height: 40px;
+          line-height: 30px;
+        }
+      }
+    }
+  }
+}

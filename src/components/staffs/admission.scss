@@ -1,0 +1,164 @@
+.admissionAdmine2673{
+    padding: 20px 0px;
+    max-width: 1200px;
+    margin: auto;
+    padding-bottom: 50px;
+
+    .inside-content{
+
+        .veryTop {
+            margin: auto 2%;
+            padding: 25px 0px;
+            border-radius: 4px;
+            background-color: #f5f3fc;
+          }
+
+          .posgdj{
+            align-items: center;
+            padding: 20px 2%;
+            padding-top: 30px;
+            position: relative;
+
+            p{
+                margin-bottom: 0px;
+                margin-left: 5px;
+            }
+
+            .fs2526{
+                width: 40px;
+                height: 40px;
+                margin-left: 10px;
+                background-color: #eeeeee;
+                border-radius: 50%;
+
+                P{
+                    margin: 0;
+                }
+            }
+
+            .myFilter{
+                position: absolute;
+                right: 2%;
+                background-color: #313131;
+                padding: 5px 15px;
+                color: #ffffff;
+                border-radius: 6px;
+                cursor: pointer;
+                display: none;
+                font-size: 14px;
+            }
+
+            @media only screen and (max-width: 920px) {
+                .myFilter{
+                    display: inline-block;
+                }  
+
+            }
+
+
+          }
+
+          .myBox34{
+            flex-wrap: wrap;
+            padding: 0% 2%;
+            position: relative;
+
+            .left3553{
+                width: calc(100% - 240px);
+
+                .admission-inquiry{
+                    width: 100%;
+                    min-height: 200px;
+                    border-radius: 10px;
+                    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+                    display: flex;
+                    flex-wrap: wrap;
+                    padding: 30px 0px;
+                    cursor: pointer;
+                    margin: 10px auto;
+            
+                    .each{
+                        flex-basis: 300px;
+                    }
+            
+                    .left{
+                        img{
+                            width: 130px;
+                            height: 130px;
+                            border-radius: 20px;
+                            object-fit: cover;
+                        }
+            
+                        .info{
+                            p{
+                                margin-bottom: 2.5px;
+                                margin-top: 2.5px;
+                            }
+                        }
+                    }
+            
+                    .right{
+            
+                        .info{
+                            float: right;
+                            text-align: right;
+                            color: rgb(60, 60, 60);
+                            width: 100%
+            
+                            p{
+                                font-size: 13px !important;
+                            }
+                        }
+                    }
+            
+                    @media only screen and (max-width: 730px) {
+                        .right{
+                            display: none;
+                        }
+                    }
+            
+                }
+            
+                .admission-inquiry:hover{
+                    background-color: rgba(244, 244, 244, 0.675);
+                }
+            }
+
+            .right3553{
+                position: absolute;
+                top: 10px;
+                right: 2%;
+                width: 200px;
+                border-radius: 6px;
+                box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+                padding: 20px;
+
+                .dropdown973753{
+                    margin: 0px;
+                }
+            }
+
+
+
+            @media only screen and (max-width: 920px) {
+
+                .left3553{
+                    width: 100%;
+                }
+
+                .right3553{
+                    background-color: #fff;
+                    width: 96%;
+                }
+
+                .rightMobileView{
+                    display: none;
+                }
+
+            }
+
+          }
+      
+
+    }
+}

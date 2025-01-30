@@ -1,0 +1,104 @@
+.dgContact732382{
+
+    .contact {
+        width: min(94vw, 1200px);
+        margin: auto;
+        margin-top: 50px;
+    
+        .four {
+          margin-top: 20px;
+          margin-bottom: 20px;
+          background-color: #f8f8fb;
+          padding: 30px 0;
+    
+          p {
+            color: #456ce7;
+            margin-top: 15px;
+            margin-bottom: 30px;
+          }
+    
+          .main {
+            width: min(1200px, 94vw);
+            margin-top: 35px;
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+            background-color: #ffffff;
+            border-radius: 8px;
+    
+            .left {
+              flex-wrap: wrap;
+              min-height: 600px;
+
+
+              .content {
+                width: 40%;
+                background-color: #ebeceb;
+                min-height: 200px;
+                border-radius: 4px;
+                flex-direction: column;
+    
+                p {
+                  color: #171a1fff;
+                  margin: 8px;
+                  text-align: center;
+                  width: 86%;
+    
+                  span {
+                    font-weight: 500;
+                    color: #323842ff;
+                  }
+                }
+
+                svg{
+                  transform: scale(1.5);
+                  margin-bottom: 10px;
+                }
+
+                .logos {
+                  min-width: 180px;
+                  min-height: 20px;
+                  margin-top: 12px;
+    
+                  a {
+                    p {
+                      display: inline-block;
+                      color: rgb(31, 31, 31);
+                    }
+                    p:hover {
+                      color: rgb(60, 58, 58);
+                      transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+                    }
+                    margin: auto 4px;
+                  }
+
+                  svg{
+                    transform: scale(1);
+                    margin-bottom: 10px;
+                  }
+
+                }
+              }
+            }
+            .right {
+              min-height: 600px;
+              width: 100%;
+              background-color: rgb(209, 209, 209);
+              overflow: hidden;
+            }
+          }
+    
+          @media only screen and (max-width: 700px) {
+            .main {
+              flex-direction: column;
+              .left {
+                margin: 20px auto;
+    
+                .content {
+                  min-width: 80%;
+                  margin: 10px auto;
+                }
+              }
+            }
+          }
+        }
+      }
+}

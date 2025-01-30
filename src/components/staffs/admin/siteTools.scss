@@ -1,0 +1,80 @@
+.site-tools-admin2733 {
+    padding: 20px 0px;
+    max-width: 1200px;
+    margin: auto;
+    padding-bottom: 50px;
+  
+    .content-inside {
+  
+      .veryTop {
+        margin: auto 1%;
+        padding: 25px 0px;
+        border-radius: 4px;
+        background-color: #f5f3fc;
+      }
+  
+      .admin-navbar-pro {
+        overflow: auto;
+        margin: 20px auto;
+  
+        .elementsInside {
+  
+          justify-content: flex-start;
+          max-width: max-content;
+          margin: auto;
+  
+          .each-div {
+            padding: 5px 15px;
+            min-width: max-content;
+            cursor: pointer;
+            padding-bottom: 0px;
+  
+            p {
+              font-size: 15px;
+              font-weight: 600;
+              color: rgb(67, 67, 67);
+              padding: 4px 5px;
+              border-bottom: 3px solid rgba(0, 128, 0, 0);
+            }
+  
+            p:hover {
+              color: #01bdd7;
+              // border-bottom: 3px solid #565656;
+            }
+          }
+  
+          .active {
+            p {
+              color: #01bdd7;
+              border-bottom: 3px solid #01bdd7;
+            }
+          }
+        }
+      }
+  
+      .basic-stats {
+        display: flex;
+        align-items: center;
+        padding: 0px 4%;
+  
+        p {
+          margin-bottom: 0px;
+        }
+  
+        .last {
+          margin-left: 10px;
+          padding: 5px 20px;
+          background-color: grey;
+          color: #fff;
+          font-size: 13px;
+          border-radius: 16px;
+        }
+      }
+  
+      .PagesRendering{
+        margin: auto 2%;
+      }
+  
+    }
+  }
+  

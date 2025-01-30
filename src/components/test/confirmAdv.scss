@@ -1,0 +1,27 @@
+.confirmforall123 {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 999999;
+  width: 100vw;
+  height: 100%;
+  background-color: #e5e5e5c6;
+  backdrop-filter: blur(5px);
+
+  .insideConfirm4673 {
+    min-width: min(400px, 96vw);
+    padding: 30px 20px;
+    background-color: rgb(236, 236, 236);
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+      rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    border-radius: 4px;
+
+    .buttons {
+      margin-top: 14px;
+
+      button {
+        width: 45%;
+      }
+    }
+  }
+}

@@ -1,0 +1,113 @@
+.terms93637v{
+    width: 100%;
+    padding: 30px 10px;
+    // background-color: rgba(128, 128, 128, 0.072);
+    max-width: 94vw;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 4px;
+
+    .main{
+
+        display: flex;
+        // justify-content: center;
+
+        .menu{
+            display: none;
+            z-index: 3;
+        }
+
+        .title{
+            min-width: 340px;
+            max-height: 400px;
+            // border: 1px solid grey;
+            // overflow: auto;
+            overflow-y: auto;
+            overflow-x: none;
+            padding-right: 20px;
+
+            ol{
+                li{
+                    font-weight: 500;
+                    color: rgb(105, 105, 105);
+                    margin: 25px 4px;
+                    font-family: 'Inter', sans-serif;
+                    margin-top: 0px;
+                    cursor: pointer;
+                }
+
+                li:hover{
+                    // color: rgba(20, 20, 20, 0.801);
+                    font-weight: 600;
+                    color: #5bcedd;
+                }
+
+                .active{
+                    font-weight: 600;
+                    color: #01BDD7;
+                }
+            }
+
+        }
+
+        .content{
+            padding-right: 40px;
+            // max-height: 400px;
+            position: relative;
+            overflow: auto;
+
+
+            dl{
+                dt{
+                    font-size: 16px;
+                    font-weight: 300px;
+                    padding-bottom: 8px;
+                    color: rgb(82, 82, 82);
+                }
+
+                dd{
+                    font-size: 15px;
+                    padding-right: 10px;
+                }
+            }
+        }
+
+
+    }
+
+    @media only screen and (max-width: 1100px){
+
+        .main{
+            position: relative;
+
+            .menu{
+                display: inline-block;
+                position: absolute;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                top: 10px;
+                left: 10px;
+                text-align: center;
+                line-height: 40px;
+                color: rgb(73, 73, 73);
+                cursor: pointer;
+            }
+
+            .title{
+                width: 100%;
+                padding-left: 60px;
+                padding-top: 16.6px;
+
+            }
+    
+            .content{
+                width: 100%;
+                padding-left: 60px;
+                padding-top: 16.6px;
+            }
+        }
+
+
+    }
+}

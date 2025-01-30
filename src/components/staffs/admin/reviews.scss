@@ -1,0 +1,90 @@
+.adminReviews23879 {
+  .texr21 {
+    p {
+      padding-left: 10px;
+      color: #454545;
+    }
+  }
+
+  .dropdown973753{
+    margin: auto !important;
+  }
+
+  .meMain23y {
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: flex-start;
+
+    .etqeqs {
+        background-color: rgba(255, 192, 203, 0.046);
+    }
+    
+    .vLeft {
+        // flex-basis: 600px;
+        flex-grow: 1;
+
+
+        .vRach239{
+            background-color: #F3F5F7;
+            max-width: 700px;
+            border-radius: 6px;
+
+
+            .box2328{
+                justify-content: flex-start;
+                position: relative;
+                flex-wrap: wrap;
+
+                img{
+                    width: 45px;
+                    height: 45px;
+                    border-radius: 50%;
+                    margin-left: 10px;
+                    object-fit: cover;
+                }
+
+                .bsajcsa77{
+                    position: absolute;
+                    top: 30px;
+                    left: 55px;
+
+                }
+
+                .stars-main{
+                    width: 100%;
+                    margin: 10px;
+                    margin-left: 30px;
+                }
+
+            }
+
+        }
+
+
+    }
+
+
+    .vRight {
+      flex-basis: 220px;
+      box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+      min-height: 200px;
+      border-radius: 6px;
+      padding: 20px 15px;
+    }
+
+
+  }
+
+  @media only screen and (max-width: 890px) {
+
+    .meMain23y{
+        flex-direction: column-reverse;
+
+        .vRight{
+            width: 100%;
+            margin: 20px auto;
+        }
+    }
+
+  }
+}

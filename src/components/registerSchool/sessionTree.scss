@@ -1,0 +1,75 @@
+.sessionTree11 {
+  background-color: #4f4f4fe4;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 100;
+  backdrop-filter: blur(4px);
+
+  .insider22x {
+    padding: 2vw 3vw;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(243, 243, 243);
+
+    .closeContainer {
+      position: relative;
+      cursor: pointer;
+
+      .close {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        padding: 10px 16px;
+        color: #242424;
+        border: 1px solid grey;
+      }
+
+      .close:hover {
+        border: 1px solid red;
+        color: #ff0404;
+      }
+    }
+
+    .mone12 {
+      background-color: rgb(243, 243, 243);
+      min-height: 100%;
+      border-radius: 5px;
+      padding: 25px 20px;
+
+      .more {
+        .button {
+          width: 100%;
+          padding: 20px 0px;
+          text-align: center;
+
+          button {
+            width: min(100%, 600px);
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 700px) {
+    .insider22x {
+      padding: 0px;
+
+      .mone12 {
+        border-radius: 0px;
+        padding: 55px 10px;
+
+        .unorganized {
+          justify-content: center;
+
+          .titlesz {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}

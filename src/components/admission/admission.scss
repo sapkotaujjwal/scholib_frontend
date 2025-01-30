@@ -1,0 +1,270 @@
+.ufevndsybds676 {
+  .main {
+    width: min(94vw, 1100px);
+    margin: 20px auto;
+    min-height: 100px;
+
+    .top {
+      display: flex;
+      flex-basis: 400;
+      flex-wrap: wrap;
+      justify-content: space-around;
+
+      .element {
+        padding: 20px 1px;
+
+        img {
+          height: 300px;
+        }
+
+        .heading {
+          margin-top: 30px;
+        }
+
+        .instructions {
+          .instruction-item {
+            display: flex;
+            flex-direction: row;
+            width: min(90vw, 450px);
+            margin: 8px auto;
+
+            svg {
+              color: rgb(75, 75, 75);
+            }
+
+            p {
+              margin-bottom: 0;
+              color: rgba(0, 0, 0, 0.582);
+            }
+          }
+        }
+      }
+    }
+
+    .line {
+      width: min(94vw, 1100px);
+      margin: 40px auto;
+      background-color: rgba(0, 0, 0, 0.087);
+    }
+
+    // for that legendary form component i am going to use everywhere
+    .our-form3636 {
+      max-width: 1100px;
+      margin: auto;
+
+      .cProgress{
+        max-width: max-content;
+        margin: 20px auto;
+        min-height: 100px;
+        overflow: auto;
+        justify-content: flex-start;
+
+        .individual{
+            margin: 0px 10px;
+            padding-bottom: 10px;
+            cursor: pointer;
+
+            p{
+                margin-bottom: 0;
+                margin-left: 8px;
+                width: max-content;
+            }
+
+            .circle{
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                overflow: hidden;
+                font-size: 12px;
+                border: 1px solid grey;
+            }
+        }
+
+        .active{
+            border-bottom: 3px solid #01BCD6;
+
+            p{
+                color: #01BCD6;
+            }
+
+            .circle{
+                background-color: #01BCD6;
+                color: white;
+                border: 1px solid white;
+            }
+        }
+
+
+      }
+
+      .form-content6 {
+        padding: 30px 15px;
+        display: flex;
+        flex-wrap: wrap;
+        border: 1px solid rgb(224, 224, 224);
+        border-radius: 6px;
+        margin-top: 20px;
+
+        .each {
+          height: max-content;
+          margin: 8px 0px;
+          box-sizing: border-box;
+          padding: 5px 10px;
+
+          p {
+            font-size: 14px;
+            color: rgb(64, 64, 64);
+            font-weight: 600;
+            margin-left: 3px;
+          }
+
+          input,
+          textarea {
+            background-color: rgba(230, 230, 230, 0.802);
+            font-size: 14px;
+            border-radius: 4px;
+            padding: 10px 15px;
+            width: 100%;
+          }
+
+          textarea {
+            height: 90px;
+          }
+
+          .gender-div {
+            padding: 4px 0px;
+            border-radius: 4px;
+
+            input {
+              height: 18px;
+              width: 18px;
+            }
+
+            p {
+              line-height: 18px;
+            }
+          }
+
+          .checkbox-div {
+            width: 100%;
+
+            ul {
+              display: flex;
+              flex-wrap: wrap;
+              width: 100%;
+              justify-content: flex-start;
+              padding: 0px;
+              margin: 0px;
+
+              li {
+                list-style: none;
+                display: flex;
+                margin: 7px 10px;
+                align-items: center;
+                justify-content: center;
+                font-size: 14px;
+
+                input {
+                  width: 18px;
+                  height: 18px;
+                  margin-right: 6px;
+                }
+              }
+            }
+          }
+
+          .dropdown973753 {
+            margin: 0px;
+            margin-top: 8px;
+          }
+
+          .dropdown973753 .container {
+            width: 100%;
+          }
+
+          //for the image select component
+          .selectImage {
+            padding: 15px;
+            margin: auto;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+              rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+            width: 300px;
+            min-height: 300px;
+            cursor: pointer;
+            text-align: center;
+
+            img {
+              width: 250px;
+              height: 200px;
+              border-radius: 4px;
+              object-fit: cover;
+              margin-top: 5px;
+            }
+
+            button {
+              margin: 13px auto;
+              width: 90%;
+              margin-bottom: 0px;
+              padding: 3px 10px;
+              font-size: 14px;
+            }
+          }
+
+          .selectImage:hover {
+            scale: 1.01;
+          }
+        }
+
+        .width1 {
+          flex-basis: calc(25%);
+        }
+
+        .width2 {
+          flex-basis: calc(50%);
+        }
+
+        .width3 {
+          flex-basis: 75%;
+        }
+        .width4 {
+          flex-basis: calc(100%);
+        }
+
+        //making things responsive
+        @media only screen and (max-width: 1100px) {
+          .width1 {
+            flex-basis: calc(40%);
+          }
+
+          .width2 {
+            flex-basis: calc(60%);
+          }
+
+          .width3 {
+            flex-basis: 100%;
+          }
+        }
+
+        @media only screen and (max-width: 600px) {
+          .each {
+            flex-basis: calc(100%);
+            margin: 5px auto;
+
+            textarea {
+              height: 125px;
+            }
+          }
+        }
+      }
+
+      @media only screen and (max-width: 600px) {
+        .form-content6 {
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+    }
+  }
+}

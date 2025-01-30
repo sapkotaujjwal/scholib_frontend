@@ -1,0 +1,97 @@
+.removed-members {
+    width: 100%;
+
+
+    .myboxelem{
+        width: 100%;
+        max-width: 850px;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+        border-radius: 7px;
+        margin: 10px auto;
+        flex-wrap: wrap;
+        padding: 20px 3vw;
+        gap: 10px;
+        cursor: pointer;
+
+        .each{
+            flex-basis: 48%;
+            flex-grow: 1;
+        }
+
+        .left{
+            display: flex;
+            min-width: 300px;
+
+            .image{
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                img{
+                    height: 120px;
+                    width: 120px;
+                    object-fit: cover;
+                    border-radius: 6px;
+                }
+            }
+
+            .data{
+                margin-left: 15px;
+                padding: 20px 0px;
+                display: flex;
+                // align-items: center;
+                justify-content: center;
+                flex-direction: column;
+
+                p{
+                    color: rgb(72, 72, 72);
+                    margin: 4px 0px;
+                    padding-left: 7px;
+                }
+
+                .special{
+                    padding: 8px 15px;
+                    border-radius: 3px;
+                    background-color: rgb(235, 234, 234);
+                    margin-left: 5px;
+                }
+
+                .versatile{
+                    display: none;
+                }
+            }
+        }
+
+        .right{
+
+            .intt{
+                display: flex;
+                justify-content: flex-end;
+
+                p{
+                    color: rgb(45, 45, 45);
+                }
+            }
+
+        }
+
+        @media only screen and (max-width: 700px) {
+            .right{
+                display: none;
+            }
+
+            .left{
+                .versatile{
+                    display: inline-block !important;
+                }
+            }
+        }
+
+
+
+
+
+    }
+
+}

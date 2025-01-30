@@ -1,0 +1,51 @@
+.dbsdgsdgsdgsud{
+    position: fixed;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 6283623823;
+    overflow: hidden;
+    width: 100vw;
+  
+  .expanded .alert {
+    position: relative;
+    overflow: hidden;
+    transition: all 4.5s linear;
+    border-bottom: 3px solid rgb(60, 0, 255); /* Add the red line at the bottom */
+  }
+  
+  .expanded .alert:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: red;
+    animation: expandLine 4.5s linear;
+  }
+  
+  @keyframes expandLine {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+  
+
+    strong{
+        margin-right: 10px;
+    }
+    
+    button{
+        margin-left: 10px;
+        padding: 5px 20px;
+        background-color: rgb(185, 183, 183);
+        border-radius: 2px;
+    }
+    button:hover{
+        background-color: red;
+    }
+}

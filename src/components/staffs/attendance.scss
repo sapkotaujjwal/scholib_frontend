@@ -1,0 +1,133 @@
+.attendanceAdmin2838 {
+  padding: 20px 0px;
+  max-width: 1200px;
+  margin: auto;
+  padding-bottom: 50px;
+
+  .finalAlert {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(255, 255, 255);
+    z-index: 100;
+
+    .finalInside {
+      overflow: auto;
+      margin: 50px auto;
+      max-height: 80vh;
+      padding: 40px 10px;
+      width: min(96%, 700px);
+      border-radius: 5px;
+      box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+        rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+        position: relative;
+
+      .inxsds {
+        .buttons {
+          button {
+            width: 48%;
+            font-size: 13px;
+          }
+        }
+      }
+    }
+  }
+
+  .inside-content {
+    .veryTop {
+      margin: auto 2%;
+      padding: 25px 0px;
+      border-radius: 4px;
+      background-color: #f5f3fc;
+    }
+
+    .centerOne {
+      margin: 25px 2%;
+      min-height: 100px;
+
+      p {
+        color: rgb(61, 61, 61);
+      }
+
+      .righterOne {
+        justify-content: flex-end;
+        flex-wrap: wrap;
+
+        .each {
+          p {
+            margin-bottom: 0;
+          }
+        }
+      }
+
+      .admcont {
+        margin: 20px auto;
+        margin-top: min(6vw, 40px);
+
+        box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+          rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+        border-radius: 4px;
+
+        // for the student register component
+        .regParent {
+          padding: 30px 10px;
+          max-width: 800px;
+          margin: auto;
+          p {
+            margin-bottom: 0;
+            color: rgb(87, 87, 87);
+          }
+
+          .right {
+            float: right;
+
+            .parent {
+              display: inline-block;
+
+              .each {
+                display: flex;
+                margin: auto 8px;
+
+                .box {
+                  width: 20px;
+                  height: 20px;
+                  border-radius: 5px;
+                  margin-right: 8px;
+                }
+              }
+            }
+          }
+
+          .content {
+            clear: both;
+            padding-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+
+            .each {
+              flex-basis: min(70px, 25%);
+              height: 60px;
+              margin: 4px;
+              border-radius: 6px;
+              cursor: pointer;
+              color: rgb(255, 255, 255);
+              font-weight: 600;
+            }
+
+            .each:hover {
+              background-color: black;
+              scale: 1.05;
+            }
+          }
+        }
+      }
+
+      .below {
+        margin-top: min(10vw, 50px);
+      }
+    }
+  }
+}

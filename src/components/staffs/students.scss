@@ -1,0 +1,69 @@
+.studentsAdmin2838 {
+  padding: 20px 0px;
+  max-width: 1200px;
+  margin: auto;
+  padding-bottom: 50px;
+
+
+  .student-details-container2212 {
+    position: fixed;
+    width: 100vw;
+    left: 0px;
+    top: 0px;
+    z-index: 100;
+    background-color: #fff;
+    height: 100vh;
+    overflow: auto;
+  }
+
+  .inside-content {
+    .veryTop {
+      margin: auto 2%;
+      padding: 25px 0px;
+      border-radius: 4px;
+      background-color: #f5f3fc;
+    }
+
+    .here-main2638 {
+      margin: 0px 2%;
+      padding: 25px 0px;
+      border-radius: 4px;
+
+      .year-dropdown{
+        width: min(94vw, 1000px);
+        margin: 10px auto;
+        min-height: 50px;
+        justify-content: flex-end;
+      }
+
+
+
+      .students-table-3283 {
+        margin: 20px 2%;
+
+        p {
+          margin-bottom: 0px;
+        }
+
+        .bar-control {
+          justify-content: flex-end;
+          flex-wrap: wrap;
+
+          .ind-bar {
+            margin: 5px 5px;
+          }
+        }
+      }
+    }
+
+    @media only screen and (max-width: 750px) {
+      .veryTop {
+        margin: auto 1%;
+      }
+
+      .here-main2638 {
+        margin: 0px 1%;
+      }
+    }
+  }
+}

@@ -1,0 +1,81 @@
+.alertforall123 {
+  position: fixed;
+  top: 70px;
+  right: 0px;
+  z-index: 10000;
+  padding-bottom: 10px;
+//   width: 100vw;
+
+  .insideAlert4673 {
+    float: right;
+    min-width: 40vw;
+    height: 68px;
+    width: max-content;
+    background-color: rgb(236, 236, 236);
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    border-radius: 12px 2px 2px 12px;
+    position: relative;
+    justify-content: flex-start;
+    padding-left: 25px;
+    padding-right: 60px;
+    overflow: hidden;
+
+    p{
+        margin-bottom: 0px;
+        color: rgb(42, 42, 42);
+    }
+
+    .p2{
+        color: rgb(81, 81, 81);
+    }
+
+    .close{
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 34px;
+        height: 34px;  
+        background-color: rgb(213, 213, 213);  
+        border-radius: 50%;  
+        cursor: pointer;
+    }
+
+    .line{
+        position: absolute;
+        bottom: 0px;
+        left: 2px;
+        height: 4px;
+        background-color: grey;
+        border-radius: 0 0 0 12px;
+        width: 100%;
+
+        .line2 {
+            width: 0;
+            height: 100%;
+            background-color: blue;
+            animation: expandWidth 5s forwards;
+          }
+          
+          @keyframes expandWidth {
+            from {
+              width: 0;
+            }
+            to {
+              width: 100%;
+            }
+          }
+          
+    }
+
+    .close:hover{
+        background-color: grey;
+    }
+  }
+
+  @media only screen and (max-width: 500px) {
+    .insideAlert4673{
+        width: 98vw;
+    }
+  }
+}

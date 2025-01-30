@@ -1,0 +1,121 @@
+.allClassesBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100%;
+  background-color: #d4d4d4;
+  z-index: 1000;
+
+  .meInside23 {
+    width: min(100%, 1000px);
+    padding: 20px 10px;
+    overflow-y: auto;
+    position: relative;
+    // max-height: 96vh;
+    max-height: 100%;
+    border-radius: 6px;
+
+    background-color: rgb(255, 255, 255);
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 2vw;
+
+      button {
+        font-size: 12px;
+        box-shadow: rgba(0, 0, 0, 0.073) 0px 6px 24px 0px,
+          rgba(0, 0, 0, 0.241) 0px 0px 0px 1px;
+        border-radius: 4px;
+        padding: 5px 30px;
+        width: 140px;
+        background-color: white;
+      }
+    }
+
+    @media only screen and (max-width: 583px) {
+      .close {
+        width: 100%;
+        margin: auto;
+        text-align: center;
+        right: 0px;
+        top: 12px;
+
+        button {
+          width: 90%;
+          border-radius: 2px;
+          background-color: rgb(61, 61, 61);
+          color: #fff;
+          border: 0px;
+          padding: 8px;
+        }
+      }
+    }
+
+    .content-box {
+      width: min(100%, 900px);
+      margin: 20px auto;
+
+      .actddsd {
+        padding: 20px 2%;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+          rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+        border-radius: 4px;
+
+        .classesContent {
+          .classes-list {
+            flex-wrap: wrap;
+            gap: 6px;
+
+            .each {
+              border-radius: 6px;
+              height: 100px;
+              width: 130px;
+              cursor: pointer;
+              transition: all 0.3s ease;
+              overflow: hidden;
+              background-color: rgb(99, 99, 99);
+
+              p {
+                padding: 15px 7px;
+                min-width: 80%;
+                max-width: 90%;
+                border-radius: 4px;
+                margin: 0px;
+                text-align: center;
+                font-size: 14px;
+
+                color: rgb(69, 69, 69);
+                background-color: #ffffff;
+              }
+            }
+
+            .each:hover {
+              box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+                rgba(0, 0, 0, 0.23) 0px 6px 6px;
+            }
+
+            .active {
+              background-color: #00bcd7;
+
+              p {
+                background-color: #eafcff;
+                color: #000;
+              }
+            }
+          }
+        }
+      }
+
+      .button {
+        width: 100%;
+      }
+    }
+  }
+}

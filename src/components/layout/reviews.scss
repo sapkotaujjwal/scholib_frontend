@@ -1,0 +1,264 @@
+.reviews732893g{
+    width: 100%;
+    min-height: 20px;
+    padding: 30px 10px;
+    // background-color: #FAFAFB;
+
+    .inside{
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: flex-start;
+
+
+        .input-write{
+            margin-top: 30px;
+
+            .rating_star_box{
+                span{
+                    font-size: 34px !important;
+                }
+            }
+
+            textarea{
+                border: 1px solid rgb(232, 232, 232);
+                margin: 10px auto;
+                margin-top: 4px;
+                height: 70px;
+                border-radius: 5px;
+                padding: 10px 10px;
+                font-size: 14px;
+                width: 100%;
+                background-color: rgb(233, 233, 233);
+            }
+
+            button{
+                font-size: 13px;
+                width: calc(50% - 5px);
+            }
+        }
+
+        .each{
+            flex-grow: 1;
+            // border: 1px solid rgba(128, 128, 128, 0.272);
+            min-height: 200px;
+
+        }
+
+        .left{
+            flex-basis: 200px;
+
+
+            .container{
+
+            .topic{
+                p{
+                    color: rgb(73, 73, 73);
+                }
+            }
+
+            .below-topic{
+                justify-content: flex-start;
+                margin: 1vw 0px;
+            }
+
+            .image{
+                width: max-content;
+                margin: 10px 0px;
+                width: 90%;
+                overflow: hidden;
+
+                img{
+                    width: 250px;
+                    border-radius: 4px;
+                }
+            }
+        }
+
+        @media only screen and (max-width: 1020px) {
+
+            .container{
+                .topic{
+                    text-align: center;
+
+                }
+    
+                .below-topic{
+                    justify-content: center;
+                }
+    
+                .image{
+                    text-align: center;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+            }
+
+        }
+
+        }
+
+        .right{
+            flex-basis: 650px;
+
+            
+            .write{
+                float: right;
+                
+                button{
+                    background-color: #fff;
+                    padding: 4px 20px;
+                    border: 1px solid #00BCD7;
+                    border-radius: 4px;
+                    font-size: 13px;
+                    color: #00b6d2;
+                }
+                
+                button:hover{
+                    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+                }
+            }
+
+            @media only screen and (max-width: 450px) {
+                .write{
+                    margin: auto;
+                    float: none;
+                    text-align: center;
+                    margin-top: 15px;
+
+                    button{
+                        width: 100%;
+                    }
+                }
+            }
+
+            .reviews-container{
+                margin-top: min(40px, 4vw);
+
+                .review{
+                    background-color: rgb(240, 240, 240);
+                    min-width: 100%;
+                    min-height: 100px;
+                    margin: 10px 0px;
+                    border-radius: 5px;
+                    padding: 20px 15px;
+
+                    .user{
+                        justify-content: flex-start;
+                        position: relative;
+                        padding-left: 50px;
+                        font-size: 12px;
+
+                        .image{
+                            position: absolute;
+                            top: 0px;
+                            left: 0px;
+
+                            img{
+                                width: 40px;
+                                height: 40px;
+                                object-fit: cover;
+                                border-radius: 20px;
+                            }
+                        }
+
+                        .stars-main{
+                            position: absolute;
+                            left: 50px;
+                            top: 13px;             
+                        }
+                    }
+
+                    .content{
+                        margin-top: 30px;
+                        font-size: 14px;
+                        font-weight: 400;
+                        padding-top: 5px;
+                        padding-bottom: 5px;
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+.allreviews23{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(223, 223, 223);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 999;
+
+    .bar{
+        width: 100vw;
+        height: 60px;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        background-color: rgb(255, 255, 255);
+        z-index: 999999999999;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+        padding: 0px 5vw;
+
+        button{
+            font-size: 14px;
+            width: 200px;
+        }
+    }
+
+    .veryInside2328b{
+        padding: 30px 15px;
+        padding-top: 100px;
+        background-color: #fff;
+        max-height: calc(100vh);
+        overflow: auto;
+        padding-bottom: 60px;
+        min-width: min(96vw, 800px);
+
+
+        .review{
+            background-color: rgb(240, 240, 240);
+            min-width: 100%;
+            min-height: 100px;
+            margin: 10px 0px;
+            border-radius: 5px;
+            padding: 20px 15px;
+
+            .user{
+                justify-content: flex-start;
+                position: relative;
+                padding-left: 50px;
+                font-size: 12px;
+
+                .image{
+                    position: absolute;
+                    top: 0px;
+                    left: 0px;
+
+                    img{
+                        width: 40px;
+                        height: 40px;
+                        object-fit: cover;
+                        border-radius: 20px;
+                    }
+                }
+
+                .stars-main{
+                    position: absolute;
+                    left: 50px;
+                    top: 13px;             
+                }
+            }
+
+            .content{
+                margin-top: 30px;
+                font-size: 14px;
+                font-weight: 400;
+                padding-top: 5px;
+                padding-bottom: 5px;
+            }
+        }
+    }
+}

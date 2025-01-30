@@ -1,0 +1,117 @@
+.tomato32552{
+    padding: 0px 0px;
+    width: 280px;
+    margin: auto;
+    background-color: white;
+
+    .errorContainer{
+        background-color: rgba(255, 255, 255, 0.264);
+        padding: 20px 0px;
+        border-radius: 4px;
+        flex-direction: column;
+        min-height: 500px;
+        box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    }   
+
+    .maindbsn{
+        background-color: rgba(255, 255, 255, 0.264);
+        padding: 20px 0px;
+        border-radius: 4px;
+        min-height: 400px;
+        box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+        padding-top: 0;
+
+        hr{
+            width: 90%;
+            margin: 20px auto;
+        }
+
+        .top{
+            width: 100%;
+            height: 80px;
+            background-color: #EAFCFF;
+            border-radius: 4px 4px 0px 0px;
+            position: relative;
+
+            .image{
+                position: absolute;
+                width: 60px;
+                height: 60px;
+                bottom: -30px;
+                left: 50%;
+                transform: translateX(-50%);
+                padding: 0.5px;
+                border: 2px solid #A7F4FF;
+                border-radius: 50%;
+
+                img{
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 50%;
+                }
+            }
+
+            .user{
+                padding-top: 120px;
+
+                .parent-buttons{
+                    padding: 0 3px;
+
+                    .likeButton{
+                        padding: 4px 10px;
+                        font-size: 12px;
+                        color: rgba(29, 29, 29, 0.803);
+                        background-color: rgba(128, 128, 128, 0.083);
+                        width: max-content;
+                        border-radius: 3px;
+    
+                        p{
+                            margin: 0;
+                        }
+                    }
+                }
+
+
+            }
+        }
+
+        .bottom{
+            width: 86%;
+            margin: 180px auto;
+            margin-bottom: 10px;
+            border-radius: 6px;
+
+            p{
+                font-size: 13px;
+                color: rgb(64, 64, 64);
+                margin: 0;
+                // margin-bottom: 3px;
+            }
+
+            .data-div{
+                background-color: rgba(175, 173, 173, 0.206);
+                border-radius: 3px;
+                padding: 4px 10px;
+                margin-top: 4px;
+            }
+
+            button{
+                width: 96%;
+                font-size: 12px;
+                border-radius: 3px;
+            }
+            
+            .buttonLogOut{
+                width: 96%;
+                font-size: 12px;
+                border: 1px solid grey;
+                border-radius: 3px;
+            }
+
+            .buttonLogOut:hover{
+                border: 1px solid rgb(133, 113, 113);
+                background-color: rgba(128, 128, 128, 0.09);
+            }
+        }
+    }
+}

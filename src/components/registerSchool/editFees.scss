@@ -1,0 +1,325 @@
+.editFeesdwsbj {
+    background-color: #ececec;
+    width: 100vw;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 100;
+  
+    /* Hide the default number input arrows */
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  
+    .dropdown973753 {
+      p {
+        text-transform: none !important;
+      }
+    }
+  
+    .courseInside730 {
+      width: min(720px, 100vw);
+      max-height: 96vh;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px 15px;
+      overflow: hidden;
+  
+      .actual-container-very-form {
+        overflow: auto;
+        overflow-x: hidden;
+        background-color: rgba(245, 245, 245, 0.703);
+        border-radius: 6px;
+        max-height: calc(96vh - 225px);
+        height: auto;
+  
+        .form-content6 {
+          padding: 30px 15px;
+          display: flex;
+          flex-wrap: wrap;
+          border-radius: 6px;
+          margin-top: 0px;
+          padding-top: 5px;
+  
+          .each {
+            height: max-content;
+            margin: 8px 0px;
+            box-sizing: border-box;
+            padding: 5px 10px;
+  
+            p {
+              font-size: 14px;
+              color: rgb(64, 64, 64);
+              margin-bottom: 3px;
+              font-weight: 600;
+              margin-left: 3px;
+            }
+  
+            input,
+            textarea {
+              background-color: rgba(230, 230, 230, 0.802);
+              font-size: 14px;
+              border-radius: 4px;
+              padding: 10px 15px;
+              width: 100%;
+            }
+  
+            .title {
+              width: 100%;
+  
+              p {
+                margin-bottom: 0;
+              }
+  
+              .contents {
+                background-color: rgba(195, 195, 195, 0.375);
+                margin: 10px auto;
+                border-radius: 3px;
+                padding: 8px 14px;
+  
+                .each {
+                  background-color: rgb(204, 203, 203);
+                  padding: 10px 10px;
+                  border-radius: 4px;
+                  margin: 5px;
+                  display: inline-block;
+                  position: relative;
+                  padding-right: 36px;
+                  // text-transform: capitalize;
+  
+                  .closes32 {
+                    position: absolute;
+                    cursor: pointer;
+                    border-radius: 10px;
+                    width: 20px;
+                    height: 20px;
+                    right: 5px;
+                    top: 5px;
+                    background-color: rgb(156, 156, 156);
+                    font-size: 9px;
+                  }
+  
+                  .closes32:hover {
+                    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+                  }
+                }
+  
+                .special {
+                  width: 100%;
+                  background-color: #ffffff00;
+                  padding: 0;
+                  margin: 0px;
+                  padding-top: 13px;
+  
+                  .mHead {
+                    padding: 10px 0px;
+                    position: relative;
+                    text-align: center;
+                    background-color: rgb(204, 203, 203);
+  
+                    .closes32 {
+                      position: absolute;
+                      cursor: pointer;
+                      border-radius: 0px;
+                      width: 50px;
+                      height: 100%;
+                      right: 0px;
+                      top: 0px;
+                      background-color: rgb(127, 127, 127);
+                      font-size: 17px;
+                      color: #e2e2e2;
+                    }
+  
+                    .closes32:hover {
+                      background-color: rgb(175, 175, 175);
+                      box-shadow: none;
+                    }
+                  }
+  
+                  .second-cont {
+                    width: 100%;
+                    min-height: 40px;
+                    margin: 13px auto;
+                  }
+                }
+              }
+            }
+  
+            .grouping {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+  
+              .inputAdv {
+                width: calc(100% - 50px);
+                border-top-right-radius: 0px;
+                border-bottom-right-radius: 0px;
+                height: 41px;
+              }
+  
+              .enterBtn {
+                height: 41px;
+                width: 50px;
+                background-color: #00cbe6;
+                color: #fff;
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+                cursor: pointer;
+              }
+            }
+  
+            textarea {
+              height: 90px;
+            }
+  
+            .gender-div {
+              padding: 4px 0px;
+              border-radius: 4px;
+  
+              input {
+                height: 18px;
+                width: 18px;
+              }
+  
+              p {
+                line-height: 18px;
+              }
+            }
+  
+            .checkbox-div {
+              width: 100%;
+  
+              ul {
+                display: flex;
+                flex-wrap: wrap;
+                width: 100%;
+                justify-content: flex-start;
+                padding: 0px;
+                margin: 0px;
+  
+                li {
+                  list-style: none;
+                  display: flex;
+                  margin: 7px 10px;
+                  align-items: center;
+                  justify-content: center;
+                  font-size: 14px;
+  
+                  input {
+                    width: 18px;
+                    height: 18px;
+                    margin-right: 6px;
+                  }
+                }
+              }
+            }
+  
+            .dropdown973753 {
+              margin: 0px;
+              margin-top: 8px;
+            }
+  
+            .dropdown973753 .container {
+              width: 100%;
+            }
+          }
+  
+          
+          .table-my {
+            // min-width: 100%;
+            // background-color: rgb(189, 189, 189);
+            min-width: 500px;
+
+
+  
+            .eachRow {
+              width: 100%;
+              height: 55px;
+              // background-color: grey;
+              margin: 10px auto;
+              // border-bottom: 1px solid rgb(228, 228, 228);
+  
+              div {
+                width: 50%;
+                // height: 100%;
+                // background-color: green;
+  
+                p {
+                  margin-bottom: 0;
+                }
+  
+                .dropdown973753 {
+                  width: 100%;
+                  height: auto;
+                  margin: 0;
+  
+                  p {
+                    font-size: 13px !important;
+                  }
+                }
+              }
+            }
+          }
+  
+          .width1 {
+            flex-basis: calc(25%);
+          }
+  
+          .width2 {
+            flex-basis: calc(50%);
+          }
+  
+          .width3 {
+            flex-basis: 75%;
+          }
+          .width4 {
+            flex-basis: calc(100%);
+          }
+  
+          //making things responsive
+          @media only screen and (max-width: 1100px) {
+            .width1 {
+              flex-basis: calc(40%);
+            }
+  
+            .width2 {
+              flex-basis: calc(60%);
+            }
+  
+            .width3 {
+              flex-basis: 100%;
+            }
+          }
+  
+          @media only screen and (max-width: 600px) {
+            .each {
+              flex-basis: calc(100%);
+              margin: 5px auto;
+  
+              textarea {
+                height: 125px;
+              }
+            }
+          }
+        }
+      }
+  
+      .buttons {
+        margin-top: 10px;
+  
+        button {
+          padding: 8px 30px;
+          background-color: grey;
+          color: #fff;
+          font-weight: 600;
+          font-size: 14px;
+          width: 45%;
+          border-radius: 6px;
+        }
+      }
+    }
+  }
+  

@@ -1,0 +1,74 @@
+.usdysn{
+        .main{
+            width: 100%;
+            margin: 0px auto;
+            border-radius: 4px;
+            position: relative;
+            padding-left: 210px;
+            padding-right: 10px;
+    
+            .miniNavShow{
+              display: none;
+              padding: 10px 1px;
+              border-radius: 4px;
+              position: fixed;
+              top: 5px;
+              left: 0px;
+              z-index: 100;
+
+              .icon{
+                padding: 3px 10px;
+                background-color: rgb(224, 224, 224);
+                border-radius: 6px;
+                max-width: max-content;
+              }
+            }
+    
+            .miniNav{
+                position: fixed;
+                top: 70px;
+                background-color: rgb(254, 254, 254);
+                left: 0px;
+                overflow: hidden;
+                width: max-content;
+            }   
+    
+            .miniNav2{
+              position: fixed;
+              top: 70px;
+              left: 0px;
+              overflow: hidden;
+              width: max-content;
+          } 
+          
+          .others{
+            width: 100%;
+          }
+    
+        }
+    
+    
+        @media only screen and (max-width: 1220px){
+    
+          .main{
+            padding-left: 10px;
+            padding-right: 10px;
+    
+            .miniNav{
+              display: none;
+            }
+    
+            .miniNavShow{
+              display: block;
+              padding-left: 30px;
+              font-size: 20px;
+            }
+          }
+        }
+
+        @media only screen and (min-width: 1221px){
+          .miniNav2{
+            display: none;
+          }
+        }
+    }

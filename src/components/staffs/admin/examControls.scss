@@ -1,0 +1,429 @@
+.exam-controls-main {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: #fff;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 999;
+
+  .insiderxzqw {
+    width: min(95%, 1200px);
+    position: relative;
+    padding: 30px 2vw;
+    margin: auto;
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 2vw;
+
+      button {
+        font-size: 12px;
+        box-shadow: rgba(0, 0, 0, 0.073) 0px 6px 24px 0px,
+          rgba(0, 0, 0, 0.241) 0px 0px 0px 1px;
+        border-radius: 4px;
+        padding: 5px 30px;
+        width: 140px;
+        background-color: white;
+      }
+    }
+
+    @media only screen and (max-width: 583px) {
+      .close {
+        width: 100%;
+        margin: auto;
+        text-align: center;
+        right: 0px;
+        top: 12px;
+
+        button {
+          width: 100%;
+          border-radius: 2px;
+          background-color: rgb(61, 61, 61);
+          color: #fff;
+          border: 0px;
+          padding: 8px;
+        }
+      }
+    }
+
+    .myContent {
+      margin-top: 37px;
+
+      p {
+        margin: 0;
+      }
+
+      .box {
+        flex-wrap: wrap;
+        gap: 25px;
+        margin: 20px auto;
+        align-items: flex-start;
+
+        .first {
+          width: 100%;
+
+          margin-left: auto;
+          margin-right: auto;
+
+          .classesContent {
+            padding: 20px 10px;
+            border-radius: 4px;
+            box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+              rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+
+            .classes-list {
+              flex-wrap: wrap;
+              gap: 6px;
+
+              .each {
+                background-color: rgb(99, 99, 99);
+                border-radius: 6px;
+                height: 100px;
+                width: 130px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                overflow: hidden;
+
+                p {
+                  color: rgb(69, 69, 69);
+                  background-color: #fff;
+                  padding: 15px 7px;
+                  min-width: 80%;
+                  max-width: 90%;
+                  border-radius: 4px;
+                  margin: 0px;
+                  text-align: center;
+                  font-size: 14px;
+                }
+              }
+
+              .each:hover {
+                box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+                  rgba(0, 0, 0, 0.23) 0px 6px 6px;
+              }
+
+              .active {
+                background-color: rgb(176, 176, 176);
+              }
+            }
+          }
+
+          .button {
+            button {
+              background-color: rgba(188, 188, 188, 0.777);
+              color: #333333;
+              padding: 8px;
+            }
+
+            button:hover {
+              border: 1px solid grey;
+              background-color: #fff;
+              color: #2c2c2c;
+            }
+          }
+
+          .buttons {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            width: 100%;
+
+            .button-border-one {
+              background-color: #01bdd7;
+              color: #fff;
+              width: min(200px, 48%);
+              font-weight: 500;
+              border: 1px solid #01bdd7;
+            }
+
+            .button-border-one:hover {
+              background-color: #fff;
+              color: rgb(42, 42, 42);
+              border: 1px solid grey;
+            }
+
+            .button-border-two {
+              background-color: #fff;
+              border: 1px solid #01bdd7;
+              color: #01bdd7;
+            }
+
+            .button-border-two:hover {
+              background-color: #fff;
+              border: 1px solid #000000;
+              color: #232323;
+            }
+          }
+        }
+      }
+
+      .results-table {
+        min-height: 400px;
+        margin: 25px auto;
+        border-radius: 4px;
+        gap: 20px;
+        flex-wrap: wrap;
+
+        .each {
+          flex-grow: 1;
+          //   background-color: white;
+        }
+
+        .first {
+          width: min(95%, 700px);
+
+          margin-left: auto;
+          margin-right: auto;
+
+          .our-dropdown {
+            width: 100%;
+            justify-content: flex-end;
+
+            .righterOne {
+              justify-content: flex-end;
+              flex-wrap: wrap;
+
+              .each {
+                p {
+                  margin-bottom: 0;
+                }
+              }
+            }
+          }
+
+          //for that legendary create-result component
+          .create-result-main-parent {
+            .create-result-parent27327 {
+              .create-result327 {
+                border: 2px solid #dfe0e6;
+                width: 100%;
+                // max-width: 700px;
+                border-radius: 6px;
+                overflow: hidden;
+                margin: auto;
+
+                .vertical {
+                  min-width: 80px;
+                  width: max-content;
+                  border: 1px solid #dfe0e6;
+                  border-top: 0px;
+                  flex-basis: 33.3333%;
+                  border-bottom: 0px;
+
+                  .each {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+                    border-bottom: 1px solid #dfe0e6;
+                    font-size: 14px;
+                    height: 55px;
+                  }
+
+                  .top {
+                    background-color: rgba(228, 228, 228, 0.327);
+                    font-weight: 500;
+                    padding: 10px 0px;
+                  }
+                }
+
+                :nth-child(1) {
+                  border-left: 0;
+                  flex-basis: 30%;
+                }
+
+                :nth-child(2) {
+                  flex-basis: 40%;
+                }
+
+                :nth-child(3) {
+                  border-right: 0;
+                  flex-basis: 30%;
+
+                  input {
+                    width: 100px;
+                    border-radius: 5px;
+                    text-align: center;
+                    color: white;
+                    background-color: #dbdbdb;
+                    padding: 6px 0px;
+                    color: #000;
+                  }
+                }
+
+                :nth-child(4) {
+                  border-right: 0;
+                  flex-basis: 30%;
+
+                  input {
+                    width: 100px;
+                    border-radius: 5px;
+                    text-align: center;
+                    color: white;
+                    background-color: #dbdbdb;
+                    padding: 6px 0px;
+                    color: #000;
+                  }
+                }
+              }
+
+              @media only screen and (max-width: 420px) {
+                .create-result327 {
+                  width: 400px;
+
+                  :nth-child(1) {
+                    border-left: 0;
+                    flex-basis: 1%;
+                  }
+
+                  :nth-child(2) {
+                    flex-basis: 52%;
+                  }
+
+                  :nth-child(3) {
+                    border-right: 0;
+                    flex-basis: 47%;
+                  }
+                }
+              }
+            }
+            .inputsBelow {
+              display: flex;
+              flex-wrap: wrap;
+              flex-grow: 1;
+              padding-top: 20px;
+              gap: 20px;
+
+              .each {
+                flex-basis: 180px;
+                margin-top: 15px;
+                // margin-left: 10px;
+                // margin-right: 10px;
+                display: flex;
+                flex-grow: 1;
+
+                .inside {
+                  width: 100%;
+
+                  p {
+                    font-size: 14px;
+                    margin-left: 3px;
+                  }
+
+                  input {
+                    background-color: rgba(201, 201, 201, 0.752);
+                    padding: 10px 15px;
+                    border-radius: 4px;
+                    width: 100%;
+                    color: rgb(41, 41, 41);
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .second {
+          padding: 20px 10px;
+          border-radius: 4px;
+          flex-basis: 300px;
+          box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+            rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+          margin: auto;
+
+          .exNo {
+            width: 200px;
+            margin: 10px auto;
+            cursor: pointer;
+
+            hr {
+              color: rgb(175, 175, 175);
+              margin: 10px auto;
+              font-weight: 400;
+              background-color: rgb(175, 175, 175);
+            }
+          }
+
+          .exNo:hover, .activeHere{
+            p{
+              color: #01bdd7;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .finalAlert {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(255, 255, 255);
+    z-index: 100;
+
+    .finalInside {
+      overflow: auto;
+      margin: 50px auto;
+      max-height: 80vh;
+      padding: 40px 10px;
+      width: min(96%, 700px);
+      border-radius: 5px;
+      box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+        rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+        position: relative;
+
+      .inxsds {
+
+        .inputsBelow {
+          display: flex;
+          flex-wrap: wrap;
+          flex-grow: 1;
+          padding-top: 20px;
+          gap: 20px;
+
+          .each {
+            flex-basis: 180px;
+            margin-top: 15px;
+            // margin-left: 10px;
+            // margin-right: 10px;
+            display: flex;
+            flex-grow: 1;
+
+            .inside {
+              width: 100%;
+
+              p {
+                font-size: 14px;
+                margin-left: 3px;
+              }
+
+              input {
+                background-color: rgba(201, 201, 201, 0.752);
+                padding: 10px 15px;
+                border-radius: 4px;
+                width: 100%;
+                color: rgb(41, 41, 41);
+              }
+            }
+          }
+        }
+
+
+        .buttons {
+          button {
+            width: 48%;
+            font-size: 13px;
+          }
+        }
+      }
+    }
+  }
+
+
+}

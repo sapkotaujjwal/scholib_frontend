@@ -1,0 +1,42 @@
+.qetusbkdaa234{
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(20px);
+    background-color: rgba(229, 229, 229, 0.279);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 9999999999999999;
+    overflow: auto;
+
+    .main{
+        width: min(90vw, 600px);
+        background-color: #fff;
+        border-radius: 6px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        padding: 40px 10px;
+
+        .container{
+            text-align: center;
+
+            p{
+                width: min(80vw, 400px);
+                margin: auto;
+                // font-size: 14px;
+                // line-height: 18px;
+            }
+
+            .img{
+                width: min(60vw, 300px);
+                margin: auto;
+            }
+
+            button{
+                width: 80%;
+                margin: 10px auto;
+                font-size: 13px;
+                margin-bottom: 0;
+            }
+        }
+    }
+}

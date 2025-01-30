@@ -1,0 +1,312 @@
+.footer{
+    margin-top: 20px;
+    width: 100vw;
+    width: 100%;
+    flex-wrap: wrap;
+    height: 300px;
+    z-index: 10;
+
+    .school{
+        margin: 50px auto;
+        background-color: #4069E5FF;
+        padding-bottom: 20px;
+
+    .school-top{
+        flex-wrap: wrap;
+        padding-top: 40px;
+        padding-bottom: 40px;
+
+        .left{
+            width: 300px;
+            flex-wrap: wrap;
+        .logo{
+            // background-color: #0001;
+            padding: 8px;
+            img{
+                width: min(6.5vw, 30px);
+                height: min(6.5vw, 30px);
+                background: none;
+                margin-right: 10px;
+            }
+    
+            h1{
+                color: #ffffff;
+            }
+        }
+
+        .name{
+            h1{
+                text-transform: capitalize;
+                color: #e1e1e1;
+                margin-top: 10px;
+
+            }
+        }
+
+
+        .taught{
+            border-radius: 20px 20px 0px 20px; 
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+            background-color: #f1f1f1;
+            margin-top: 25px;
+            padding: 22px;
+            position: relative;
+            z-index: 10;
+            width: 250px;
+
+            p{
+                color: #9095A0FF;
+                line-height: 3px;
+            }
+
+            .emoji{
+                padding: 20px;
+                background-color: #01BCD6;
+                border-radius: 6px;
+                height: 20px;
+                width: 20px;
+                margin: 7px;
+                position: absolute;
+                right: 20px;
+                top: 13px;
+            }
+        }
+    }
+
+
+    //start of medium
+
+    .medium{
+        .logo{
+            display: block;
+            margin: auto;
+            text-align: center;
+            
+            img{
+                width: 120px;
+                height: 120px;
+                object-fit: contain;
+                margin-bottom: 20px;
+            }
+        }
+
+        .slogan{
+            p{
+                color: #f2f0f0;
+                text-align: center;
+            }
+        }
+
+    }
+
+    @media only screen and (max-width: 860px) {
+        .medium {
+          width: 90vw;
+          width: 90%;
+          margin: 40px auto;
+        }
+      }
+
+    .right{
+        text-align: center;
+        min-width: 280px;
+
+        p{
+            color: #fff;
+            margin: 8px auto;
+        }
+
+        .logos{
+            min-width: 270px;
+            min-height: 30px;
+            margin-bottom: 12px;
+
+            a{
+                p{
+                    display: inline-block;
+                    color: rgb(239, 239, 239);
+                }
+                p:hover{
+                    color: rgb(166, 166, 166);
+                    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+                }
+                margin: auto 8px;
+            }
+        }
+    }
+    }
+
+
+    .school-bottom{
+        width: auto;
+        max-width: 83vw;
+        max-width: 83%;
+        border-top: 2px solid white;
+        min-height: 100px;
+        margin: auto;
+        margin-top: 5px;
+
+        p{
+            color: #fff;
+        }
+
+        .nav{
+            border: 1px solid rgb(214, 214, 214);
+            border-radius: 30px;
+            height: 40px;
+            background-color: #fff;
+    
+            ul{
+                list-style: none;
+                margin: auto 120px;
+                
+                li{
+                    display: inline-block;
+                    margin: 16px;
+                    line-height: 0px; 
+                    text-transform: capitalize;  
+                    :hover{
+                        color: #EF9834FF;
+                    }
+    
+                    a{
+                        font-size: 14px; 
+                        color: #171a1fe9;
+                        font-family: 'Inter', sans-serif;   
+                    }
+                }
+            }
+        }
+
+        @media only screen and (max-width: 1100px) {
+            .nav {
+                display: none;
+            }
+          }
+
+    }
+
+    //end of school
+}
+
+
+
+    .scholib{
+        flex-wrap: wrap;
+        min-height: 10vh;
+        background-color: #fff;
+        padding-bottom: 60px;
+
+
+
+        .left{ 
+                width: min(90vw, 700px); 
+                background: #DEE0E7;
+                border-radius: 20px; 
+                flex-wrap: wrap;
+                padding-top: 20px;
+                padding-bottom: 20px;
+
+                .left{
+                    text-align: center;
+                    color:  rgb(30, 30, 30);
+                    overflow: hidden;
+                    min-width: fit-content;
+                    max-width: 30%;
+                    border-radius: 0px;
+                    height: fit-content;
+
+                    a{
+                        img{
+                            width: 200px;
+                            margin: 5px auto;
+                        }
+                    }
+
+                    .logos{
+                        min-width: 270px;
+                        min-height: 30px;
+                        margin-bottom: 12px;
+            
+                        a{
+                            p{
+                                display: inline-block;
+                                color: rgb(31, 31, 31);
+                            }
+                            p:hover{
+                                color: rgb(60, 58, 58);
+                                transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+                            }
+                            margin: auto 8px;
+                        }
+                    }
+                }
+
+                .middle{
+                    text-align: center;
+                    min-height: fit-content;
+                    min-width: fit-content;
+                    max-width: 30%;
+                    padding-top: 0px;
+                    // border: 1px solid green;
+
+                    p{
+                        margin: 10px auto;
+                        display: block;
+                    }
+                    a{
+                        button{
+                            margin: auto;
+                            padding: 6px;
+                            font-size: 14px;
+                            margin-bottom: 30px;
+                        }
+                    }
+
+                }
+
+                @media only screen and (min-width: 1100px) {
+                    .middle {
+                        padding-top: 20px;
+                    }
+                  }
+
+                .right{
+                    min-height: fit-content;
+                    min-width: fit-content;
+                    max-width: 30%;
+                    margin: auto 10px;
+                    border-radius: 4px;
+
+                    .blurhashImg{
+                        overflow: hidden;
+                    }
+
+                    img{
+                        width: 100%;
+                        object-fit: contain;
+                    }
+                }
+              }
+
+
+        .right{
+            width: 300px;
+            height: 200px;
+            overflow: hidden;
+
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        @media only screen and (max-width: 1100px) {
+                .right{
+                    display: none;
+                }
+        }
+
+    }
+}

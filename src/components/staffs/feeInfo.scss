@@ -1,0 +1,87 @@
+.busmdaidna122 {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgb(248, 248, 248);
+  overflow: auto;
+  align-items: flex-start;
+  padding: 20px;
+
+  .vmainqqw {
+    margin: auto;
+    width: min(600px, 96vw);
+    background-color: #fff;
+    border-radius: 8px;
+
+    padding: 20px 24px;
+
+    .ng-one{
+      padding: 5px 0px;
+      // border-radius: 4px;
+      border: 1px solid rgba(223, 223, 223, 0.137);
+      border-left: 0px;
+      border-right: 0px;
+      background-color: rgba(128, 128, 128, 0.053);
+    }
+
+    .closeContainer {
+      position: relative;
+      cursor: pointer;
+      height: 35px;
+
+      .close {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        padding: 10px 16px;
+        color: #242424;
+        border: 1px solid grey;
+      }
+
+      .close:hover {
+        border: 1px solid red;
+        color: #ff0404;
+      }
+    }
+
+    .content {
+      margin: 20px 0px;
+      box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+        rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+      padding: 20px 14px;
+      border-radius: 4px;
+
+      p {
+        margin: 0;
+      }
+
+      .withInfo {
+        cursor: pointer;
+      }
+
+      .each {
+        margin: 10px auto;
+
+        .left233z {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          max-width: calc(100% - 80px);
+          position: relative;
+
+          svg {
+            align-self: flex-start;
+            margin-top: 3px;
+          }
+        }
+
+        .h7 {
+          font-size: 15px;
+        }
+
+        svg {
+          color: #00bdd6;
+        }
+      }
+    }
+  }
+}

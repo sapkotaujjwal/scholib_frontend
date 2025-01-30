@@ -1,0 +1,223 @@
+.full{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+.feesComponent325375{
+    background-color: white; 
+    // padding-left: 10px;
+    // padding-right: 10px;
+
+    p{
+        margin-bottom: 0;
+    }
+
+    .mainyy{
+        width: min(100%, 1050px);
+        // margin-top: 30px;
+        padding-bottom: 40px;
+
+        .fees{
+          width: min(100%, 900px);
+          margin: auto;
+        }
+
+        .user{
+            position: relative;
+            .background{
+                width: 90%;
+                height: 130px;
+                background-color: #EAFCFF;
+                border-radius: 8px;
+                margin: auto;
+                position: absolute;
+                top: 2px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .image{
+                z-index: 10;
+                text-align: center;
+                position: relative;
+                margin-bottom: 10px;
+                
+                img{
+                    object-fit: cover;
+                    width: 110px;
+                    height: 110px;
+                    border-radius: 50%;
+                    margin-bottom: 4px;
+                    margin-top: 70px;
+                }
+            }
+
+            p{
+                margin-bottom: 0px;
+            }
+
+            .likeButtons{
+                width: min(90vw, 600px);
+                margin: 10px auto;
+                margin-top: 30px;
+
+                p{
+                    margin-bottom: 6px;
+                }
+
+                
+                .likeButton{
+                    width: min(41vw, 260px);
+                    .box{
+                        width: 100%;
+                        margin: 4px auto;
+                        background-color: rgba(232, 232, 232, 0.63);
+                        color: rgb(44, 44, 44);
+                        padding: 4px 8px;
+                        border-radius: 3px;
+                    }
+                }
+            }
+        }
+
+        .fees{
+            margin-top: 20px;
+
+            .titleText{
+                padding-top: 30px;
+            }
+
+            .account{
+                width: min(100%, 900px);
+                min-height: 200px;
+                margin: 30px auto;
+                margin-top: 3vw;
+                
+                .abs-container{
+                  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+                  display: flex;
+                  padding: 20px;
+                  flex-wrap: wrap;
+                  border-radius: 4px;
+                  align-items: center;
+                  justify-content: center;
+          
+                  .each{
+                    flex-grow: 1;
+                    margin: 10px;
+                  }
+          
+                  .left{
+                    flex-basis: 400px;
+                    border: 1px solid rgb(215, 215, 215);
+                    max-height: 210px;
+                    border-radius: 4px;
+                  }
+                  .right{
+                    flex-basis: 160px;
+                    text-align: center;
+          
+          
+                    .circle{
+                      width: 130px;
+                      height: 130px;
+                      border-radius: 50%;
+                      background-color: #8353E2;
+                      margin: auto;
+                      margin-top: 15px;
+                    }
+                    .present-text{
+                      color: rgb(42, 42, 42);
+                    }
+                  }
+                }
+          
+                .pay{
+                  margin-top: 20px;
+          
+                  p{
+                    color: rgb(57, 57, 57);
+                  }
+                  input{
+                    padding: 13px;
+                    width: 60%;
+                    background-color: rgb(237, 237, 237);
+                    border-radius: 4px;
+                  }
+          
+                  button{
+                    width: 35%;
+                    margin-left: 5%;
+                    min-height: 40px;
+                    line-height: 30px;
+                  }
+                }
+              }
+
+              .paymentDetails {
+                // margin-top: 80px;
+          
+                .payment-history{
+                  margin: 30px auto;
+                  overflow: auto;
+                }
+          
+                .payment-info{
+                  width: min(100%, 600px);
+                  padding: 14px 1px;
+                  border: 1px solid grey;
+                  margin: 20px auto;
+                  border-left: 0;
+                  border-right: 0;
+                }
+        
+          
+                @media only screen and (max-width: 400px) {
+          
+                  .payment-info{
+          
+                    p{
+                      margin-bottom: 0;
+                    }
+          
+                    span{
+                      display: block;
+                      margin-top: 8px;
+                    }
+                  }
+
+
+                }
+              }
+
+        }
+
+        
+    }
+
+    @media only screen and (max-width: 1220px){
+      .post-text-center{
+        text-align: center;
+      }
+    }
+
+    @media only screen and (max-width: 1280px) { 
+
+        .mainyy{
+            width: 94vw;
+            margin: auto;
+
+            .fees{
+                .titleText{
+                    text-align: center;
+                    padding-top: 6px !important;
+                }
+            }
+        }
+        
+
+    }
+}

@@ -1,0 +1,822 @@
+.registerComp26326{
+    width: min(1100px, 94vw);
+    margin: 90px auto;
+    padding-bottom: 60vh;
+
+
+    @media only screen and (max-width: 950px) {
+
+    }
+
+    //for that hawa navbar
+    .navbar{
+        width: 100vw;
+        height: 60px;
+        background-color: rgb(33, 33, 33);
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        color: white;
+        z-index: 2;
+
+        p{
+            margin-bottom: 0;
+        }
+
+        .inside{
+            width: 94vw;
+            margin: auto;
+            position: relative;
+
+            .hda{
+                position: absolute;
+                right: 0px;
+            }
+        }
+    }
+
+    // for the student register component 
+    .regParent{
+        box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+        padding: 30px 10px;
+        max-width: 700px;
+        border-radius: 4px;
+        margin: auto;
+        p{
+            margin-bottom: 0;
+            color: rgb(87, 87, 87);
+        }
+
+        .right{
+            float: right;
+
+            .parent{
+                display: inline-block;
+
+                .each{
+                    display: flex;
+                    margin: auto 8px;
+    
+                    .box{
+                        width: 20px;
+                        height: 20px;
+                        border-radius: 5px;
+                        margin-right: 8px;
+                    }
+                }
+
+            }
+        }
+
+        .content{
+            clear: both;
+            padding-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+
+            .each{
+                flex-basis: 60px;
+                height: 60px;
+                margin: 4px;
+                border-radius: 6px;
+                cursor: pointer;
+                color: rgb(255, 255, 255);
+                font-weight: 600;
+            }
+
+            .each:hover{
+                background-color: black;
+                scale: 1.05;
+            }
+        }
+    }
+
+    //for the image select component
+    .selectImage{
+        padding: 15px;
+        margin: auto;
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+        width: 300px;
+        min-height: 300px;
+        cursor: pointer;
+        text-align: center;
+
+        img{
+            width: 250px;
+            height: 200px;
+            border-radius: 4px;
+            object-fit: cover;
+            margin-top: 5px;
+        }
+
+        button{
+            margin: 13px auto;
+            width: 90%;
+            margin-bottom: 0px;
+            padding: 3px 10px;
+            font-size: 14px;
+        }
+    }
+
+    .selectImage:hover{
+        scale: 1.01;
+    }
+
+    //for that regisnation component
+    .resign-box{
+        margin: 50px auto;
+        width: min(360px, 100%);
+        min-height: 400px;
+        border-radius: 6px;
+        background-color: #fff;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+        padding: 20px 10px;
+
+        .confirm{
+            padding: 15px 20px;
+            width: max-content;
+            border-radius: 6px;
+           background-color: rgb(255, 255, 255);
+           border: 1px solid #BDC0CA;
+            text-align: center;
+            margin: auto;
+
+            p{
+                margin-bottom: 0;
+            }
+        }
+        
+        .image{
+            border-radius: 50%;
+            border: 1px solid #ED7D2D;
+            width: 130px;
+            height: 130px;
+            overflow: hidden;
+            text-align: center;
+            margin: 24px auto;
+
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .info{
+            text-align: center;
+
+            .more-info{
+                width: 80%;
+                margin: auto;
+                overflow: auto;
+                display: flex;
+                align-items: center;
+                padding-bottom: 7px;
+                overflow-x: auto;
+                justify-content: center;
+                white-space: nowrap;
+
+
+                    .each{
+                        padding: 4px 10px;
+                        background-color: rgb(223, 223, 223);
+                        border-radius: 6px;
+                        margin: auto 6px;
+                        font-size: 12px;
+
+                        flex: 0 0 auto;
+                    }
+                
+            }
+        }
+
+        .surity{
+            width: 100%;
+            padding: 20px 10px;
+            margin: 35px auto;
+            min-height: 200px;
+            background-color: #FDF2F2;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border: 2px dotted #E05858;
+            color: rgb(69, 69, 69);
+        }
+
+        .message{
+            text-align: left;
+            padding: 10px;
+
+            p{
+                font-size: 15px;
+            }
+
+            textarea{
+                width: 100%;
+                background-color: rgb(235, 235, 235);
+                padding: 13px 10px;
+                color: rgb(42, 42, 42);
+                border-radius: 4px;
+                min-height: 100px;
+                font-size: 15px;
+            }
+        }
+    }
+
+    //for that admission inquiry component 
+    .admission-inquiry{
+        width: 100%;
+        min-height: 200px;
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 30px 20px;
+        cursor: pointer;
+
+        .each{
+            flex-basis: 300px;
+        }
+
+        .left{
+            img{
+                width: 130px;
+                height: 130px;
+                border-radius: 20px;
+                object-fit: cover;
+            }
+
+            .info{
+                p{
+                    margin-bottom: 2.5px;
+                    margin-top: 2.5px;
+                }
+            }
+        }
+
+        .right{
+
+            .info{
+                float: right;
+                text-align: right;
+                color: rgb(60, 60, 60);
+                width: 100%
+
+                p{
+                    font-size: 13px !important;
+                }
+            }
+        }
+
+        @media only screen and (max-width: 730px) {
+            .right{
+                display: none;
+            }
+        }
+
+    }
+
+    .admission-inquiry:hover{
+        background-color: rgba(244, 244, 244, 0.675);
+    }
+
+    // for that legendary staff profile card
+    .profile-container{
+        display: flex;
+        flex-wrap: wrap;
+        padding: 20px 0px;
+        border-radius: 5px;
+
+        .user-profile-8237{
+            cursor: pointer;
+            background-color: #f6f6f6;
+            padding: 16px 10px;
+            padding-top: 25px;
+            width: 250px;
+            flex-basis: 250px;
+            margin: auto;
+            min-height: 200px;
+            box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+            border-radius: 6px;
+            border: 1px solid rgba(0, 128, 0, 0);
+            margin-top: 10px;
+    
+            .top{
+                padding-left: 10px;
+    
+                .left{
+    
+                    img{
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 50%;
+                        overflow: hidden;
+                        object-fit: cover;
+                    }
+                }
+    
+                .right{
+                    height: 50px;
+                    margin-left: 12px;
+                    padding-top: 5px;
+    
+                    p{
+                        margin-bottom: 3px;
+                    }
+                }
+            }
+    
+            .bottom{
+                margin-top: 30px;
+    
+                .each{
+                    padding-left: 10px;
+                    margin: 5px auto;
+    
+                    p{
+                        font-size: 13px;
+                        margin-right: 5px;
+                    }
+                }
+            }
+        }
+
+        .user-profile-8237:hover{
+            background-color: #f6f6f6ae;
+            border: 1px solid rgba(128, 128, 128, 0.22);
+            transition: all 0.3s ease;
+        }
+
+    }
+
+    //for that legendary create-result component
+    .create-result-main-parent{
+    .create-result-parent27327{
+    .create-result327{
+      border: 2px solid #DFE0E6;  
+      width: 100%;
+      max-width: 700px;
+      border-radius: 6px;
+      overflow: hidden;
+      margin: auto;
+
+      .vertical{
+        min-width: 80px;
+        width: max-content;
+        border: 1px solid #DFE0E6;
+        border-top: 0px;
+        flex-basis: 33.3333%;
+        border-bottom: 0px;
+
+        .each{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-bottom: 1px solid #DFE0E6;
+            font-size: 14px;
+            height: 55px;
+        }
+
+        .top{
+            background-color: rgba(228, 228, 228, 0.327);
+            font-weight: 500;
+            padding: 10px 0px;
+        }
+    }
+
+    :nth-child(1) {
+        border-left: 0;
+        flex-basis: 30%;
+    }
+
+    :nth-child(2) {
+        flex-basis: 40%;
+    }
+
+    :nth-child(3) {
+        border-right: 0;
+        flex-basis: 30%;
+
+        input{
+            width: 100px;
+            border-radius: 5px;
+            text-align: center;
+            color: white;
+            background-color: #686868;
+            padding: 6px 0px;
+        }
+    }
+
+
+    }
+
+    @media only screen and (max-width: 420px) {
+
+        .create-result327{
+            width: 400px;
+
+            :nth-child(1) {
+                border-left: 0;
+                flex-basis: 1%;
+            }
+        
+            :nth-child(2) {
+                flex-basis: 52%;
+            }
+        
+            :nth-child(3) {
+                border-right: 0;
+                flex-basis: 47%;
+        
+            }
+        }
+
+    }
+}
+    .inputsBelow{
+        display: flex;
+        flex-wrap: wrap;
+        flex-grow: 1;
+        padding-top: 20px;
+
+        .each{
+            flex-basis: 180px;
+            margin-top: 15px;
+            margin-left: 10px;
+            margin-right: 10px;
+            display: flex;
+            flex-grow: 1;
+
+            .inside{
+                width: 100%;
+
+            p{
+                font-size: 14px;
+                margin-left: 3px;
+            }
+
+            input{
+                background-color: rgba(201, 201, 201, 0.752);
+                padding: 10px 15px;
+                border-radius: 4px;
+                width: 100%;
+                color: rgb(41, 41, 41);
+            }
+        }
+        }
+}
+    }
+
+    //for that legendary confirm payment box
+    .confirm-payment{
+        padding: 30px 10px;
+        margin: 30px auto;
+        border-radius: 6px;
+
+        .box{
+            border: 2px solid #dfe0e6bf;
+            padding: 25px 3.6%;
+            min-height: 200px;
+            border-radius: 5px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+
+            .admission-inquiry352{
+                width: 100%;
+                border-radius: 10px;
+                box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+                display: flex;
+                flex-wrap: wrap;
+                padding: 30px 0px;
+                cursor: pointer;
+                margin-bottom: 20px;
+        
+                .left{
+                    img{
+                        width: 130px;
+                        height: 130px;
+                        border-radius: 20px;
+                        object-fit: cover;
+                    }
+        
+                    .info{
+                        p{
+                            margin-bottom: 2.5px;
+                            margin-top: 2.5px;
+                        }
+                    }
+                }
+        
+                .right{
+                    margin-top: 20px;
+        
+                    .info{
+                        text-align: center;
+                        color: rgb(60, 60, 60);
+                        margin-top: 10px;
+        
+                        p{
+                            font-size: 13px !important;
+                            display: inline-block;
+                        }
+                        
+                        :nth-child(1){
+                            padding: 5px 20px;
+                            background-color: rgb(221, 221, 221);
+                            border-radius: 4px;
+                            margin-bottom: 0;
+                        }
+
+                        :nth-child(2){
+                            padding: 5px 20px;
+                            background-color: rgba(255, 32, 32, 0.183);
+                            border-radius: 4px;
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+        
+            }
+        }
+    }
+
+    // for that legendary navbar for our tools page of admin dashboard
+    .admin-navbar-pro{
+        overflow: auto;
+
+        .elementsInside{
+            justify-content: flex-start;
+            max-width: max-content;
+            margin: auto;
+
+            .each-div{
+                padding: 5px 15px;
+                min-width: max-content;
+                cursor: pointer;
+                padding-bottom: 0px;
+
+                p{
+                    font-size: 15px;
+                    font-weight: 600;
+                    color: rgb(67, 67, 67);
+                    padding: 4px 5px;
+                    border-bottom: 3px solid rgba(0, 128, 0, 0);
+                }
+
+                 p:hover{
+                    color: #01BDD7;
+                    // border-bottom: 3px solid #565656;
+                }
+            }
+
+            
+            .active{
+                p{
+                    color: #01BDD7;
+                    border-bottom: 3px solid #01BDD7;    
+                }
+            }
+        }
+    }
+
+    // for that analytics overview header page 
+    .analytics279{
+
+        .content-analytics{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2%;
+
+            .each{
+                flex-basis: 400px;
+                min-width: 40%;
+                min-height: 200px;
+                margin: 5px auto;
+                flex-grow: 1;
+                box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+                border-radius: 3px;
+                padding: 20px 0px;
+            }
+
+            .first{
+                flex-wrap: wrap;
+
+                .final{
+                    flex-basis: 150px;
+                    padding: 5px 4px;
+                    min-height: 140px;
+                    margin: 5px;
+                    color: rgb(47, 47, 47);
+
+                    p{
+                        margin-left: 5px;
+                    }
+
+                    div{
+                        padding: 15px 0px;
+                        text-align: center;
+                        border-radius: 5px;
+                        min-height: 100px;
+                        min-width: 100px;
+                        background-color: #01BDD7;
+                        margin: 7px auto;
+                        color: #000;
+                    }
+                }
+
+                @media only screen and (min-width: 500px) {
+                    .final{
+                        flex-basis: 180px;
+                    }
+                }
+
+            }
+
+            .second{
+
+                .final{
+                    flex-basis: 160px;
+                    padding: 5px 4px;
+                    min-height: 140px;
+                    margin: 5px;
+                    color: rgb(47, 47, 47);
+                    padding: 10px;
+                    border-radius: 6px;
+                }
+
+                .chart{
+                    background-color: rgba(128, 128, 128, 0.264);
+                }
+
+                .more{
+                    max-width: 150px;
+
+                    div{
+                        padding: 15px 0px;
+                        text-align: center;
+                        border-radius: 5px;
+                        width: 100%;
+                        background-color: #01BDD7;
+                        margin: 15px auto;
+                        color: #000;
+                        flex-direction: column;
+                    }
+                }
+            }
+        }
+    }
+
+
+    // for that legendary form component i am going to use everywhere 
+    .our-form3636{
+        max-width: 1000px;
+        margin: auto;
+
+        .form-content6{
+            padding: 30px 15px;
+            display: flex;
+            flex-wrap: wrap;
+            border: 1px solid rgb(224, 224, 224);
+            border-radius: 6px;
+            margin-top: 20px;
+
+            .each{
+                height: max-content;
+                margin: 8px 0px;
+                box-sizing: border-box;
+                padding: 5px 10px;
+
+                p{
+                    font-size: 14px;
+                    color: rgb(64, 64, 64);
+                    margin-bottom: 3px;
+                    font-weight: 600;
+                    margin-left: 3px;
+                }
+
+                input,textarea{
+                    background-color: rgba(230, 230, 230, 0.802);
+                    font-size: 14px;
+                    border-radius: 4px;
+                    padding: 10px 15px;
+                    width: 100%;
+                }
+
+                textarea{
+                    height: 90px;
+                }
+
+                .gender-div{
+                    padding: 4px 0px;
+                    border-radius: 4px;
+
+                    input{
+                        height: 18px;
+                        width: 18px;
+                    }
+
+                    p{
+                        line-height: 18px;
+                    }
+                }
+
+                .checkbox-div{
+                    width: 100%;
+
+                    ul{
+                        display: flex;
+                        flex-wrap: wrap;
+                        width: 100%;
+                        justify-content: flex-start;
+                        padding: 0px;
+                        margin: 0px;
+
+                        li{
+                            list-style: none;
+                            display: flex;
+                            margin: 7px 10px;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 14px;
+
+                            input{
+                                width: 18px;
+                                height: 18px;
+                                margin-right: 6px;
+                            }
+                        }
+                    }
+                }
+                
+                .dropdown973753{
+                    margin: 0px;
+                    margin-top: 8px;
+                }
+
+                .dropdown973753 .container{
+                    width: 100%;
+                }
+            }
+
+            .width1{
+                flex-basis: calc(25%);
+            }
+
+            .width2{
+                flex-basis: calc(50%);
+            }
+
+            .width3{
+                flex-basis: 75%;
+            }
+            .width4{
+                flex-basis: calc(100%);
+            }
+
+
+            //making things responsive
+            @media only screen and (max-width: 1100px) {
+
+                .width1{
+                    flex-basis: calc(40%);
+                }
+    
+                .width2{
+                    flex-basis: calc(60%);
+                }
+    
+                .width3{
+                    flex-basis: 100%;
+                }
+    
+            }
+
+
+            @media only screen and (max-width: 600px) {
+                .each{
+                    flex-basis: calc(100%);
+                    margin: 5px auto;
+
+                    textarea{
+                        height: 125px;
+                    }
+                }
+            }
+
+
+
+        }
+
+        @media only screen and (max-width: 600px) {
+            .form-content6{
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+    }
+
+} 
