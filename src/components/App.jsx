@@ -8,14 +8,12 @@ import { GET_USER, GET_USER_SUCCESS, ERROR_REMOVE } from "../redux/UserSlice";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { useEffect } from "react";
-import RegisterSchool from "./registerSchool/RegisterSchool";
 import {
   GET_SCHOLIB,
   GET_SCHOLIB_FAIL,
   GET_SCHOLIB_SUCCESS,
 } from "../redux/scholibSlice";
 import { SET_DATE } from "../redux/OtherInfoSlice";
-import Register from "./test/Register";
 
 function App() {
   const dispatch = useDispatch();
@@ -89,10 +87,7 @@ function App() {
     <Router>
       <Switch>
         <Route path="/school/:schoolCode" component={School} />
-        <Route exact path="/register" component={RegisterSchool} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/test3" component={Register} />
-
         <Route path="/" component={Scholib} />
       </Switch>
     </Router>

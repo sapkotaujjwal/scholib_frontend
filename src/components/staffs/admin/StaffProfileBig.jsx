@@ -226,7 +226,7 @@ const StaffProfileBig = ({ id, closeFunction, removed = false }) => {
                       <p className="h6 text-secondary w600"> {admin.name} </p>
                       <p className="h7 w500">
                         {" "}
-                        {admin.title} ( {admin.role}){" "}
+                        {admin.title} ( {admin.role} ){" "}
                       </p>
                     </div>
                   </div>

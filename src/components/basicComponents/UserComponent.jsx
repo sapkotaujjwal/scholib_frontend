@@ -3,6 +3,7 @@ import "./userComponent.scss";
 import {
   faArrowRightFromBracket,
   faHouse,
+  faScrewdriverWrench,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
@@ -78,7 +79,7 @@ const UserComponent = ({ closeUserComponent }) => {
     }
 
     if (studentRouteMatch || staffRouteMatch) {
-      history.push(`/school/${school.schoolCode}`);
+      history.push(`/school/${school.schoolCode}/${key}/`);
       closeUserComponent();
       return;
     }
@@ -345,8 +346,8 @@ const UserComponent = ({ closeUserComponent }) => {
                 onClick={openDashboard}
                 style={{ border: "0px" }}
               >
-                <FontAwesomeIcon className="mx-2" icon={faHouse} />
-                {studentRouteMatch || staffRouteMatch ? "Home" : "Dashboard"}
+                <FontAwesomeIcon className="mx-2" icon={faScrewdriverWrench} />
+                Dashboard
               </button>
             </div>
           </div>

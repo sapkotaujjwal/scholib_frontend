@@ -6,8 +6,6 @@ import Reviews from "./Reviews";
 import Faq from "./Faq";
 import MoreThings from "./MoreThings";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import Updates from "../../updates/Updates";
-import Gallery from "../../gallery/Gallery";
 
 const Tools = () => {
   const history = useHistory();
@@ -77,19 +75,7 @@ const Tools = () => {
               <p>More Things</p>
             </div> */}
 
-            <div
-              className={`each-div ${currentPage === 4 ? "active" : ""} `}
-              onClick={() => setCurrentPage(4)}
-            >
-              <p>Updates</p>
-            </div>
 
-            <div
-              className={`each-div ${currentPage === 5 ? "active" : ""} `}
-              onClick={() => setCurrentPage(5)}
-            >
-              <p>Gallery</p>
-            </div>
           </div>
         </div>
 
@@ -99,8 +85,6 @@ const Tools = () => {
           {currentPage && currentPage === 1 && <Reviews />}
           {currentPage && currentPage === 2 && <Faq />}
           {currentPage && currentPage === 3 && <MoreThings />}
-          {currentPage && currentPage === 4 && <Updates />}
-          {currentPage && currentPage === 5 && <Gallery />}
         </section>
       </div>
     </div>

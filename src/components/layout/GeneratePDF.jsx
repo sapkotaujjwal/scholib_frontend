@@ -186,7 +186,7 @@ const GeneratePDF = ({ data, generate = false, closePrint = () => {} }) => {
           fontSize: 12,
           bold: true,
           color: "#FFFFFF",
-          alignment: "center",
+          // alignment: "center",
         },
         studentInfoLabel: {
           fontSize: 11,
@@ -358,12 +358,12 @@ const GeneratePDF = ({ data, generate = false, closePrint = () => {} }) => {
                 { text: subject.name, margin: [10, 8, 0, 8] },
                 {
                   text: calculateGPA(subject.obtainedMarks, subject.theory),
-                  alignment: "center",
+                  // alignment: "center",
                   margin: [0, 8, 0, 8],
                 },
                 {
                   text: calculateGPA(subject.obtainedMarks2, subject.practical),
-                  alignment: "center",
+                  // alignment: "center",
                   margin: [0, 8, 0, 8],
                 },
                 {
@@ -373,7 +373,7 @@ const GeneratePDF = ({ data, generate = false, closePrint = () => {} }) => {
                     subject.obtainedMarks,
                     subject.obtainedMarks2
                   ).gpa,
-                  alignment: "center",
+                  // alignment: "center",
                   margin: [0, 8, 0, 8],
                 },
                 {
@@ -383,7 +383,7 @@ const GeneratePDF = ({ data, generate = false, closePrint = () => {} }) => {
                     subject.obtainedMarks,
                     subject.obtainedMarks2
                   ).gradePoint,
-                  alignment: "center",
+                  // alignment: "center",
                   margin: [0, 8, 0, 8],
                   bold: true,
                 },

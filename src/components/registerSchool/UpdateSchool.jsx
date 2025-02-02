@@ -504,34 +504,33 @@ const UpdateSchool = ({ data, edit = true }) => {
                             characters left{" "}
                           </p>
                           <textarea
-  name=""
-  id=""
-  cols="30"
-  value={Mydata.text1}
-  rows="1" // Set to 1 for auto-expansion
-  onChange={(event) => {
-    if (event.target.value.length > 1800) {
-      return;
-    }
+                            name=""
+                            id=""
+                            cols="30"
+                            value={Mydata.text1}
+                            rows="1" // Set to 1 for auto-expansion
+                            onChange={(event) => {
+                              if (event.target.value.length > 1800) {
+                                return;
+                              }
 
-    setMydata({
-      ...Mydata,
-      text1: event.target.value,
-    });
-  }}
-  style={{
-    width: '100%',
-    minHeight: '50px', // Adjust the initial height
-    overflow: 'hidden',
-    resize: 'none', // Disable manual resizing
-    padding: '8px',
-  }}
-  onInput={(event) => {
-    event.target.style.height = 'auto'; // Reset height to auto
-    event.target.style.height = `${event.target.scrollHeight}px`; // Adjust height to fit content
-  }}
-></textarea>
-
+                              setMydata({
+                                ...Mydata,
+                                text1: event.target.value,
+                              });
+                            }}
+                            style={{
+                              width: "100%",
+                              minHeight: "50px", // Adjust the initial height
+                              overflow: "hidden",
+                              resize: "none", // Disable manual resizing
+                              padding: "8px",
+                            }}
+                            onInput={(event) => {
+                              event.target.style.height = "auto"; // Reset height to auto
+                              event.target.style.height = `${event.target.scrollHeight}px`; // Adjust height to fit content
+                            }}
+                          ></textarea>
                         </div>
 
                         <div className="each width4">
@@ -748,31 +747,30 @@ const UpdateSchool = ({ data, edit = true }) => {
                             characters left{" "}
                           </p>
                           <textarea
-  value={Mydata.text2}
-  placeholder="Shree Chetana Secondary School"
-  onChange={(event) => {
-    if (event.target.value.length > 600) {
-      return;
-    }
+                            value={Mydata.text2}
+                            placeholder="Shree Chetana Secondary School"
+                            onChange={(event) => {
+                              if (event.target.value.length > 600) {
+                                return;
+                              }
 
-    setMydata({
-      ...Mydata,
-      text2: event.target.value,
-    });
-  }}
-  style={{
-    width: '100%',
-    minHeight: '50px', // Initial height, you can adjust this
-    overflow: 'hidden',
-    resize: 'none', // Disable manual resizing
-    padding: '8px',
-  }}
-  onInput={(event) => {
-    event.target.style.height = 'auto'; // Reset height to auto
-    event.target.style.height = `${event.target.scrollHeight}px`; // Adjust height to fit content
-  }}
-/>
-
+                              setMydata({
+                                ...Mydata,
+                                text2: event.target.value,
+                              });
+                            }}
+                            style={{
+                              width: "100%",
+                              minHeight: "50px", // Initial height, you can adjust this
+                              overflow: "hidden",
+                              resize: "none", // Disable manual resizing
+                              padding: "8px",
+                            }}
+                            onInput={(event) => {
+                              event.target.style.height = "auto"; // Reset height to auto
+                              event.target.style.height = `${event.target.scrollHeight}px`; // Adjust height to fit content
+                            }}
+                          />
                         </div>
 
                         <div className="each width4">
@@ -804,34 +802,33 @@ const UpdateSchool = ({ data, edit = true }) => {
                             characters left{" "}
                           </p>
                           <textarea
-  name=""
-  value={Mydata.text3}
-  id=""
-  cols="30"
-  rows="1"  // Start with 1 row for auto-expansion
-  onChange={(event) => {
-    if (event.target.value.length > 2000) {
-      return;
-    }
+                            name=""
+                            value={Mydata.text3}
+                            id=""
+                            cols="30"
+                            rows="1" // Start with 1 row for auto-expansion
+                            onChange={(event) => {
+                              if (event.target.value.length > 2000) {
+                                return;
+                              }
 
-    setMydata({
-      ...Mydata,
-      text3: event.target.value,
-    });
-  }}
-  style={{
-    width: '100%',
-    minHeight: '50px', // Initial height, adjust as needed
-    overflow: 'hidden',
-    resize: 'none', // Disable manual resizing
-    padding: '8px',
-  }}
-  onInput={(event) => {
-    event.target.style.height = 'auto'; // Reset height to auto
-    event.target.style.height = `${event.target.scrollHeight}px`; // Adjust height to fit content
-  }}
-></textarea>
-
+                              setMydata({
+                                ...Mydata,
+                                text3: event.target.value,
+                              });
+                            }}
+                            style={{
+                              width: "100%",
+                              minHeight: "50px", // Initial height, adjust as needed
+                              overflow: "hidden",
+                              resize: "none", // Disable manual resizing
+                              padding: "8px",
+                            }}
+                            onInput={(event) => {
+                              event.target.style.height = "auto"; // Reset height to auto
+                              event.target.style.height = `${event.target.scrollHeight}px`; // Adjust height to fit content
+                            }}
+                          ></textarea>
                         </div>
 
                         <div className="each width4">
@@ -847,34 +844,33 @@ const UpdateSchool = ({ data, edit = true }) => {
                             characters left{" "}
                           </p>
                           <textarea
-  name=""
-  value={Mydata.teamText}
-  id=""
-  cols="30"
-  rows="1"  // Start with 1 row for auto-expansion
-  onChange={(event) => {
-    if (event.target.value.length > 200) {
-      return;
-    }
+                            name=""
+                            value={Mydata.teamText}
+                            id=""
+                            cols="30"
+                            rows="1" // Start with 1 row for auto-expansion
+                            onChange={(event) => {
+                              if (event.target.value.length > 200) {
+                                return;
+                              }
 
-    setMydata({
-      ...Mydata,
-      teamText: event.target.value,
-    });
-  }}
-  style={{
-    width: '100%',
-    minHeight: '50px', // Adjust the initial height as needed
-    overflow: 'hidden',
-    resize: 'none', // Disable manual resizing
-    padding: '8px',
-  }}
-  onInput={(event) => {
-    event.target.style.height = 'auto'; // Reset height to auto
-    event.target.style.height = `${event.target.scrollHeight}px`; // Adjust height to fit content
-  }}
-></textarea>
-
+                              setMydata({
+                                ...Mydata,
+                                teamText: event.target.value,
+                              });
+                            }}
+                            style={{
+                              width: "100%",
+                              minHeight: "50px", // Adjust the initial height as needed
+                              overflow: "hidden",
+                              resize: "none", // Disable manual resizing
+                              padding: "8px",
+                            }}
+                            onInput={(event) => {
+                              event.target.style.height = "auto"; // Reset height to auto
+                              event.target.style.height = `${event.target.scrollHeight}px`; // Adjust height to fit content
+                            }}
+                          ></textarea>
                         </div>
 
                         <div className="each width4">
@@ -1292,6 +1288,23 @@ const UpdateSchool = ({ data, edit = true }) => {
                       <p className="h5 w600 text-center"> Few More </p>
 
                       <div className="form-content6">
+                        <div className="each width4">
+                          <p> Domain Name </p>
+                          <input
+                            type="text"
+                            name=""
+                            value={Mydata.domain}
+                            id=""
+                            placeholder="scholib.edu.np"
+                            onChange={(event) =>
+                              setMydata({
+                                ...Mydata,
+                                domain: event.target.value,
+                              })
+                            }
+                          />
+                        </div>
+
                         <div className="each width4">
                           <p> School Policies </p>
 

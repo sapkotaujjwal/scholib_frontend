@@ -565,6 +565,10 @@ const StudentDetails = ({
   const [loadingStateForEditMarks, setLoadingStateForEditMarks] =
     useState(false);
 
+
+
+    
+
   async function updateExamMarks(dataHere = {}) {
     axios
       .post(
@@ -611,6 +615,8 @@ const StudentDetails = ({
       });
   }
 
+
+
   function findTotalFee() {
     let totalAmt = 0;
     let cCourse22 = course.find((crc) => crc._id === StudentCourseInfo.class);
@@ -652,6 +658,9 @@ const StudentDetails = ({
       studentMainData.paymentHistory.reduce((acc, hist) => acc + hist.amount, 0)
     );
   }
+
+
+
 
   function findSectionByExamId(data, examId) {
     for (const course of data) {

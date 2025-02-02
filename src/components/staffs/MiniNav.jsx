@@ -3,6 +3,7 @@ import "./miniNav.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChartSimple,
+  faCoins,
   faComputer,
   faGraduationCap,
   faLock,
@@ -169,7 +170,7 @@ const MiniNav = ({ function24 = function () {} }) => {
             </Link>
           </div>
 
-          {/* <div
+          <div
             className={
               currentPath === `/school/${schoolCode}/staff/account`
                 ? "content active"
@@ -187,7 +188,7 @@ const MiniNav = ({ function24 = function () {} }) => {
                 Account
               </p>{" "}
             </Link>
-          </div> */}
+          </div>
 
           <div
             className={

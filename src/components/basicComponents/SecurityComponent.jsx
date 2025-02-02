@@ -204,7 +204,6 @@ const SecurityComponent = () => {
                         <input
                           type="password"
                           name=""
-                          id=""
                           placeholder=""
                           ref={oldPasswordref}
                         />
@@ -217,7 +216,6 @@ const SecurityComponent = () => {
                         <input
                           type="password"
                           name=""
-                          id=""
                           placeholder=""
                           ref={newPasswordref}
                         />
@@ -230,7 +228,6 @@ const SecurityComponent = () => {
                         <input
                           type="password"
                           name=""
-                          id=""
                           placeholder=""
                           ref={newPasswordref2}
                         />

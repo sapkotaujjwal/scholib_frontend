@@ -14,5 +14,18 @@
           }
       
 
+          .bar-control {
+            justify-content: flex-end;
+            flex-wrap: wrap;
+  
+            .ind-bar {
+              margin: 5px 5px;
+            }
+
+            p{
+                margin-bottom: 0;
+            }
+          }
+
     }
 }

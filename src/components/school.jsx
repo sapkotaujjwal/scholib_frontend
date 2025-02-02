@@ -216,7 +216,7 @@ function School() {
         <Switch>
           {/* school's basic routes */}
 
-          <Route exact path={`/school/${schoolCode}/`} component={Home} />
+          {/* <Route exact path={`/school/${schoolCode}/`} component={Home} /> */}
           <Route
             exact
             path={`/school/${schoolCode}/updates`}
@@ -227,11 +227,7 @@ function School() {
             path={`/school/${schoolCode}/gallery`}
             component={Gallery}
           />
-          <Route
-            exact
-            path={`/school/${schoolCode}/contact`}
-            component={ContactComponent}
-          />
+
           <Route
             exact
             path={`/school/${schoolCode}/admission`}

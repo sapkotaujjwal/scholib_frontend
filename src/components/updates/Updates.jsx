@@ -90,18 +90,26 @@ const Updates = () => {
           <div className="main">
             <MetaData title={`${school.sName} || ${"Updates"}`} />
 
-
-            {false && <div className="top">
+            <div className="top">
               <div className="content pb-3">
                 <h3 className="h2 f2 w600"> Updates </h3>
                 <h1 className="h5"> {school.name} </h1>
                 <p className="h7 text-secondary">
-                As the academic year progresses, we're thrilled to share some exciting developments happening around our school! From innovative new programs to inspiring student achievements, there's plenty to celebrate. Stay tuned for updates on upcoming events, academic achievements, and initiatives aimed at fostering a vibrant learning community. Together, let's make this school year one to remember!
+                  As the academic year progresses, we're thrilled to share some
+                  exciting developments happening around our school! From
+                  innovative new programs to inspiring student achievements,
+                  there's plenty to celebrate. Stay tuned for updates on
+                  upcoming events, academic achievements, and initiatives aimed
+                  at fostering a vibrant learning community. Together, let's
+                  make this school year one to remember!
                 </p>
 
-                <Link to={`/school/${school.schoolCode}/admission`}> <button className="btn btn-primary"> Get Admission </button></Link>
+                <Link to={`/school/${school.schoolCode}/admission`}>
+                  {" "}
+                  <button className="btn btn-primary"> Get Admission </button>
+                </Link>
               </div>
-            </div>}
+            </div>
 
             {user && user.role && (
               <div className="admin">
@@ -129,19 +137,19 @@ const Updates = () => {
 
               {updates && updates.length < 1 ? (
                 <>
-                <hr />
-                <p className="text-secondary text-center p-2 pt-3 h5">
-                  {" "}
-                  No Updates available{" "}
-                </p>
-                <hr />
+                  <hr />
+                  <p className="text-secondary text-center p-2 pt-3 h5">
+                    {" "}
+                    No Updates available{" "}
+                  </p>
+                  <hr />
                 </>
               ) : (
                 ""
               )}
 
               {updates &&
-                updates.map((update,index) => {
+                updates.map((update, index) => {
                   return <Update update={update} key={index} />;
                 })}
 

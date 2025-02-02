@@ -20,7 +20,7 @@ const BusStatus = ({
   data,
   StudentCourseInfo,
   closeFunction = () => {},
-  closeMain=()=>{}
+  closeMain = () => {},
 }) => {
   const dispatch = useDispatch();
   const date = useSelector((state) => state.Other.date);

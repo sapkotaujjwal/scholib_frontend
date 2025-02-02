@@ -299,60 +299,6 @@ const Exams = () => {
 
   const [newMarks, setNewMarks] = useState(false);
 
-  // function handlePrintData() {
-  //   const students = studentsInfo
-  //     .filter(
-  //       (student) =>
-  //         student.course.class === currentClass._id &&
-  //         student.course.section === currentSection._id
-  //     )
-  //     .map((student) => ({
-  //       studentInfo: {
-  //         _id: student._id,
-  //         name: student.name,
-  //         id: student.loginId,
-  //         class: currentClass.class,
-  //         section: currentSection.name,
-  //       },
-
-  //       schoolInfo: {
-  //         name: school.name,
-  //         address: school.address,
-  //       },
-
-  //       examInfo: {
-  //         term: currentTerm,
-  //       },
-
-  //       subjects: [],
-  //     }));
-
-  //   let subjects = examInfo.find((sec) => sec.section == currentSection._id)
-  //     .exam.term[currentTerm - 1].subjects;
-
-  //   subjects.forEach((subject) => {
-  //     let obj = {
-  //       name: subject.subject,
-  //       theory: subject.fullMarks,
-  //       practical: subject.fullMarks2,
-  //     };
-
-  //     subject.students.forEach((std) => {
-  //       students.find((student, index) => {
-  //         if (student.studentInfo._id === std.student) {
-  //           students[index].subjects.push({
-  //             ...obj,
-  //             obtainedMarks: std.obtainedMarks,
-  //             obtainedMarks2: std.obtainedMarks2,
-  //           });
-  //         }
-  //       });
-  //     });
-  //   });
-
-  //   return students;
-  // }
-
   function handlePrintData() {
     const studentsOfSection = students
       .filter(
@@ -422,6 +368,12 @@ const Exams = () => {
   }, [currentTerm, currentSection, currentClass, examInfo, studentsInfo]);
 
   const [session, setSession] = useState(null);
+
+  useEffect(() => {
+    if (!session) {
+      setCourses(coursesCurrent);
+    }
+  }, [session]);
 
   return (
     <div className="examsAdmin2838">
@@ -588,7 +540,7 @@ const Exams = () => {
                         .find((sec) => sec.section === currentSection._id)
                         .exam.term.map((each, index) => {
                           return {
-                            label: `${index + 1}`,
+                            label: `${index + 1} `,
                             value: each._id,
                           };
                         })}

@@ -1,11 +1,12 @@
 import NepaliDate from "nepali-date";
 
 export function busPriceCalculator(
-  date = "2081-09-07",
+  date = "2081-10-17",
   dataArray,
   priceArray,
   date2 = "2081-01-01"
 ) {
+
   const getDaysDifference = (date2, date1) => {
     // Helper function to convert a Nepali date string to an AD date
     const convertNepaliToAD = (nepaliDateString) => {
@@ -33,9 +34,7 @@ export function busPriceCalculator(
 
   dataArray.forEach((dataItem) => {
     const { place, start, end } = dataItem;
-    const priceItem = priceArray.find(
-      (item) => item._id.toString() === place
-    );
+    const priceItem = priceArray.find((item) => item._id.toString() === place);
 
     if (priceItem) {
       const { amounts } = priceItem;
@@ -74,5 +73,3 @@ export function busPriceCalculator(
 
   return Math.ceil(totalPrice);
 }
-
-// module.exports = { busPriceCalculator };
