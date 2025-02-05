@@ -90,9 +90,9 @@ const StaffPage = () => {
 
             <Switch>
 
-            <Route exact path={`/school/${schoolCode}/staff/`} component={Dashboard} />
+            <Route exact path={`/school/${schoolCode}/staff/`} component={Profile} />
             <Route exact path={`/school/${schoolCode}/staff/staffs`} component={Staffs} />
-            <Route exact path={`/school/${schoolCode}/staff/profile`} component={Profile} />
+            {/* <Route exact path={`/school/${schoolCode}/staff/profile`} component={Profile} /> */}
             <Route exact path={`/school/${schoolCode}/staff/security`} component={SecurityComponent} />
             <Route exact path={`/school/${schoolCode}/staff/admissions`} component={Admission} />
             <Route exact path={`/school/${schoolCode}/staff/exams`} component={Exams} />

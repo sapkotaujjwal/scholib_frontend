@@ -33,8 +33,6 @@ const Header = () => {
     setuserComponent(!userComponent);
   };
 
-
-
   return (
     <div className="header21ed flex1" id="headerId001">
       {userComponent && (
@@ -49,7 +47,7 @@ const Header = () => {
             <FontAwesomeIcon icon={faBars} />
           </div>
 
-          <Link to={`/school/${schoolCode}/`} onClick={handleLinkClick}>
+          <Link to={`/school/${schoolCode}/updates`} onClick={handleLinkClick}>
             {school.logo && (
               <>
                 <img
@@ -66,8 +64,6 @@ const Header = () => {
 
         <div className="center flex2 hidden1" ref={navbarRef}>
           <ul>
-
-
             <li>
               <Link
                 to={`/school/${schoolCode}/updates`}
@@ -82,7 +78,6 @@ const Header = () => {
               </Link>
             </li>
             <p className="h4"> | </p>
-
 
             <li>
               <Link
@@ -130,7 +125,7 @@ const Header = () => {
           {user && user.schoolCode == schoolCode && (
             <div
               className="user_div flex1"
-              onClick={handleUserClick}
+              onClick={() => handleUserClick()}
               style={{ cursor: "pointer" }}
             >
               <div className="image">

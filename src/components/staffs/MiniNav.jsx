@@ -103,7 +103,7 @@ const MiniNav = ({ function24 = function () {} }) => {
             </Link>{" "}
           </div>
 
-          <div
+          {/* <div
             className={
               currentPath === `/school/${schoolCode}/staff/profile`
                 ? "content active"
@@ -122,7 +122,7 @@ const MiniNav = ({ function24 = function () {} }) => {
                 Profile
               </p>{" "}
             </Link>
-          </div>
+          </div> */}
 
           <hr />
           <p className="h6 text-secondary w600 text-left mx-1 mt-4 mb-3">

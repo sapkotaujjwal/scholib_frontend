@@ -7,16 +7,18 @@ import Login from "./layout/Login";
 import { GET_USER, GET_USER_SUCCESS, ERROR_REMOVE } from "../redux/UserSlice";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   GET_SCHOLIB,
   GET_SCHOLIB_FAIL,
   GET_SCHOLIB_SUCCESS,
 } from "../redux/scholibSlice";
 import { SET_DATE } from "../redux/OtherInfoSlice";
+import NotFound from "./layout/NotFound";
 
 function App() {
   const dispatch = useDispatch();
+  const [success, setSuccess] = useState(false);
 
   function convertDate(originalDateString) {
     // Parse the original date string
@@ -42,6 +44,7 @@ function App() {
         withCredentials: true,
       })
       .then((response) => {
+        setSuccess(true);
         if (response.data.success) {
           response.data.data.dob = convertDate(response.data.data.dob);
           dispatch(GET_USER_SUCCESS(response.data.data));
@@ -51,8 +54,8 @@ function App() {
         }
       })
       .catch((error) => {
+        setSuccess(true);
         dispatch(ERROR_REMOVE());
-        console.log("You are not logged In");
       });
   }, [dispatch]);
 
@@ -85,11 +88,15 @@ function App() {
 
   return (
     <Router>
-      <Switch>
-        <Route path="/school/:schoolCode" component={School} />
-        <Route exact path="/login" component={Login} />
-        <Route path="/" component={Scholib} />
-      </Switch>
+      {success && (
+        <Switch>
+          <Route path="/school/:schoolCode" component={School} />
+          {/* <Route exact path="/login" component={Login} /> */}
+          <Route path="/" component={Scholib} />
+
+          <Route path="" component={NotFound} />
+        </Switch>
+      )}
     </Router>
   );
 }

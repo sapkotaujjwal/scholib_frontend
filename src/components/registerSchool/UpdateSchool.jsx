@@ -172,8 +172,7 @@ const UpdateSchool = ({ data, edit = true }) => {
       !Mydata.sName ||
       !Mydata.name ||
       !Mydata.address ||
-      !Mydata.estd ||
-      !Mydata.coordinates
+      !Mydata.estd 
     ) {
       alert("All fields with * are required");
       return;
@@ -773,7 +772,7 @@ const UpdateSchool = ({ data, edit = true }) => {
                           />
                         </div>
 
-                        <div className="each width4">
+                        {/* <div className="each width4">
                           <p> Map Coordinates *</p>
                           <input
                             type="text"
@@ -787,7 +786,7 @@ const UpdateSchool = ({ data, edit = true }) => {
                               })
                             }
                           />
-                        </div>
+                        </div> */}
 
                         <div className="each width4">
                           <p> Describe the motto of school </p>

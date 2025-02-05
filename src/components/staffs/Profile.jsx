@@ -148,7 +148,7 @@ const Profile = () => {
                 <p className="h5 w600"> About </p>
                 <hr />
 
-                <p className="lastP" style={{ minWidth: "40vw" }}>
+                <p className="lastP px-3" style={{ minWidth: "40vw" }}>
                   {admin.about}
                 </p>
               </section>

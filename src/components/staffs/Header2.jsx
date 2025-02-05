@@ -41,7 +41,7 @@ const Header = (props) => {
             <FontAwesomeIcon icon={faBars} />
           </div>
 
-          <Link to={`/school/${schoolCode}`} onClick={handleLinkClick}>
+          <Link to={`/school/${schoolCode}/updates`} onClick={handleLinkClick}>
             {school.logo && (
               <>
                 <img
