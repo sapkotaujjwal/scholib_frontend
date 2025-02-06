@@ -152,6 +152,7 @@ const FeeStructure = () => {
             <p className="h6 text-center mx-2 text-secondary my-3">
               No Courses available
             </p>
+            <hr />
           </>
         )}
 
@@ -217,7 +218,7 @@ const FeeStructure = () => {
           <p className="h4 w600"> Bus Fees </p>
         </div>
 
-        <div className="bus-fee-table-container flex3">
+        <div className="bus-fee-table-container flex3 shadow1 rounded-md">
           <div className="ind121bsbdjd">
             <TableEdit2
               excludedKeys={["_id"]}

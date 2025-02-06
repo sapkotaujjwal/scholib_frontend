@@ -17,8 +17,6 @@ const Account = () => {
 
   const courses = useSelector((state) => state.Course.course.payload.course);
 
-  const studentsInfo = useSelector((state) => state.Students.students.payload);
-
   const [currentClass, setCurrentClass] = useState(
     courses.length > 0 ? courses[0] : null
   );
@@ -68,6 +66,11 @@ const Account = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!currentSection) {
+      setLoading(false);
+      return;
+    }
+
     axios
       .get(
         `${process.env.REACT_APP_API_URL}/adminStudent/${schoolCode}/account/${currentSection._id}`,
@@ -180,82 +183,94 @@ const Account = () => {
           <p className="h6 text-center"> {school.name} </p>
         </div>
 
-        <div className="bar-control flex1 my-3">
-          <div className="ind-bar flex1">
-            {" "}
-            <p className="h6 w500 me-2"> Class : </p>{" "}
-            <Dropdown
-              title={currentClass && currentClass.class}
-              options={courses.map((ind) => {
-                return {
-                  label: ind.class,
-                  value: ind._id,
-                };
-              })}
-              onSelect={(a, b, c) => {
-                setCurrentClass(
-                  courses.find((ind) => {
-                    return ind._id === c;
-                  })
-                );
-              }}
-            />{" "}
+        {courses.length === 0 && (
+          <div className="">
+            <hr className="mt-8" />
+            <p className="text-center text-lg w500 text-gray-600 my-0"> No courses available </p>
+            <hr />
           </div>
-          <div className="ind-bar flex1">
-            {" "}
-            <p className="h6 w500 me-2"> Section : </p>{" "}
-            <Dropdown
-              options={allSections.map((sec) => {
-                return {
-                  label: sec.name,
-                  value: sec._id,
-                };
-              })}
-              onSelect={(a, b, c) => {
-                setCurrentSection(
-                  allSections.find((ind) => {
-                    return ind._id === c;
-                  })
-                );
-              }}
-              title={currentSection && currentSection.name}
-            />{" "}
-          </div>
-        </div>
+        )}
 
-        <section className="shadow1 mx-2 rounded-md">
-          {loading && (
-            <div
-              className="spinner-container flex1"
-              style={{ width: "100%", height: "80px" }}
-            >
-              <div
-                className="spinner-border text-primary my-4 loading452"
-                role="status"
-              >
-                <span className="sr-only">Loading...</span>
-              </div>{" "}
+        {courses.length > 0 && (
+          <div className="bar-control flex1 my-3">
+            <div className="ind-bar flex1">
+              {" "}
+              <p className="h6 w500 me-2"> Class : </p>{" "}
+              <Dropdown
+                title={currentClass && currentClass.class}
+                options={courses.map((ind) => {
+                  return {
+                    label: ind.class,
+                    value: ind._id,
+                  };
+                })}
+                onSelect={(a, b, c) => {
+                  setCurrentClass(
+                    courses.find((ind) => {
+                      return ind._id === c;
+                    })
+                  );
+                }}
+              />{" "}
             </div>
-          )}
-
-          <div className="custom-scrollbar overflow-auto max-w-[100%]">
-            <DataTable
-              data={students}
-              exclude={["_id"]}
-              fields={[
-                "SN",
-                "Name",
-                "Paid",
-                "Unpaid",
-                "Bus",
-                "Fine",
-                "Discount",
-              ]}
-              noSelect={true}
-              selectedOnes={() => {}}
-            />
+            <div className="ind-bar flex1">
+              {" "}
+              <p className="h6 w500 me-2"> Section : </p>{" "}
+              <Dropdown
+                options={allSections.map((sec) => {
+                  return {
+                    label: sec.name,
+                    value: sec._id,
+                  };
+                })}
+                onSelect={(a, b, c) => {
+                  setCurrentSection(
+                    allSections.find((ind) => {
+                      return ind._id === c;
+                    })
+                  );
+                }}
+                title={currentSection && currentSection.name}
+              />{" "}
+            </div>
           </div>
-        </section>
+        )}
+
+        {courses.length > 0 && (
+          <section className="shadow1 mx-2 rounded-md">
+            {loading && (
+              <div
+                className="spinner-container flex1"
+                style={{ width: "100%", height: "80px" }}
+              >
+                <div
+                  className="spinner-border text-primary my-4 loading452"
+                  role="status"
+                >
+                  <span className="sr-only">Loading...</span>
+                </div>{" "}
+              </div>
+            )}
+
+            <div className="custom-scrollbar overflow-auto max-w-[100%]">
+              <DataTable
+                data={students}
+                exclude={["_id"]}
+                fields={[
+                  "SN",
+                  "Name",
+                  "Paid",
+                  "Unpaid",
+                  "Bus",
+                  "Fine",
+                  "Discount",
+                ]}
+                noSelect={true}
+                selectedOnes={() => {}}
+              />
+            </div>
+          </section>
+        )}
       </div>
     </div>
   );

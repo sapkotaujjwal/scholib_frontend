@@ -45,7 +45,7 @@ const SearchComponent = ({ suggestions, search10 }) => {
   const handleSuggestionClick = (suggestion) => {
     const schoolCode = parseInt(suggestion.match(/^\d{6}/));
     search10();
-    history.push(`/school/${schoolCode}`);
+    history.push(`/school/${schoolCode}/updates`);
   };
 
   const handleInputFocus = () => {

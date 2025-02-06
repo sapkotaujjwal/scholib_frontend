@@ -22,11 +22,11 @@ const Scholib = () => {
 
   const user = useSelector((state) => state.User.user.payload);
 
-  if (user) {
-    history.push(`/school/${user.schoolCode}/updates`);
-  }else{
-    window.location = 'https://scholib.com/login.html'
-  }
+  // if (user) {
+  //   history.push(`/school/${user.schoolCode}/updates`);
+  // }else{
+  //   window.location = 'https://scholib.com/login.html'
+  // }
 
   return (
     <div>
@@ -41,6 +41,7 @@ const Scholib = () => {
           <Switch>
             <Route exact path="/" component={Scholib_home} />
             <Route exact path="/about" component={Scholib_about} />
+
             <Route path="" component={NotFound} />
           </Switch>
 

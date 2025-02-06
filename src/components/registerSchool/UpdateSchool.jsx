@@ -168,12 +168,7 @@ const UpdateSchool = ({ data, edit = true }) => {
   // Main submitt is actually here so make things work from here.. let's go
 
   async function handleSubmit() {
-    if (
-      !Mydata.sName ||
-      !Mydata.name ||
-      !Mydata.address ||
-      !Mydata.estd 
-    ) {
+    if (!Mydata.sName || !Mydata.name || !Mydata.address || !Mydata.estd) {
       alert("All fields with * are required");
       return;
     }
@@ -714,13 +709,11 @@ const UpdateSchool = ({ data, edit = true }) => {
                         </div>
 
                         <div className="each width4">
-                          <p> Quote </p>
+                          <p> Message * </p>
 
-                          <input
-                            type="text"
-                            name=""
+                          <textarea
                             value={Mydata.principle.quote}
-                            placeholder="Shree Chetana Secondary School"
+                            placeholder=""
                             onChange={(event) =>
                               setMydata({
                                 ...Mydata,
@@ -730,6 +723,14 @@ const UpdateSchool = ({ data, edit = true }) => {
                                 },
                               })
                             }
+                            className="w-full p-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none overflow-hidden"
+                            style={{
+                              minHeight: "50px", // Set initial height, can be adjusted
+                            }}
+                            onInput={(event) => {
+                              event.target.style.height = "auto"; // Reset height to auto
+                              event.target.style.height = `${event.target.scrollHeight}px`; // Adjust height to fit content
+                            }}
                           />
                         </div>
 
@@ -771,22 +772,6 @@ const UpdateSchool = ({ data, edit = true }) => {
                             }}
                           />
                         </div>
-
-                        {/* <div className="each width4">
-                          <p> Map Coordinates *</p>
-                          <input
-                            type="text"
-                            name=""
-                            value={Mydata.coordinates}
-                            placeholder="Shree Chetana Secondary School"
-                            onChange={(event) =>
-                              setMydata({
-                                ...Mydata,
-                                coordinates: event.target.value,
-                              })
-                            }
-                          />
-                        </div> */}
 
                         <div className="each width4">
                           <p> Describe the motto of school </p>

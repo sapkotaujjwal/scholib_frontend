@@ -63,7 +63,7 @@ const Footer = () => {
             </div>
 
             <div className="slogan">
-              <p className="h7 w500"> {school.principle.quote} </p>
+              <p className="h7 w500"> {school.address} </p>
             </div>
           </div>
 

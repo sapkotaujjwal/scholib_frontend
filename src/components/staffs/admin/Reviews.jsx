@@ -89,7 +89,7 @@ const Reviews = () => {
         <div className="my-3">
           <hr />
           <p
-            className="h5 text-secondary text-center"
+            className="text-lg text-gray-500 py-2 w500 text-center"
             style={{ margin: "auto" }}
           >
             {" "}

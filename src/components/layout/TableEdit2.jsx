@@ -205,7 +205,7 @@ const TableEdit2 = ({
 
       <div className="heroTable0238">
         {!myData || myData.length < 1 ? (
-          <p className="h6 text-secondary text-center"> No data Found... </p>
+          <p className="h6 text-secondary text-center py-4"> No data Found... </p>
         ) : (
           <table>
             <thead>
@@ -293,17 +293,10 @@ const TableEdit2 = ({
                       borderLeft: "0px",
                     }}
                     onClick={(e) => {
-                      // e.stopPropagation();
 
                       function1(myData[index]._id);
 
                       setEditIndex(null);
-
-                      // setMyData((prevData) => {
-                      //   const newData = [...prevData];
-                      //   newData.splice(index, 1);
-                      //   return newData;
-                      // });
                     }}
                   >
                     <div className="svg">

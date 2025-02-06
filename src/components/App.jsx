@@ -91,7 +91,7 @@ function App() {
       {success && (
         <Switch>
           <Route path="/school/:schoolCode" component={School} />
-          {/* <Route exact path="/login" component={Login} /> */}
+          <Route exact path="/login" component={Login} />
           <Route path="/" component={Scholib} />
 
           <Route path="" component={NotFound} />

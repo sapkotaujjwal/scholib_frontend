@@ -214,11 +214,10 @@ const Faq = () => {
 
           <hr />
           <p
-            className="h5 text-secondary text-center"
+            className="text-lg w500 text-gray-500 text-center py-2 m-0"
             style={{ margin: "auto" }}
           >
-            {" "}
-            No faq's added{" "}
+            Not Available
           </p>
 
           <hr />
@@ -266,7 +265,7 @@ const Faq = () => {
           );
         })}
 
-        <div className="button2123 flex1">
+        <div className="button2123 flex1 justify-content-center">
           <button
             className="btn btn-primary newFaq"
             onClick={() => {

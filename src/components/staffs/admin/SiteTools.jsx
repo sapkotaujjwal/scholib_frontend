@@ -26,28 +26,22 @@ const Tools = () => {
     <div className="site-tools-admin2733">
       <MetaData title={`${user && user.role ? "Staff" : "Student"} || Tools`} />
       <div className="content-inside">
-        <div className="veryTop">
-          <p className="h4 ps-3" style={{ color: "#133189" }}>
-            Website Tools
-          </p>
-          <p
-            className="h6 w500 f3 ps-3"
-            style={{ marginBottom: "13px", fontSize: "13px" }}
-          >
-            {" "}
+
+
+        <div className="veryTop p-4">
+          <p className="text-2xl font-semibold text-[#133189]">Website Tools</p>
+          <p className="text-sm font-normal text-gray-600 mb-3">
             Few of things to edit from your landing page and make sure the info
-            is correct...{" "}
+            is correct...
           </p>
 
           <button
-            className="btn btn-secondary ms-3 pt-1"
-            style={{ fontSize: "14px", width: "min(90%, 330px)" }}
+            className="bg-gray-300 hover:bg-gray-300 text-sm text-gray-800 py-2 px-4 rounded-lg w-full sm:w-80"
             onClick={() =>
               history.push(`/school/${school.schoolCode}/website/update`)
             }
           >
-            {" "}
-            Edit School Info{" "}
+            Edit School Info
           </button>
         </div>
 
@@ -67,19 +61,8 @@ const Tools = () => {
             >
               <p>FAQ</p>
             </div>
-
-            {/* <div
-              className={`each-div ${currentPage === 3 ? "active" : ""} `}
-              onClick={() => setCurrentPage(3)}
-            >
-              <p>More Things</p>
-            </div> */}
-
-
           </div>
         </div>
-
-        {/* rendering the components according to their order  */}
 
         <section className="PagesRendering">
           {currentPage && currentPage === 1 && <Reviews />}
