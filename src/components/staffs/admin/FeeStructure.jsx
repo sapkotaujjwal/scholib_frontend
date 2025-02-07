@@ -199,7 +199,7 @@ const FeeStructure = () => {
             <hr />
             <p className="h6 w500 text-center my-3">
               <span
-                className="w600 bg-primary text-white me-3 p-1"
+                className="w600 text-gray-600 me-3 px-1 py-2"
                 style={{ borderRadius: "4px" }}
               >
                 {" "}

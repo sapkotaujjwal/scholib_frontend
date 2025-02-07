@@ -28,7 +28,7 @@ const ExtraTools = () => {
       {staffs2.length < 1 && (
         <>
           <hr />
-          <p className="h6 w500 text-center text-secondary">
+          <p className="h6 w500 text-center text-secondary py-2">
             {" "}
             No Removed Members Available{" "}
           </p>

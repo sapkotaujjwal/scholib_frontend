@@ -185,8 +185,8 @@ const AnalyticsOverview = () => {
           {/* left side div  */}
 
           <div className="second each flex3">
-            <div className="more final flex3">
-              <div className="flex1 bg-slate-200">
+            <div className="more final flex3 p-2">
+              <div className="flex1 bg-slate-200 p-2">
                 <p className="h7 py-2">Total Fees Collected</p>
                 <p className="h5">
                   {" "}
@@ -197,7 +197,7 @@ const AnalyticsOverview = () => {
                 </p>
               </div>
 
-              <div className="flex1 bg-blue-200">
+              <div className="flex1 bg-blue-200 p-2">
                 <p className="h7 py-2">Last 10 Days</p>
                 <p className="h5">
                   {" "}
@@ -209,12 +209,12 @@ const AnalyticsOverview = () => {
 
           <div className="second each flex3">
             <div className="more final flex3">
-              <div className="flex1 bg-slate-200">
+              <div className="flex1 bg-slate-200 p-2">
                 <p className="h7 py-2">Total Students</p>
                 <p className="h5"> {students ? students.length : "N/A"} </p>
               </div>
 
-              <div className="flex1 bg-blue-200">
+              <div className="flex1 bg-blue-200 p-2">
                 <p className="h7 py-2">Total Staffs</p>
                 <p className="h5"> {school.staffs.length} </p>
               </div>

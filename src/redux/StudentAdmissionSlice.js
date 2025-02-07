@@ -4,7 +4,8 @@ export const studentAdmissionSlice = createSlice({
   name: 'StudentAdmission',
   initialState: {
     loading: false,
-    error: {},
+    error: {
+    },
     data: [],
   },
   reducers: {
