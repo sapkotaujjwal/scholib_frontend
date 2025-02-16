@@ -539,8 +539,12 @@ const GeneratePDF = ({ data, generate = false, closePrint = () => {} }) => {
   return (
     <>
       {!generate && (
-        <button className="button-Simple" onClick={generatePdf}>
-          <FontAwesomeIcon icon={faPrint} /> Print to PDF
+        <button
+          className="bg-gray-500 text-white flex items-center space-x-2 py-2 border border-gray-500 rounded-lg hover:bg-gray-600 transition-colors duration-200 px-[60px]"
+          onClick={generatePdf}
+        >
+          <i className="fas fa-print text-gray-600"></i>
+          <span>Print PDF</span>
         </button>
       )}
     </>

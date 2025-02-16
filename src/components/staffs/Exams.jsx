@@ -5,10 +5,7 @@ import MetaData from "../layout/MetaData";
 import axios from "axios";
 import { SET_ALERT_GLOBAL } from "../../redux/AlertGlobalSlice";
 import Dropdown from "../basicComponents/Dropdown";
-import DataTable from "../layout/Table";
 import AllClasses from "./admin/AllClasses";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFileExcel, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import GeneratePDF from "../layout/GeneratePDF";
 
 const Exams = () => {
@@ -375,335 +372,279 @@ const Exams = () => {
     }
   }, [session]);
 
+  console.log(courses);
+
   return (
     <div className="examsAdmin2838">
       <MetaData title={`${user && user.role ? "Staff" : "Student"} || Exams`} />
-      {!newMarks && (
+
+      {!newMarks && true && (
         <div className="inside-content">
           <div className="veryTop">
-            <p className="h4 text-center" style={{ color: "#133189" }}>
-              Exams
-            </p>
-            <p className="h6 text-center"> {school.name} </p>
+            <p className="h4 text-center text-[#133189]">Exams</p>
+            <p className="h6 text-center">{school.name}</p>
           </div>
 
-          {user &&
-            (user.role === "Administrator" ||
-              user.role === "Coordinator" ||
-              user.role === "Moderator") && (
-              <div
-                className="outer-buttons flex1"
-                style={{ justifyContent: "flex-end" }}
-              >
-                <div
-                  className="examControls flex1"
-                  style={{ justifyContent: "flex-end" }}
-                >
-                  <button
-                    onClick={() =>
-                      setAllClasses({
-                        title: "Add New Exam",
-                        btnText: "Add New Exam",
-                        handleGetSelectedOnes: addNewExam,
-                      })
-                    }
-                  >
-                    {" "}
-                    Add New Exam{" "}
-                  </button>
-                </div>
-
-                <div
-                  className="examControls flex1 btn-end"
-                  style={{ justifyContent: "flex-end", marginRight: "0" }}
-                >
-                  <button
-                    onClick={() =>
-                      setAllClasses({
-                        title: "Publish Result",
-                        btnText: "Publish Result",
-                        handleGetSelectedOnes: publishResult,
-                      })
-                    }
-                  >
-                    {" "}
-                    Publish Result{" "}
-                  </button>
-                </div>
-              </div>
-            )}
-
-          <div className="classInfo">
-            <p className="h5 w600 ms-2"> All Classes </p>
-
-            <div className="year-dropdown flex1">
-              <p className="h6 me-2" style={{ marginBottom: "0" }}>
-                {" "}
-                Session :
-              </p>
-              <Dropdown
-                title={"Current"}
-                options={[
-                  { label: "Current", value: null },
-                  ...school.olderData?.map((each) => {
-                    return {
-                      label: each.year,
-                      value: each.year,
-                    };
-                  }),
-                ]}
-                onSelect={(a, b, c) => {
-                  setSession(c);
-
-                  axios
-                    .get(
-                      `${process.env.REACT_APP_API_URL}/staff/${schoolCode}/students`,
-                      {
-                        params: {
-                          year: c,
-                        },
-                        withCredentials: true,
+          {/* Main Actions */}
+          <div className="my-7">
+            {user &&
+              ["Administrator", "Coordinator", "Moderator"].includes(
+                user.role
+              ) && (
+                <>
+                  <div className="flex1 justify-end min-w-[100%]">
+                    <button
+                      onClick={() =>
+                        setAllClasses({
+                          title: "Add New Exam",
+                          btnText: "Add New Exam",
+                          handleGetSelectedOnes: addNewExam,
+                        })
                       }
-                    )
-                    .then((response) => {
-                      if (response.data.success) {
-                        setStudents(response.data.data);
+                      className="w-[40%] md:w-[240px] bg-white text-gray-600 hover:bg-gray-200 rounded-lg py-2 px-3 shadow1 transition-all duration-200 flex items-center justify-center space-x-2 mx-2"
+                    >
+                      <i className="fas fa-plus-circle"></i>
+                      <span className="font-medium">Create New Exam</span>
+                    </button>
+                    <button
+                      onClick={() =>
+                        setAllClasses({
+                          title: "Publish Result",
+                          btnText: "Publish Result",
+                          handleGetSelectedOnes: publishResult,
+                        })
+                      }
+                      className="w-[40%] md:w-[240px] bg-white text-gray-600 hover:bg-gray-200 rounded-lg py-2 px-3 shadow1 transition-all duration-200 flex items-center justify-center space-x-2 mx-2"
+                    >
+                      <i className="fas fa-share-square"></i>
+                      <span className="font-medium">Publish Results</span>
+                    </button>
+                  </div>
+                </>
+              )}
+          </div>
 
-                        if (response.data.courses) {
-                          let coursesNew = response.data.courses.map((crc) =>
-                            course1.find((crc2) => crc2._id === crc)
-                          );
-                          setCourses(coursesNew);
+          {/* Filters Section */}
+          <div className="bg-white rounded-xl shadow1 p-6">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">
+                  Academic Session
+                </label>
+                <select
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  onChange={(e) => {
+                    const selectedYear =
+                      e.target.value === "current" ? null : e.target.value;
+
+                    setSession(selectedYear);
+
+                    axios
+                      .get(
+                        `${process.env.REACT_APP_API_URL}/staff/${schoolCode}/students`,
+                        {
+                          params: { year: selectedYear },
+                          withCredentials: true,
                         }
-                      } else {
-                        dispatch(SET_ALERT_GLOBAL(response.data.data));
-                      }
-                    })
-                    .catch((error) => {
-                      const data = {
-                        message: error.message,
-                        status: "Cannot communicate with the server",
-                      };
+                      )
+                      .then((response) => {
+                        if (response.data.success) {
+                          setStudents(response.data.data);
+                          if (response.data.courses) {
+                            const coursesNew = response.data.courses.map(
+                              (crc) => courses.find((crc2) => crc2._id === crc)
+                            );
+                            setCourses(coursesNew);
+                          }
+                        }
+                      })
+                      .catch((error) => {
+                        // Handle error
+                      });
+                  }}
+                >
+                  <option value="current">Current</option>
+                  {school.olderData?.map((each) => (
+                    <option key={each.year} value={each.year}>
+                      {each.year}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-                      if (error.response) {
-                        dispatch(SET_ALERT_GLOBAL(error.response.data));
-                        return;
-                      }
-                      dispatch(SET_ALERT_GLOBAL(data));
-                    });
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">
+                  Class
+                </label>
+                <select
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  onChange={(e) => {
+                    const selectedClass = courses.find(
+                      (c) => c._id === e.target.value
+                    );
+                    setCurrentClass(selectedClass);
+                    setExamInfo(null);
+                  }}
+                >
+                  {courses.map((course) => (
+                    <option key={course._id} value={course._id}>
+                      {course.class}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">
+                  Term
+                </label>
+                <select
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  onChange={(e) => setCurrentTerm(parseInt(e.target.value))}
+                  value={currentTerm}
+                >
+                  {examInfo &&
+                    examInfo
+                      .find((sec) => sec.section === currentSection._id)
+                      ?.exam.term.map((_, index) => (
+                        <option key={index} value={index + 1}>
+                          Term {index + 1}
+                        </option>
+                      ))}
+                </select>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">
+                  Section
+                </label>
+                <select
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  onChange={(e) => {
+                    const selectedSection = allSections.find(
+                      (s) => s._id === e.target.value
+                    );
+                    setCurrentSection(selectedSection);
+                    const subjectsList = findSectionById(
+                      courses,
+                      e.target.value
+                    ).subjects;
+                    setCurrentSubject(subjectsList[0]);
+                    setAllSubjects(subjectsList);
+                  }}
+                >
+                  {examInfo &&
+                    examInfo.map((each) => (
+                      <option key={each.section} value={each.section}>
+                        {allSections.find((s) => s._id === each.section)?.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
+            </div>
+          </div>
+
+          {/* Quick Actions */}
+          <div className="flex flex-wrap gap-4 my-7 bg-gray-100 p-4 rounded-lg justify-end">
+            {printData && <GeneratePDF data={printData} />}
+
+            <button className="bg-gray-500 text-white flex items-center space-x-2 py-2 border border-gray-500 rounded-lg hover:bg-gray-600 transition-colors duration-200 px-[60px]">
+              <i className="fas fa-file-excel text-gray-600"></i>
+              <span>Export Excel</span>
+            </button>
+            <button
+              className="bg-gray-500 text-white flex items-center space-x-2 py-2 border border-gray-500 rounded-lg hover:bg-gray-600 transition-colors duration-200 px-[60px]"
+              onClick={() => {
+                const subject = examInfo
+                  ?.find((sec) => sec.section === currentSection._id)
+                  ?.exam.term[currentTerm - 1]?.subjects.find(
+                    (sub) => sub._id === currentSubject._id
+                  );
+                setNewMarks(subject);
+              }}
+            >
+              <i className="fas fa-edit text-gray-600"></i>
+              <span>Edit Marks</span>
+            </button>
+          </div>
+
+          {currentSubject && (
+            <div className="each flex1 justify-end mb-3 pt-2">
+              <p className="text-md mb-0 w500"> Subject :</p>
+              <Dropdown
+                title={` ${currentSubject.subject || "Select One"}`}
+                options={allSubjects.map((each, index) => {
+                  return {
+                    label: each.subject,
+                    value: each._id,
+                  };
+                })}
+                onSelect={(a, b, c) => {
+                  setCurrentSubject(allSubjects.find((sub) => sub._id === c));
                 }}
               />
             </div>
+          )}
 
-            {courses.length > 0 && (
-              <div className="classes-list flex1">
-                {courses.map((arr) => {
-                  return (
-                    <div
-                      className={`each flex1 ${
-                        currentClass._id === arr._id ? "active" : ""
-                      }`}
-                      key={arr._id}
-                      onClick={() => {
-                        setExamInfo(null);
-                        setCurrentClass(arr);
-                      }}
-                    >
-                      <p className="h6 w600"> {arr.class} </p>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-
-
-
-
-
-
-
-            {courses.length === 0 && (
-              <>
-                <hr />
-
-                <p className="h6 text-center mx-2 text-secondary my-3">
-                  No courses available
-                </p>
-
-                <hr />
-              </>
-            )}
-
-            {examInfo && !loading && currentTerm > 0 && (
-              <>
-                <div className="ourOptions flex1">
-                  {/* <div className="each flex1"> Year : <Dropdown /> </div> */}
-
-                  <div className="each ">
-                    <Dropdown
-                      title={`Term : ${currentTerm}`}
-                      options={examInfo
-                        .find((sec) => sec.section === currentSection._id)
-                        .exam.term.map((each, index) => {
-                          return {
-                            label: `${index + 1} `,
-                            value: each._id,
-                          };
-                        })}
-                      onSelect={(a) => {
-                        setCurrentTerm(a + 1);
-                      }}
-                    />
-                  </div>
-
-                  <div className="each ">
-                    <Dropdown
-                      title={`Section : ${currentSection.name}`}
-                      options={examInfo
-                        .map((each) => {
-                          return {
-                            label: allSections.find(
-                              (ind) => ind._id === each.section
-                            ).name,
-                            value: each.section,
-                          };
-                        })
-                        .sort((a, b) =>
-                          a.label
-                            .toLowerCase()
-                            .localeCompare(b.label.toLowerCase())
-                        )}
-                      onSelect={(a, b, c) => {
-                        setCurrentSection(
-                          allSections.find((sec) => sec._id === c)
-                        );
-
-                        let subjectsList = findSectionById(courses, c).subjects;
-
-                        setCurrentSubject(subjectsList[0]);
-                        setAllSubjects(subjectsList);
-                      }}
-                    />{" "}
-                  </div>
-
-                  <div className="each ">
-                    <Dropdown
-                      title={`Subject : ${
-                        currentSubject.subject || "Select One"
-                      }`}
-                      options={allSubjects.map((each, index) => {
-                        return {
-                          label: each.subject,
-                          value: each._id,
-                        };
-                      })}
-                      onSelect={(a, b, c) => {
-                        setCurrentSubject(
-                          allSubjects.find((sub) => sub._id === c)
-                        );
-                      }}
-                    />
-                  </div>
-                </div>
-
-                <hr />
-
-                <div className="button flex3 my-3 flex-wrap">
-                  {/* <button className="button-Simple" onClick={handlePrintData}>
-                    <FontAwesomeIcon icon={faPrint} /> Print to PDF
-                  </button> */}
-
-                  {printData && <GeneratePDF data={printData} />}
-
-                  <button className="button-Simple">
-                    <FontAwesomeIcon icon={faFileExcel} /> Export to Excel
-                  </button>
-
-                  <button
-                    className="button-Simple"
-                    onClick={() => {
-                      let subject = examInfo
-                        .find((sec) => sec.section === currentSection._id)
-                        .exam.term[currentTerm - 1].subjects.find(
-                          (sub) => sub._id === currentSubject._id
-                        );
-
-                      setNewMarks(subject);
-                    }}
-                  >
-                    {" "}
-                    <FontAwesomeIcon icon={faPenToSquare} /> Edit Marks{" "}
-                  </button>
-                </div>
-
-                {examInfo && currentSection && students && (
-                  <div
-                    className="absentStudents my-3 custom-scrollbar shadow1"
-                    style={{ overflowX: "auto" }}
-                  >
-                    <DataTable
-                      data={examInfo
-                        .find((sec) => sec.section === currentSection._id)
-                        .exam.term[currentTerm - 1].subjects.find(
-                          (sub) => sub._id === currentSubject._id
-                        )
-                        .students.map((std, index) => {
-                          const student = students.find(
-                            (stu) => stu._id === std.student
-                          );
-                          return {
-                            Roll: index + 1,
-                            name: student?.name, // Use optional chaining to safely access name
-                            marks: std.obtainedMarks,
-                            marks2: std.obtainedMarks2,
-                          };
-                        })
-                        .filter((entry) => entry.name !== undefined)} // Filter out entries without a valid name
-                      fields={[
-                        "Roll",
-                        "Student Name",
-                        "Written Marks",
-                        "Practical Marks",
-                      ]}
-                      exclude={[]}
-                    />
-                  </div>
-                )}
-              </>
-            )}
-
-            {!examInfo && !loading && (
-              <>
-                <hr />
-                <p className="h6 w600 text-center text-secondary">
-                  {" "}
-                  Exam details not found{" "}
-                </p>
-                <hr />
-              </>
-            )}
-
-            {currentTerm === 0 && (
-              <>
-                <hr />
-                <p className="h6 w600 text-center text-secondary">
-                  No Exams have been conducted
-                </p>
-                <hr />
-              </>
-            )}
-
-            {loading && (
-              <div
-                className="spinner-container flex1"
-                style={{ width: "100%", height: "60px" }}
-              >
-                <div
-                  className="spinner-border text-primary my-4 loading452"
-                  role="status"
-                >
+          {/* Results Table */}
+          <div className="bg-white shadow1 p-6 max-w[100%] overflow-x-auto">
+            {loading ? (
+              <div className="flex items-center justify-center h-48">
+                <div className="spinner-border text-primary" role="status">
                   <span className="sr-only">Loading...</span>
                 </div>
+              </div>
+            ) : examInfo && currentSection && students ? (
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead>
+                  <tr>
+                    <th className="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Roll
+                    </th>
+                    <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Student Name
+                    </th>
+                    <th className="px-6 py-3 bg-gray-50 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
+                      Written Marks
+                    </th>
+                    <th className="px-6 py-3 bg-gray-50 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
+                      Practical Marks
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {examInfo
+                    .find((sec) => sec.section === currentSection._id)
+                    ?.exam.term[currentTerm - 1]?.subjects.find(
+                      (sub) => sub._id === currentSubject._id
+                    )
+                    ?.students.map((std, index) => {
+                      const student = students.find(
+                        (stu) => stu._id === std.student
+                      );
+                      return student ? (
+                        <tr key={student._id}>
+                          <td className="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                            {index + 1}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            {student.name}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                            {std.obtainedMarks}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                            {std.obtainedMarks2}
+                          </td>
+                        </tr>
+                      ) : null;
+                    })}
+                </tbody>
+              </table>
+            ) : (
+              <div className="flex flex-col items-center justify-center min-h-[200px] text-gray-500 space-y-4">
+                <i className="fas fa-search text-gray-300 text-4xl"></i>
+                <p>No exam data found for the selected filters</p>
               </div>
             )}
           </div>
