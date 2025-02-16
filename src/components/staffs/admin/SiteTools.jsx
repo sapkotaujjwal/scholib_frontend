@@ -27,14 +27,9 @@ const Tools = () => {
       <MetaData title={`${user && user.role ? "Staff" : "Student"} || Tools`} />
       <div className="content-inside">
 
-
-        <div className="veryTop p-4">
-          <p className="text-2xl font-semibold text-[#133189]">Website Tools</p>
-          <p className="text-sm font-normal text-gray-600 mb-3">
-            Few of things to edit from your landing page and make sure the info
-            is correct...
-          </p>
-
+        <div className="flex flex-col p-4 bg-white shadow1 rounded-lg mx-[2%]">
+          <p className="text-xl font-semibold text-[#133189]">Website Tools</p>
+          <p className="text-sm text-gray-600">{school.name}</p>
           <button
             className="bg-gray-300 hover:bg-gray-300 text-sm text-gray-800 py-2 px-4 rounded-lg w-full sm:w-80"
             onClick={() =>

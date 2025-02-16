@@ -15,8 +15,6 @@ const Attendance = () => {
   const date = useSelector((state) => state.Other.date);
   const dispatch = useDispatch();
 
-
-
   const [students, setStudents] = useState(null);
   const [ourAlert, setOurAlert] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -292,24 +290,19 @@ const Attendance = () => {
       )}
 
       <div className="inside-content">
-        <div className="veryTop">
-          <p className="h4 text-center" style={{ color: "#133189" }}>
-            Attendance
-          </p>
-          <p className="h6 text-center"> {school.name} </p>
+        <div className="flex flex-col p-4 bg-white shadow1 rounded-lg mx-[2%]">
+          <p className="text-xl font-semibold text-[#133189]">Students</p>
+          <p className="text-sm text-gray-600">{school.name}</p>
         </div>
       </div>
 
       {courses && courses.length > 0 && (
         <div className="inside-content">
           <div className="centerOne">
-            <div className="righterOne flex1">
-              <div
-                className="each flex1 ms-2 ps-2"
-                style={{ marginTop: "8px" }}
-              >
+            <div className="righterOne flex1 shadow1 py-4 rounded-md">
+              <div className="each flex1 ms-2 ps-2 py-2 md:py-0">
                 {" "}
-                <p className="h7 w500"> Class : </p>{" "}
+                <p className="text-sm w500"> Class : </p>{" "}
                 <Dropdown
                   title={currentClass && currentClass.class}
                   options={courses.map((ind) => {
@@ -327,12 +320,9 @@ const Attendance = () => {
                   }}
                 />{" "}
               </div>
-              <div
-                className="each flex1 ms-2 ps-2"
-                style={{ marginTop: "8px" }}
-              >
+              <div className="each flex1 ms-2 ps-2 py-2 md:py-0">
                 {" "}
-                <p className="h7 w500"> Section : </p>{" "}
+                <p className="text-sm w500"> Section : </p>{" "}
                 <Dropdown
                   options={allSections.map((sec) => {
                     return {

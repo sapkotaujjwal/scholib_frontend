@@ -15,6 +15,7 @@ import StaffProfileBig from "./admin/StaffProfileBig";
 
 import userImg from "../../images/user.png";
 import { SET_STAFFS } from "../../redux/OtherInfoSlice";
+import StaffTable from "./StaffTable";
 
 const Staffs = () => {
   useEffect(() => {
@@ -93,127 +94,45 @@ const Staffs = () => {
       {staffs && (
         <div className="sInside27">
           <div className="veryTop">
-            <p className="h4 text-center" style={{ color: "#133189" }}>
-              {" "}
-              Staffs{" "}
-            </p>
-            <p className="h6 text-center"> {school.name} </p>
+            <div className="flex flex-col p-4 bg-white shadow1 rounded-lg">
+              <p className="text-xl font-semibold text-[#133189]">Staffs</p>
+              <p className="text-sm text-gray-600">{school.name}</p>
+            </div>
           </div>
 
-          <div className="top2stafs d-flex">
-            <p className="h5 w600"> STAFFS </p>
-            <div className="number flex1"> {staffs.length} </div>
-          </div>
+          <div className="flex1 justify-between wrap px-2">
+            <div className="top2stafs d-flex">
+              <p className="h5 w600"> STAFFS </p>
+              <div className="number flex1"> {staffs.length} </div>
+            </div>
 
-          {user &&
-            (user.role === "Administrator" || user.role === "Coordinator") && (
-              <div className="onlyAdmin " style={{ marginTop: "20px" }}>
-                <button
-                  style={{ minWidth: "300px" }}
-                  onClick={() => handleAddNewStaff()}
-                >
-                  {" "}
-                  <FontAwesomeIcon
-                    icon={faPlus}
-                    style={{ marginRight: "5px" }}
-                  />{" "}
-                  Add New Staff{" "}
-                </button>
-              </div>
-            )}
-
-          <div className="ourStaffsAll">
-            <div
-              className="profile-container flex1"
-              style={{ justifyContent: "flex-start" }}
-            >
-              {loading && (
-                <div
-                  className="spinner-container flex1"
-                  style={{ width: "100%", height: "80px" }}
-                >
-                  <div
-                    className="spinner-border text-primary my-4 loading452"
-                    role="status"
+            {user &&
+              (user.role === "Administrator" ||
+                user.role === "Coordinator") && (
+                <div className="onlyAdmin " style={{ marginTop: "20px" }}>
+                  <button
+                    className="w-[200px] md:w-[300px]"
+                    onClick={() => handleAddNewStaff()}
                   >
-                    <span className="sr-only">Loading...</span>
-                  </div>{" "}
+                    {" "}
+                    <FontAwesomeIcon
+                      icon={faPlus}
+                      style={{ marginRight: "5px" }}
+                    />{" "}
+                    Add New Staff{" "}
+                  </button>
                 </div>
               )}
+          </div>
 
-              {!loading && !error && staffs && staffs.length < 1 ? (
-                <p className="text-secondary text-center p-2 pt-3 h5">
-                  No Staffs available
-                </p>
-              ) : (
-                ""
-              )}
-
-              {!loading && error && (
-                <p className="text-secondary text-center p-2 pt-3 h5">
-                  {error.status} <br />
-                  {error.message}
-                </p>
-              )}
-
-              {staffs &&
-                staffs.length >= 1 &&
-                staffs.map((ind) => {
-                  return (
-                    <div
-                      className="user-profile-8237"
-                      key={ind._id}
-                      onClick={(e) => {
-                        setBigStaff(ind._id);
-                      }}
-                    >
-                      <div className="top d-flex">
-                        <div className="left">
-                          {ind.pPhoto && (
-                            <img src={ind.pPhoto.secure_url} alt="" />
-                          )}
-
-                          {!ind.pPhoto && <img src={userImg} alt="" />}
-                        </div>
-                        <div className="right">
-                          <p className="h6">{ind.name}</p>
-                          <p className="h7 text-secondary">{ind.title}</p>
-                        </div>
-                      </div>
-
-                      <div className="bottom">
-                        <div className="each d-flex">
-                          <FontAwesomeIcon icon={faUserTie} />
-                          <p className="h6" style={{ marginLeft: "12px" }}>
-                            {ind.role}
-                          </p>
-                        </div>
-
-                        <div className="each d-flex">
-                          <FontAwesomeIcon icon={faPhone} />
-                          <p className="h6" style={{ marginLeft: "12px" }}>
-                            {ind.phone}
-                          </p>
-                        </div>
-
-                        <div className="each d-flex">
-                          <FontAwesomeIcon icon={faEnvelope} />
-                          <p className="h6" style={{ marginLeft: "12px" }}>
-                            {ind.email}
-                          </p>
-                        </div>
-
-                        <div className="each d-flex">
-                          <FontAwesomeIcon icon={faLocationDot} />
-                          <p className="h6" style={{ marginLeft: "12px" }}>
-                            {ind.address}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-            </div>
+          <div className="my-3  px-[2%]">
+            <StaffTable
+              loading={loading}
+              error={error}
+              staffs={staffs}
+              setBigStaff={setBigStaff}
+              userImg={userImg}
+            />
           </div>
         </div>
       )}

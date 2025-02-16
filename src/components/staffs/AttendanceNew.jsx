@@ -91,8 +91,8 @@ const AttendanceNew = ({
             <table>
               <thead>
                 <tr>
-                  <th> Id</th>
-                  <th>Name</th>
+                  <th> &nbsp; &nbsp; Id &nbsp; &nbsp;</th>
+                  <th style={{ textAlign: "left" }}>Name</th>
                   <th>Present</th>
                   <th>Absent</th>
                 </tr>
@@ -101,7 +101,7 @@ const AttendanceNew = ({
                 {attendanceData.map((student, index) => (
                   <tr key={student.id}>
                     <td>{index + 1}</td>
-                    <td>{student.name}</td>
+                    <td style={{ textAlign: "left" }}>{student.name}</td>
                     <td>
                       <input
                         type="radio"

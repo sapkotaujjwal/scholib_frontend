@@ -141,12 +141,10 @@ const Admission = () => {
 
       {filter2.admissions && (
         <div className="inside-content">
-          <div className="veryTop">
-            <p className="h4 text-center" style={{ color: "#133189" }}>
-              Admissions
-            </p>
-            <p className="h6 text-center"> {school.name} </p>
-          </div>
+        <div className="flex flex-col p-4 bg-white shadow1 rounded-lg mx-[2%]">
+          <p className="text-xl font-semibold text-[#133189]">Admissions</p>
+          <p className="text-sm text-gray-600">{school.name}</p>
+        </div>
 
           <div className="posgdj d-flex">
             <p className="h5 w600"> Admission Inquiries</p>

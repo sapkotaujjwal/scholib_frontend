@@ -7,6 +7,7 @@ import { SET_ALERT_GLOBAL } from "../../redux/AlertGlobalSlice";
 import Dropdown from "../basicComponents/Dropdown";
 import AllClasses from "./admin/AllClasses";
 import GeneratePDF from "../layout/GeneratePDF";
+import ExamMarks from "./ExamMarks";
 
 const Exams = () => {
   const school = useSelector((state) => state.Home.school.payload);
@@ -372,17 +373,15 @@ const Exams = () => {
     }
   }, [session]);
 
-  console.log(courses);
-
   return (
     <div className="examsAdmin2838">
       <MetaData title={`${user && user.role ? "Staff" : "Student"} || Exams`} />
 
       {!newMarks && true && (
         <div className="inside-content">
-          <div className="veryTop">
-            <p className="h4 text-center text-[#133189]">Exams</p>
-            <p className="h6 text-center">{school.name}</p>
+          <div className="flex flex-col p-4 bg-white shadow1 rounded-lg">
+            <p className="text-xl font-semibold text-[#133189]">Exams</p>
+            <p className="text-sm text-gray-600">{school.name}</p>
           </div>
 
           {/* Main Actions */}
@@ -401,7 +400,7 @@ const Exams = () => {
                           handleGetSelectedOnes: addNewExam,
                         })
                       }
-                      className="w-[40%] md:w-[240px] bg-white text-gray-600 hover:bg-gray-200 rounded-lg py-2 px-3 shadow1 transition-all duration-200 flex items-center justify-center space-x-2 mx-2"
+                      className="w-[50%] md:w-[240px] bg-white text-gray-600 hover:bg-gray-200 rounded-lg py-2 px-3 shadow1 transition-all duration-200 flex items-center justify-center space-x-2 mx-2"
                     >
                       <i className="fas fa-plus-circle"></i>
                       <span className="font-medium">Create New Exam</span>
@@ -414,7 +413,7 @@ const Exams = () => {
                           handleGetSelectedOnes: publishResult,
                         })
                       }
-                      className="w-[40%] md:w-[240px] bg-white text-gray-600 hover:bg-gray-200 rounded-lg py-2 px-3 shadow1 transition-all duration-200 flex items-center justify-center space-x-2 mx-2"
+                      className="w-[50%] md:w-[240px] bg-white text-gray-600 hover:bg-gray-200 rounded-lg py-2 px-3 shadow1 transition-all duration-200 flex items-center justify-center space-x-2 mx-2"
                     >
                       <i className="fas fa-share-square"></i>
                       <span className="font-medium">Publish Results</span>
@@ -545,7 +544,7 @@ const Exams = () => {
           </div>
 
           {/* Quick Actions */}
-          <div className="flex flex-wrap gap-4 my-7 bg-gray-100 p-4 rounded-lg justify-end">
+          <div className=" hidden md:flex flex-wrap gap-4 my-7 bg-gray-100 p-4 rounded-lg justify-end">
             {printData && <GeneratePDF data={printData} />}
 
             <button className="bg-gray-500 text-white flex items-center space-x-2 py-2 border border-gray-500 rounded-lg hover:bg-gray-600 transition-colors duration-200 px-[60px]">
@@ -569,20 +568,37 @@ const Exams = () => {
           </div>
 
           {currentSubject && (
-            <div className="each flex1 justify-end mb-3 pt-2">
-              <p className="text-md mb-0 w500"> Subject :</p>
-              <Dropdown
-                title={` ${currentSubject.subject || "Select One"}`}
-                options={allSubjects.map((each, index) => {
-                  return {
-                    label: each.subject,
-                    value: each._id,
-                  };
-                })}
-                onSelect={(a, b, c) => {
-                  setCurrentSubject(allSubjects.find((sub) => sub._id === c));
-                }}
-              />
+            <div className="each flex1 justify-end mb-3 pt-2 flex-wrap-reverse flex-grow-1 mt-3">
+              <div className="">
+                {/* <p className="text-md mb-0 w500"> Subject :</p> */}
+                <Dropdown
+                  title={` ${currentSubject.subject || "Select One"}`}
+                  options={allSubjects.map((each, index) => {
+                    return {
+                      label: each.subject,
+                      value: each._id,
+                    };
+                  })}
+                  onSelect={(a, b, c) => {
+                    setCurrentSubject(allSubjects.find((sub) => sub._id === c));
+                  }}
+                />
+              </div>
+
+              {examInfo &&
+              examInfo.find((sec) => sec.section == currentSection._id).exam
+                .term[currentTerm - 1].publishedDate ? (
+                <div className="bg-green-200 py-2 px-4 mr-3 rounded-sm">
+                  <p className="text-sm text-gray-600 w500 mb-0"> Published </p>
+                </div>
+              ) : (
+                <div className="bg-red-200 py-2 px-4 mr-3 rounded-sm">
+                  <p className="text-sm text-gray-600 w500 mb-0">
+                    {" "}
+                    Not Published{" "}
+                  </p>
+                </div>
+              )}
             </div>
           )}
 
@@ -660,7 +676,7 @@ const Exams = () => {
         />
       )}
 
-      {newMarks && (
+      {newMarks && false && (
         <div className="create-result-main-parent">
           <div className="anotherIn custom-scrollbar">
             {
@@ -910,6 +926,10 @@ const Exams = () => {
           </div>
         </div>
       )}
+
+      {
+        newMarks && <ExamMarks students={students} newMarks={newMarks} setNewMarks={setNewMarks} updateExamInfo />
+      }
     </div>
   );
 };

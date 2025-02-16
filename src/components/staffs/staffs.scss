@@ -7,9 +7,8 @@
 
         .veryTop{
             margin: auto 2%;
-            padding: 25px 0px;
+
             border-radius: 4px;
-            background-color: #F5F3FC;
         }
 
         .top2stafs{
@@ -42,7 +41,7 @@
                 background-color: #01BDD7;
                 border-radius: 5px;
                 color: #fff;
-                width: 100%;
+                // width: 100%;
                 max-width: 400px;
             }
         }
@@ -58,6 +57,10 @@
                 justify-content: space-between;
                 justify-content: center;
                 margin: auto;
+
+                p{
+                    margin-bottom: 0;
+                }
         
                 .user-profile-8237{
                     cursor: pointer;

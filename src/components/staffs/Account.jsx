@@ -176,11 +176,9 @@ const Account = () => {
       />
 
       <div className="inside-content">
-        <div className="veryTop">
-          <p className="h4 text-center" style={{ color: "#133189" }}>
-            Account
-          </p>
-          <p className="h6 text-center"> {school.name} </p>
+      <div className="flex flex-col p-4 bg-white shadow1 rounded-lg mx-[2%]">
+          <p className="text-xl font-semibold text-[#133189]">Account</p>
+          <p className="text-sm text-gray-600">{school.name}</p>
         </div>
 
         {courses.length === 0 && (
@@ -192,7 +190,7 @@ const Account = () => {
         )}
 
         {courses.length > 0 && (
-          <div className="bar-control flex1 my-3">
+          <div className="bar-control flex1 my-3 bg-gray-50 shadow1 rounded-md py-3 mx-[2%]">
             <div className="ind-bar flex1">
               {" "}
               <p className="h6 w500 me-2"> Class : </p>{" "}
@@ -237,7 +235,7 @@ const Account = () => {
         )}
 
         {courses.length > 0 && (
-          <section className="shadow1 mx-2 rounded-md">
+          <section className="shadow1  rounded-md mx-[2%]">
             {loading && (
               <div
                 className="spinner-container flex1"
@@ -266,7 +264,8 @@ const Account = () => {
                   "Discount",
                 ]}
                 noSelect={true}
-                selectedOnes={() => {}}
+                center={false}
+
               />
             </div>
           </section>
