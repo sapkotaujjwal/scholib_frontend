@@ -88,43 +88,66 @@ const AttendanceNew = ({
         <div className="main-content flex1">
           <div className="attendance-table">
             <hr />
-            <table>
-              <thead>
-                <tr>
-                  <th> &nbsp; &nbsp; Id &nbsp; &nbsp;</th>
-                  <th style={{ textAlign: "left" }}>Name</th>
-                  <th>Present</th>
-                  <th>Absent</th>
-                </tr>
-              </thead>
-              <tbody>
-                {attendanceData.map((student, index) => (
-                  <tr key={student.id}>
-                    <td>{index + 1}</td>
-                    <td style={{ textAlign: "left" }}>{student.name}</td>
-                    <td>
-                      <input
-                        type="radio"
-                        checked={student.status === "Present"}
-                        onChange={() =>
-                          handleStatusChange(student.id, "Present")
-                        }
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="radio"
-                        checked={student.status === "Absent"}
-                        style={{ accentColor: "red" }}
-                        onChange={() =>
-                          handleStatusChange(student.id, "Absent")
-                        }
-                      />
-                    </td>
+
+            <div className="w-full max-w-[94vw] overflow-x-auto shadow1 rounded-md">
+              <table className="min-w-full bg-white border border-gray-200 rounded-lg">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
+                      &nbsp;&nbsp;&nbsp; SN &nbsp;&nbsp;&nbsp;
+                    </th>
+                    <th
+                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b"
+                      style={{ textAlign: "left" }}
+                    >
+                      Name
+                    </th>
+                    <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
+                      Present
+                    </th>
+                    <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
+                      Absent
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {attendanceData.map((student, index) => (
+                    <tr key={student.id} className="hover:bg-gray-50">
+                      <td className="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500 border-b">
+                        {index + 1}
+                      </td>
+                      <td
+                        className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 border-b text-left"
+                        style={{ textAlign: "left" }}
+                      >
+                        {student.name}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-center border-b">
+                        <input
+                          type="radio"
+                          checked={student.status === "Present"}
+                          onChange={() =>
+                            handleStatusChange(student.id, "Present")
+                          }
+                          className="form-radio h-4 w-4 text-green-600 focus:ring-green-500 cursor-pointer"
+                        />
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-center border-b">
+                        <input
+                          type="radio"
+                          checked={student.status === "Absent"}
+                          onChange={() =>
+                            handleStatusChange(student.id, "Absent")
+                          }
+                          className="form-radio h-4 w-4 cursor-pointer"
+                          style={{ accentColor: "#dc2626" }} // This adds the red color inline
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
 
             <div className="submit-button">
               <button
@@ -140,14 +163,14 @@ const AttendanceNew = ({
           </div>
 
           <div className="calendar-summary">
-            <div className="calendar">
-              <div className="top flex3">
-                <h4 className="h5 w600">
-                  {shortMonths[calenderDate.month - 1]} {calenderDate.year}{" "}
+            <div className="w-full p-4 bg-white shadow1 rounded-md calender m-1">
+              <div className="flex justify-between items-center mb-4">
+                <h4 className="text-lg font-semibold text-gray-800">
+                  {shortMonths[calenderDate.month - 1]} {calenderDate.year}
                 </h4>
-                <div className="arrows flex1">
+                <div className="flex gap-4">
                   <FontAwesomeIcon
-                    className="me-3"
+                    className="text-gray-600 hover:text-gray-800 cursor-pointer"
                     icon={faCaretLeft}
                     onClick={() => {
                       setCalenderDate((prevDate) => ({
@@ -157,6 +180,7 @@ const AttendanceNew = ({
                     }}
                   />
                   <FontAwesomeIcon
+                    className="text-gray-600 hover:text-gray-800 cursor-pointer"
                     icon={faCaretRight}
                     onClick={() => {
                       setCalenderDate((prevDate) => ({
@@ -168,15 +192,20 @@ const AttendanceNew = ({
                 </div>
               </div>
 
-              <hr />
+              <hr className="border-gray-200 mb-4" />
 
-              <div className="days custom-scrollbar">
+              <div className="grid grid-cols-7 gap-2 overflow-y-auto max-h-[300px]">
                 {[...Array(32)].map((_, i) => (
                   <div
                     key={i}
-                    className={`numbersHere ${
-                      i === calenderDate.day - 1 ? "selected" : ""
-                    }`}
+                    className={`
+              aspect-square flex items-center justify-center rounded-lg text-sm cursor-pointer
+              ${
+                i + 1 === calenderDate.day
+                  ? "bg-blue-500 text-white"
+                  : "hover:bg-gray-100 text-gray-700"
+              }
+            `}
                     onClick={() => {
                       setCalenderDate((prevDate) => ({
                         ...prevDate,

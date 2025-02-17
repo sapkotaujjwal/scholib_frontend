@@ -190,21 +190,23 @@ const Classes = () => {
         </div>
 
         {courses.length > 0 && (
-          <div className="classes-list flex1">
-            {courses.map((arr) => {
-              return (
-                <div
-                  className={`each flex1 ${
-                    currentClass._id === arr._id ? "active" : ""
-                  }`}
-                  key={arr._id}
-                  onClick={() => setCurrentClass(arr)}
-                >
-                  <p className="h6 w600"> {arr.class} </p>
-                </div>
-              );
-            })}
-          </div>
+          <div className="flex justify-center flex-wrap gap-3 py-4 shadow1 mt-8 rounded-md mb-2">
+{courses.map((course) => (
+  <button
+    key={course._id}
+    onClick={() => setCurrentClass(course)}
+    className={`
+      h-20 w-28 rounded border transition-all
+      ${currentClass._id === course._id
+        ? 'border-blue-500 bg-blue-100 text-blue-700'
+        : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+      }
+    `}
+  >
+    <span className="text-sm">{course.class}</span>
+  </button>
+))}
+</div>
         )}
 
         {courses.length === 0 && (
@@ -245,7 +247,7 @@ const Classes = () => {
                     Fee Structure{" "}
                   </p>
 
-                  <div className="table-my my-2">
+                  <div className="table-my my-2 max-w-[94vw] overflow-auto">
                     <DataTable
                       data={currentClass.fees.map((fee) => {
                         return {
@@ -258,7 +260,7 @@ const Classes = () => {
                   </div>
                 </div>
 
-                <div className="left-student">
+                <div className="left-student max-w-[94vw] overflow-auto">
                   <p
                     className="h6 w600 text-center py-2"
                     style={{ backgroundColor: "#DEE0E7", borderRadius: "3px" }}
@@ -348,7 +350,7 @@ const Classes = () => {
                     Subjects
                   </p>
 
-                  <div className="table-my my-2">
+                  <div className="table-my my-2 max-w-[94vw] overflow-auto">
                     <DataTable
                       data={currentSection.subjects.map((sub) => {
                         return {

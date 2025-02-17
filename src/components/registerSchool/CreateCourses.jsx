@@ -304,7 +304,7 @@ const CreateCourses = ({ data, id, closeFunction = () => {} }) => {
 
                         const subjectEntered = subjectsRef.current.value;
                         const newSubjectObject = {
-                          name: subjectEntered,
+                          subject: subjectEntered,
                           teacher: {
                             _id: undefined,
                             title: undefined,

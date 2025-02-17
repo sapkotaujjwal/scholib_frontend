@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import "./miniNav.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChartSimple,
@@ -12,13 +11,11 @@ import {
   faPeopleCarry,
   faPeopleGroup,
   faToolbox,
-  faUserTie,
 } from "@fortawesome/free-solid-svg-icons";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom/cjs/react-router-dom.min";
-import placeholderImage from "../../images/placeholder.png";
 
-const MiniNav = ({ function24 = function () {} }) => {
+const MiniNav = ({ function24 = () => {} }) => {
   const school = useSelector((state) => state.Home.school.payload);
   const scholib = useSelector((state) => state.Scholib.scholib.payload);
   const schoolCode = school.schoolCode;
@@ -27,310 +24,150 @@ const MiniNav = ({ function24 = function () {} }) => {
   const currentPath = location.pathname;
   const contRef = useRef(null);
 
-    const handleClickOutside = (event) => {
-      // Check if the click is outside the dropdown
-      if (contRef.current && !contRef.current.contains(event.target)) {
-        function24();
-      }
-    };
-  
-    useEffect(() => {
-      // Add event listener when the component is mounted
-      document.addEventListener("mousedown", handleClickOutside);
-  
-      // Clean up event listener when the component is unmounted
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }, []);
+  const handleClickOutside = (event) => {
+    if (contRef.current && !contRef.current.contains(event.target)) {
+      function24();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const NavLink = ({ to, icon, children }) => {
+    const isActive = currentPath === to;
+    return (
+      <Link
+        to={to}
+        onClick={function24}
+        className={`
+          group w-full px-3 py-2 my-1 flex items-center rounded-md transition-all duration-300
+          ${isActive 
+            ? "bg-cyan-500 text-white shadow-lg shadow-cyan-200 hover:bg-cyan-600" 
+            : "text-gray-700 hover:bg-sky-50 hover:text-cyan-600"
+          }
+        `}
+      >
+        <div
+          className={`mr-3 transition-transform duration-300 group-hover:scale-110 ${
+            isActive ? "text-white" : "text-gray-500"
+          }`}
+        >
+          <FontAwesomeIcon icon={icon} className="w-4 h-4" />
+        </div>
+        <span className="text-sm font-medium">{children}</span>
+      </Link>
+    );
+  };
 
   return (
-    <div className="miniNav83283 custom-scrollbar" ref={contRef}>
-      <div className="main1">
-        <div className="top flex2">
-          <div className="image">
+    <div
+      ref={contRef}
+      className="w-[250px] md:w-[205px] h-screen overflow-y-auto bg-white shadow-sm border-r border-gray-100 px-2 py-4 transition-all duration-300 ease-in-out custom-scrollbar"
+    >
+      <div className="ps-2 pb-6">
+        {/* Header */}
+        <div className="flex items-center space-x-3 px-2 mb-8 group">
+          <div className="w-12 h-12 rounded-lg overflow-hidden shadow-md transition-transform duration-300 group-hover:scale-105">
             <img
-              src={
-                school.logo && school.logo.secure_url
-                  ? school.logo.secure_url
-                  : placeholderImage
-              }
+              src={school.logo?.secure_url || "/placeholder.png"}
               alt="School Logo"
+              className="w-full object-cover"
             />
           </div>
-
-          <div className="name">
-            <p className="h6 w600"> {school.sName} </p>
-            <p className="h8 text-secondary"> School </p>
+          <div className="flex flex-col">
+            <h2 className="text-sm font-semibold text-gray-800 truncate">
+              {school.sName}
+            </h2>
+            <span className="text-xs text-gray-500">School</span>
           </div>
         </div>
 
-        <div className="middle">
-          <div
-            className={
-              currentPath === `/school/${schoolCode}/staff/`
-                ? "content active"
-                : "content"
-            }
-            onClick={() => function24()}
+        {/* Main Navigation */}
+        <div className="space-y-1 px-1">
+          <NavLink to={`/school/${schoolCode}/staff/`} icon={faChartSimple}>
+            Dashboard
+          </NavLink>
+          <NavLink
+            to={`/school/${schoolCode}/staff/staffs`}
+            icon={faPeopleCarry}
           >
-            <Link className="text-dark" to={`/school/${schoolCode}/staff/`}>
-              <p className="h6">
-                {" "}
-                <FontAwesomeIcon icon={faChartSimple} /> Dashboard
-              </p>
-            </Link>
-          </div>
+            Staffs
+          </NavLink>
+        </div>
 
-          <div
-            className={
-              currentPath === `/school/${schoolCode}/staff/staffs`
-                ? "content active"
-                : "content"
-            }
-            onClick={() => function24()}
-          >
-            {" "}
-            <Link
-              className="text-dark"
-              to={`/school/${schoolCode}/staff/staffs`}
-            >
-              {" "}
-              <p className="h6">
-                {" "}
-                <FontAwesomeIcon icon={faPeopleCarry} /> Staffs
-              </p>{" "}
-            </Link>{" "}
-          </div>
-
-          {/* <div
-            className={
-              currentPath === `/school/${schoolCode}/staff/profile`
-                ? "content active"
-                : "content"
-            }
-            onClick={() => function24()}
-          >
-            {" "}
-            <Link
-              className="text-dark"
-              to={`/school/${schoolCode}/staff/profile`}
-            >
-              {" "}
-              <p className="h6">
-                <FontAwesomeIcon icon={faUserTie} />
-                Profile
-              </p>{" "}
-            </Link>
-          </div> */}
-
-          <hr />
-          <p className="h6 text-secondary w600 text-left mx-1 mt-4 mb-3">
-            {" "}
-            Student Tools{" "}
-          </p>
-
-          <div
-            className={
-              currentPath === `/school/${schoolCode}/staff/exams`
-                ? "content active"
-                : "content"
-            }
-            onClick={() => function24()}
-          >
-            {" "}
-            <Link
-              className="text-dark"
+        {/* Student Tools Section */}
+        <div className="mt-6 px-1">
+          <h3 className="px-2 mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+            Student Tools
+          </h3>
+          <div className="space-y-1">
+            <NavLink
               to={`/school/${schoolCode}/staff/exams`}
+              icon={faGraduationCap}
             >
-              <p className="h6">
-                {" "}
-                <FontAwesomeIcon icon={faGraduationCap} /> Exams
-              </p>{" "}
-            </Link>
-          </div>
-
-          <div
-            className={
-              currentPath === `/school/${schoolCode}/staff/students`
-                ? "content active"
-                : "content"
-            }
-            onClick={() => function24()}
-          >
-            {" "}
-            <Link
-              className="text-dark"
+              Exams
+            </NavLink>
+            <NavLink
               to={`/school/${schoolCode}/staff/students`}
+              icon={faPeopleGroup}
             >
-              <p className="h6">
-                {" "}
-                <FontAwesomeIcon icon={faPeopleGroup} /> Students
-              </p>{" "}
-            </Link>
-          </div>
-
-          <div
-            className={
-              currentPath === `/school/${schoolCode}/staff/account`
-                ? "content active"
-                : "content"
-            }
-            onClick={() => function24()}
-          >
-            {" "}
-            <Link
-              className="text-dark"
-              to={`/school/${schoolCode}/staff/account`}
-            >
-              <p className="h6">
-                <FontAwesomeIcon icon={faCoins} />
-                Account
-              </p>{" "}
-            </Link>
-          </div>
-
-          <div
-            className={
-              currentPath === `/school/${schoolCode}/staff/attendance`
-                ? "content active"
-                : "content"
-            }
-            onClick={() => function24()}
-          >
-            {" "}
-            <Link
-              className="text-dark"
+              Students
+            </NavLink>
+            <NavLink to={`/school/${schoolCode}/staff/account`} icon={faCoins}>
+              Account
+            </NavLink>
+            <NavLink
               to={`/school/${schoolCode}/staff/attendance`}
+              icon={faNoteSticky}
             >
-              <p className="h6">
-                {" "}
-                <FontAwesomeIcon icon={faNoteSticky} /> Attendance
-              </p>
-            </Link>{" "}
-          </div>
-
-          {/* <div
-            className={
-              currentPath === `/school/${schoolCode}/staff/library`
-                ? "content active"
-                : "content"
-            }
-            onClick={() => function24()}
-          >
-            {" "}
-            <Link
-              className="text-dark"
-              to={`/school/${schoolCode}/staff/library`}
-            >
-              <p className="h6">
-                <FontAwesomeIcon icon={faBookAtlas} />
-                Library
-              </p>{" "}
-            </Link>{" "}
-          </div> */}
-
-          <hr />
-
-          <p className="h6 text-secondary w600 text-left mx-1 mt-4 mb-3">
-            {" "}
-            System{" "}
-          </p>
-
-          <div
-            className={
-              currentPath === `/school/${schoolCode}/staff/security`
-                ? "content active"
-                : "content"
-            }
-            onClick={() => function24()}
-          >
-            {" "}
-            <Link
-              className="text-dark"
-              to={`/school/${schoolCode}/staff/security`}
-            >
-              <p className="h6">
-                {" "}
-                <FontAwesomeIcon icon={faLock} /> Security
-              </p>
-            </Link>{" "}
-          </div>
-
-          <div
-            className={
-              currentPath === `/school/${schoolCode}/staff/admissions`
-                ? "content active"
-                : "content"
-            }
-            onClick={() => function24()}
-          >
-            {" "}
-            <Link
-              className="text-dark"
-              to={`/school/${schoolCode}/staff/admissions`}
-            >
-              <p className="h6">
-                {" "}
-                <FontAwesomeIcon icon={faPen} /> Admissions
-              </p>
-            </Link>{" "}
-          </div>
-
-          <div
-            className={
-              currentPath === `/school/${schoolCode}/staff/tools`
-                ? "content active"
-                : "content"
-            }
-            onClick={() => function24()}
-          >
-            {" "}
-            <Link
-              className="text-dark"
-              to={`/school/${schoolCode}/staff/tools`}
-            >
-              <p className="h6">
-                <FontAwesomeIcon icon={faToolbox} /> Tools
-              </p>
-            </Link>{" "}
-          </div>
-
-          <div
-            className={
-              currentPath === `/school/${schoolCode}/staff/site`
-                ? "content active"
-                : "content"
-            }
-            onClick={() => function24()}
-          >
-            {" "}
-            <Link className="text-dark" to={`/school/${schoolCode}/staff/site`}>
-              <p className="h6">
-                <FontAwesomeIcon icon={faComputer} /> Site Tools
-              </p>
-            </Link>{" "}
+              Attendance
+            </NavLink>
           </div>
         </div>
 
+        {/* System Section */}
+        <div className="mt-6 px-1">
+          <h3 className="px-2 mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+            System
+          </h3>
+          <div className="space-y-1">
+            <NavLink to={`/school/${schoolCode}/staff/security`} icon={faLock}>
+              Security
+            </NavLink>
+            <NavLink to={`/school/${schoolCode}/staff/admissions`} icon={faPen}>
+              Admissions
+            </NavLink>
+            <NavLink to={`/school/${schoolCode}/staff/tools`} icon={faToolbox}>
+              Tools
+            </NavLink>
+            <NavLink to={`/school/${schoolCode}/staff/site`} icon={faComputer}>
+              Site Tools
+            </NavLink>
+          </div>
+        </div>
+
+        {/* Scholib Footer */}
         {scholib && (
-          <div className="bottom">
-            <div className="image">
-              <img src={scholib.logo.secure_url} alt="" />
+          <div className="mt-8 p-4 bg-indigo-50 rounded-lg transition-all duration-300 hover:scale-[1.02] mb-7">
+            <div className="w-full mb-3">
+              <img
+                src={scholib.logo.secure_url}
+                alt="Scholib Logo"
+                className="w-full mx-auto rounded-md shadow-sm object-cover"
+              />
             </div>
-
-            <p className="h6 para1" style={{ color: "#8253E3" }}>
-              {" "}
+            <h3 className="text-sm font-medium text-indigo-600 mb-2">
               {scholib.name}
-            </p>
-
-            <p className="h7">
-              {" "}
-              <span>"</span> A good life starts with a good education{" "}
-              <span>"</span>{" "}
+            </h3>
+            <p className="text-xs text-gray-600 italic">
+              "A good life starts with a good education"
             </p>
           </div>
         )}
+
+        <hr />
       </div>
     </div>
   );

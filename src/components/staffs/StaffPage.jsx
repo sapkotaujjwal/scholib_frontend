@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import './staffPage.scss'
-import Dashboard from './Dashboard'
 import MiniNav from './MiniNav'
 import Header from './Header2'
 import SecurityComponent from '../basicComponents/SecurityComponent'

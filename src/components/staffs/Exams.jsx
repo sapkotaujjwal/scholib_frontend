@@ -573,7 +573,7 @@ const Exams = () => {
                 {/* <p className="text-md mb-0 w500"> Subject :</p> */}
                 <Dropdown
                   title={` ${currentSubject.subject || "Select One"}`}
-                  options={allSubjects.map((each, index) => {
+                  options={allSubjects.map((each) => {
                     return {
                       label: each.subject,
                       value: each._id,
@@ -586,8 +586,8 @@ const Exams = () => {
               </div>
 
               {examInfo &&
-              examInfo.find((sec) => sec.section == currentSection._id).exam
-                .term[currentTerm - 1].publishedDate ? (
+              examInfo.find((sec) => sec.section == currentSection._id)?.exam
+                ?.term?.[currentTerm - 1]?.publishedDate ? (
                 <div className="bg-green-200 py-2 px-4 mr-3 rounded-sm">
                   <p className="text-sm text-gray-600 w500 mb-0"> Published </p>
                 </div>
@@ -927,9 +927,14 @@ const Exams = () => {
         </div>
       )}
 
-      {
-        newMarks && <ExamMarks students={students} newMarks={newMarks} setNewMarks={setNewMarks} updateExamInfo />
-      }
+      {newMarks && (
+        <ExamMarks
+          students={students}
+          newMarks={newMarks}
+          setNewMarks={setNewMarks}
+          updateExamInfo
+        />
+      )}
     </div>
   );
 };

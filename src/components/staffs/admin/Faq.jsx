@@ -1,11 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
-import "./faq.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare, faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { SET_ALERT_GLOBAL } from "../../../redux/AlertGlobalSlice";
-
 import { DELETE_FAQ, ADD_FAQ, EDIT_FAQ } from "../../../redux/HomeSlice";
 import {
   REMOVE_CONFIRM_GLOBAL,
@@ -15,8 +13,12 @@ import {
 const Faq = () => {
   const dispatch = useDispatch();
   const school = useSelector((state) => state.Home.school.payload);
-
   const [faqData, setFaqData] = useState(null);
+  const [newFaq, setNewFaq] = useState(false);
+  const [editFaq, setEditFaq] = useState({
+    question: "",
+    answer: "",
+  });
 
   const confirmGlobalStatusState = useSelector(
     (state) => state.ConfirmGlobal.status
@@ -31,256 +33,180 @@ const Faq = () => {
     }
   }, [confirmGlobalStatusState]);
 
-  async function deleteFaq(data) {
-    axios
-      .delete(
+  const deleteFaq = async (data) => {
+    try {
+      const response = await axios.delete(
         `${process.env.REACT_APP_API_URL}/admin/${school.schoolCode}/faq/${data._id}`,
-        {
-          withCredentials: true,
-        }
-      )
-      .then((response) => {
-        if (response.data.success) {
-          dispatch(DELETE_FAQ(data._id));
-          dispatch(SET_ALERT_GLOBAL(response.data));
-        } else {
-          dispatch(SET_ALERT_GLOBAL(response.data));
-        }
-      })
-      .catch((error) => {
-        const data = {
-          message: error.message,
-          status: "Cannot communicate with the server",
-        };
-
-        if (error.response) {
-          dispatch(SET_ALERT_GLOBAL(error.response.data));
-          return;
-        }
-        dispatch(SET_ALERT_GLOBAL(data));
-      });
-  }
-
-  const [newFaq, setNewFaq] = useState(false);
-
-  const questionRef = useRef(null);
-
-  if (newFaq) {
-    document.body.classList.add("dshauda-hidden322");
-  } else {
-    document.body.classList.remove("dshauda-hidden322");
-  }
-
-  const [editFaq, setEditFaq] = useState({
-    question: "",
-    answer: "",
-  });
-
-  async function addNewFaq() {
-
-
-    if (editFaq._id) {
-      axios
-        .put(
-          `${process.env.REACT_APP_API_URL}/admin/${school.schoolCode}/faq/${editFaq._id}`,
-          editFaq,
-          {
-            withCredentials: true,
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        )
-        .then((response) => {
-          if (response.data.success) {
-            dispatch(EDIT_FAQ(editFaq))
-            dispatch(SET_ALERT_GLOBAL(response.data));
-            setNewFaq(false);
-          } else {
-            dispatch(SET_ALERT_GLOBAL(response.data));
-          }
-        })
-        .catch((error) => {
-          const data = {
-            message: error.message,
-            status: "Cannot communicate with the server",
-          };
-
-          if (error.response) {
-            dispatch(SET_ALERT_GLOBAL(error.response.data));
-            return;
-          }
-          dispatch(SET_ALERT_GLOBAL(data));
-        });
-    } else {
-      axios
-        .post(
-          `${process.env.REACT_APP_API_URL}/admin/${school.schoolCode}/faq/new`,
-          editFaq,
-          {
-            withCredentials: true,
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        )
-        .then((response) => {
-          if (response.data.success) {
-            dispatch(ADD_FAQ(editFaq))
-            dispatch(SET_ALERT_GLOBAL(response.data));
-            setNewFaq(false);
-          } else {
-            dispatch(SET_ALERT_GLOBAL(response.data));
-          }
-        })
-        .catch((error) => {
-          const data = {
-            message: error.message,
-            status: "Cannot communicate with the server",
-          };
-
-          if (error.response) {
-            dispatch(SET_ALERT_GLOBAL(error.response.data));
-            return;
-          }
-          dispatch(SET_ALERT_GLOBAL(data));
-        });
+        { withCredentials: true }
+      );
+      
+      if (response.data.success) {
+        dispatch(DELETE_FAQ(data._id));
+        dispatch(SET_ALERT_GLOBAL(response.data));
+      } else {
+        dispatch(SET_ALERT_GLOBAL(response.data));
+      }
+    } catch (error) {
+      const errorData = error.response?.data || {
+        message: error.message,
+        status: "Cannot communicate with the server",
+      };
+      dispatch(SET_ALERT_GLOBAL(errorData));
     }
-  }
+  };
+
+  const addNewFaq = async () => {
+    const url = editFaq._id
+      ? `${process.env.REACT_APP_API_URL}/admin/${school.schoolCode}/faq/${editFaq._id}`
+      : `${process.env.REACT_APP_API_URL}/admin/${school.schoolCode}/faq/new`;
+
+    const method = editFaq._id ? "put" : "post";
+
+    try {
+      const response = await axios[method](url, editFaq, {
+        withCredentials: true,
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (response.data.success) {
+        dispatch(editFaq._id ? EDIT_FAQ(editFaq) : ADD_FAQ(editFaq));
+        dispatch(SET_ALERT_GLOBAL(response.data));
+        setNewFaq(false);
+      } else {
+        dispatch(SET_ALERT_GLOBAL(response.data));
+      }
+    } catch (error) {
+      const errorData = error.response?.data || {
+        message: error.message,
+        status: "Cannot communicate with the server",
+      };
+      dispatch(SET_ALERT_GLOBAL(errorData));
+    }
+  };
 
   return (
-    <div className="adminFaq23879">
+    <div className="container mx-auto sm:px-0 md:px-4 py-8">
+      {/* Modal for Add/Edit FAQ */}
       {newFaq && (
-        <div className="faqMe flex1">
-          <div className="inside-me123444">
-            <p className="h5 w600 text-center">
-              {" "}
-              {`${editFaq._id ? "Edit FAQ" : "Add New FAQ"}`}{" "}
-            </p>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center" style={{zIndex: 999}}>
+          <div className="bg-white rounded-lg p-6 w-full max-w-2xl">
+            <h2 className="text-xl font-semibold text-center mb-6 p-3 shadow1 rounded-md">
+              {editFaq._id ? "Edit FAQ" : "Add New FAQ"}
+            </h2>
 
-            <div className="finalInside2323">
-              <div className="eachinds2">
-                <p className="h6 w600"> Question : </p>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-bold text-gray-700 mb-2 ms-2">
+                  Question:
+                </label>
                 <textarea
-                  ref={questionRef}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  rows="4"
+                  placeholder="Enter Question..."
                   value={editFaq.question}
-                  cols="30"
-                  rows="10"
-                  placeholder="Enter Question ..."
-                  onChange={(event) =>
-                    setEditFaq({ ...editFaq, question: event.target.value })
+                  onChange={(e) =>
+                    setEditFaq({ ...editFaq, question: e.target.value })
                   }
-                ></textarea>
+                />
               </div>
 
-              <div className="eachinds2">
-                <p className="h6 w600"> Answer : </p>
+              <div>
+                <label className="block text-sm font-bold text-gray-700 mb-2 ms-2">
+                  Answer:
+                </label>
                 <textarea
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  rows="6"
+                  placeholder="Enter Answer..."
                   value={editFaq.answer}
-                  onChange={(event) =>
-                    setEditFaq({ ...editFaq, answer: event.target.value })
+                  onChange={(e) =>
+                    setEditFaq({ ...editFaq, answer: e.target.value })
                   }
-                  cols="30"
-                  placeholder="Enter Answer ..."
-                  rows="10"
-                ></textarea>
+                />
               </div>
             </div>
 
-            <div className="btns-3227 flex4">
+            <div className="mt-6 flex justify-between space-x-4 p-3 shadow1 rounded-md">
               <button
-                className="btn btn-secondary"
-                onClick={() => {
-                  setNewFaq(false);
-                }}
+                className="px-4 py-2 text-gray-600 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors w-[50%]"
+                onClick={() => setNewFaq(false)}
               >
-                {" "}
-                Close{" "}
+                Cancel
               </button>
-              <button className="btn btn-primary" onClick={() => addNewFaq()}>
-                {`${editFaq._id ? "Update" : "Submit"}`}{" "}
+              <button
+                className="px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-colors w-[50%]"
+                onClick={addNewFaq}
+              >
+                {editFaq._id ? "Update" : "Submit"}
               </button>
             </div>
           </div>
         </div>
       )}
 
-      <div className="texr21 pb-2">
-        <p className="h4 w600"> FAQ </p>
+      {/* Header */}
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl p-3 bg-gray-100 rounded-lg font-bold text-gray-900">FAQ</h1>
+        <button
+          className="px-5 md:px-20  py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors flex items-center space-x-2"
+          onClick={() => {
+            setEditFaq({ question: "", answer: "" });
+            setNewFaq(true);
+          }}
+        >
+          <FontAwesomeIcon icon={faPlus} />
+          <span className="text-sm">Add FAQ</span>
+        </button>
       </div>
 
-      {school.faq.length < 1 && (
-        <div className="my-3">
-
-          <hr />
-          <p
-            className="text-lg w500 text-gray-500 text-center py-2 m-0"
-            style={{ margin: "auto" }}
-          >
-            Not Available
-          </p>
-
-          <hr />
+      {/* FAQ List */}
+      {school.faq.length === 0 ? (
+        <div className="text-center py-8 border-t border-b">
+          <p className="text-gray-500 text-lg">No FAQs available</p>
         </div>
-      )}
-
-      <div className="meMain23y">
-        {school.faq.map((faq) => {
-          return (
-            <div key={faq._id} className="mInd flex4">
-              <div className="left823b">
-                <div className="question">
-                  <p className="h6 w600"> {faq.question} </p>
+      ) : (
+        <div className="space-y-4">
+          {school.faq.map((faq) => (
+            <div
+              key={faq._id}
+              className="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow"
+            >
+              <div className="flex justify-between items-start">
+                <div className="flex-1 pr-4">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    {faq.question}
+                  </h3>
+                  <p className="text-gray-600">{faq.answer}</p>
                 </div>
-                <div className="answer">
-                  <p className="h6 w400">{faq.answer}</p>
+                <div className="flex space-x-3">
+                  <button
+                    className="text-gray-500 hover:text-blue-600 transition-colors"
+                    onClick={() => {
+                      setEditFaq(faq);
+                      setNewFaq(true);
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faPenToSquare} size="lg" />
+                  </button>
+                  <button
+                    className="text-gray-500 hover:text-red-600 transition-colors"
+                    onClick={() => {
+                      setFaqData(faq);
+                      dispatch(
+                        SET_CONFIRM_GLOBAL({
+                          message: "Are you sure you want to delete this FAQ?",
+                        })
+                      );
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faTrash} size="lg" />
+                  </button>
                 </div>
-              </div>
-
-              <div className="right-controls p-1 flex1">
-                <p
-                  className="h6 w600"
-                  onClick={() => {
-                    setFaqData(faq);
-                    dispatch(
-                      SET_CONFIRM_GLOBAL({
-                        message: "Are you sure to delete this faq ?",
-                      })
-                    );
-                  }}
-                >
-                  <FontAwesomeIcon icon={faTrash} />{" "}
-                </p>
-                <p
-                  className="h6 mx-2 w600"
-                  onClick={() => {
-                    setEditFaq(faq);
-                    setNewFaq(true);
-                  }}
-                >
-                  <FontAwesomeIcon icon={faPenToSquare} />{" "}
-                </p>
               </div>
             </div>
-          );
-        })}
-
-        <div className="button2123 flex1 justify-content-center">
-          <button
-            className="btn btn-primary newFaq"
-            onClick={() => {
-              setEditFaq({
-                question: "",
-                answer: "",
-              });
-              setNewFaq(true);
-            }}
-          >
-            {" "}
-            Add a new FAQ{" "}
-          </button>
+          ))}
         </div>
-      </div>
+      )}
     </div>
   );
 };

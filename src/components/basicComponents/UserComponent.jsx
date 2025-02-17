@@ -246,8 +246,12 @@ const UserComponent = ({ closeUserComponent }) => {
                       {course.find(
                         (obj) => obj._id === studentData.course.class
                       ).class.length > 3
-                        ? ""
-                        : "Class : "}
+                        ? course.find(
+                          (obj) => obj._id === studentData.course.class
+                        ).class
+                        : `Class : ${course.find(
+                          (obj) => obj._id === studentData.course.class
+                        ).class}`}
 
                       {course.find(
                         (obj) => obj._id === studentData.course.class

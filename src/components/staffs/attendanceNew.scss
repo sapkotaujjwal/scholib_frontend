@@ -74,75 +74,8 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
-        overflow: auto;
+        // overflow: auto;
 
-        .calendar {
-          // border: 1px solid #ddd;
-          padding: 10px 5px;
-          border-radius: 5px;
-          background-color: rgba(233, 233, 233, 0.121);
-          box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-
-          .top {
-            background-color: rgb(234, 234, 234);
-            padding: 10px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            color: rgb(50, 50, 50);
-          }
-
-          .arrows {
-            justify-content: flex-end;
-            svg {
-              width: 30px;
-              height: 30px;
-              cursor: pointer;
-              border-radius: 50%;
-              padding: 5px;
-            }
-
-            svg:hover {
-              background-color: rgb(255, 255, 255);
-            }
-          }
-
-          h4 {
-            text-align: center;
-            margin: 0;
-          }
-
-          .days {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 5px;
-            background-color: rgba(237, 237, 237, 0.91);
-            border-radius: 5px;
-            padding: 8px 0px;
-            overflow: auto;
-            padding-left: 10px;
-            padding-right: 10px;
-
-            div {
-              text-align: center;
-              padding: 10px;
-              border-radius: 5px;
-              width: 90%;
-            }
-
-            .numbersHere {
-              cursor: pointer;
-
-              &.selected {
-                background-color: #28a745;
-                color: #fff;
-              }
-            }
-            .numbersHere:hover {
-              background-color: white;
-              color: #000;
-            }
-          }
-        }
 
         .summary {
           display: flex;
