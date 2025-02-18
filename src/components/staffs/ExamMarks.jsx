@@ -1,6 +1,8 @@
 import React from "react";
 
 const ExamMarks = ({ students, newMarks, setNewMarks, updateExamInfo }) => {
+
+
   return (
     <div className="fixed top-0 left-0 w-[100vw] h-[100%] bg-white overflow-auto" style={{zIndex:'9999'}}>
       <div className=" mx-auto p-4 bg-white rounded-lg shadow-md ">

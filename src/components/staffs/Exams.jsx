@@ -32,7 +32,6 @@ const Exams = () => {
   const coursesCurrent = useSelector(
     (state) => state.Course.course.payload.course
   );
-  const course1 = useSelector((state) => state.Course.courseAll.payload.course);
 
   const [courses, setCourses] = useState(coursesCurrent);
 
@@ -372,6 +371,7 @@ const Exams = () => {
       setCourses(coursesCurrent);
     }
   }, [session]);
+
 
   return (
     <div className="examsAdmin2838">
@@ -932,7 +932,7 @@ const Exams = () => {
           students={students}
           newMarks={newMarks}
           setNewMarks={setNewMarks}
-          updateExamInfo
+          updateExamInfo={updateExamInfo}
         />
       )}
     </div>
