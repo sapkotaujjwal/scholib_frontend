@@ -372,7 +372,6 @@ const Exams = () => {
     }
   }, [session]);
 
-
   return (
     <div className="examsAdmin2838">
       <MetaData title={`${user && user.role ? "Staff" : "Student"} || Exams`} />
@@ -544,7 +543,7 @@ const Exams = () => {
           </div>
 
           {/* Quick Actions */}
-          <div className=" hidden md:flex flex-wrap gap-4 my-7 bg-gray-100 p-4 rounded-lg justify-end">
+          <div className="hidden md:flex flex-wrap gap-4 my-7 bg-gray-100 p-4 rounded-lg justify-end">
             {printData && <GeneratePDF data={printData} />}
 
             <button className="bg-gray-500 text-white flex items-center space-x-2 py-2 border border-gray-500 rounded-lg hover:bg-gray-600 transition-colors duration-200 px-[60px]">

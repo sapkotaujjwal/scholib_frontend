@@ -757,6 +757,9 @@ const StudentDetails = ({
                   <FontAwesomeIcon icon={faXmark} />
                 </div>
               </div>
+
+
+
               <section className="basicDetails">
                 <div className="box flex2">
                   <div className="left">
@@ -927,6 +930,9 @@ const StudentDetails = ({
                   </div>
                 </div>
               </section>
+
+
+              
               <section className="paymentDetails">
                 <p className="h5 w600 text-center text-secondary f2">
                   Payment History

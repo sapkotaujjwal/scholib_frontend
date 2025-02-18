@@ -428,36 +428,17 @@ const Create = ({
               </select>
             </div>
 
-            {/* Feature to email everybody has been commented  */}
 
-            {/* {!id && (
-              <div className="who flex1">
-                <p>
-                  <FontAwesomeIcon icon={faLock} />
-                </p>
-                <p className="text-secondary h5 mx-3"> Email Everybody </p>
-                <div className="form-check form-switch dhsdskd">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    role="switch"
-                    id="flexSwitchCheckDefault"
-                    checked={formData.emailEverybody}
-                    onChange={handleEmailEverybodyChange}
-                  />
-                </div>
-              </div>
-            )} */}
           </div>
           <div className="buttons flex1">
             <button
-              className="btn btn-secondary mx-1"
+              className="btn btn-secondary mx-1 w-[50%]"
               onClick={handleUpdateClose}
             >
               {" "}
               Cancel{" "}
             </button>
-            <button className="btn btn-primary mx-1" onClick={handleCreate}>
+            <button className="btn btn-primary mx-1 w-[50%]" onClick={handleCreate}>
               {id ? "Update Post" : "Create Post"}
             </button>
           </div>

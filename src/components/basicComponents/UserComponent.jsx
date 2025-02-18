@@ -52,7 +52,7 @@ const UserComponent = ({ closeUserComponent }) => {
         if (response.data.success) {
           dispatch(LOGOUT_ME_SUCCESS());
           closeUserComponent();
-          history.push(`/school/${schoolCode}`);
+          history.push(`/school/${schoolCode}/updates`);
         } else {
           dispatch(GET_USER_FAIL(response.data.data));
         }

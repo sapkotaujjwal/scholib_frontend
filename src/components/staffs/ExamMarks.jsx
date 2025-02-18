@@ -1,15 +1,29 @@
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
 const ExamMarks = ({ students, newMarks, setNewMarks, updateExamInfo }) => {
-
-
   return (
-    <div className="fixed top-0 left-0 w-[100vw] h-[100%] bg-white overflow-auto" style={{zIndex:'9999'}}>
-      <div className=" mx-auto p-4 bg-white rounded-lg shadow-md ">
+    <div
+      className="fixed top-0 left-0 w-[100vw] h-[100%] bg-white overflow-auto"
+      style={{ zIndex: "9999" }}
+    >
+      <div className=" mx-auto sm:px-0 py-4 md:p-4 bg-white rounded-lg shadow-md ">
         <div className="overflow-y-auto">
-          <h2 className="text-xl font-semibold text-center text-gray-800 mb-4">
-            Edit Exam Info
-          </h2>
+          <div className="relative mb-4">
+            <h2 className="text-xl font-semibold text-center text-gray-800">
+              Edit Exam Info
+            </h2>
+
+            <button
+              className="absolute right-3 top-0 rounded-full px-3 py-[2px] text-gray-600 hover:text-gray-800"
+              aria-label="Close"
+              onClick={() => setNewMarks(false)}
+            >
+              <FontAwesomeIcon icon={faXmark} className="text-lg" />
+            </button>
+          </div>
+
           <div className="border-b border-gray-200 mb-6"></div>
 
           {newMarks.students.length > 0 ? (

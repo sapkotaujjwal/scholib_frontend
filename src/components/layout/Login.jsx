@@ -101,7 +101,7 @@ const Login = () => {
             history.goBack();
           } else {
             // history.push(`/school/${parseInt(schoolCode.current.value)}`);
-            history.push(`/school/${parseInt(response.data.user.schoolCode)}`);
+            history.push(`/school/${parseInt(response.data.user.schoolCode)}/updates`);
           }
         } else if (response.data.success === false) {
           dispatch(GET_USER_FAIL(response.data.data));
