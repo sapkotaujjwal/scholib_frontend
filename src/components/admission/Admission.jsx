@@ -23,6 +23,7 @@ import Loading from "../layout/loading";
 import Success from "../layout/Success";
 import Error from "../layout/error";
 import axios from "axios";
+import DatePicker from "../layout/DatePicker";
 
 const Admission = () => {
   useEffect(() => {
@@ -317,8 +318,6 @@ const Admission = () => {
     document.body.classList.remove("dshauda-hidden32");
   }
 
-
-
   return (
     <>
       {loading && <Loading />}
@@ -453,13 +452,11 @@ const Admission = () => {
 
                   <div className="each width1">
                     <p> DOB (BS) y/m/d *</p>
-                    <input
-                      type="text"
-                      name=""
-                      value={student.dob}
-                      placeholder="2060/03/21"
-                      onChange={(event) =>
-                        setStudent({ ...student, dob: event.target.value })
+
+                    <DatePicker
+                      data={student.dob}
+                      setData={(value) =>
+                        setStudent({ ...student, dob: value })
                       }
                     />
                   </div>
@@ -1013,9 +1010,6 @@ const Admission = () => {
                 </button>
               </div>
             </div>
-
-
-
           </div>
         </div>
       )}

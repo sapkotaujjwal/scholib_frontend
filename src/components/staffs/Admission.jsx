@@ -180,10 +180,11 @@ const Admission = () => {
                     >
                       <div className="each left flex1">
                         <img
+                        className="shadow1"
                           src={
                             content.photo1
                               ? content.photo1.secure_url
-                              : "https://cdn.pixabay.com/photo/2021/07/21/12/49/error-6482984_640.png"
+                              : "https://www.tenforums.com/attachments/user-accounts-family-safety/322690d1615743307-user-account-image-log-user.png"
                           }
                           alt=""
                         />

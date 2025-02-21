@@ -18,6 +18,7 @@ import Loading from "../layout/loading";
 import Success from "../layout/Success";
 import Error from "../layout/error";
 import { AFTER_ADMISSION_WORK } from "../../redux/HomeSlice";
+import DatePicker from "../layout/DatePicker";
 
 const CreateNewStudent = ({
   data,
@@ -34,8 +35,8 @@ const CreateNewStudent = ({
   const course1 = useSelector((state) => state.Course.course.payload.course);
   const school = useSelector((state) => state.Home.school.payload);
 
-  if(!course){
-    course = course1
+  if (!course) {
+    course = course1;
   }
 
   function formatDate(dateString) {
@@ -204,7 +205,7 @@ const CreateNewStudent = ({
       .then((response) => {
         if (response.data.success) {
           dispatch(POST_UPDATE_SCHOOL_SUCCESS(response.data.data));
-          dispatch(AFTER_ADMISSION_WORK(_id))
+          dispatch(AFTER_ADMISSION_WORK(_id));
           setSuccessData({
             status: response.data.status,
             message: response.data.message,
@@ -438,15 +439,13 @@ const CreateNewStudent = ({
 
                 <div className="each width2">
                   <p> DOB (y/m/d) BS </p>
-                  <input
-                    type="text"
-                    name=""
-                    value={student.dob}
-                    placeholder="2050/12/20"
-                    onChange={(event) =>
+
+                  <DatePicker
+                    data={student.dob}
+                    setData={(value) =>
                       setStudent({
                         ...student,
-                        dob: event.target.value,
+                        dob: value,
                       })
                     }
                   />
@@ -863,7 +862,7 @@ const CreateNewStudent = ({
           </div>
 
           <div className="buttons flex1">
-            <button onClick={() => closeFunction()}>Close</button>
+            <button className="bg-gray-200 hover:bg-gray-300" onClick={() => closeFunction()}>Close</button>
             <button onClick={() => handleStaffSubmit()}>Submit</button>
           </div>
         </div>

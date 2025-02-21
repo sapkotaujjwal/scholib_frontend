@@ -41,6 +41,9 @@ const Profile = () => {
     document.body.classList.remove("dshauda-hidden");
   }
 
+
+  console.log(admin)
+
   return (
     <>
       {admin && (

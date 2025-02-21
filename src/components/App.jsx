@@ -15,27 +15,11 @@ import {
 } from "../redux/scholibSlice";
 import { SET_DATE } from "../redux/OtherInfoSlice";
 import NotFound from "./layout/NotFound";
-
+import DatePicker from "./layout/DatePicker";
 
 function App() {
   const dispatch = useDispatch();
   const [success, setSuccess] = useState(false);
-
-  function convertDate(originalDateString) {
-    // Parse the original date string
-    var originalDate = new Date(originalDateString);
-
-    // Subtract one year from the year component of the date
-    originalDate.setFullYear(originalDate.getFullYear() - 1);
-
-    // Format the date into the desired string format
-    var year = originalDate.getFullYear();
-    var month = String(originalDate.getMonth() + 1).padStart(2, "0");
-    var day = String(originalDate.getDate()).padStart(2, "0");
-    var formattedDateString = year + "/" + month + "/" + day;
-
-    return formattedDateString;
-  }
 
   useEffect(() => {
     dispatch(GET_USER());
@@ -47,7 +31,6 @@ function App() {
       .then((response) => {
         setSuccess(true);
         if (response.data.success) {
-          response.data.data.dob = convertDate(response.data.data.dob);
           dispatch(GET_USER_SUCCESS(response.data.data));
           dispatch(SET_DATE(response.data.date));
         } else {
@@ -93,6 +76,7 @@ function App() {
         <Switch>
           <Route path="/school/:schoolCode" component={School} />
           <Route exact path="/login" component={Login} />
+          <Route path="/date" component={DatePicker} />
           <Route path="/" component={Scholib} />
 
           <Route path="" component={NotFound} />

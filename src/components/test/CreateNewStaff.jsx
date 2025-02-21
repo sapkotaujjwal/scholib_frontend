@@ -18,6 +18,7 @@ import Loading from "../layout/loading";
 import Success from "../layout/Success";
 import Error from "../layout/error";
 import { GET_USER_SUCCESS } from "../../redux/UserSlice";
+import DatePicker from "../layout/DatePicker";
 
 const CreateNewStaff = ({
   data,
@@ -556,15 +557,14 @@ const CreateNewStaff = ({
 
                 <div className="each width2">
                   <p> DOB (y/m/d) BS </p>
-                  <input
-                    type="text"
-                    name=""
-                    value={admin.dob}
-                    placeholder="2050/12/20"
-                    onChange={(event) =>
+
+
+                  <DatePicker
+                    data={admin.dob}
+                    setData={(value) =>
                       setAdmin({
                         ...admin,
-                        dob: event.target.value,
+                        dob: value,
                       })
                     }
                   />
