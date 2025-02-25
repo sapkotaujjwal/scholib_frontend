@@ -8,6 +8,8 @@ import StudentDetails from "./StudentDetails";
 import DataTable from "../layout/Table";
 import axios from "axios";
 import { SET_ALERT_GLOBAL } from "../../redux/AlertGlobalSlice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 const Students = () => {
   const dispatch = useDispatch();
@@ -272,53 +274,71 @@ const Students = () => {
             />
           )}
 
-          <div className="students-table-3283">
-            <p className="h4 pt-3 pb-2 w600 text-center"> Students </p>
+          <hr />
 
-            <div className="bar-control flex1 mt-3">
-              <div className="ind-bar flex1">
-                {" "}
-                <p className="h6 w500 me-2"> Class : </p>{" "}
-                <Dropdown
-                  title={currentClass && currentClass.class}
-                  options={courses.map((ind) => {
-                    return {
-                      label: ind.class,
-                      value: ind._id,
-                    };
-                  })}
-                  onSelect={(a, b, c) => {
-                    setCurrentClass(
-                      courses.find((ind) => {
-                        return ind._id === c;
-                      })
-                    );
-                  }}
-                />{" "}
-              </div>
-              <div className="ind-bar flex1">
-                {" "}
-                <p className="h6 w500 me-2"> Section : </p>{" "}
-                <Dropdown
-                  options={allSections.map((sec) => {
-                    return {
-                      label: sec.name,
-                      value: sec._id,
-                    };
-                  })}
-                  onSelect={(a, b, c) => {
-                    setCurrentSection(
-                      allSections.find((ind) => {
-                        return ind._id === c;
-                      })
-                    );
-                  }}
-                  title={currentSection && currentSection.name}
-                />{" "}
-              </div>
-            </div>
+          <div className="">
 
-            <hr />
+
+                        <div
+                          className="shadow1 py-4
+                        flex1 justify-end rounded-md mt-5"
+                        >
+                          <div className="mt-3 flex gap-4 w-full min-w-[60%] max-w-[100%] mx-3 flex-wrap ">
+                            <div className="flex-1 flex items-center" style={{flexBasis: '250px'}}>
+                              <label className="font-medium mr-2">Class :</label>
+                              <div className="relative flex-1"  >
+                                <select
+                                  className="w-full px-3 py-2 border rounded-md appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-[150px]"
+                                  value={currentClass?._id || ""}
+                                  onChange={(e) => {
+                                    const selected = courses.find(
+                                      (course) => course._id === e.target.value
+                                    );
+                                    setCurrentClass(selected);
+                                  }}
+                                >
+                                  {courses.map((course) => (
+                                    <option key={course._id} value={course._id}>
+                                      {course.class}
+                                    </option>
+                                  ))}
+                                </select>
+                                <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                                  <FontAwesomeIcon icon={faCaretDown} className="mx-1" />
+                                </div>
+                              </div>
+                            </div>
+            
+                            <div className="flex-1 flex items-center" style={{flexBasis: '250px'}}>
+                              <label className="font-medium mr-2">Section :</label>
+                              <div className="relative flex-1">
+                                <select
+                                  className="w-full px-3 py-2 border rounded-md appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                  value={currentSection?._id || ""}
+                                  onChange={(e) => {
+                                    const selected = allSections.find(
+                                      (section) => section._id === e.target.value
+                                    );
+                                    setCurrentSection(selected);
+                                  }}
+                                >
+                                  {allSections.map((section) => (
+                                    <option key={section._id} value={section._id}>
+                                      {section.name}
+                                    </option>
+                                  ))}
+                                </select>
+                                <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                                  <FontAwesomeIcon icon={faCaretDown} className="mx-1" />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+
+  
           </div>
 
           {students && students.length > 0 && (

@@ -33,11 +33,19 @@ const Exams = () => {
     (state) => state.Course.course.payload.course
   );
 
+  const coursesAll = useSelector(
+    (state) => state.Course.courseAll.payload.course
+  );
+
   const [courses, setCourses] = useState(coursesCurrent);
 
   const [currentClass, setCurrentClass] = useState(
     courses.length > 0 ? courses[0] : null
   );
+
+  useEffect(() => {
+    setCurrentClass(courses.length > 0 ? courses[0] : null);
+  }, [courses]);
 
   function getAllSectionIds() {
     if (currentClass === null) {
@@ -76,6 +84,7 @@ const Exams = () => {
   }, [allSections]);
 
   const [examInfo, setExamInfo] = useState(null);
+
   const [currentTerm, setCurrentTerm] = useState(null);
   const [currentSubject, setCurrentSubject] = useState(null);
 
@@ -88,7 +97,6 @@ const Exams = () => {
 
     setLoading(true);
 
-    setExamInfo(null);
     axios
       .get(`${process.env.REACT_APP_API_URL}/admin/${schoolCode}/exam/info`, {
         params: {
@@ -325,7 +333,7 @@ const Exams = () => {
       }));
 
     let subjects = examInfo.find((sec) => sec.section == currentSection._id)
-      .exam.term[currentTerm - 1].subjects;
+      .exam.term[currentTerm - 1]?.subjects;
 
     subjects.forEach((subject) => {
       let obj = {
@@ -360,6 +368,8 @@ const Exams = () => {
       examInfo &&
       studentsInfo
     ) {
+      console.log(examInfo);
+
       setPrintData(handlePrintData());
     }
   }, [currentTerm, currentSection, currentClass, examInfo, studentsInfo]);
@@ -436,6 +446,7 @@ const Exams = () => {
                       e.target.value === "current" ? null : e.target.value;
 
                     setSession(selectedYear);
+                    setExamInfo(null);
 
                     axios
                       .get(
@@ -450,8 +461,10 @@ const Exams = () => {
                           setStudents(response.data.data);
                           if (response.data.courses) {
                             const coursesNew = response.data.courses.map(
-                              (crc) => courses.find((crc2) => crc2._id === crc)
+                              (crc) =>
+                                coursesAll.find((crc2) => crc2._id === crc)
                             );
+
                             setCourses(coursesNew);
                           }
                         }

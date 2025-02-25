@@ -1,7 +1,5 @@
 import React from "react";
 import pdfMake from "pdfmake/build/pdfmake.min";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPrint } from "@fortawesome/free-solid-svg-icons";
 
 // Configure fonts
 pdfMake.fonts = {
@@ -218,8 +216,8 @@ const GeneratePDF = ({ data, generate = false, closePrint = () => {} }) => {
       pageMargins: [40, 40, 40, 40],
     };
 
-    data.map((item, index) => {
-      const { schoolInfo, studentInfo, subjects, examInfo } = item;
+    data.forEach((item, index) => {
+      const { schoolInfo, studentInfo, subjects } = item;
       docDefinition.content.push(
         // Header with School Name and Report Card Title
         {
@@ -531,10 +529,12 @@ const GeneratePDF = ({ data, generate = false, closePrint = () => {} }) => {
     pdfMake.createPdf(docDefinition).open();
   };
 
+
   if (generate) {
     generatePdf();
     closePrint();
   }
+
 
   return (
     <>

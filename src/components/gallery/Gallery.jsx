@@ -231,7 +231,7 @@ const Gallery = () => {
       {newUpdate && <UploadImages closeFunction={close8373} />}
       {bigImage && <BigImage closeFunction={bigImageClose} />}
 
-      <div className="ewdnd68wx">
+      <div className="ewdnd68wx mb-8">
         <MetaData title={`${school.sName} || Gallery `} />
         <div className="main2365dvysgallery8772">
           <div className="top my-3 mt-5">

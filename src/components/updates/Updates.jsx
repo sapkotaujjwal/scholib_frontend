@@ -86,7 +86,7 @@ const Updates = () => {
       {bigImage && <BigImage closeFunction={bigImageClose} />}
 
       {
-        <div className="dgshdtwg6737">
+        <div className="dgshdtwg6737 ">
           <div className="main">
             <MetaData title={`${school.sName} || ${"Updates"}`} />
 
@@ -111,6 +111,9 @@ const Updates = () => {
               </div>
             </div>
 
+
+            <div className="updates bg-gray-100 border-top">
+
             {user && user.role && (
               <div className="admin">
                 <button onClick={handleCreatePost}>
@@ -120,7 +123,8 @@ const Updates = () => {
               </div>
             )}
 
-            <div className="updates">
+
+
               {loading && (
                 <div
                   className="spinner-container flex1"

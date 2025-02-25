@@ -1,88 +1,79 @@
-import React, { useState } from 'react';
-import './bigImage.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretLeft, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { useSelector } from 'react-redux';
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretLeft, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from "react-redux";
 
-const BigImage = ({closeFunction}) => {
-
-  const array = useSelector((state) => state.BigImage.data); 
-  const index = useSelector((state) => state.BigImage.index); 
-
-  const handleClose = () => {
-    closeFunction();
-  };
-  
-
+const BigImage = ({ closeFunction }) => {
+  const array = useSelector((state) => state.BigImage.data);
+  const index = useSelector((state) => state.BigImage.index);
   const [image, setImage] = useState(index);
 
-  function nextImage() {
+  const nextImage = () => {
     setImage((prevImage) => (prevImage + 1) % array.length);
-  }
+  };
 
-  function previousImage() {
+  const previousImage = () => {
     setImage((prevImage) => (prevImage - 1 + array.length) % array.length);
-  }
+  };
 
-  //for slide feature
-
-
+  // Swipe feature
   let startX;
   let deltaX;
 
-  function handleTouchStart(event) {
-    startX = event.touches[0].clientX; // Store starting X position
-  }
-  
-  function handleTouchMove(event) {
-    const touch = event.touches[0];
-    deltaX = touch.clientX - startX; // Calculate X movement
-  }
-  
-  function handleTouchEnd() {
-    if (Math.abs(deltaX) > 100) { // Adjust threshold based on needs
-      if (deltaX > 0) {
-        previousImage(); // Slide right
-      } else {
-        nextImage(); // Slide left
-      }
+  const handleTouchStart = (event) => {
+    startX = event.touches[0].clientX;
+  };
+
+  const handleTouchMove = (event) => {
+    deltaX = event.touches[0].clientX - startX;
+  };
+
+  const handleTouchEnd = () => {
+    if (Math.abs(deltaX) > 100) {
+      deltaX > 0 ? previousImage() : nextImage();
     }
-    startX = null; // Reset starting position
-  }
-
-
-  
+    startX = null;
+  };
 
   return (
-    <div className="pcontainer">
-    <div className='bigImage028387 flex1'>
-      <div className="maincsf flex1">
-        <div className="close flex1" onClick={handleClose} style={{cursor: 'pointer'}}>
-          <FontAwesomeIcon icon={faXmark} />
-        </div>
+    <div className="fixed inset-0 flex items-center justify-center bg-gray-100/90 backdrop-blur-lg z-[9999] p-4">
+      {/* Close Button */}
+      <button
+        className="absolute top-4 right-4 p-3 border rounded-md bg-white text-gray-700 hover:text-red-500 hover:border-red-500 transition z-50"
+        onClick={closeFunction}
+      >
+        <FontAwesomeIcon icon={faXmark} size="lg" />
+      </button>
 
-        <div className="container">
-
-          <div className="image" onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
-
-            <img src={array[image]} alt="" />
-
-          </div>
-
-          <div className="each left" onClick={previousImage}>
-              <FontAwesomeIcon icon={faCaretLeft} />
-            </div>
-
-          <div className="each right" onClick={nextImage}>
-              <FontAwesomeIcon icon={faCaretLeft} style={{ transform: 'rotate(180deg)' }} />
-            </div>
-
-        </div>
-
+      {/* Image Container */}
+      <div
+        className="relative flex items-center justify-center w-full h-full"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        <img
+          src={array[image]}
+          alt="Displayed"
+          className="w-auto h-full max-h-screen max-w-screen object-contain rounded-lg shadow-lg"
+        />
+        
+        {/* Navigation Buttons */}
+        <button
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-md hover:shadow-lg transition z-50"
+          onClick={previousImage}
+        >
+          <FontAwesomeIcon icon={faCaretLeft} size="lg" />
+        </button>
+        <button
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-md hover:shadow-lg transition z-50"
+          onClick={nextImage}
+        >
+          <FontAwesomeIcon icon={faCaretLeft} size="lg" className="rotate-180" />
+        </button>
       </div>
-      </div>
-      </div>
+    </div>
   );
-}
+};
 
 export default BigImage;
