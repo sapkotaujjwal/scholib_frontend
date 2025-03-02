@@ -320,6 +320,8 @@ const Admission = () => {
 
   return (
     <>
+
+    <div className="applyBootstrap">
       {loading && <Loading />}
       {studentAdmission && (
         <Success
@@ -1013,6 +1015,8 @@ const Admission = () => {
           </div>
         </div>
       )}
+
+</div>
     </>
   );
 };

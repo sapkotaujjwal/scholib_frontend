@@ -198,7 +198,7 @@ const Attendance = () => {
   }
 
   return (
-    <div className="attendanceAdmin2838">
+    <div className="attendanceAdmin2838 applyBootstrap">
       <MetaData
         title={`${user && user.role ? "Staff" : "Student"} || Attendance`}
       />
@@ -306,9 +306,9 @@ const Attendance = () => {
               className="shadow1 py-4
             flex1 justify-end"
             >
-              <div className="mt-3 flex gap-4 w-full min-w-[60%] max-w-[100%] mx-3 flex-wrap ">
+              <div className="mt-3 flex gap-4 w-full min-w-[60%] max-w-[100%] mx-3 flex-wrap px-[2%]">
                 <div className="flex-1 flex items-center" style={{flexBasis: '250px'}}>
-                  <label className="font-medium mr-2">Class :</label>
+                  <label className="font-medium mr-2 mb-0">Class :</label>
                   <div className="relative flex-1"  >
                     <select
                       className="w-full px-3 py-2 border rounded-md appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-[150px]"
@@ -333,7 +333,7 @@ const Attendance = () => {
                 </div>
 
                 <div className="flex-1 flex items-center" style={{flexBasis: '250px'}}>
-                  <label className="font-medium mr-2">Section :</label>
+                  <label className="font-medium mr-2 mb-0">Section :</label>
                   <div className="relative flex-1">
                     <select
                       className="w-full px-3 py-2 border rounded-md appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"

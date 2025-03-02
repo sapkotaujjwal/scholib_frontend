@@ -173,7 +173,7 @@ const Classes = () => {
               {" "}
               Session Table{" "}
             </button>
-            <button onClick={() => setNewClass(true)}>Add New Class</button>
+            <button className="mx-3" onClick={() => setNewClass(true)}>Add New Class</button>
             <button
               onClick={() =>
                 setAllClasses({
@@ -191,22 +191,23 @@ const Classes = () => {
 
         {courses.length > 0 && (
           <div className="flex justify-center flex-wrap gap-3 py-4 shadow1 mt-8 rounded-md mb-2">
-{courses.map((course) => (
-  <button
-    key={course._id}
-    onClick={() => setCurrentClass(course)}
-    className={`
+            {courses.map((course) => (
+              <button
+                key={course._id}
+                onClick={() => setCurrentClass(course)}
+                className={`
       h-20 w-28 rounded border transition-all
-      ${currentClass._id === course._id
-        ? 'border-blue-500 bg-blue-100 text-blue-700'
-        : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+      ${
+        currentClass._id === course._id
+          ? "border-blue-500 bg-blue-100 text-blue-700"
+          : "border-gray-200 hover:border-gray-300 hover:bg-gray-50"
       }
     `}
-  >
-    <span className="text-sm">{course.class}</span>
-  </button>
-))}
-</div>
+              >
+                <span className="text-sm">{course.class}</span>
+              </button>
+            ))}
+          </div>
         )}
 
         {courses.length === 0 && (

@@ -72,7 +72,7 @@ const StaffPage = () => {
   }, []);
 
     return (
-        <div className='staffPage23728'>
+        <div className='staffPage23728 '>
           <Header function={toggleMiniNav} />
 
           <div className="hawashdusdbsds" style={{position:'fixed',top:'62px', left:'0px', zIndex:'99999999', backgroundColor:"#fff"}}>

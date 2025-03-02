@@ -90,19 +90,6 @@ const ClassInfo = ({ course, data, _id, closeFunction = () => {} }) => {
     }));
   };
 
-  // function handleSelect() {
-  //   if (courseData.class && courseData.section && courseData.group) {
-  //     console.log(courseData);
-  //   } else {
-  //     dispatch(
-  //       SET_ALERT_GLOBAL({
-  //         status: "All fields are required",
-  //         message: "Make sure Class, Group and Section are all selected",
-  //       })
-  //     );
-  //   }
-  // }
-
   function changeCourse() {
     axios
       .post(
@@ -163,7 +150,7 @@ const ClassInfo = ({ course, data, _id, closeFunction = () => {} }) => {
       <div className="vmainqqw">
         <div className="closeContainer">
           <div className="close flex1" onClick={closeFunction}>
-            <FontAwesomeIcon icon={faXmark} />
+            <FontAwesomeIcon icon={faXmark} className="" />
           </div>
         </div>
 
@@ -173,8 +160,8 @@ const ClassInfo = ({ course, data, _id, closeFunction = () => {} }) => {
           <div className="content">
             <div className="each flex4">
               <div className="left233z d-flex">
-                <FontAwesomeIcon icon={faChalkboard} />
-                <p className="h7 text-secondary ms-2"> Class </p>
+                <FontAwesomeIcon icon={faChalkboard} className="" />
+                <p className="h7 text-secondary ml-2"> Class </p>
               </div>
               <div className="right233z">
                 <Dropdown
@@ -193,8 +180,8 @@ const ClassInfo = ({ course, data, _id, closeFunction = () => {} }) => {
 
             <div className="each flex4">
               <div className="left233z d-flex">
-                <FontAwesomeIcon icon={faUserGroup} />
-                <p className="h7 text-secondary ms-2"> Group </p>
+                <FontAwesomeIcon icon={faUserGroup} className="" />
+                <p className="h7 text-secondary ml-2"> Group </p>
               </div>
               <div className="right233z">
                 <Dropdown
@@ -214,8 +201,8 @@ const ClassInfo = ({ course, data, _id, closeFunction = () => {} }) => {
 
             <div className="each flex4">
               <div className="left233z d-flex">
-                <FontAwesomeIcon icon={faBraille} />
-                <p className="h7 text-secondary ms-2"> Section </p>
+                <FontAwesomeIcon icon={faBraille} className="" />
+                <p className="h7 text-secondary ml-2"> Section </p>
               </div>
               <div className="right233z">
                 <Dropdown

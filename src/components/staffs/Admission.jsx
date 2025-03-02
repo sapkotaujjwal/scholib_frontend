@@ -126,7 +126,7 @@ const Admission = () => {
   }
 
   return (
-    <div className="admissionAdmine2673">
+    <div className="admissionAdmine2673 applyBootstrap">
       <MetaData
         title={`${user && user.role ? "Staff" : "Student"} || Admissions`}
       />

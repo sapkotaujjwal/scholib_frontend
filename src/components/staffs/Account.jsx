@@ -211,7 +211,7 @@ const Account = () => {
   }
 
   return (
-    <div className="accountAdmin2838">
+    <div className="accountAdmin2838 applyBootstrap">
       <MetaData
         title={`${user && user.role ? "Staff" : "Student"} || Account`}
       />

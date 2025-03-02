@@ -14,7 +14,7 @@ const ConfirmAdv = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="confirmforall123 flex1">
+    <div className="confirmforall123 flex1 applyBootstrap">
       <div className="insideConfirm4673">
 
         <p className="h5 w600 text-center"> Confirm </p>

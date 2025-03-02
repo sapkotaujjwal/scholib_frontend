@@ -107,7 +107,7 @@ const SecurityComponent = () => {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gray-50 py-8 applyBootstrap">
       <div className=" mx-auto sm:px-0 md:px-4">
         {/* User Profile Section */}
         <div className="bg-white rounded-lg shadow-md overflow-hidden mb-8">

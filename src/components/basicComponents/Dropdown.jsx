@@ -56,7 +56,7 @@ const Dropdown = ({
 
   return (
     <div className="dropdown973753" ref={dropdownRef}>
-      <p className="text-center" onClick={handleShow}>
+      <p className="text-center mb-0" onClick={handleShow}>
         {current} &nbsp; <FontAwesomeIcon icon={faCaretDown} />
       </p>
 

@@ -101,7 +101,9 @@ const Login = () => {
             history.goBack();
           } else {
             // history.push(`/school/${parseInt(schoolCode.current.value)}`);
-            history.push(`/school/${parseInt(response.data.user.schoolCode)}/updates`);
+            history.push(
+              `/school/${parseInt(response.data.user.schoolCode)}/updates`
+            );
           }
         } else if (response.data.success === false) {
           dispatch(GET_USER_FAIL(response.data.data));
@@ -313,7 +315,7 @@ const Login = () => {
 
       {loading2 && <Loading />}
 
-      <div className="hdrevvsfs52">
+      <div className="hdrevvsfs52 applyBootstrap">
         <MetaData title={`Scholib || Login to your school `} />
 
         <div className="container89 flex1">
@@ -680,5 +682,5 @@ const Login = () => {
     </>
   );
 };
-
+  
 export default Login;

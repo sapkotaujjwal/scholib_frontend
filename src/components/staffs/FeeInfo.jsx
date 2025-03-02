@@ -141,21 +141,21 @@ const FeeInfo = ({
               <div className="content">
                 <div className="each flex4">
                   <div className="left233z d-flex">
-                    <FontAwesomeIcon icon={faCircleCheck} />
-                    <p className="h7 text-secondary ms-2">Class Fee</p>
+                    <FontAwesomeIcon icon={faCircleCheck} className="mr-2" />
+                    <p className="h7 text-secondary">Class Fee</p>
                   </div>
                   <div className="right233z">
-                    <p className="h7 text-secondary ms-2 w600">{classFee}</p>
+                    <p className="h7 text-secondary w600">{classFee}</p>
                   </div>
                 </div>
 
                 <div className="each flex4">
                   <div className="left233z d-flex">
-                    <FontAwesomeIcon icon={faCircleCheck} />
-                    <p className="h7 text-secondary ms-2"> Previous Left </p>
+                    <FontAwesomeIcon icon={faCircleCheck} className="mr-2" />
+                    <p className="h7 text-secondary"> Previous Left </p>
                   </div>
                   <div className="right233z">
-                    <p className="h7 text-secondary ms-2 w600">
+                    <p className="h7 text-secondary w600">
                       {data.previousLeft}
                     </p>
                   </div>
@@ -163,17 +163,17 @@ const FeeInfo = ({
 
                 <div className="each flex4">
                   <div className="left233z d-flex">
-                    <FontAwesomeIcon icon={faCircleCheck} />
-                    <p className="h7 text-secondary ms-2"> Bus Amount </p>
+                    <FontAwesomeIcon icon={faCircleCheck} className="mr-2" />
+                    <p className="h7 text-secondary"> Bus Amount </p>
                   </div>
                   <div className="right233z">
-                    <p className="h7 text-secondary ms-2 w600">{busAmount}</p>
+                    <p className="h7 text-secondary w600">{busAmount}</p>
                   </div>
                 </div>
 
                 <div className="each flex4">
                   <div className="left233z d-flex">
-                    <FontAwesomeIcon icon={faCircleCheck} />
+                    <FontAwesomeIcon icon={faCircleCheck} className="mr-2" />
                     <p className="h7 text-secondary ms-2"> Amount Paid </p>
                   </div>
                   <div className="right233z">
@@ -185,7 +185,7 @@ const FeeInfo = ({
 
                 <div className="each flex4 ">
                   <div className="left233z d-flex ">
-                    <FontAwesomeIcon icon={faCircleCheck} />
+                    <FontAwesomeIcon icon={faCircleCheck} className="mr-2" />
                     <p className="h7 text-secondary ms-2 font-semibold">
                       Amount Left
                     </p>
@@ -211,10 +211,10 @@ const FeeInfo = ({
                     >
                       <div className="left233z d-flex">
                         {/* <FontAwesomeIcon icon={faCircleCheck} /> */}
-                        <p className="h7 text-secondary ms-2">{ind.remark}</p>
+                        <p className="h7 text-secondary ml-2">{ind.remark}</p>
                       </div>
                       <div className="right233z">
-                        <p className="h7 text-secondary ms-2 w600">
+                        <p className="h7 text-secondary ml-2 w600">
                           {" "}
                           Rs. {ind.amount}{" "}
                         </p>
@@ -229,13 +229,13 @@ const FeeInfo = ({
                 >
                   <div className="left233z d-flex">
                     {/* <FontAwesomeIcon icon={faCircleCheck} /> */}
-                    <p className="h7 text-secondary ms-2 w500">
+                    <p className="h7 text-secondary ml-2 w500">
                       {" "}
                       Total Fine :{" "}
                     </p>
                   </div>
                   <div className="right233z">
-                    <p className="h7 text-secondary ms-2 w600">
+                    <p className="h7 text-secondary ml-2 w600">
                       {" "}
                       Rs.{" "}
                       {data.fine.reduce(
@@ -260,10 +260,10 @@ const FeeInfo = ({
                     >
                       <div className="left233z d-flex">
                         {/* <FontAwesomeIcon icon={faCircleCheck} /> */}
-                        <p className="h7 text-secondary ms-2">{ind.remark}</p>
+                        <p className="h7 text-secondary ml-2">{ind.remark}</p>
                       </div>
                       <div className="right233z">
-                        <p className="h7 text-secondary ms-2 w600">
+                        <p className="h7 text-secondary ml-2 w600">
                           {" "}
                           Rs. {ind.amount}{" "}
                         </p>
@@ -278,13 +278,13 @@ const FeeInfo = ({
                 >
                   <div className="left233z d-flex">
                     {/* <FontAwesomeIcon icon={faCircleCheck} /> */}
-                    <p className="h7 text-secondary ms-2 w500">
+                    <p className="h7 text-secondary ml-2 w500">
                       {" "}
                       Total Discount :{" "}
                     </p>
                   </div>
                   <div className="right233z">
-                    <p className="h7 text-secondary ms-2 w600">
+                    <p className="h7 text-secondary ml-2 w600">
                       {" "}
                       Rs.{" "}
                       {data.discount.reduce(

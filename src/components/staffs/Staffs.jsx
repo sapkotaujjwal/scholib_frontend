@@ -79,7 +79,7 @@ const Staffs = () => {
   }, [schoolCode]);
 
   return (
-    <div className="staffs3267">
+    <div className="staffs3267 applyBootstrap">
       {newStaff && <CreateNewStaff closeFunction={handleAddNewStaff} />}
 
       {bigStaff && (

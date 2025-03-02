@@ -81,7 +81,9 @@ const Updates = () => {
   }
 
   return (
-    <>
+    < >
+    <div className="applyBootstrap">
+    
       {newUpdate && <Create closeFunction={close8373} />}
       {bigImage && <BigImage closeFunction={bigImageClose} />}
 
@@ -167,6 +169,7 @@ const Updates = () => {
           </div>
         </div>
       }
+      </div>
     </>
   );
 };

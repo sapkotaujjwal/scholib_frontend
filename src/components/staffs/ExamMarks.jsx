@@ -52,7 +52,7 @@ const ExamMarks = ({ students, newMarks, setNewMarks, updateExamInfo }) => {
                         {index + 1}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {students.find((std) => std._id === obj.student).name}
+                        {students.find((std) => std._id === obj.student)?.name || 'N/A'}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-center">
                         <input

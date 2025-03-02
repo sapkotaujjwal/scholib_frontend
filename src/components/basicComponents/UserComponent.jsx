@@ -155,7 +155,7 @@ const UserComponent = ({ closeUserComponent }) => {
   }, []);
 
   return (
-    <div className="tomato32552" ref={componentRef}>
+    <div className="tomato32552 applyBootstrap" ref={componentRef}>
       {loading && (
         <div
           className="spinner-container flex1"

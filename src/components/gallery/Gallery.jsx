@@ -228,6 +228,9 @@ const Gallery = () => {
 
   return (
     <>
+
+    <div className="applyBootstrap">
+
       {newUpdate && <UploadImages closeFunction={close8373} />}
       {bigImage && <BigImage closeFunction={bigImageClose} />}
 
@@ -480,6 +483,8 @@ const Gallery = () => {
             </div>
           )}
         </div>
+      </div>
+
       </div>
     </>
   );

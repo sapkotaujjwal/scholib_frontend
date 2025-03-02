@@ -295,14 +295,13 @@ const Exams = () => {
   }
 
   const [allClasses, setAllClasses] = useState(false);
+  const [newMarks, setNewMarks] = useState(false);
 
-  if (allClasses) {
+  if (allClasses || newMarks) {
     document.body.classList.add("dshauda-hidden");
-  } else if (!allClasses) {
+  } else if (!allClasses && !newMarks) {
     document.body.classList.remove("dshauda-hidden");
   }
-
-  const [newMarks, setNewMarks] = useState(false);
 
   function handlePrintData() {
     const studentsOfSection = students
@@ -368,8 +367,6 @@ const Exams = () => {
       examInfo &&
       studentsInfo
     ) {
-      console.log(examInfo);
-
       setPrintData(handlePrintData());
     }
   }, [currentTerm, currentSection, currentClass, examInfo, studentsInfo]);
@@ -383,10 +380,10 @@ const Exams = () => {
   }, [session]);
 
   return (
-    <div className="examsAdmin2838">
+    <div className="examsAdmin2838 applyBootstrap">
       <MetaData title={`${user && user.role ? "Staff" : "Student"} || Exams`} />
 
-      {!newMarks && true && (
+      {true && (
         <div className="inside-content">
           <div className="flex flex-col p-4 bg-white shadow1 rounded-lg">
             <p className="text-xl font-semibold text-[#133189]">Exams</p>
@@ -493,6 +490,7 @@ const Exams = () => {
                     const selectedClass = courses.find(
                       (c) => c._id === e.target.value
                     );
+
                     setCurrentClass(selectedClass);
                     setExamInfo(null);
                   }}

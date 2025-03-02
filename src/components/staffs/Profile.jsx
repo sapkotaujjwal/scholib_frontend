@@ -42,10 +42,9 @@ const Profile = () => {
   }
 
 
-  console.log(admin)
-
   return (
     <>
+    <div className="applyBootstrap">
       {admin && (
         <div className="profile2638">
           <MetaData
@@ -214,6 +213,7 @@ const Profile = () => {
           </div>
         </div>
       )}
+      </div>
     </>
   );
 };

@@ -50,7 +50,7 @@ const AllClasses = ({
                 key={course._id}
                 onClick={() => handleClassSelection(course._id)}
                 className={`
-                  h-20 w-28 rounded border transition-all
+                  h-20 w-32 rounded border transition-all
                   ${selectedOnes.includes(course._id)
                     ? 'border-blue-500 bg-blue-100 text-blue-700'
                     : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'

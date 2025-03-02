@@ -139,9 +139,9 @@ const Update = ({ update }) => {
               className="w-12 h-12 rounded-full object-cover"
             />
             <div>
-              <h3 className="text-lg font-semibold text-gray-800">
+              <p className="text-lg mb-0 font-semibold text-gray-800">
                 {author.name}
-              </h3>
+              </p>
               <div className="flex items-center text-sm text-gray-600">
                 <span>Founder & CEO of {school.sName}</span>
               </div>
@@ -155,7 +155,7 @@ const Update = ({ update }) => {
                 update.author._id === user._id) && (
                 <button
                   onClick={() => setShowMenu(!showMenu)}
-                  className="p-2 hover:bg-gray-100 rounded-full"
+                  className="p-2 hover:bg-gray-100 rounded-full "
                 >
                   <FontAwesomeIcon
                     icon={faEllipsisVertical}
@@ -165,7 +165,7 @@ const Update = ({ update }) => {
               )}
 
             {showMenu && (
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-50">
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow1 z-50">
                 <div className="py-1">
                   <button
                     onClick={handleEdit}

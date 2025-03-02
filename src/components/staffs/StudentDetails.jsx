@@ -565,10 +565,6 @@ const StudentDetails = ({
   const [loadingStateForEditMarks, setLoadingStateForEditMarks] =
     useState(false);
 
-
-
-    
-
   async function updateExamMarks(dataHere = {}) {
     axios
       .post(
@@ -615,8 +611,6 @@ const StudentDetails = ({
       });
   }
 
-
-
   function findTotalFee() {
     let totalAmt = 0;
     let cCourse22 = course.find((crc) => crc._id === StudentCourseInfo.class);
@@ -658,9 +652,6 @@ const StudentDetails = ({
       studentMainData.paymentHistory.reduce((acc, hist) => acc + hist.amount, 0)
     );
   }
-
-
-
 
   function findSectionByExamId(data, examId) {
     for (const course of data) {
@@ -735,7 +726,7 @@ const StudentDetails = ({
   return (
     <>
       {studentMainData && (
-        <div className="studentDetails63773 custom-scrollbar">
+        <div className="studentDetails63773 custom-scrollbar applyBootstrap">
           {!student && (
             <div
               className="spinner-container flex1"
@@ -758,8 +749,6 @@ const StudentDetails = ({
                 </div>
               </div>
 
-
-
               <section className="basicDetails">
                 <div className="box flex2">
                   <div className="left">
@@ -780,7 +769,7 @@ const StudentDetails = ({
                         style={{ justifyContent: "flex-end", width: "90%" }}
                       >
                         <button
-                          className="btn btn-danger"
+                          className="btn btn-danger mr-3"
                           style={{ fontSize: "12px", width: "130px" }}
                           onClick={() => {
                             deleteStudent();
@@ -931,8 +920,6 @@ const StudentDetails = ({
                 </div>
               </section>
 
-
-              
               <section className="paymentDetails">
                 <p className="h5 w600 text-center text-secondary f2">
                   Payment History

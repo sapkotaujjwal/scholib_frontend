@@ -23,7 +23,7 @@ const Tools = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   return (
-    <div className="site-tools-admin2733">
+    <div className="site-tools-admin2733 applyBootstrap">
       <MetaData title={`${user && user.role ? "Staff" : "Student"} || Tools`} />
       <div className="content-inside">
 

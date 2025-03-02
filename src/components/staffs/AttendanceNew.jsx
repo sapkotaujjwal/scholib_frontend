@@ -113,18 +113,18 @@ const AttendanceNew = ({
   const getDaysInMonth = (year, month) => {
     // For Nepali calendar, hardcode the days per month
     const daysInMonth = {
-      1: 31, // Baisakh
-      2: 31, // Jestha
+      1: 32, // Baisakh
+      2: 32, // Jestha
       3: 32, // Asar
-      4: 31, // Shrawan
-      5: 31, // Bhadra
-      6: 30, // Ashwin
-      7: 30, // Kartik
-      8: 30, // Mangsir
-      9: 30, // Poush
-      10: 29, // Magh
-      11: 30, // Falgun
-      12: 30, // Chaitra
+      4: 32, // Shrawan
+      5: 32, // Bhadra
+      6: 32, // Ashwin
+      7: 32, // Kartik
+      8: 32, // Mangsir
+      9: 32, // Poush
+      10: 32, // Magh
+      11: 32, // Falgun
+      12: 32, // Chaitra
     };
     return daysInMonth[month] || 30; // Default to 30 if not found
   };
@@ -144,10 +144,6 @@ const AttendanceNew = ({
     "Chaitra", // Chaitra
   ];
 
-  console.log(
-    date ==
-      formatDateString(calenderDate.year, calenderDate.month, calenderDate.day)
-  );
 
   return (
     <div className="allWrapupAttendanceNew">

@@ -13,8 +13,9 @@ import Error from "../layout/error";
 import Loading from "../layout/loading";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
+
 const Scholib = () => {
-  const history = useHistory();
+
 
   const loading = useSelector((state) => state.Scholib.loading);
   const scholib = useSelector((state) => state.Scholib.scholib.payload);

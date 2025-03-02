@@ -146,7 +146,7 @@ const BusStatus = ({
 
 
   return (
-    <div className="busmdaidna flex1">
+    <div className="busmdaidna flex1 ">
       <div className="vmainqqw custom-scrollbar">
         {/* for closing the entire thing  */}
         <div className="closeContainer">
@@ -161,7 +161,7 @@ const BusStatus = ({
           <div className="content">
             <div className="each flex4">
               <div className="left233z d-flex">
-                <FontAwesomeIcon icon={faCircleCheck} />
+                <FontAwesomeIcon icon={faCircleCheck} className="mr-2" />
                 <p className="h7 text-secondary ms-2"> Current Status </p>
               </div>
               <div className="right233z">
@@ -173,7 +173,7 @@ const BusStatus = ({
 
             <div className="each flex4">
               <div className="left233z d-flex">
-                <FontAwesomeIcon icon={faLocationPin} />
+                <FontAwesomeIcon icon={faLocationPin} className="mr-2" />
                 <p className="h7 text-secondary ms-2"> Place </p>
               </div>
               <div className="right233z">
@@ -189,7 +189,7 @@ const BusStatus = ({
 
             <div className="each flex4">
               <div className="left233z d-flex">
-                <FontAwesomeIcon icon={faDollarSign} />
+                <FontAwesomeIcon icon={faDollarSign} className="mr-2" />
                 <p className="h7 text-secondary ms-2"> Total Fare </p>
               </div>
               <div className="right233z">
@@ -214,7 +214,7 @@ const BusStatus = ({
                   <>
                     <div className="each flex4">
                       <div className="left233z d-flex">
-                        <FontAwesomeIcon icon={faMap} />
+                        <FontAwesomeIcon icon={faMap} className="mr-2" />
                         <p className="h7 text-secondary ms-2"> Place </p>
                       </div>
                       <div className="right233z">
@@ -235,7 +235,7 @@ const BusStatus = ({
 
                     <div className="each flex4">
                       <div className="left233z d-flex">
-                        <FontAwesomeIcon icon={faCalendar} />
+                        <FontAwesomeIcon icon={faCalendar} className="mr-2" />
                         <p className="h7 text-secondary ms-2"> Start Date </p>
                       </div>
                       <div className="right233z">
@@ -248,7 +248,7 @@ const BusStatus = ({
                     {ind.end && (
                       <div className="each flex4">
                         <div className="left233z d-flex">
-                          <FontAwesomeIcon icon={faCalendar} />
+                          <FontAwesomeIcon icon={faCalendar} className="mr-2" />
                           <p className="h7 text-secondary ms-2"> End Date </p>
                         </div>
                         <div className="right233z">

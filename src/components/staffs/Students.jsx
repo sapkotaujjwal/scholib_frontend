@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import MetaData from "../layout/MetaData";
 import StudentSearch from "../adminComponents/StudentSearch";
 import Dropdown from "../basicComponents/Dropdown";
-import StudentDetails from "./StudentDetails";
 import DataTable from "../layout/Table";
 import axios from "axios";
 import { SET_ALERT_GLOBAL } from "../../redux/AlertGlobalSlice";
@@ -195,7 +194,7 @@ const Students = () => {
         </div>
       )}
 
-      <div className="inside-content">
+      <div className="inside-content applyBootstrap">
         <div className="flex flex-col p-4 bg-white shadow1 rounded-lg mx-[2%]">
           <p className="text-xl font-semibold text-[#133189]">Students</p>
           <p className="text-sm text-gray-600">{school.name}</p>
@@ -279,15 +278,15 @@ const Students = () => {
 
           <div className="">
             <div
-              className="shadow1 py-4
-                        flex1 justify-end rounded-md mt-5"
+              className="shadow1 py-4 my-4
+                        flex1 justify-end rounded-md mt-5 px-[2%]"
             >
               <div className="mt-3 flex gap-4 w-full min-w-[60%] max-w-[100%] mx-3 flex-wrap ">
                 <div
                   className="flex-1 flex items-center"
                   style={{ flexBasis: "250px" }}
                 >
-                  <label className="font-medium mr-2">Class :</label>
+                  <label className="font-medium mr-2 mb-0">Class :</label>
                   <div className="relative flex-1">
                     <select
                       className="w-full px-3 py-2 border rounded-md appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-[150px]"
@@ -315,7 +314,7 @@ const Students = () => {
                   className="flex-1 flex items-center"
                   style={{ flexBasis: "250px" }}
                 >
-                  <label className="font-medium mr-2">Section :</label>
+                  <label className="font-medium mr-2 mb-0">Section :</label>
                   <div className="relative flex-1">
                     <select
                       className="w-full px-3 py-2 border rounded-md appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"

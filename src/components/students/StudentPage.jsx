@@ -68,7 +68,7 @@ const StudentPage = () => {
   }, []);
 
   return (
-    <div className="usdysn">
+    <div className=" usdysn">
       <Header function={toggleMiniNav} />
 
       <div
