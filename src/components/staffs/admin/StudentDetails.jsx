@@ -23,7 +23,7 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 
-const StudentDetails2 = ({ _id, students, year, closeFunction }) => {
+const StudentDetails = ({ _id, students, year, closeFunction }) => {
   const school = useSelector((state) => state.Home.school.payload);
   const course = useSelector((state) => state.Course.courseAll.payload.course);
   const courseCurrentOnly = useSelector(
@@ -131,28 +131,11 @@ const StudentDetails2 = ({ _id, students, year, closeFunction }) => {
     value: ind._id,
   }));
 
-  // For scrolling logic
-  const libraryElementRef = useRef(null);
 
-  const [paymentDetails, setPaymentDetails] = useState([]);
   const [libraryDetails, setLibraryDetails] = useState([]);
   const [returnedBooks, setReturnedBooks] = useState([]);
 
   useEffect(() => {
-    if (studentMainData && studentMainData.paymentHistory.length > 0) {
-      setPaymentDetails(
-        studentMainData.paymentHistory.map((ind) => {
-          return {
-            date: ind.date.substring(0, 10),
-            time: convertTo12HourClock(ind.time),
-            approvedBy: school.staffs.find(
-              (staf) => staf._id === ind.approvedBy
-            ).name,
-            amount: ind.amount,
-          };
-        })
-      );
-    }
 
     if (studentMainData) {
       setLibraryDetails(
@@ -189,9 +172,6 @@ const StudentDetails2 = ({ _id, students, year, closeFunction }) => {
 
   const [selectedBooksTaken, setSelectedBooksTaken] = useState([]);
 
-  function handleLibrarySelected(data) {
-    setSelectedBooksTaken(data);
-  }
 
   const [busStatus, setBusStatus] = useState(false);
   const [studentInfo, setStudentInfo] = useState(false);
@@ -245,6 +225,7 @@ const StudentDetails2 = ({ _id, students, year, closeFunction }) => {
         }
       })
       .catch((error) => {
+        setConfirmAlert(false)
         const data = {
           message: error.message,
           status: "Cannot communicate with the server",
@@ -720,11 +701,11 @@ const StudentDetails2 = ({ _id, students, year, closeFunction }) => {
     const remark = remarkRef.current.value;
     const amount = amountRef.current.value;
 
-    if (!remark || !amount) {
+    if ( !amount) {
       dispatch(
         SET_ALERT_GLOBAL({
-          status: "Amount and remark are both required",
-          message: "Please enter amount and remark",
+          status: "Amount is required",
+          message: "Please enter amount ",
         })
       );
       return;
@@ -745,6 +726,7 @@ const StudentDetails2 = ({ _id, students, year, closeFunction }) => {
         }
       )
       .then((response) => {
+        setConfirmAlert(false)
         if (response.data.success) {
           dispatch(SET_ALERT_GLOBAL(response.data));
           closeFunction();
@@ -753,6 +735,7 @@ const StudentDetails2 = ({ _id, students, year, closeFunction }) => {
         }
       })
       .catch((error) => {
+        setConfirmAlert(false)
         const data = {
           message: error.message,
           status: "Cannot communicate with the server",
@@ -770,11 +753,11 @@ const StudentDetails2 = ({ _id, students, year, closeFunction }) => {
     const remark = remarkRef.current.value;
     const amount = amountRef.current.value;
 
-    if (!remark || !amount) {
+    if ( !amount) {
       dispatch(
         SET_ALERT_GLOBAL({
-          status: "Amount and remark are both required",
-          message: "Please enter amount and remark",
+          status: "Amount is required",
+          message: "Please enter amount",
         })
       );
       return;
@@ -795,6 +778,7 @@ const StudentDetails2 = ({ _id, students, year, closeFunction }) => {
         }
       )
       .then((response) => {
+        setConfirmAlert(false)
         if (response.data.success) {
           dispatch(SET_ALERT_GLOBAL(response.data));
           closeFunction();
@@ -803,6 +787,7 @@ const StudentDetails2 = ({ _id, students, year, closeFunction }) => {
         }
       })
       .catch((error) => {
+        setConfirmAlert(false)
         const data = {
           message: error.message,
           status: "Cannot communicate with the server",
@@ -1879,43 +1864,6 @@ const StudentDetails2 = ({ _id, students, year, closeFunction }) => {
                                 </table>
                               </div>
                             </div>
-
-                            {/* <!-- Payment Form --> */}
-                            <div className=" rounded-lg shadow-sm bg-gray-50 p-6 mt-8">
-                              <h3 className="text-lg font-bold mb-3">
-                                Make a Payment
-                              </h3>
-
-                              <label className="block mb-2 font-medium">
-                                Amount
-                              </label>
-                              <input
-                                type="number"
-                                className="w-full p-2 border rounded-lg mb-3"
-                                placeholder="Enter amount"
-                                ref={amountRef}
-                              />
-
-                              <label className="block mb-2 font-medium">
-                                Remarks
-                              </label>
-                              <input
-                                type="text"
-                                className="w-full p-2 border rounded-lg mb-3"
-                                placeholder=""
-                                ref={remarkRef}
-                              />
-
-                              <button
-                                onClick={() => {
-                                  // handlePayFees();
-                                  setConfirmAlert(true);
-                                }}
-                                className="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 transition"
-                              >
-                                Pay Now
-                              </button>
-                            </div>
                           </div>
                         )}
 
@@ -1995,43 +1943,6 @@ const StudentDetails2 = ({ _id, students, year, closeFunction }) => {
                                 </table>
                               </div>
                             </div>
-
-                            {/* <!-- discount Form --> */}
-                            <div className=" rounded-lg shadow-sm bg-gray-50 p-6 mt-8">
-                              <h3 className="text-lg font-bold mb-3">
-                                Add a Discount
-                              </h3>
-
-                              <label className="block mb-2 font-medium">
-                                Amount
-                              </label>
-                              <input
-                                type="number"
-                                className="w-full p-2 border rounded-lg mb-3"
-                                placeholder="Enter amount"
-                                ref={amountRef}
-                              />
-
-                              <label className="block mb-2 font-medium">
-                                Remarks
-                              </label>
-                              <input
-                                type="text"
-                                className="w-full p-2 border rounded-lg mb-3"
-                                placeholder=""
-                                ref={remarkRef}
-                              />
-
-                              <button
-                                onClick={() => {
-                                  // handlePayFees();
-                                  setConfirmAlert(true);
-                                }}
-                                className="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 transition"
-                              >
-                                Add Discount
-                              </button>
-                            </div>
                           </div>
                         )}
                         {secondNavActive === "Fine" && (
@@ -2108,51 +2019,49 @@ const StudentDetails2 = ({ _id, students, year, closeFunction }) => {
                                 </table>
                               </div>
                             </div>
-
-                            {/* <!-- discount Form --> */}
-                            <div className=" rounded-lg shadow-sm bg-gray-50 p-6 mt-8">
-                              <h3 className="text-lg font-bold mb-3">
-                                Add a Fine
-                              </h3>
-
-                              <label className="block mb-2 font-medium">
-                                Amount
-                              </label>
-                              <input
-                                type="number"
-                                className="w-full p-2 border rounded-lg mb-3"
-                                placeholder="Enter amount"
-                                ref={amountRef}
-                              />
-
-                              <label className="block mb-2 font-medium">
-                                Remarks
-                              </label>
-                              <input
-                                type="text"
-                                className="w-full p-2 border rounded-lg mb-3"
-                                placeholder=""
-                                ref={remarkRef}
-                              />
-
-                              <button
-                                onClick={() => {
-                                  // handlePayFees();
-                                  setConfirmAlert(true);
-                                }}
-                                className="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 transition"
-                              >
-                                Add Fine
-                              </button>
-                            </div>
                           </div>
                         )}
+
+                        {/* <!-- discount Form --> */}
+                        <div className=" rounded-lg shadow-sm bg-gray-50 p-6 mt-8">
+                          <h3 className="text-lg font-bold mb-3"> {secondNavActive === "Fees" ? 'Make a Payment' : secondNavActive === "Discount" ? "Add a Discount" : secondNavActive === "Fine" ? "Add a Fine" : 'Something Wrong'} </h3>
+
+                          <label className="block mb-2 font-medium">
+                            Amount
+                          </label>
+                          <input
+                            type="number"
+                            className="w-full p-2 border rounded-lg mb-3"
+                            placeholder="Enter amount"
+                            ref={amountRef}
+                          />
+
+                          <label className="block mb-2 font-medium">
+                            Remarks
+                          </label>
+                          <input
+                            type="text"
+                            className="w-full p-2 border rounded-lg mb-3"
+                            placeholder=""
+                            ref={remarkRef}
+                          />
+
+                          <button
+                            onClick={() => {
+                              // handlePayFees();
+                              setConfirmAlert(true);
+                            }}
+                            className="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 transition"
+                          >
+                            Submit
+                          </button>
+                        </div>
 
                         {confirmAlert && (
                           <div className="reset fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
                             <div className="bg-white p-6 rounded-lg shadow-lg min-w-[50%] relative">
                               <h2 className="text-lg font-semibold text-center mb-3">
-                                Confirm Payment
+                              {secondNavActive === "Fees" ? 'Confirm Payment' : secondNavActive === "Discount" ? "Confirm Discount" : secondNavActive === "Fine" ? "Confirm Fine" : 'Something Wrong'}
                               </h2>
                               <hr className="mb-3" />
 
@@ -2168,18 +2077,6 @@ const StudentDetails2 = ({ _id, students, year, closeFunction }) => {
                                   <p className="text-gray-800">{date}</p>
                                 </div>
 
-                                <div className="flex justify-between items-center">
-                                  <div className="flex items-center">
-                                    <FontAwesomeIcon
-                                      icon={faMoneyBill}
-                                      className="text-blue-500"
-                                    />
-                                    <p className="ml-2 text-gray-700">
-                                      Payment Method
-                                    </p>
-                                  </div>
-                                  <p className="text-gray-800">Cash</p>
-                                </div>
 
                                 <div className="flex justify-between items-center">
                                   <div className="flex items-center">
@@ -2260,7 +2157,17 @@ const StudentDetails2 = ({ _id, students, year, closeFunction }) => {
                                 </button>
                                 <button
                                   className="bg-blue-600 text-white px-4 py-2 rounded-lg w-1/2 ml-2"
-                                  onClick={handlePayFees}
+                                  onClick={()=>{
+
+                                    if(!amountRef.current.value){
+                                      alert('Please Enter Amount')
+                                      setConfirmAlert(false)
+                                      return
+                                    }
+
+
+                                    {secondNavActive === "Fees" ? handlePayFees() : secondNavActive === "Discount" ? addDiscount() : secondNavActive === "Fine" ? addFine() : alert('Something Wrong')}
+                                  }}
                                 >
                                   Confirm
                                 </button>
@@ -2591,4 +2498,4 @@ const StudentDetails2 = ({ _id, students, year, closeFunction }) => {
   );
 };
 
-export default StudentDetails2;
+export default StudentDetails;

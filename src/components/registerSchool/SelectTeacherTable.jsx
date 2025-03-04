@@ -52,7 +52,7 @@ const SelectTeacherTable = ({ fields, currentSection, staffUpdate }) => {
   return (
     <div className="heroTable02357">
       {!myData || myData.length < 1 ? (
-        <p className="h6 text-secondary text-center" style={{marginBottom: '10px'}}>No data Found...</p>
+        <p className="h6 text-secondary text-center py-[20px]" >No data Found...</p>
       ) : (
         <table>
           <thead>

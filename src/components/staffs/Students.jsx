@@ -9,7 +9,7 @@ import axios from "axios";
 import { SET_ALERT_GLOBAL } from "../../redux/AlertGlobalSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
-import StudentDetails2 from "./admin/StudentDetails2";
+import StudentDetails from "./admin/StudentDetails";
 
 const Students = () => {
   const dispatch = useDispatch();
@@ -185,7 +185,7 @@ const Students = () => {
 
       {currentStudent && (
         <div className="student-details-container2212 custom-scrollbar">
-          <StudentDetails2
+          <StudentDetails
             _id={currentStudent}
             students={students}
             year={session}

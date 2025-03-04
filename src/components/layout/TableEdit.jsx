@@ -64,7 +64,7 @@ const TableEdit = ({
   return (
     <div className="heroTable0238">
       {!myData || myData.length < 1 ? (
-        <p className="h6 text-secondary text-center" style={{marginBottom: '10px'}}> No data Found... </p>
+        <p className="h6 text-secondary text-center my-[10px]"> No data Found... </p>
       ) : (
         <table>
           <thead>

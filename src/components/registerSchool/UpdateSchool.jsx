@@ -286,7 +286,7 @@ const UpdateSchool = ({ data, edit = true }) => {
       )}
 
       {!isSuccess && !loading && !error && (
-        <div className="registerSchool326">
+        <div className="registerSchool326 applyBootstrap">
           <MetaData title={" Update your school || Scholib"} />
 
           <div className="top-parent">
@@ -311,14 +311,14 @@ const UpdateSchool = ({ data, edit = true }) => {
                   )}
                   {progress < 4 && (
                     <button
-                      className="ms-2"
+                      className="ml-2"
                       onClick={() => setProgress(progress + 1)}
                     >
                       Next
                     </button>
                   )}
                   {progress === 4 && (
-                    <button className="ms-2" onClick={() => handleSubmit()}>
+                    <button className="ml-2" onClick={() => handleSubmit()}>
                       Submit
                     </button>
                   )}
@@ -335,7 +335,7 @@ const UpdateSchool = ({ data, edit = true }) => {
                   onClick={() => setProgress(1)}
                 >
                   <FontAwesomeIcon icon={faCircle} />
-                  <p className="d-inline-block ms-2"> Basic Information </p>
+                  <p className="d-inline-block ml-2"> Basic Information </p>
                 </div>
 
                 <div
@@ -343,7 +343,7 @@ const UpdateSchool = ({ data, edit = true }) => {
                   onClick={() => setProgress(2)}
                 >
                   <FontAwesomeIcon icon={faCircle} />
-                  <p className="d-inline-block ms-2"> Detailed Information </p>
+                  <p className="d-inline-block ml-2"> Detailed Information </p>
                 </div>
 
                 <div
@@ -351,7 +351,7 @@ const UpdateSchool = ({ data, edit = true }) => {
                   onClick={() => setProgress(3)}
                 >
                   <FontAwesomeIcon icon={faCircle} />
-                  <p className="d-inline-block ms-2"> Contact Information </p>
+                  <p className="d-inline-block ml-2"> Contact Information </p>
                 </div>
 
                 <div
@@ -359,7 +359,7 @@ const UpdateSchool = ({ data, edit = true }) => {
                   onClick={() => setProgress(4)}
                 >
                   <FontAwesomeIcon icon={faCircle} />
-                  <p className="d-inline-block ms-2"> Few More </p>
+                  <p className="d-inline-block ml-2"> Few More </p>
                 </div>
               </div>
             </div>
@@ -1697,14 +1697,14 @@ const UpdateSchool = ({ data, edit = true }) => {
                   )}
                   {progress < 4 && (
                     <button
-                      className="ms-2"
+                      className="ml-2"
                       onClick={() => setProgress(progress + 1)}
                     >
                       Next
                     </button>
                   )}
                   {progress === 4 && (
-                    <button className="ms-2" onClick={() => handleSubmit()}>
+                    <button className="ml-2" onClick={() => handleSubmit()}>
                       Submit
                     </button>
                   )}
