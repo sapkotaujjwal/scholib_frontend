@@ -144,7 +144,6 @@ const AttendanceNew = ({
     "Chaitra", // Chaitra
   ];
 
-
   return (
     <div className="allWrapupAttendanceNew">
       <div className="attendance-container">
@@ -175,21 +174,19 @@ const AttendanceNew = ({
               </div>
             )}
 
-            {(
-              workingDates.includes(
-                formatDateString(
-                  calenderDate.year,
-                  calenderDate.month,
-                  calenderDate.day
-                )
-              ) ||
+            {(workingDates.includes(
+              formatDateString(
+                calenderDate.year,
+                calenderDate.month,
+                calenderDate.day
+              )
+            ) ||
               date ===
                 formatDateString(
                   calenderDate.year,
                   calenderDate.month,
                   calenderDate.day
-                )
-            ) && (
+                )) && (
               <div className="w-full max-w-[94vw] overflow-x-auto shadow1 rounded-md">
                 <table className="min-w-full bg-white border border-gray-200 rounded-lg">
                   <thead className="bg-gray-50">
@@ -253,21 +250,19 @@ const AttendanceNew = ({
               </div>
             )}
 
-            {(
-              workingDates.includes(
-                formatDateString(
-                  calenderDate.year,
-                  calenderDate.month,
-                  calenderDate.day
-                )
-              ) ||
+            {(workingDates.includes(
+              formatDateString(
+                calenderDate.year,
+                calenderDate.month,
+                calenderDate.day
+              )
+            ) ||
               date ===
                 formatDateString(
                   calenderDate.year,
                   calenderDate.month,
                   calenderDate.day
-                )
-            ) && (
+                )) && (
               <div className="submit-button">
                 <button
                   className="btn btn-secondary my-3"

@@ -68,15 +68,7 @@ export const homeSlice = createSlice({
     },
     
     ADD_SCHOOL_BUS: (state, action) => {
-      state.school.payload.busFee.push({
-        location: action.payload.location,
-        amounts: [
-          {
-            // date: getDate().fullDate,
-            amount: action.payload.amount,
-          },
-        ],
-      });
+      state.school.payload.busFee = action.payload
     },
 
     ADD_FAQ: (state, action) => {

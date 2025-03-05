@@ -79,11 +79,7 @@ const FeeStructure = () => {
         if (response.data.success) {
           dispatch(SET_ALERT_GLOBAL(response.data));
           dispatch(
-            ADD_SCHOOL_BUS({
-              location: locationRef.current.value,
-              amount: amountRef.current.value,
-              active: true,
-            })
+            ADD_SCHOOL_BUS(response.data.data)
           );
 
           locationRef.current.value = "";
