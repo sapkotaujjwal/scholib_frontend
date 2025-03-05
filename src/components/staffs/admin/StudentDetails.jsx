@@ -6,7 +6,6 @@ import {
   REMOVE_CONFIRM_GLOBAL,
   SET_CONFIRM_GLOBAL,
 } from "../../../redux/ConfirmGlobalSlice";
-import { convertTo12HourClock } from "../../../tools/dateTool";
 import { busPriceCalculator } from "../../../tools/feeTools";
 
 import BusStatus from "../BusStatus";
@@ -19,7 +18,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCalendarDays,
   faCoins,
-  faMoneyBill,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -43,6 +41,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
 
   const [student, setStudent] = useState(null);
   const [studentMainData, setStudentMainData] = useState(null);
+  const [studentCourseData, setStudentCourseData] = useState(null);
 
   const StudentCourseInfo = allStudents.find(
     (indSt) => indSt._id === _id
@@ -64,16 +63,15 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
       )
       .then((response) => {
         if (response.data.success) {
-          // console.log(response.data.data)
-
           const response1 = response.data.data;
 
-          setStudentMainData({
-            ...response1,
-            ...response1.session.find(
+          setStudentMainData(response1);
+
+          setStudentCourseData(
+            response1.session.find(
               (ses) => ses.courseId == StudentCourseInfo.class
-            ),
-          });
+            )
+          );
         } else {
           dispatch(SET_ALERT_GLOBAL(response.data.data));
           closeFunction();
@@ -131,15 +129,13 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
     value: ind._id,
   }));
 
-
   const [libraryDetails, setLibraryDetails] = useState([]);
   const [returnedBooks, setReturnedBooks] = useState([]);
 
   useEffect(() => {
-
-    if (studentMainData) {
+    if (studentCourseData) {
       setLibraryDetails(
-        studentMainData.library
+        studentCourseData.library
           .filter((ind) => !ind.returnedDate)
           .map((ind) => ({
             date: ind.date.substring(0, 10),
@@ -153,9 +149,9 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
       );
     }
 
-    if (studentMainData) {
+    if (studentCourseData) {
       setReturnedBooks(
-        studentMainData.library
+        studentCourseData.library
           .filter((ind) => ind.returnedDate)
           .map((ind) => ({
             date: ind.date.substring(0, 10),
@@ -168,19 +164,17 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
           }))
       );
     }
-  }, [studentMainData]);
+  }, [studentCourseData]);
 
   const [selectedBooksTaken, setSelectedBooksTaken] = useState([]);
 
-
   const [busStatus, setBusStatus] = useState(false);
-  const [studentInfo, setStudentInfo] = useState(false);
   const [classInfo, setClassInfo] = useState(false);
   const cancelFeeRef = useRef(null);
 
-  if (busStatus || studentInfo || classInfo || studentInfo) {
+  if (busStatus || classInfo) {
     document.body.classList.add("dshauda-hidden");
-  } else if (!busStatus && !studentInfo && !classInfo && !studentInfo) {
+  } else if (!busStatus && !classInfo) {
     document.body.classList.remove("dshauda-hidden");
   }
 
@@ -225,7 +219,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
         }
       })
       .catch((error) => {
-        setConfirmAlert(false)
+        setConfirmAlert(false);
         const data = {
           message: error.message,
           status: "Cannot communicate with the server",
@@ -571,23 +565,28 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
     let totalAmt = 0;
     let cCourse22 = course.find((crc) => crc._id === StudentCourseInfo.class);
 
-    totalAmt = totalAmt + studentMainData.previousLeft;
+    totalAmt = totalAmt + studentCourseData.previousLeft;
 
     cCourse22.fees.forEach((elem) => {
       totalAmt = totalAmt + elem.amount;
     });
 
-    studentMainData.fine.forEach((elem) => {
+    studentCourseData.fine.forEach((elem) => {
       totalAmt = totalAmt + elem.amount;
     });
 
-    studentMainData.discount.forEach((elem) => {
+    studentCourseData.discount.forEach((elem) => {
       totalAmt = totalAmt - elem.amount;
     });
 
     return (
       totalAmt +
-      busPriceCalculator(date, studentMainData.bus, school.busFee, "2081-01-01")
+      busPriceCalculator(
+        date,
+        studentCourseData.bus,
+        school.busFee,
+        "2081-01-01"
+      )
     );
   }
 
@@ -605,7 +604,10 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
   function findAmountLeft() {
     return (
       findTotalFee() -
-      studentMainData.paymentHistory.reduce((acc, hist) => acc + hist.amount, 0)
+      studentCourseData.paymentHistory.reduce(
+        (acc, hist) => acc + hist.amount,
+        0
+      )
     );
   }
 
@@ -631,7 +633,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
         studentInfo: {
           _id: studentMainData.studentId,
           name: studentMainData.name,
-          id: studentInfo.loginId,
+          id: student.loginId,
           class: classAndExams.find((ind) => ind.exam === examData.examId)
             .class,
           section: findSectionByExamId(course, examData.examId).name,
@@ -683,13 +685,13 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
   const [editStudent, setEditStudent] = useState(false);
 
   useEffect(() => {
-    if (studentMainData) {
+    if (studentCourseData) {
       let findcurrentClass = course.find(
-        (crc) => crc._id === studentMainData.courseId
+        (crc) => crc._id === studentCourseData.courseId
       );
       setCurrentClass(findcurrentClass);
     }
-  }, [studentMainData]);
+  }, [studentCourseData]);
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -701,7 +703,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
     const remark = remarkRef.current.value;
     const amount = amountRef.current.value;
 
-    if ( !amount) {
+    if (!amount) {
       dispatch(
         SET_ALERT_GLOBAL({
           status: "Amount is required",
@@ -726,7 +728,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
         }
       )
       .then((response) => {
-        setConfirmAlert(false)
+        setConfirmAlert(false);
         if (response.data.success) {
           dispatch(SET_ALERT_GLOBAL(response.data));
           closeFunction();
@@ -735,7 +737,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
         }
       })
       .catch((error) => {
-        setConfirmAlert(false)
+        setConfirmAlert(false);
         const data = {
           message: error.message,
           status: "Cannot communicate with the server",
@@ -753,7 +755,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
     const remark = remarkRef.current.value;
     const amount = amountRef.current.value;
 
-    if ( !amount) {
+    if (!amount) {
       dispatch(
         SET_ALERT_GLOBAL({
           status: "Amount is required",
@@ -778,7 +780,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
         }
       )
       .then((response) => {
-        setConfirmAlert(false)
+        setConfirmAlert(false);
         if (response.data.success) {
           dispatch(SET_ALERT_GLOBAL(response.data));
           closeFunction();
@@ -787,7 +789,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
         }
       })
       .catch((error) => {
-        setConfirmAlert(false)
+        setConfirmAlert(false);
         const data = {
           message: error.message,
           status: "Cannot communicate with the server",
@@ -801,9 +803,12 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
       });
   }
 
+  console.log(studentMainData);
+  console.log(studentCourseData);
+
   return (
     <div className="noBootstrap">
-      {studentMainData && (
+      {studentCourseData && (
         <>
           {!student && (
             <div
@@ -1083,7 +1088,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                   )}
 
                   <div className="bg-white flex justify-end p-5 rounded-lg shadow1 mb-5">
-                    {!studentMainData.removedOn && (
+                    {!studentMainData.removedOn && (student.course.class === studentCourseData.courseId) &&(
                       <div className="hidden md:flex">
                         <button
                           className="text-sm bg-gray-300 hover:bg-gray-400 p-2 px-5 mx-2 rounded-sm hover:text-white"
@@ -1100,11 +1105,28 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                       </div>
                     )}
 
-                    <select className="border text-sm border-gray-300 rounded-sm p-2 px-4 bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                      <option value="class1">Class 1</option>
-                      <option value="class2">Class 2</option>
-                      <option value="class3">Class 3</option>
-                    </select>
+                    {true && (
+                      <select
+                        className="border text-sm border-gray-300 rounded-sm p-2 px-4 bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        onChange={(e) => {
+                          // alert(e.target.value);
+                          setStudentCourseData(
+                            studentMainData.session.find(
+                              (ses) => ses.courseId == e.target.value
+                            )
+                          );
+                        }}
+                      >
+                        {studentMainData.session.map((session, index) => (
+                          <option key={index} value={session.courseId}>
+                            {
+                              course.find((crc) => crc._id === session.courseId)
+                                .class
+                            }
+                          </option>
+                        ))}
+                      </select>
+                    )}
                   </div>
 
                   <section>
@@ -1127,6 +1149,40 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                     {/* Dropdowns for Class and Term Selection */}
                                     <div className="flex flex-col md:flex-row gap-4 mb-6">
                                       <div className="flex justify-between items-center">
+                                        <span className="text-gray-600 mr-2">
+                                          Select Class :
+                                        </span>
+
+                                        <select
+                                          className="p-2 border border-gray-300 rounded-md w-40 mr-4"
+                                          onChange={(e) =>
+                                            setExamData(
+                                              examInfoAll.find(
+                                                (each) =>
+                                                  each.examId === e.target.value
+                                              )
+                                            )
+                                          }
+                                          value={examData.examId}
+                                        >
+                                          {examInfoAll.map((each) => {
+                                            const classLabel =
+                                              classAndExams.find(
+                                                (ind) =>
+                                                  ind.exam === each.examId
+                                              )?.class;
+
+                                            return (
+                                              <option
+                                                key={each.examId}
+                                                value={each.examId}
+                                              >
+                                                {classLabel}
+                                              </option>
+                                            );
+                                          })}
+                                        </select>
+
                                         <span className="text-gray-600 mr-2">
                                           Select Term :
                                         </span>
@@ -1325,8 +1381,8 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                   Status
                                 </span>
                                 <span className="text-lg text-gray-900">
-                                  {studentMainData.bus[0] &&
-                                  !studentMainData.bus[0].end
+                                  {studentCourseData.bus[0] &&
+                                  !studentCourseData.bus[0].end
                                     ? `Active`
                                     : "Inactive"}
                                 </span>
@@ -1337,13 +1393,13 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                   Place
                                 </span>
                                 <span className="text-lg text-gray-900">
-                                  {studentMainData.bus[0] &&
-                                  !studentMainData.bus[0].end
+                                  {studentCourseData.bus[0] &&
+                                  !studentCourseData.bus[0].end
                                     ? `${
                                         busPlaces.find(
                                           (ind) =>
                                             ind.value ===
-                                              studentMainData.bus[0].place &&
+                                              studentCourseData.bus[0].place &&
                                             ind.label
                                         ).label
                                       }`
@@ -1359,7 +1415,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                   Rs.{" "}
                                   {busPriceCalculator(
                                     date,
-                                    studentMainData.bus,
+                                    studentCourseData.bus,
                                     school.busFee,
                                     "2081-01-01"
                                   )}
@@ -1392,7 +1448,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  {studentMainData.bus.map((ind, index) => {
+                                  {studentCourseData.bus.map((ind, index) => {
                                     return (
                                       <tr
                                         key={index}
@@ -1437,7 +1493,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                               {/* <!-- Calendar --> */}
                               <div className="flex-1 bg-white rounded-md min-w-[50%] p-4">
                                 <AbsentDaysCalendar
-                                  absentDays={studentMainData.absentDays}
+                                  absentDays={studentCourseData.absentDays}
                                 />
                               </div>
 
@@ -1472,7 +1528,10 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                             Absent Days
                                           </h4>
                                           <p className="text-xl font-semibold text-red-600">
-                                            {studentMainData.absentDays.length}
+                                            {
+                                              studentCourseData.absentDays
+                                                .length
+                                            }
                                           </p>
                                         </div>
 
@@ -1484,7 +1543,8 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                           <p className="text-xl font-semibold text-green-600">
                                             {currentClass.groups[0].sections[0]
                                               .workingDates.length -
-                                              studentMainData.absentDays.length}
+                                              studentCourseData.absentDays
+                                                .length}
                                           </p>
                                         </div>
                                       </div>
@@ -1591,7 +1651,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                   Previous School :
                                 </span>
                                 <span className="font-medium">
-                                  {student.psName}
+                                  {student.psName || "N/A"}
                                 </span>
                               </div>
                               <div className="flex justify-between">
@@ -1599,7 +1659,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                   Previous School Address :
                                 </span>
                                 <span className="font-medium">
-                                  {student.psAddress}
+                                  {student.psAddress || "N/A"}
                                 </span>
                               </div>
                             </div>
@@ -1691,7 +1751,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                   Amount Paid
                                 </p>
                                 <p className="text-xl font-bold text-green-700">
-                                  {studentMainData.paymentHistory.reduce(
+                                  {studentCourseData.paymentHistory.reduce(
                                     (acc, hist) => acc + hist.amount,
                                     0
                                   )}
@@ -1703,7 +1763,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                 </p>
                                 <p className="text-xl font-bold text-red-700">
                                   {findTotalFee() -
-                                    studentMainData.paymentHistory.reduce(
+                                    studentCourseData.paymentHistory.reduce(
                                       (acc, hist) => acc + hist.amount,
                                       0
                                     )}
@@ -1733,7 +1793,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                   <span className="font-semibold">
                                     {busPriceCalculator(
                                       date,
-                                      studentMainData.bus,
+                                      studentCourseData.bus,
                                       school.busFee,
                                       "2081-01-01"
                                     )}
@@ -1744,7 +1804,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                     Previous Due :
                                   </span>
                                   <span className="font-semibold">
-                                    {studentMainData.previousLeft}
+                                    {studentCourseData.previousLeft}
                                   </span>
                                 </div>
                                 <div className="flex justify-between">
@@ -1753,7 +1813,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                   </span>
                                   <span className="font-semibold text-green-600">
                                     -{" "}
-                                    {studentMainData.discount.reduce(
+                                    {studentCourseData.discount.reduce(
                                       (acc, hist) => acc + hist.amount,
                                       0
                                     )}
@@ -1763,7 +1823,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                   <span className="text-gray-600">Fine :</span>
                                   <span className="font-semibold text-red-600">
                                     +{" "}
-                                    {studentMainData.fine.reduce(
+                                    {studentCourseData.fine.reduce(
                                       (acc, hist) => acc + hist.amount,
                                       0
                                     )}
@@ -1779,7 +1839,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                   <span>Amount Paid :</span>
                                   <span>
                                     {" "}
-                                    {studentMainData.paymentHistory.reduce(
+                                    {studentCourseData.paymentHistory.reduce(
                                       (acc, hist) => acc + hist.amount,
                                       0
                                     )}
@@ -1792,7 +1852,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                   <span>Amount Left :</span>
                                   <span>
                                     {findTotalFee() -
-                                      studentMainData.paymentHistory.reduce(
+                                      studentCourseData.paymentHistory.reduce(
                                         (acc, hist) => acc + hist.amount,
                                         0
                                       )}
@@ -1830,7 +1890,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    {studentMainData.paymentHistory.map(
+                                    {studentCourseData.paymentHistory.map(
                                       (payment) => (
                                         <tr
                                           key={payment._id}
@@ -1880,7 +1940,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                   </span>
                                   <span className="font-semibold text-green-600">
                                     - {"Rs. "}
-                                    {studentMainData.discount.reduce(
+                                    {studentCourseData.discount.reduce(
                                       (acc, hist) => acc + hist.amount,
                                       0
                                     )}
@@ -1914,7 +1974,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    {studentMainData.discount.map(
+                                    {studentCourseData.discount.map(
                                       (discount) => (
                                         <tr
                                           key={discount._id}
@@ -1958,7 +2018,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                   </span>
                                   <span className="font-semibold text-red-600">
                                     {"Rs. "}
-                                    {studentMainData.fine.reduce(
+                                    {studentCourseData.fine.reduce(
                                       (acc, hist) => acc + hist.amount,
                                       0
                                     )}
@@ -1992,7 +2052,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    {studentMainData.fine.map((discount) => (
+                                    {studentCourseData.fine.map((discount) => (
                                       <tr
                                         key={discount._id}
                                         className="odd:bg-white even:bg-gray-50 hover:bg-gray-100 transition"
@@ -2024,7 +2084,16 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
 
                         {/* <!-- discount Form --> */}
                         <div className=" rounded-lg shadow-sm bg-gray-50 p-6 mt-8">
-                          <h3 className="text-lg font-bold mb-3"> {secondNavActive === "Fees" ? 'Make a Payment' : secondNavActive === "Discount" ? "Add a Discount" : secondNavActive === "Fine" ? "Add a Fine" : 'Something Wrong'} </h3>
+                          <h3 className="text-lg font-bold mb-3">
+                            {" "}
+                            {secondNavActive === "Fees"
+                              ? "Make a Payment"
+                              : secondNavActive === "Discount"
+                              ? "Add a Discount"
+                              : secondNavActive === "Fine"
+                              ? "Add a Fine"
+                              : "Something Wrong"}{" "}
+                          </h3>
 
                           <label className="block mb-2 font-medium">
                             Amount
@@ -2061,7 +2130,13 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                           <div className="reset fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
                             <div className="bg-white p-6 rounded-lg shadow-lg min-w-[50%] relative">
                               <h2 className="text-lg font-semibold text-center mb-3">
-                              {secondNavActive === "Fees" ? 'Confirm Payment' : secondNavActive === "Discount" ? "Confirm Discount" : secondNavActive === "Fine" ? "Confirm Fine" : 'Something Wrong'}
+                                {secondNavActive === "Fees"
+                                  ? "Confirm Payment"
+                                  : secondNavActive === "Discount"
+                                  ? "Confirm Discount"
+                                  : secondNavActive === "Fine"
+                                  ? "Confirm Fine"
+                                  : "Something Wrong"}
                               </h2>
                               <hr className="mb-3" />
 
@@ -2076,7 +2151,6 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                   </div>
                                   <p className="text-gray-800">{date}</p>
                                 </div>
-
 
                                 <div className="flex justify-between items-center">
                                   <div className="flex items-center">
@@ -2157,16 +2231,22 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                 </button>
                                 <button
                                   className="bg-blue-600 text-white px-4 py-2 rounded-lg w-1/2 ml-2"
-                                  onClick={()=>{
-
-                                    if(!amountRef.current.value){
-                                      alert('Please Enter Amount')
-                                      setConfirmAlert(false)
-                                      return
+                                  onClick={() => {
+                                    if (!amountRef.current.value) {
+                                      alert("Please Enter Amount");
+                                      setConfirmAlert(false);
+                                      return;
                                     }
 
-
-                                    {secondNavActive === "Fees" ? handlePayFees() : secondNavActive === "Discount" ? addDiscount() : secondNavActive === "Fine" ? addFine() : alert('Something Wrong')}
+                                    {
+                                      secondNavActive === "Fees"
+                                        ? handlePayFees()
+                                        : secondNavActive === "Discount"
+                                        ? addDiscount()
+                                        : secondNavActive === "Fine"
+                                        ? addFine()
+                                        : alert("Something Wrong");
+                                    }
                                   }}
                                 >
                                   Confirm
@@ -2469,7 +2549,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
             {busStatus && (
               <BusStatus
                 StudentCourseInfo={StudentCourseInfo}
-                data={studentMainData}
+                data={studentCourseData}
                 _id={_id}
                 closeFunction={() => setBusStatus(false)}
                 closeMain={closeFunction}

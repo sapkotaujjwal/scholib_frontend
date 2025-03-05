@@ -8,6 +8,7 @@ import Dropdown from "../basicComponents/Dropdown";
 import AllClasses from "./admin/AllClasses";
 import GeneratePDF from "../layout/GeneratePDF";
 import ExamMarks from "./ExamMarks";
+import Dropdown2 from "../basicComponents/Dropdown2";
 
 const Exams = () => {
   const school = useSelector((state) => state.Home.school.payload);
@@ -409,7 +410,7 @@ const Exams = () => {
                       className="w-[50%] md:w-[240px] bg-white text-gray-600 hover:bg-gray-200 rounded-lg py-2 px-3 shadow1 transition-all duration-200 flex items-center justify-center space-x-2 mx-2"
                     >
                       <i className="fas fa-plus-circle"></i>
-                      <span className="font-medium">Create New Exam</span>
+                      <span className="font-medium text-sm">Create New Exam</span>
                     </button>
                     <button
                       onClick={() =>
@@ -422,7 +423,7 @@ const Exams = () => {
                       className="w-[50%] md:w-[240px] bg-white text-gray-600 hover:bg-gray-200 rounded-lg py-2 px-3 shadow1 transition-all duration-200 flex items-center justify-center space-x-2 mx-2"
                     >
                       <i className="fas fa-share-square"></i>
-                      <span className="font-medium">Publish Results</span>
+                      <span className="font-medium text-sm">Publish Results</span>
                     </button>
                   </div>
                 </>
@@ -579,10 +580,11 @@ const Exams = () => {
 
           {currentSubject && (
             <div className="each flex1 justify-end mb-3 pt-2 flex-wrap-reverse flex-grow-1 mt-3">
-              <div className="">
+              <div className=" mr-4">
+
                 {/* <p className="text-md mb-0 w500"> Subject :</p> */}
-                <Dropdown
-                  title={` ${currentSubject.subject || "Select One"}`}
+                <Dropdown2
+                  title={`Class`}
                   options={allSubjects.map((each) => {
                     return {
                       label: each.subject,

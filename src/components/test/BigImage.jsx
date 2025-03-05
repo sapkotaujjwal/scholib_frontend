@@ -42,7 +42,7 @@ const BigImage = ({ closeFunction }) => {
         className="absolute top-4 right-4 p-3 border rounded-md bg-white text-gray-700 hover:text-red-500 hover:border-red-500 transition z-50"
         onClick={closeFunction}
       >
-        <FontAwesomeIcon icon={faXmark} size="lg" />
+        <FontAwesomeIcon icon={faXmark} size="md" />
       </button>
 
       {/* Image Container */}

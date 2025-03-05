@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import "./userComponent.scss";
 import {
   faArrowRightFromBracket,
-  faHouse,
   faScrewdriverWrench,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

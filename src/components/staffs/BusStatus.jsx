@@ -9,11 +9,11 @@ import {
   faMap,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
-import Dropdown from "../basicComponents/Dropdown";
 import { useDispatch, useSelector } from "react-redux";
 import { SET_ALERT_GLOBAL } from "../../redux/AlertGlobalSlice";
 import axios from "axios";
 import { busPriceCalculator } from "../../tools/feeTools";
+import Dropdown2 from "../basicComponents/Dropdown2";
 
 const BusStatus = ({
   _id,
@@ -148,7 +148,7 @@ const BusStatus = ({
   return (
     <div className="busmdaidna flex1 ">
       <div className="vmainqqw custom-scrollbar">
-        {/* for closing the entire thing  */}
+
         <div className="closeContainer">
           <div className="close flex1" onClick={closeFunction}>
             <FontAwesomeIcon icon={faXmark} />
@@ -205,9 +205,10 @@ const BusStatus = ({
 
             <hr />
 
-            {data.bus.length < 1 && (
+            {/* {data.bus.length < 1 && (
               <p className="h6 w500 text-center text-secondary"> No data </p>
-            )}
+            )} */}
+
             {data.bus.length > 0 &&
               data.bus.map((ind) => {
                 return (
@@ -269,18 +270,19 @@ const BusStatus = ({
             <section>
               {((data.bus[0] && data.bus[0].end) || data.bus.length === 0) && (
                 <div className="location-Full flex4">
-                  <p className="h6 w500" style={{ width: "120px" }}>
+                  {/* <p className="h6 w500" style={{ width: "120px" }}>
                     {" "}
                     Select Place :
-                  </p>
+                  </p> */}
 
                   <div
-                    className="inttt"
-                    style={{ width: "calc(100% - 120px)" }}
+                    className="inttt w-full px-3"
+                   
                   >
-                    <Dropdown
+                    <Dropdown2
+                    nullOption={true}
                       options={placeOptions}
-                      title={`Select One`}
+                      title={`Select Place`}
                       onSelect={(a, b, c) => setBusPlace(c)}
                     />
                   </div>

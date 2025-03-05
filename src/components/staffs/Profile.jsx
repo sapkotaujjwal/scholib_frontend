@@ -33,11 +33,10 @@ const Profile = () => {
   });
 
   const [edit, setEdit] = useState(false);
-  const [leaveSchool, setLeaveSchool] = useState(false);
 
-  if (edit || leaveSchool) {
+  if (edit ) {
     document.body.classList.add("dshauda-hidden");
-  } else if (!edit && !leaveSchool) {
+  } else if (!edit ) {
     document.body.classList.remove("dshauda-hidden");
   }
 

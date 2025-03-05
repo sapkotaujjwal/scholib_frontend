@@ -30,14 +30,16 @@ const Header = () => {
   };
 
   const handleUserClick = () => {
+
     setuserComponent(!userComponent);
+
   };
 
   return (
     <div className="header21ed flex1" id="headerId001">
       {userComponent && (
         <div className="userComponent">
-          <UserComponent closeUserComponent={handleUserClick} />
+          <UserComponent closeUserComponent={()=>{setuserComponent(false)}} />
         </div>
       )}
 
