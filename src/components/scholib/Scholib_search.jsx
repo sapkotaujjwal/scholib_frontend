@@ -80,7 +80,7 @@ const SearchComponent = ({ suggestions, search10 }) => {
   };
 
   return (
-    <div ref={eltRef} className="seardasydg56262">
+    <div ref={eltRef} className="seardasydg56262 applyBootstrap">
       <div className="main">
         <div ref={searchRef} className="search-container">
           <div
