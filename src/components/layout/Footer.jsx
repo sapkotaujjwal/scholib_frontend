@@ -27,14 +27,28 @@ const SocialIcon = ({ href, icon }) => {
   );
 };
 
-const FooterLink = ({ to, children }) => (
-  <Link
-    to={to}
-    className="text-blue-100 hover:text-white transition-colors duration-300 text-sm inline-block"
-  >
-    {children}
-  </Link>
-);
+const FooterLink = ({ to, children }) => {
+  const isExternal = to.startsWith("http");
+
+  return isExternal ? (
+    <a
+      href={to}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-blue-100 hover:text-white transition-colors duration-300 text-sm inline-block"
+    >
+      {children}
+    </a>
+  ) : (
+    <Link
+      to={to}
+      className="text-blue-100 hover:text-white transition-colors duration-300 text-sm inline-block"
+    >
+      {children}
+    </Link>
+  );
+};
+
 
 const Footer = () => {
   const school = useSelector((state) => state.Home.school.payload);
@@ -84,24 +98,26 @@ const Footer = () => {
               <h3 className="text-white font-semibold text-lg mb-6">
                 Quick Links
               </h3>
+
               <div className="grid grid-cols-2 gap-4">
-                {[
-                  { path: "", label: "Home" },
-                  { path: "updates", label: "Updates" },
-                  { path: "contact", label: "Contact" },
-                  { path: "gallery", label: "Gallery" },
-                  { path: "admission", label: "Admission" },
-                ].map((item) => (
-                  <FooterLink
-                    key={item.path}
-                    to={`/school/${school?.schoolCode}${
-                      item.path ? `/${item.path}` : ""
-                    }`}
-                  >
-                    {item.label}
-                  </FooterLink>
-                ))}
-              </div>
+  {[
+    { path: `https://${school.domain}/`, label: "Home" },
+    { path: "/updates", label: "Updates" },
+    { path: `https://${school.domain}/contact.html`, label: "Contact" },
+    { path: "/gallery", label: "Gallery" },
+    { path: "/admission", label: "Admission" },
+  ].map((item) => (
+    <FooterLink
+      key={item.path}
+      to={item.path.startsWith("http") ? item.path : `/school/${school?.schoolCode}${item.path}`}
+    >
+      {item.label}
+    </FooterLink>
+  ))}
+</div>
+
+
+
             </div>
 
             {/* Social Media */}

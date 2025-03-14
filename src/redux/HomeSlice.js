@@ -66,11 +66,19 @@ export const homeSlice = createSlice({
       );
       state.school.payload.faq = updatedFaqs;
     },
-    
+
     ADD_SCHOOL_BUS: (state, action) => {
-      state.school.payload.busFee = action.payload
+      state.school.payload.busFee = action.payload;
     },
 
+    UPDATE_SCHOOL_BUS: (state, action) => {
+      state.school.payload = {
+        ...state.school.payload,
+        busFee: 
+          action.payload,
+        
+      };
+    },
     ADD_FAQ: (state, action) => {
       state.school.payload.faq.push(action.payload);
     },
@@ -119,8 +127,9 @@ export const {
   DELETE_OTHERS_TAB,
   SET_OTHERS_TAB,
   AFTER_ADMISSION_WORK,
+  UPDATE_SCHOOL_BUS,
   SET_SCHOOL_ADMISSIONS,
-  GET_ACCOUNTS
+  GET_ACCOUNTS,
 } = homeSlice.actions;
 
 export default homeSlice.reducer;

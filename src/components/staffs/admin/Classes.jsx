@@ -12,6 +12,7 @@ import AllClasses from "./AllClasses";
 import axios from "axios";
 import { SET_ALERT_GLOBAL } from "../../../redux/AlertGlobalSlice";
 import EditSubjectTeacher from "../../registerSchool/EditSubjectTeacher";
+import { UPDATE_COURSE_SECTION } from "../../../redux/CourseSlice";
 
 const Classes = () => {
   const courses = useSelector((state) => state.Course.course.payload.course);

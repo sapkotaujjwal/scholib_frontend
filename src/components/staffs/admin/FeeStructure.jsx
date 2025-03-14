@@ -174,7 +174,7 @@ const FeeStructure = () => {
                 onClick={() => {
                   setEditFees(true);
                 }}
-                className="btn btn-secondary h6 px-3 mb-0"
+                className="btn btn-secondary h6 px-3 ml-2 mb-0"
                 style={{ minWidth: "100px" }}
               >
                 {" "}

@@ -185,7 +185,7 @@ const CreateCourses = ({ data, id, closeFunction = () => {} }) => {
               </p>
             </div>
 
-            <div
+            {/* <div
               className={`individual flex1 ${progress === 2 ? "active" : ""}`}
               onClick={() => setProgress(2)}
             >
@@ -195,13 +195,13 @@ const CreateCourses = ({ data, id, closeFunction = () => {} }) => {
                 {" "}
                 {">"}{" "}
               </p>
-            </div>
+            </div> */}
 
             <div
               className={`individual flex1 ${progress === 3 ? "active" : ""}`}
               onClick={() => setProgress(3)}
             >
-              <div className="circle flex1"> 3 </div>
+              <div className="circle flex1"> 2 </div>
               <p className="h6"> Fees Info </p>
             </div>
           </div>

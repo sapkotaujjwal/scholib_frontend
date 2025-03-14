@@ -2,14 +2,12 @@ import React from "react";
 import "./success.scss";
 
 import img from "../../images/success.svg";
-import AnimatedBlurhashImage from "./blurHash";
 
 const Success = ({ closeSuccess, data }) => {
   function closeThisSuccess() {
     closeSuccess();
   }
 
-  const blurhashString = "LDI=x?-p009YyXRjbxxu4TM{yZ%3";
 
   return (
     <div className="qetusbkdaa234 flex1">
@@ -20,7 +18,6 @@ const Success = ({ closeSuccess, data }) => {
           </h6>
 
           <div className="img">
-            {/* <AnimatedBlurhashImage imageUrl={img} blurhash={'LDI=x?-p009YyXRjbxxu4TM{yZxv'} width ={300} height={300} /> */}
 
             <img src={img} alt="" />
           </div>
@@ -32,7 +29,7 @@ const Success = ({ closeSuccess, data }) => {
           <p className="h7 mt-4"> Proceed to your activity.. </p>
           <button
             type="button"
-            class="btn btn-outline-secondary"
+            class="bg-gray-300 px-5 py-3 rounded-md text-md hover:bg-gray-400"
             onClick={closeThisSuccess}
           >
             Close

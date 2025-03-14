@@ -16,6 +16,7 @@ import AbsentDaysCalendar from "./AbsentDaysCalendar";
 import EditStudentProfile from "../../studentsControl/EditStudentProfile";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faBars,
   faCalendarDays,
   faCoins,
   faUser,
@@ -694,7 +695,8 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
   }, [studentCourseData]);
 
   const [currentPage, setCurrentPage] = useState(1);
-
+  const mainNavRef = useRef(null);
+  const [mainNav, setMainNav] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   const [secondNavActive, setSecondNavActive] = useState("Fees");
@@ -803,8 +805,18 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
       });
   }
 
-  console.log(studentMainData);
-  console.log(studentCourseData);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (mainNavRef.current && !mainNavRef.current.contains(event.target)) {
+        setMainNav(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className="noBootstrap">
@@ -826,9 +838,22 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
 
           {student && !busStatus && !classInfo && !editStudent && (
             <div className="flex">
+
+<div className="topNav flex items-center justify-between lg:hidden w-full h-16 bg-gray-800 fixed z-10 px-6 top-0 left-0 text-white shadow-md">
+ <button onClick={()=> setMainNav(true)}> <p className="text-2xl font-semibold cursor-pointer hover:text-gray-300 transition mb-0"><FontAwesomeIcon icon={faBars} /></p> </button>
+ <button onClick={()=> closeFunction()}> <p className="text-md font-semibold cursor-pointer hover:text-gray-300 transition mb-0">Close</p> </button>
+</div>
+
+
+
               {/* <!-- Sidebar --> */}
 
-              <aside className="hidden lg:block w-64 bg-gray-800 text-white h-screen p-5 fixed top-0 left-0 shadow-lg pt-20">
+              <aside
+                ref={mainNavRef}
+                className={`${
+                  !mainNav ? "hidden" : ""
+                } w-[70vw] lg:block md:w-64 bg-gray-800 text-white h-screen p-5 fixed top-0 left-0 shadow-lg pt-20 z-10`}
+              >
                 <h2 className="text-2xl font-bold mb-8 text-white">
                   Student Details
                 </h2>
@@ -836,6 +861,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                   <li
                     onClick={() => {
                       setCurrentPage(1);
+                      setMainNav(false)
                     }}
                     className={`mb-4 p-3 rounded-md cursor-pointer hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105 hover:text-white ${
                       currentPage === 1 ? "bg-blue-700" : "bg-gray-700"
@@ -846,6 +872,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                   <li
                     onClick={() => {
                       setCurrentPage(2);
+                      setMainNav(false)
                     }}
                     className={`mb-4 p-3 rounded-md cursor-pointer hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105 hover:text-white ${
                       currentPage === 2 ? "bg-blue-700" : "bg-gray-700"
@@ -856,6 +883,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                   <li
                     onClick={() => {
                       setCurrentPage(3);
+                      setMainNav(false)
                     }}
                     className={`mb-4 p-3 rounded-md cursor-pointer hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105 hover:text-white ${
                       currentPage === 3 ? "bg-blue-700" : "bg-gray-700"
@@ -866,6 +894,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                   <li
                     onClick={() => {
                       setCurrentPage(4);
+                      setMainNav(false)
                     }}
                     className={`mb-4 p-3 rounded-md cursor-pointer hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105 hover:text-white ${
                       currentPage === 4 ? "bg-blue-700" : "bg-gray-700"
@@ -876,12 +905,15 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                 </ul>
               </aside>
 
-              <div className="lg:ps-64 w-full">
+              <div className="mt-20 lg:mt-0 lg:ps-64 w-full">
                 <main className="flex-1 p-2 md:p-5 lg:p-10">
                   {/* <!-- Student Profile --> */}
 
-                  <div className="relative flex justify-end mx-3 mb-3">
-                    <button className="block lg:hidden absolute left-0 bg-gray-300 p-2 px-8 rounded-md hover:bg-gray-400 hover:text-gray-100 text-sm">
+                  <div className="hidden relative lg:flex justify-end mx-3 mb-3 ">
+                    <button
+                      className="block lg:hidden absolute left-0 bg-gray-300 p-2 px-8 rounded-md hover:bg-gray-400 hover:text-gray-100 text-sm"
+                      onClick={() => setMainNav(!mainNav)}
+                    >
                       Open
                     </button>
 
@@ -1088,22 +1120,23 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                   )}
 
                   <div className="bg-white flex justify-end p-5 rounded-lg shadow1 mb-5">
-                    {!studentMainData.removedOn && (student.course.class === studentCourseData.courseId) &&(
-                      <div className="hidden md:flex">
-                        <button
-                          className="text-sm bg-gray-300 hover:bg-gray-400 p-2 px-5 mx-2 rounded-sm hover:text-white"
-                          onClick={() => setBusStatus(true)}
-                        >
-                          Bus Info
-                        </button>
-                        <button
-                          className="text-sm bg-gray-300 hover:bg-gray-400 p-2 px-5 mx-2 rounded-sm hover:text-white"
-                          onClick={() => setClassInfo(true)}
-                        >
-                          Class Info
-                        </button>
-                      </div>
-                    )}
+                    {!studentMainData.removedOn &&
+                      student.course.class === studentCourseData.courseId && (
+                        <div className="hidden md:flex">
+                          <button
+                            className="text-sm bg-gray-300 hover:bg-gray-400 p-2 px-5 mx-2 rounded-sm hover:text-white"
+                            onClick={() => setBusStatus(true)}
+                          >
+                            Bus Info
+                          </button>
+                          <button
+                            className="text-sm bg-gray-300 hover:bg-gray-400 p-2 px-5 mx-2 rounded-sm hover:text-white"
+                            onClick={() => setClassInfo(true)}
+                          >
+                            Class Info
+                          </button>
+                        </div>
+                      )}
 
                     {true && (
                       <select
@@ -1149,7 +1182,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                     {/* Dropdowns for Class and Term Selection */}
                                     <div className="flex flex-col md:flex-row gap-4 mb-6">
                                       <div className="flex justify-between items-center">
-                                        <span className="text-gray-600 mr-2">
+                                        <span className="hidden md:block text-gray-600 mr-2">
                                           Select Class :
                                         </span>
 
@@ -1183,9 +1216,10 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                           })}
                                         </select>
 
-                                        <span className="text-gray-600 mr-2">
+                                        <span className="hidden md:block text-gray-600 mr-2">
                                           Select Term :
                                         </span>
+
                                         <select
                                           className="p-2 border border-gray-300 rounded-md w-40"
                                           onChange={(e) =>
@@ -1491,7 +1525,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
 
                             <div className="flex flex-col lg:flex-row gap-8">
                               {/* <!-- Calendar --> */}
-                              <div className="flex-1 bg-white rounded-md min-w-[50%] p-4">
+                              <div className="flex-1 bg-white rounded-md min-w-[50%]">
                                 <AbsentDaysCalendar
                                   absentDays={studentCourseData.absentDays}
                                 />
@@ -2128,7 +2162,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
 
                         {confirmAlert && (
                           <div className="reset fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-                            <div className="bg-white p-6 rounded-lg shadow-lg min-w-[50%] relative">
+                            <div className="bg-white p-6 rounded-lg shadow-lg w-[45%] min-w-[340px] relative">
                               <h2 className="text-lg font-semibold text-center mb-3">
                                 {secondNavActive === "Fees"
                                   ? "Confirm Payment"

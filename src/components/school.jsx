@@ -14,7 +14,6 @@ import {
 import { useParams } from "react-router-dom";
 import Error from "./layout/error";
 import Loading from "./layout/loading";
-import Home from "./home/Home";
 import Updates from "./updates/Updates";
 import Gallery from "./gallery/Gallery";
 import Admission from "./admission/Admission";
@@ -33,7 +32,6 @@ import {
 
 //students
 import { useRouteMatch } from "react-router-dom/cjs/react-router-dom.min";
-import ContactComponent from "./basicComponents/ContactComponent";
 import StudentPage from "./students/StudentPage";
 import StaffPage from "./staffs/StaffPage";
 import AlertAdv from "./test/AlertAdv";
@@ -47,7 +45,7 @@ function School() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.User.user.payload);
   const user0 = useSelector((state) => state.User.user0.payload);
-  const alertGlobal = useSelector((state) => state.AlertGlobal.alertGlobal);
+  const alertGlobal = useSelector((state) => state.AlertGlobal.alerts);
   const confirmGlobal = useSelector(
     (state) => state.ConfirmGlobal.confirmGlobal
   );

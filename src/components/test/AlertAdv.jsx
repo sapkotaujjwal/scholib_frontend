@@ -1,75 +1,64 @@
-import React, { useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { useDispatch, useSelector } from 'react-redux';
-import { REMOVE_ALERT_GLOBAL } from '../../redux/AlertGlobalSlice';
+import React, { useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { REMOVE_ALERT_GLOBAL } from "../../redux/AlertGlobalSlice";
+import { motion, AnimatePresence } from "framer-motion";
+
+const alertColors = {
+  success: "bg-green-100 text-green-700 border-green-400",
+  error: "bg-red-100 text-red-700 border-red-400",
+  warning: "bg-yellow-100 text-yellow-700 border-yellow-400",
+  info: "bg-blue-100 text-blue-700 border-blue-400",
+};
 
 const AlertAdv = () => {
-  const alertGlobal = useSelector((state) => state.AlertGlobal.data);
+  const alerts = useSelector((state) => state.AlertGlobal.alerts);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      handleCloseClick();
-    }, 4500);
-    
-    return () => clearTimeout(timer);
-  }, []);
-
-  const handleCloseClick = () => {
-    dispatch(REMOVE_ALERT_GLOBAL());
-  };
+    alerts.forEach((alert) => {
+      const timer = setTimeout(() => {
+        dispatch(REMOVE_ALERT_GLOBAL(alert.id));
+      }, 4500);
+      return () => clearTimeout(timer);
+    });
+  }, [alerts, dispatch]);
 
   return (
-    <div className="fixed top-[70px] right-0 z-[10000] pb-2.5">
-      <div className="float-right min-w-[40vw] h-[68px] w-max bg-gray-100 shadow-md rounded-l-xl rounded-r-sm relative flex justify-start pl-6 pr-16 overflow-hidden">
-        <div className="py-2 w-full">
-          <p className="text-sm font-medium mb-1 text-gray-800">
-            {alertGlobal.status || 'Successful'}
-          </p>
-          <p className="text-xs font-medium text-gray-600">
-            {alertGlobal.message || 'Proceed to your activity'}
-          </p>
-        </div>
-
-        {/* Progress line */}
-        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-300">
-          <div 
-            className="h-full bg-blue-500 origin-left"
-            style={{
-              animation: 'shrink 4.5s linear forwards'
-            }}
-          />
-        </div>
-
-        {/* Close button */}
-        <button
-          onClick={handleCloseClick}
-          className="absolute right-2.5 top-1/2 -translate-y-1/2 w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition-colors"
-        >
-          <FontAwesomeIcon 
-            icon={faXmark} 
-            className="w-4 h-4 text-gray-600"
-          />
-        </button>
-      </div>
-
-      <style jsx>{`
-        @keyframes shrink {
-          from {
-            width: 100%;
-          }
-          to {
-            width: 0%;
-          }
-        }
-
-        @media (max-width: 500px) {
-          .min-w-[40vw] {
-            width: 98vw !important;
-          }
-        }
-      `}</style>
+    <div className="fixed top-20 right-4 z-[10000] flex flex-col gap-3 min-w-[35%] w-3xl max-w-[100%]">
+      <AnimatePresence>
+        {alerts.map((alert) => (
+          <motion.div
+            key={alert.id}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 50 }}
+            transition={{ duration: 0.3 }}
+            className={`relative flex items-start p-4 pr-12 rounded-lg shadow-md border-l-4 ${alertColors[alert.type] || alertColors.info}`}
+          >
+            <div>
+              <p className="text-sm font-semibold">{alert.status || "Notification"}</p>
+              <p className="text-xs">{alert.message || "Proceed to your activity."}</p>
+            </div>
+            {/* Close Button */}
+            <button
+              onClick={() => dispatch(REMOVE_ALERT_GLOBAL(alert.id))}
+              className="absolute right-2 top-2 w-6 h-6 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300 transition"
+            >
+              <FontAwesomeIcon icon={faXmark} className="w-3.5 h-3.5 text-gray-600" />
+            </button>
+            {/* Progress Bar */}
+            <motion.div
+              className="absolute bottom-0 left-0 h-1 bg-gray-300 w-full"
+              initial={{ scaleX: 1 }}
+              animate={{ scaleX: 0 }}
+              transition={{ duration: 4.5, ease: "linear" }}
+              style={{ transformOrigin: "left" }}
+            />
+          </motion.div>
+        ))}
+      </AnimatePresence>
     </div>
   );
 };

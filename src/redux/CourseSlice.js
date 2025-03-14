@@ -27,6 +27,13 @@ export const courseSlice = createSlice({
     COURSE_ERROR_REMOVE: (state) => {
       state.error.payload = null;
     },
+    UPDATE_COURSE_SECTION: (state, action) => {
+
+      // let newCourse = state.course.paylaod.course.reduce((each)=> each._id !== action.payload.class._id);
+
+      // console.log(action.payload)
+    },
+    
   },
 });
 
@@ -36,6 +43,7 @@ export const {
   GET_COURSE_SUCCESS,
   COURSE_ERROR_REMOVE,
   GET_ALL_COURSES_SUCCESS,
+  UPDATE_COURSE_SECTION,
 } = courseSlice.actions;
 
 export default courseSlice.reducer;

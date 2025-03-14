@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import "./dropdown.scss"; // Assuming you have a stylesheet for styling
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
-const Dropdown2 = ({
+const Dropdown = ({
   options = [
     {
       title: "Option 1",
@@ -16,64 +17,77 @@ const Dropdown2 = ({
   title,
   onSelect = () => {},
   key11,
-  nullOption = false
 }) => {
-  const [selectedValue, setSelectedValue] = useState(title || "");
-  const [nullNeed, setNullNeed] = useState(nullOption);
+  const [show, setShow] = useState(false);
+  const [current, setCurrent] = useState(title); // Initialize with title prop
+
+
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
-    setSelectedValue(title); // Update when title prop changes
+    setCurrent(title); // Update current when title prop changes
   }, [title]);
 
-  const handleChange = (event) => {
-    if (!event.target.value) {
-      return;
-    }
+  const handleShow = () => {
+    setShow((prev) => !prev);
+  };
 
-    setNullNeed(false)
+  const handleSelect = (index) => () => {
+    onSelect(index, key11, options[index].value);
+    setCurrent(options[index].label);
+    setShow(false); // Close dropdown after selection
+  };
 
-    const selectedIndex = event.target.selectedIndex - 1; // Subtract 1 because of default option
-    const selectedOption = options[selectedIndex];
-
-    if (selectedIndex >= 0) {
-      // Only trigger if not the default option
-      setSelectedValue(selectedOption.title);
-      onSelect(selectedIndex, key11, selectedOption.value);
+  const handleClickOutside = (event) => {
+    // Check if the click is outside the dropdown
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setShow(false);
     }
   };
 
+  useEffect(() => {
+    // Add event listener when the component is mounted
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Clean up event listener when the component is unmounted
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="relative w-full flex items-center space-x-2">
-      <p className="text-md mb-0 text-gray-600 w-auto ms-0">{title} :</p>
-      <div className="relative flex-1">
-        <select
-          value={selectedValue}
-          onChange={handleChange}
-          className="w-full appearance-none bg-white border border-gray-300 rounded-md py-2 pl-3 pr-10 text-gray-700 
-                    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
-                    hover:border-gray-400 cursor-pointer"
+    <div className="dropdown973753" ref={dropdownRef}>
+      <p className="text-center mb-0" onClick={handleShow}>
+        {current} &nbsp; <FontAwesomeIcon icon={faCaretDown} />
+      </p>
+
+      {show && (
+        <div
+          className="container"
+          style={{ top: dropdownRef.current.offsetHeight + 5 }}
         >
-          {nullNeed && <option>Select Class</option>}
-
-          {/* Map through options */}
           {options && options.length > 0 ? (
-            options.map((option, index) => (
-              <option key={index} value={option.value} className="py-2">
-                {option.label}
-              </option>
-            ))
-          ) : (
-            <option disabled>No Data</option>
-          )}
-        </select>
+            <ul>
+              {/* Map options to list items */}
+              {options.map((obj, index) => (
 
-        {/* Custom caret icon */}
-        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-          <FontAwesomeIcon className="pr-2" icon={faCaretDown} />
+                <li key={index} className="each" onClick={handleSelect(index)}>
+                  <p className="text-center py-2">{obj.label}</p>
+                </li>
+                
+
+              ))}
+            </ul>
+          ) : (
+            <div className="each2">
+              <p className="text-center">No Data</p>
+            </div>
+          )}
         </div>
-      </div>
+      )}
     </div>
+
   );
 };
 
-export default Dropdown2;
+export default Dropdown;

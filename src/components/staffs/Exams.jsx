@@ -580,17 +580,19 @@ const Exams = () => {
 
           {currentSubject && (
             <div className="each flex1 justify-end mb-3 pt-2 flex-wrap-reverse flex-grow-1 mt-3">
-              <div className=" mr-4">
+              <div className="flex1 mr-3 mt-3">
 
-                {/* <p className="text-md mb-0 w500"> Subject :</p> */}
+                <p className="text-sm mb-0 w500 text-gray-500 mr-2"> Subject :</p>
                 <Dropdown2
-                  title={`Class`}
+                  title={currentSubject.subject}
                   options={allSubjects.map((each) => {
                     return {
                       label: each.subject,
                       value: each._id,
                     };
                   })}
+                  selected={false}
+                  
                   onSelect={(a, b, c) => {
                     setCurrentSubject(allSubjects.find((sub) => sub._id === c));
                   }}
@@ -600,11 +602,11 @@ const Exams = () => {
               {examInfo &&
               examInfo.find((sec) => sec.section == currentSection._id)?.exam
                 ?.term?.[currentTerm - 1]?.publishedDate ? (
-                <div className="bg-green-200 py-2 px-4 mr-3 rounded-sm">
+                <div className="bg-green-200 py-2 px-4 mr-3 rounded-sm mt-3">
                   <p className="text-sm text-gray-600 w500 mb-0"> Published </p>
                 </div>
               ) : (
-                <div className="bg-red-200 py-2 px-4 mr-3 rounded-sm">
+                <div className="bg-red-200 py-2 px-4 mr-3 rounded-sm mt-3">
                   <p className="text-sm text-gray-600 w500 mb-0">
                     {" "}
                     Not Published{" "}

@@ -24,6 +24,7 @@ import Success from "../layout/Success";
 import Error from "../layout/error";
 import axios from "axios";
 import DatePicker from "../layout/DatePicker";
+import Dropdown2 from "../basicComponents/Dropdown2";
 
 const Admission = () => {
   useEffect(() => {
@@ -492,17 +493,18 @@ const Admission = () => {
                   <div className="each width1">
                     <p> Class *</p>
                     <div className="wobbler" style={{ padding: "0px 3px" }}>
-                      <Dropdown
+                      <Dropdown2
                         options={course.map((crc) => {
                           return {
                             label: crc.class,
                             value: crc._id,
                           };
                         })}
-                        title={
-                          course.find((crc) => crc._id === student.course.class)
-                            ?.class || "Select One"
-                        }
+
+                        title={student.course.class ? course.find((crc)=> crc._id === student.course.class).class : 'Select Class'}
+
+                        
+
                         onSelect={(a, b, _id) => {
                           let courseFound = course.find((crc) => {
                             return crc._id === _id;

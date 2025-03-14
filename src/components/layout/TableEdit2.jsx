@@ -5,6 +5,7 @@ import { faCheck, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { SET_ALERT_GLOBAL } from "../../redux/AlertGlobalSlice";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
+import { UPDATE_SCHOOL_BUS } from "../../redux/HomeSlice";
 
 // Develoepr Note
 // this component is specially optimized for bus fees so let it properly serve it's purpose and maybe it is used somewhere else too to.........
@@ -71,6 +72,7 @@ const TableEdit2 = ({
     updateBusRoute(busFeeInfo._id, busFeeInfo);
   };
 
+
   async function updateBusRoute(_id, obj) {
     axios
       .put(
@@ -84,6 +86,9 @@ const TableEdit2 = ({
         setLoading(false);
         if (response.data.success) {
           dispatch(SET_ALERT_GLOBAL(response.data));
+          dispatch(UPDATE_SCHOOL_BUS(response.data.data));
+
+          
           setBusFeeInfo(null);
         } else {
           dispatch(SET_ALERT_GLOBAL(response.data));

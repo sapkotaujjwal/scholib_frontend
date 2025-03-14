@@ -271,7 +271,7 @@ const UpdateSchool = ({ data, edit = true }) => {
       {isSuccess && (
         <Success
           closeSuccess={() => {
-            history.push(`/school/${data.schoolCode}/`);
+            history.push(`/school/${data.schoolCode}/updates`);
           }}
           data={successData}
         />

@@ -23,7 +23,6 @@ const EditStudentMarks = ({
     submitData(data)
   };
 
-  console.log(data)
 
 
   return (

@@ -11,7 +11,12 @@ import {
 } from "../../redux/CreateCourse";
 import { SET_ALERT_GLOBAL } from "../../redux/AlertGlobalSlice";
 
-const EditSubjectTeacher = ({ data, id, closeFunction = () => {} }) => {
+const EditSubjectTeacher = ({
+  data,
+  id,
+  closeFunction = () => {},
+  handleSuccess = () => {},
+}) => {
   const [currentSection, setCurrentSection] = useState(data);
   const error = useSelector((state) => state.CreateCourse.error.payload);
   const loading = useSelector((state) => state.CreateCourse.loading);
@@ -30,8 +35,8 @@ const EditSubjectTeacher = ({ data, id, closeFunction = () => {} }) => {
     qualification: obj.qualification,
   }));
 
-  const [availableStaffs, setAvailableStaffs] = useState(
-    staffs12.sort((a, b) => a.label.localeCompare(b.label))
+  const availableStaffs = staffs12.sort((a, b) =>
+    a.label.localeCompare(b.label)
   );
 
   const updateTeacher = (subjectId, newTeacherId) => {
@@ -68,6 +73,7 @@ const EditSubjectTeacher = ({ data, id, closeFunction = () => {} }) => {
       if (response.data.success) {
         dispatch(POST_CREATE_COURSE_SUCCESS(response.data.data));
         dispatch(SET_ALERT_GLOBAL(response.data));
+        handleSuccess(currentSection);
         closeFunction();
       } else {
         dispatch(POST_CREATE_COURSE_FAIL(response.data.data));

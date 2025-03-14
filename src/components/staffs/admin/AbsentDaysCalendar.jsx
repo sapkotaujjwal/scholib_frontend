@@ -70,7 +70,7 @@ const AbsentDaysCalendar = ({ absentDays }) => {
         {days.map((day) => (
           <div
             key={day}
-            className={`p-4 border rounded-md cursor-pointer ${
+            className={` p-2 md:p-4 border rounded-md cursor-pointer ${
               isAbsentDay(day) ? "bg-red-600 text-white" : ""
             } ${day === selectedDay ? "ring-2 ring-blue-500" : ""}`}
           >

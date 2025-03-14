@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./admission.scss";
 import { useDispatch, useSelector } from "react-redux";
 import MetaData from "../layout/MetaData";
@@ -58,12 +58,17 @@ const Admission = () => {
     admissions: admissions,
   });
 
+  const isFirstRender = useRef(true);
+
   useEffect(() => {
-    setFilter2((prevState) => ({
-      ...prevState,
-      classStudents: school.admissions,
-      admissions: school.admissions,
-    }));
+    if (school?.admissions && isFirstRender.current) {
+      setFilter2((prevState) => ({
+        ...prevState,
+        classStudents: school.admissions,
+        admissions: school.admissions,
+      }));
+      isFirstRender.current = false;
+    }
   }, [school]);
 
   function sortHere(arr, type = filter2.sortBy) {
@@ -125,6 +130,16 @@ const Admission = () => {
     return array; // Now returns the sorted array, not a function
   }
 
+  const [searchValue, setSearchValue] = useState("");
+
+  // Filter admissions based on search value
+  const filteredAdmissions =
+    filter2.admissions && filter2.admissions.length
+      ? filter2.admissions.filter((student) =>
+          student.name.toLowerCase().includes(searchValue.toLowerCase())
+        )
+      : [];
+
   return (
     <div className="admissionAdmine2673 applyBootstrap">
       <MetaData
@@ -141,10 +156,10 @@ const Admission = () => {
 
       {filter2.admissions && (
         <div className="inside-content">
-        <div className="flex flex-col p-4 bg-white shadow1 rounded-lg mx-[2%]">
-          <p className="text-xl font-semibold text-[#133189]">Admissions</p>
-          <p className="text-sm text-gray-600">{school.name}</p>
-        </div>
+          <div className="flex flex-col p-4 bg-white shadow1 rounded-lg mx-[2%]">
+            <p className="text-xl font-semibold text-[#133189]">Admissions</p>
+            <p className="text-sm text-gray-600">{school.name}</p>
+          </div>
 
           <div className="posgdj d-flex">
             <p className="h5 w600"> Admission Inquiries</p>
@@ -159,8 +174,26 @@ const Admission = () => {
             </div>
           </div>
 
+          <div className="bg-gray-50 rounded-lg mx-[2%] p-3 mb-3 flex items-center gap-3 ">
+            <label
+              htmlFor="search"
+              className="whitespace-nowrap font-medium text-gray-700 dark:text-gray-300 mb-0"
+            >
+              Search :
+            </label>
+            <input
+              type="text"
+              value={searchValue}
+              onChange={(e) => {
+                setSearchValue(e.target.value);
+              }}
+              className="p-2 rounded-md flex-1 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              placeholder="Type to search..."
+            />
+          </div>
+
           <div className="myBox34 flex4">
-          {filter2.admissions && filter2.admissions.length < 1 && (
+            {filteredAdmissions.length < 1 && (
               <div className="" style={{ width: "min(640px, 100%)" }}>
                 <hr />
                 <p className="text-secondary text-center p-2 pt-3 h6">
@@ -170,17 +203,18 @@ const Admission = () => {
               </div>
             )}
 
-            {filter2.admissions.length >= 1 && (
+            {filteredAdmissions.length >= 1 && (
               <div className="left3553 indi">
-                {filter2.admissions.map((content) => {
+                {filteredAdmissions.map((content) => {
                   return (
                     <div
                       className="admission-inquiry flex3"
                       onClick={() => setStudentId(content._id)}
+                      key={content._id}
                     >
                       <div className="each left flex1">
                         <img
-                        className="shadow1"
+                          className="shadow1"
                           src={
                             content.photo1
                               ? content.photo1.secure_url
@@ -232,7 +266,7 @@ const Admission = () => {
               </div>
             )}
 
-            { school && (
+            {school && (
               <div
                 className={`right3553 indi ${filter ? "" : "rightMobileView"}`}
               >
@@ -349,19 +383,6 @@ const Admission = () => {
                     }}
                   />
                 </div>
-
-                {/* <button
-                  className="btn d-block mt-3"
-                  style={{
-                    width: "100%",
-                    fontSize: "14px",
-                    padding: "4px",
-                    backgroundColor: "#01BCD6",
-                    color: "#fff",
-                  }}
-                >
-                  Apply{" "}
-                </button> */}
               </div>
             )}
           </div>
