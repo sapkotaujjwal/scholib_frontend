@@ -134,6 +134,9 @@ const Fees = () => {
 
   return (
     <>
+    <div className="applyBootstrap">
+
+
       {busStatus && (
         <div className="full">
           <BusStatus
@@ -279,6 +282,7 @@ const Fees = () => {
           </div>
         </div>
       )}
+          </div>
     </>
   );
 };

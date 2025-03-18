@@ -41,7 +41,7 @@ const Library = () => {
   );
 
   return (
-    <div className="libraryComponent2366 flex2">
+    <div className="libraryComponent2366 flex2 applyBootstrap">
       <MetaData
         title={`${user && user.role ? "Staff" : "Student"} || Library`}
       />

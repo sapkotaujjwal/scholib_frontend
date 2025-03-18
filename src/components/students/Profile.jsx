@@ -36,7 +36,7 @@ const Profile = () => {
   );
 
   return (
-    <div className="profile2638">
+    <div className="profile2638 applyBootstrap">
       <MetaData
         title={`${user && user.role ? "Staff" : "Student"} || Profile`}
       />

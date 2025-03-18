@@ -33,7 +33,7 @@ const Dashboard = () => {
   const courseData = studentData.course;
 
   return (
-    <div className="dashboard001234c">
+    <div className="dashboard001234c applyBootstrap">
       <MetaData
         title={`${user && user.role ? "Staff" : "Student"} || Dashboard`}
       />

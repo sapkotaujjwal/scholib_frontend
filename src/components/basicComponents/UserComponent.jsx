@@ -27,7 +27,7 @@ import {
 } from "../../redux/StudentDataSlice";
 
 const UserComponent = ({ closeUserComponent }) => {
-  const course = useSelector((state) => state.Course.course.payload.course);
+  const course = useSelector((state) => state.Course.courseAll.payload.course);
   const dispatch = useDispatch();
 
   const school = useSelector((state) => state.Home.school.payload);
@@ -235,7 +235,7 @@ const UserComponent = ({ closeUserComponent }) => {
                 {school.name}{" "}
               </p>
 
-              {!user.role && (
+              {!user.role && studentData && (
                 <div
                   className="parent-buttons flex3"
                   style={{ justifyContent: "space-evenly" }}

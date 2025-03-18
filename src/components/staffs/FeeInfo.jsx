@@ -124,7 +124,7 @@ const FeeInfo = ({
   }
 
   return (
-    <div className="busmdaidna122 custom-scrollbar flex1">
+    <div className="busmdaidna122 custom-scrollbar flex1 applyBootstrap">
       {
         <div className="vmainqqw">
           {/* for closing the entire thing  */}

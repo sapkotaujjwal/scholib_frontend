@@ -57,7 +57,7 @@ const AttendanceNew = ({
 
   // Format date for comparison
   const formatDateString = (year, month, day) => {
-    return `${year}-${month}-${day}`;
+    return `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
   };
 
   const handleStatusChange = (id, status) => {
@@ -143,6 +143,13 @@ const AttendanceNew = ({
     "Falgun", // Falgun
     "Chaitra", // Chaitra
   ];
+
+  console.log(date ,
+    formatDateString(
+      calenderDate.year,
+      calenderDate.month,
+      calenderDate.day
+    ))
 
   return (
     <div className="allWrapupAttendanceNew">

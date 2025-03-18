@@ -146,7 +146,7 @@ const BusStatus = ({
 
 
   return (
-    <div className="busmdaidna flex1 ">
+    <div className="busmdaidna flex1 applyBootstrap">
       <div className="vmainqqw custom-scrollbar">
 
         <div className="closeContainer">

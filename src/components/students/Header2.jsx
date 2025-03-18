@@ -56,18 +56,7 @@ const Header = (props) => {
 
         <div className="center flex2 hidden1" ref={navbarRef}>
           <ul>
-            <li>
-              <Link
-                to={`/school/${schoolCode}/`}
-                className={
-                  currentPath === `/school/${schoolCode}/` ? "active" : ""
-                }
-                onClick={handleLinkClick}
-              >
-                Home
-              </Link>
-            </li>
-            <p className="h4"> | </p>
+
 
             <li>
               <Link
@@ -84,21 +73,6 @@ const Header = (props) => {
             </li>
             <p className="h4"> | </p>
 
-            <li>
-              <Link
-                to={`/school/${schoolCode}/contact`}
-                className={
-                  currentPath === `/school/${schoolCode}/contact`
-                    ? "active"
-                    : ""
-                }
-                onClick={handleLinkClick}
-              >
-                Contact
-              </Link>
-            </li>
-
-            <p className="h4"> | </p>
 
             <li>
               <Link

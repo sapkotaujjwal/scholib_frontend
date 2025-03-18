@@ -41,6 +41,7 @@ const StudentPage = () => {
     }
 
 
+
     dispatch(GET_STUDENTDATA());
     axios
       .get(`${process.env.REACT_APP_API_URL}/student/${schoolCode}/info`, {
