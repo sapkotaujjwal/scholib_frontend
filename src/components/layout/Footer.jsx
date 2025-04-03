@@ -8,21 +8,24 @@ import {
   faLinkedin,
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
-import { faEnvelopeCircleCheck, faLocationDot, faPhone } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEnvelopeCircleCheck,
+  faLocationDot,
+  faPhone,
+} from "@fortawesome/free-solid-svg-icons";
 
 const SocialIcon = ({ href, icon }) => {
   if (!href) return null;
   return (
     <div className="w-full flex1">
-
-    <a
-      href={href}
-      className="text-blue-100 hover:text-white transition-colors duration-300 rounded-full bg-blue-600 hover:bg-blue-500 p-3"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <FontAwesomeIcon icon={icon} className="text-lg" />
-    </a>
+      <a
+        href={href}
+        className="text-blue-100 hover:text-white transition-colors duration-300 rounded-full bg-blue-600 hover:bg-blue-500 w-10 h-10 flex1"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <FontAwesomeIcon icon={icon} className="text-lg" />
+      </a>
     </div>
   );
 };
@@ -48,7 +51,6 @@ const FooterLink = ({ to, children }) => {
     </Link>
   );
 };
-
 
 const Footer = () => {
   const school = useSelector((state) => state.Home.school.payload);
@@ -78,16 +80,24 @@ const Footer = () => {
                 </div>
               </div>
               <div className="text-blue-200 space-y-2">
-                <p className="flex items-center">
-                  <span className="mr-2"> <FontAwesomeIcon icon={faLocationDot} /> </span>
+                <p className="flex">
+                  <span className="mr-2">
+                    {" "}
+                    <FontAwesomeIcon icon={faLocationDot} />{" "}
+                  </span>
                   {school?.address}
                 </p>
-                <p className="flex items-center">
-                  <span className="mr-2"> <FontAwesomeIcon icon={faEnvelopeCircleCheck} /> </span>
+                <p className="flex">
+                  <span className="mr-2">
+                    {" "}
+                    <FontAwesomeIcon icon={faEnvelopeCircleCheck} />{" "}
+                  </span>
                   {school?.email?.[0]}
                 </p>
-                <p className="flex items-center">
-                  <span className="mr-2"><FontAwesomeIcon icon={faPhone} /></span>
+                <p className="flex">
+                  <span className="mr-2">
+                    <FontAwesomeIcon icon={faPhone} />
+                  </span>
                   {school?.phone?.[0]}
                 </p>
               </div>
@@ -100,24 +110,28 @@ const Footer = () => {
               </h3>
 
               <div className="grid grid-cols-2 gap-4">
-  {[
-    { path: `https://${school.domain}/`, label: "Home" },
-    { path: "/updates", label: "Updates" },
-    { path: `https://${school.domain}/contact.html`, label: "Contact" },
-    { path: "/gallery", label: "Gallery" },
-    { path: "/admission", label: "Admission" },
-  ].map((item) => (
-    <FooterLink
-      key={item.path}
-      to={item.path.startsWith("http") ? item.path : `/school/${school?.schoolCode}${item.path}`}
-    >
-      {item.label}
-    </FooterLink>
-  ))}
-</div>
-
-
-
+                {[
+                  { path: `https://${school.domain}/`, label: "Home" },
+                  { path: "/updates", label: "Updates" },
+                  {
+                    path: `https://${school.domain}/contact.html`,
+                    label: "Contact",
+                  },
+                  { path: "/gallery", label: "Gallery" },
+                  { path: "/admission", label: "Admission" },
+                ].map((item) => (
+                  <FooterLink
+                    key={item.path}
+                    to={
+                      item.path.startsWith("http")
+                        ? item.path
+                        : `/school/${school?.schoolCode}${item.path}`
+                    }
+                  >
+                    {item.label}
+                  </FooterLink>
+                ))}
+              </div>
             </div>
 
             {/* Social Media */}
@@ -137,6 +151,9 @@ const Footer = () => {
             </div>
           </div>
         </div>
+
+        {/* review Section */}
+
 
         {/* Scholib Section */}
         {scholib && (
@@ -163,7 +180,7 @@ const Footer = () => {
                 </div>
               </div>
 
-              <div className="flex items-center space-x-6">
+              <div className="flex items-center ">
                 <div className="flex space-x-3">
                   <SocialIcon href={scholib.facebook} icon={faFacebook} />
                   <SocialIcon href={scholib.instagram} icon={faInstagram} />
@@ -172,7 +189,7 @@ const Footer = () => {
                 </div>
                 <a
                   href="https://scholib.com"
-                  className="px-6 py-2.5 bg-white text-blue-900 rounded-lg hover:bg-gray-700 transition-colors duration-300 text-sm font-semibold shadow-lg"
+                  className="px-6 text-center py-2.5 min-w-[300px] bg-white text-blue-900 rounded-lg hover:bg-gray-700 transition-colors duration-300 text-sm font-semibold shadow-lg"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

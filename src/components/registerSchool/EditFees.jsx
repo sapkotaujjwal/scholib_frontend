@@ -11,6 +11,8 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import Error from "../layout/error";
+import { UPDATE_COURSE_FEES } from "../../redux/HomeSlice";
+
 
 const EditFees = ({ data, closeFunction = () => {} }) => {
   const [courseInfo, setCourseInfo] = useState(data);
@@ -45,6 +47,7 @@ const EditFees = ({ data, closeFunction = () => {} }) => {
         if (response.data.success) {
           dispatch(POST_CREATE_COURSE_SUCCESS(response.data.data));
           dispatch(SET_ALERT_GLOBAL(response.data));
+          dispatch(UPDATE_COURSE_FEES({...data, fees: feeData}));
           closeFunction();
         } else {
           dispatch(POST_CREATE_COURSE_FAIL(response.data.data));
@@ -71,7 +74,7 @@ const EditFees = ({ data, closeFunction = () => {} }) => {
 
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 "
+      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
       style={{ zIndex: 100000 }}
     >
       <div className="w-full max-w-xl bg-white rounded-lg shadow-xl p-6 m-4 max-h-[90vh] overflow-y-auto">
@@ -140,7 +143,7 @@ const EditFees = ({ data, closeFunction = () => {} }) => {
                 />
                 <button
                   id="addFeeBtn"
-                  className="rounded-md bg-green-500 p-2 text-white hover:bg-green-600"
+                  className="bg-green-500 p-2 text-white hover:bg-green-600 rounded-lg"
                   onClick={() => {
                     const tempValue = feeTitleRef.current.value;
                     if (tempValue) {

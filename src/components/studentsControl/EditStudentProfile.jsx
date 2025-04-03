@@ -406,7 +406,7 @@ const EditStudentProfile = ({
                     type="text"
                     name=""
                     value={student.address}
-                    placeholder="Buddhashanti 2 Budhabare Jhapa"
+                    placeholder=""
                     onChange={(event) =>
                       setStudent({
                         ...student,
@@ -422,7 +422,7 @@ const EditStudentProfile = ({
                     type="text"
                     name=""
                     value={student.psName}
-                    placeholder="Buddhashanti 2 Budhabare Jhapa"
+                    placeholder=""
                     onChange={(event) =>
                       setStudent({
                         ...student,
@@ -438,7 +438,7 @@ const EditStudentProfile = ({
                     type="text"
                     name=""
                     value={student.psAddress}
-                    placeholder="Buddhashanti 2 Budhabare Jhapa"
+                    placeholder=""
                     onChange={(event) =>
                       setStudent({
                         ...student,
@@ -458,7 +458,7 @@ const EditStudentProfile = ({
                     type="text"
                     name=""
                     value={student.fName}
-                    placeholder="Buddhashanti 2 Budhabare Jhapa"
+                    placeholder=""
                     onChange={(event) =>
                       setStudent({
                         ...student,
@@ -474,7 +474,7 @@ const EditStudentProfile = ({
                     type="text"
                     name=""
                     value={student.fProfession}
-                    placeholder="Buddhashanti 2 Budhabare Jhapa"
+                    placeholder=""
                     onChange={(event) =>
                       setStudent({
                         ...student,
@@ -490,7 +490,7 @@ const EditStudentProfile = ({
                     type="text"
                     name=""
                     value={student.mName}
-                    placeholder="Buddhashanti 2 Budhabare Jhapa"
+                    placeholder=""
                     onChange={(event) =>
                       setStudent({
                         ...student,
@@ -506,7 +506,7 @@ const EditStudentProfile = ({
                     type="text"
                     name=""
                     value={student.mProfession}
-                    placeholder="Buddhashanti 2 Budhabare Jhapa"
+                    placeholder=""
                     onChange={(event) =>
                       setStudent({
                         ...student,

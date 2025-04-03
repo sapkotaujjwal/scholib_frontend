@@ -19,11 +19,22 @@ const FeeStructure = () => {
   const course = school.course;
 
   const [cClass, setCClass] = useState(course[0]);
+  const [selectedClassId, setSelectedClassId] = useState(course[0]?._id);
 
   const locationRef = useRef(null);
   const amountRef = useRef(null);
 
   const dispatch = useDispatch();
+
+  // Update cClass whenever school.course changes or when fees are updated
+  useEffect(() => {
+    if (selectedClassId && course.length > 0) {
+      const updatedClass = course.find(c => c._id === selectedClassId);
+      if (updatedClass) {
+        setCClass(updatedClass);
+      }
+    }
+  }, [course, selectedClassId]);
 
   async function deleteBusRoute(_id) {
     axios
@@ -105,7 +116,6 @@ const FeeStructure = () => {
   const [editFees, setEditFees] = useState(false);
 
   // Confirm Global is used Here
-
   const confirmGlobalStatusState = useSelector(
     (state) => state.ConfirmGlobal.status
   );
@@ -130,10 +140,16 @@ const FeeStructure = () => {
     document.body.classList.remove("dshauda-hidden321");
   }
 
+  // Handle fees update after EditFees component closes
+  const handleEditFeesClose = () => {
+    setEditFees(false);
+    // This will trigger the useEffect that updates cClass
+  };
+
   return (
     <>
       {editFees && (
-        <EditFees data={cClass} closeFunction={() => setEditFees(false)} />
+        <EditFees data={cClass} closeFunction={handleEditFeesClose} />
       )}
 
       {!editFees && <div className="fee-Structure-admin273">
@@ -160,6 +176,7 @@ const FeeStructure = () => {
                 onSelect={(a, b, c) => {
                   const selectedCourse = course.find((data) => data._id === c);
                   setCClass(selectedCourse);
+                  setSelectedClassId(c);
                 }}
                 title={cClass.class}
                 options={course.map((crc) => {

@@ -16,7 +16,6 @@ import EditStudentProfile from "./EditStudentProfile";
 
 const StudentProfileBig2 = ({ data, closeFunction }) => {
   const school = useSelector((state) => state.Home.school.payload);
-  const courseCurrentOnly = useSelector((state) => state.Course.course.payload.course);
   const course = useSelector((state) => state.Course.courseAll.payload.course);
 
   function formatDate(dateString) {

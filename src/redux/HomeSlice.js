@@ -74,9 +74,7 @@ export const homeSlice = createSlice({
     UPDATE_SCHOOL_BUS: (state, action) => {
       state.school.payload = {
         ...state.school.payload,
-        busFee: 
-          action.payload,
-        
+        busFee: action.payload,
       };
     },
     ADD_FAQ: (state, action) => {
@@ -110,6 +108,15 @@ export const homeSlice = createSlice({
     GET_ACCOUNTS: (state, action) => {
       state.accounts = action.payload;
     },
+
+    UPDATE_COURSE_FEES: (state, action) => {
+
+      const updatedOthers = state.school.payload.course.map(
+        (course) =>
+          course._id == action.payload._id ? action.payload : course
+      );
+      state.school.payload.course = updatedOthers;
+    },
   },
 });
 
@@ -130,6 +137,7 @@ export const {
   UPDATE_SCHOOL_BUS,
   SET_SCHOOL_ADMISSIONS,
   GET_ACCOUNTS,
+  UPDATE_COURSE_FEES,
 } = homeSlice.actions;
 
 export default homeSlice.reducer;

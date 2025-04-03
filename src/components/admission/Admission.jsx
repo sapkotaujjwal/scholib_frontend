@@ -7,7 +7,6 @@ import { faCircleCheck } from "@fortawesome/free-regular-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import MetaData from "../layout/MetaData";
-import Dropdown from "../basicComponents/Dropdown";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import addImage from "../../images/addImage.svg";
 
