@@ -1139,8 +1139,11 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                       )}
 
                     {true && (
+
+                      <>
+                      
                       <select
-                        className="border text-sm border-gray-300 rounded-sm p-2 px-4 bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="border text-sm min-w-[100px] border-gray-300 rounded-sm p-2 px-4 bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         onChange={(e) => {
                           // alert(e.target.value);
                           setStudentCourseData(
@@ -1159,6 +1162,9 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                           </option>
                         ))}
                       </select>
+                      </>
+
+
                     )}
                   </div>
 
@@ -1682,7 +1688,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                             <div className="space-y-2 text-sm">
                               <div className="flex justify-between">
                                 <span className="text-gray-600">
-                                  Previous School :
+                                  Previous School Name :
                                 </span>
                                 <span className="font-medium">
                                   {student.psName || "N/A"}
@@ -1755,7 +1761,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                   amountRef.current.value = "";
                                   remarkRef.current.value = "";
                                 }}
-                                className={`px-8 py-2 rounded-sm transition-all 
+                                className={`px-8 py-2 text-sm rounded-sm transition-all 
                                 ${
                                   secondNavActive === item
                                     ? "bg-blue-500 text-white"
@@ -1902,7 +1908,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                               <div className="overflow-auto">
                                 <table className="w-full min-w-full border text-gray-600 border-gray-300 rounded-sm overflow-hidden shadow-sm">
                                   <thead>
-                                    <tr className="bg-gray-100 text-gray-600 uppercase text-sm ">
+                                    <tr className="bg-gray-100 text-gray-600 uppercase text-sm">
                                       <th className="p-3 text-left border-b font-semibold">
                                         Date
                                       </th>
@@ -1930,16 +1936,16 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                           key={payment._id}
                                           className="odd:bg-white even:bg-gray-50 hover:bg-gray-100 transition"
                                         >
-                                          <td className="p-3 border-b">
+                                          <td className="p-3 border-b min-w-[120px]">
                                             {payment.date}
                                           </td>
-                                          <td className="p-3 border-b">
+                                          <td className="p-3 border-b min-w-[120px]">
                                             {payment.time}
                                           </td>
-                                          <td className="p-3 border-b font-medium text-gray-900">
+                                          <td className="p-3 border-b font-medium min-w-[100px] text-gray-900">
                                             Rs. {payment.amount}
                                           </td>
-                                          <td className="p-3 border-b">
+                                          <td className="p-3 border-b min-w-[120px]">
                                             {school.staffs.find(
                                               (staf) =>
                                                 staf._id === payment.approvedBy
@@ -1948,7 +1954,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                           <td className="p-3 border-b">
                                             {payment.method}
                                           </td>
-                                          <td className="p-3 border-b text-gray-600 italic">
+                                          <td className="p-3 border-b text-gray-600 italic min-w-[120px]">
                                             {payment.remark}
                                           </td>
                                         </tr>
@@ -2496,7 +2502,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                             <label className="block mb-2 text-sm font-medium text-gray-600">
                               Select Book to Return
                             </label>
-                            <select
+                            {/* <select
                               className="w-full p-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
                               onChange={(e) => {
                                 if (!e.target.value) {
@@ -2512,6 +2518,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                               <option value="" selected>
                                 Select a book
                               </option>
+
                               {libraryDetails
                                 .filter(
                                   (book) =>
@@ -2524,7 +2531,47 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                     {book.book}
                                   </option>
                                 ))}
-                            </select>
+
+
+                            </select> */}
+
+
+<select
+  className="w-full p-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+  onChange={(e) => {
+    if (!e.target.value) {
+      return;
+    }
+    
+    setSelectedBooksTaken([
+      ...selectedBooksTaken,
+      e.target.value,
+    ]);
+    
+    // Reset the select element to default value
+    e.target.value = "";
+  }}
+  value="" // Add this to control the component
+>
+  <option value="" selected>
+    Select a book
+  </option>
+  {libraryDetails
+    .filter(
+      (book) =>
+        !selectedBooksTaken.find(
+          (bk) => book._id === bk
+        )
+    )
+    .map((book, index) => (
+      <option key={index} value={book._id}>
+        {book.book}
+      </option>
+    ))}
+</select>
+
+
+
                           </div>
 
                           <div className="mb-5">

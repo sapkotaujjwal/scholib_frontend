@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import "./siteTools.scss";
 import MetaData from "../../layout/MetaData";
 import { useSelector } from "react-redux";
-import Reviews from "./Reviews";
 import Faq from "./Faq";
 import MoreThings from "./MoreThings";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import Reviews2 from "./Reviews2";
 
 const Tools = () => {
   const history = useHistory();
@@ -60,7 +60,7 @@ const Tools = () => {
         </div>
 
         <section className="PagesRendering">
-          {currentPage && currentPage === 1 && <Reviews />}
+          {currentPage && currentPage === 1 && <Reviews2 />}
           {currentPage && currentPage === 2 && <Faq />}
           {currentPage && currentPage === 3 && <MoreThings />}
         </section>

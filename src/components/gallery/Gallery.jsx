@@ -406,10 +406,14 @@ const Gallery = () => {
 
               {galleryData && galleryData.length < 1 && (
                 <>
-                  <p className="h6 text-center py-3 px-3">
+                <div className="mt-[30px] w-full flex1">
+
+                  <p className="text-sm text-center py-3 w-[75%] px-3 bg-gray-300 rounded-md">
                     {" "}
                     No Images Available{" "}
                   </p>
+
+                </div>
                 </>
               )}
 

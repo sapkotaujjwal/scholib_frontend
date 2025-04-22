@@ -58,6 +58,10 @@ const AnalyticsOverview = () => {
       )
         .then((response) => {
           if (response.data.success) {
+
+            console.log(response.data)
+
+
             const paymentData = response.data.data.paymentHistory.map(
               (ind, index) => ({
                 sn: index + 1,

@@ -10,6 +10,7 @@ import {
   POST_CREATE_COURSE_FAIL,
 } from "../../redux/CreateCourse";
 import { SET_ALERT_GLOBAL } from "../../redux/AlertGlobalSlice";
+import { GET_ALL_COURSES_SUCCESS, GET_COURSE, GET_COURSE_FAIL, GET_COURSE_SUCCESS } from "../../redux/CourseSlice";
 
 const EditSubjectTeacher = ({
   data,
@@ -51,6 +52,69 @@ const EditSubjectTeacher = ({
     }));
   };
 
+
+  function updateCourse (){
+
+    dispatch(GET_COURSE());
+
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/basic/${schoolCode}/courses`, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        if (response.data.success) {
+          let courseData = response.data.data.course.map((crc) => ({
+            ...crc,
+            groups: crc.groups.map((grp) => ({
+              ...grp,
+              sections: grp.sections.map((sec) => ({
+                ...sec,
+                subjects: sec.subjects.map((sub) => {
+                  // Find the teacher from the staff list
+                  const teacher = school.staffs.find(
+                    (sta) => sta._id === sub.teacher
+                  );
+                  // Return the updated subject with the teacher assigned
+                  return {
+                    ...sub,
+                    teacher: teacher || null, // Ensure there's a fallback if no teacher is found
+                  };
+                }),
+              })),
+            })),
+          }));
+
+          dispatch(GET_ALL_COURSES_SUCCESS({ course: courseData }));
+
+          let courseDataNew = school.course2.map((item321) => {
+            return courseData.find((crc2) => crc2._id.toString() === item321);
+          });
+
+          courseData = school.course
+            .map((crc) =>
+              courseDataNew.find((crc2) => crc2.courseId === crc._id)
+            )
+            .filter(Boolean);
+
+          dispatch(GET_COURSE_SUCCESS({ course: courseData }));
+        } else {
+          dispatch(GET_COURSE_FAIL(response.data.data));
+        }
+      })
+      .catch((error) => {
+        const data = {
+          message: error.message,
+          status: "Cannot communicate with the server",
+        };
+
+        if (error.response) {
+          dispatch(GET_COURSE_FAIL(error.response.data));
+          return;
+        }
+        dispatch(GET_COURSE_FAIL(data));
+      });
+  }
+
   const handleSubmit = async () => {
     dispatch(POST_CREATE_COURSE());
 
@@ -74,6 +138,7 @@ const EditSubjectTeacher = ({
         dispatch(POST_CREATE_COURSE_SUCCESS(response.data.data));
         dispatch(SET_ALERT_GLOBAL(response.data));
         handleSuccess(currentSection);
+        updateCourse();
         closeFunction();
       } else {
         dispatch(POST_CREATE_COURSE_FAIL(response.data.data));

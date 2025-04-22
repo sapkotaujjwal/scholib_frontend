@@ -36,11 +36,30 @@ const Admission = () => {
       )
       .then((response) => {
         dispatch(SET_SCHOOL_ADMISSIONS(response.data.data));
+        // Update your filter2 state when new admissions data is received
+        setFilter2((prevState) => ({
+          ...prevState,
+          classStudents: response.data.data,
+          admissions: response.data.data,
+        }));
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
+
+  // This useEffect updates filter2 whenever school.admissions changes
+  useEffect(() => {
+    if (school?.admissions) {
+      setFilter2((prevState) => ({
+        ...prevState,
+        classStudents: school.admissions,
+        admissions: sortHere(
+          school.admissions.filter((std) => std.gpa >= prevState.gpa)
+        ),
+      }));
+    }
+  }, [school.admissions]);
 
   const [studentId, setStudentId] = useState(null);
 

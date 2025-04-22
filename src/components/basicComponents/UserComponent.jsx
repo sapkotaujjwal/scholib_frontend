@@ -137,7 +137,14 @@ const UserComponent = ({ closeUserComponent }) => {
   const componentRef = useRef(null);
 
   const handleClickOutside = (event) => {
-    // Check if the click is outside the dropdown
+    const headerParent = document.getElementById("headerParent");
+    const isChildOfHeaderParent =
+      headerParent && headerParent.contains(event.target);
+
+    if (isChildOfHeaderParent) {
+      return;
+    } 
+
     if (componentRef.current && !componentRef.current.contains(event.target)) {
       closeUserComponent();
     }
@@ -246,11 +253,13 @@ const UserComponent = ({ closeUserComponent }) => {
                         (obj) => obj._id === studentData.course.class
                       ).class.length > 3
                         ? course.find(
-                          (obj) => obj._id === studentData.course.class
-                        ).class
-                        : `Class : ${course.find(
-                          (obj) => obj._id === studentData.course.class
-                        ).class}`}
+                            (obj) => obj._id === studentData.course.class
+                          ).class
+                        : `Class : ${
+                            course.find(
+                              (obj) => obj._id === studentData.course.class
+                            ).class
+                          }`}
 
                       {course.find(
                         (obj) => obj._id === studentData.course.class

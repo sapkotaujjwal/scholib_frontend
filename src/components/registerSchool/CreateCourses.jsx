@@ -433,7 +433,7 @@ const CreateCourses = ({ data, id, closeFunction = () => {} }) => {
                             </div>
 
                             <div>
-                              <p>Sections:</p>
+                              <p>Sections :</p>
                               <div className="title">
                                 <div
                                   className="contents"
@@ -474,7 +474,7 @@ const CreateCourses = ({ data, id, closeFunction = () => {} }) => {
 
                             <div className="grouping">
                               <input
-                                className="inputAdv"
+                                className="inputAdv "
                                 type="text"
                                 placeholder="Add a new section"
                                 id={`sectionid235273${groupIndex}`}

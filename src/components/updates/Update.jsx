@@ -13,10 +13,13 @@ import { SET_BIGIMAGE } from "../../redux/BigImageSlice";
 
 // Confirmation Dialog Component
 const ConfirmDialog = ({ onConfirm, onCancel }) => (
-  <div className="fixed inset-0 bg-gray-300  flex items-center justify-center" style={{zIndex: 10000}}>
+  <div
+    className="fixed inset-0 bg-gray-300/40 backdrop-blur-md flex items-center justify-center"
+    style={{ zIndex: 10000 }}
+  >
     <div className="bg-white rounded-lg p-6 max-w-sm w-full mx-4">
-      <h3 className="text-xl font-semibold mb-4">Confirm Update Deletion</h3>
-      <p className="text-gray-600 mb-6">
+      <h3 className="text-xl font-semibold mb-4 ">Confirm Update Deletion</h3>
+      <p className="text-gray-600 mb-6 ">
         Are you sure you want to delete this update?
       </p>
       <div className="flex justify-end space-x-3">
@@ -110,7 +113,6 @@ const Update = ({ update }) => {
       dispatch(SET_BIGIMAGE(object));
     }
   }
-
 
   return (
     <>

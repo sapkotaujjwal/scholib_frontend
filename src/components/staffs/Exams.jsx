@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import MetaData from "../layout/MetaData";
 import axios from "axios";
 import { SET_ALERT_GLOBAL } from "../../redux/AlertGlobalSlice";
-import Dropdown from "../basicComponents/Dropdown";
 import AllClasses from "./admin/AllClasses";
 import GeneratePDF from "../layout/GeneratePDF";
 import ExamMarks from "./ExamMarks";

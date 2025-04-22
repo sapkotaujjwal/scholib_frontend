@@ -144,12 +144,12 @@ const AttendanceNew = ({
     "Chaitra", // Chaitra
   ];
 
-  console.log(date ,
-    formatDateString(
-      calenderDate.year,
-      calenderDate.month,
-      calenderDate.day
-    ))
+  // console.log(date ,
+  //   formatDateString(
+  //     calenderDate.year,
+  //     calenderDate.month,
+  //     calenderDate.day
+  //   ))
 
   return (
     <div className="allWrapupAttendanceNew">
@@ -351,9 +351,7 @@ const AttendanceNew = ({
                     "aspect-square flex items-center justify-center rounded-lg text-sm";
                   let dayStyle = {};
 
-                  if (isToday) {
-                    dayClasses += " bg-green-500 text-white";
-                  } else if (isFuture) {
+                  if (isFuture) {
                     dayClasses += " text-gray-300 cursor-not-allowed";
                   } else if (!isWorkDay) {
                     dayStyle = {

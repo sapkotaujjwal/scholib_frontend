@@ -169,6 +169,7 @@ const Attendance = () => {
 
         if (response.data.success) {
           dispatch(SET_ALERT_GLOBAL(response.data));
+          getStudents()
         } else {
           dispatch(SET_ALERT_GLOBAL(response.data));
         }

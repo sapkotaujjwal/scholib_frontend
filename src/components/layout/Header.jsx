@@ -29,6 +29,7 @@ const Header = () => {
     toggleNavbar();
   };
 
+
   const handleUserClick = () => {
 
     setuserComponent(!userComponent);
@@ -126,8 +127,12 @@ const Header = () => {
 
           {user && user.schoolCode == schoolCode && (
             <div
+            id="headerParent"
               className="user_div flex1"
-              onClick={() => handleUserClick()}
+              onClick={() => {
+                  handleUserClick()
+              }
+                }
               style={{ cursor: "pointer" }}
             >
               <div className="image">
@@ -157,6 +162,8 @@ const Header = () => {
             </div>
           )}
         </div>
+
+
       </div>
     </div>
   );

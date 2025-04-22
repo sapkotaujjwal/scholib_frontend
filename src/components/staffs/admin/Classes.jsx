@@ -12,7 +12,6 @@ import AllClasses from "./AllClasses";
 import axios from "axios";
 import { SET_ALERT_GLOBAL } from "../../../redux/AlertGlobalSlice";
 import EditSubjectTeacher from "../../registerSchool/EditSubjectTeacher";
-import { UPDATE_COURSE_SECTION } from "../../../redux/CourseSlice";
 
 const Classes = () => {
   const courses = useSelector((state) => state.Course.course.payload.course);
@@ -116,6 +115,33 @@ const Classes = () => {
   ) {
     document.body.classList.remove("dshauda-hidden321");
   }
+
+
+  // Add this useEffect to update currentClass when courses changes
+useEffect(() => {
+  if (courses.length > 0) {
+    // Find the current course ID in the updated courses array
+    if (currentClass) {
+      const updatedCourse = courses.find(course => course._id === currentClass._id);
+      if (updatedCourse) {
+        setCurrentClass(updatedCourse);
+      } else {
+        // If current course no longer exists, default to first course
+        setCurrentClass(courses[0]);
+      }
+    } else {
+      setCurrentClass(courses[0]);
+    }
+  }
+}, [courses]);
+
+// Update allSections useEffect to properly depend on currentClass
+useEffect(() => {
+  if (currentClass) {
+    const sectionIds = getAllSectionIds();
+    setAllSections(sectionIds);
+  }
+}, [currentClass]);
 
   return (
     <>

@@ -121,6 +121,7 @@ const Header = (props) => {
 
           {user && (
             <div
+                        id="headerParent"
               className="user_div flex1"
               onClick={handleUserClick}
               style={{ cursor: "pointer" }}

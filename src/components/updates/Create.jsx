@@ -23,7 +23,7 @@ const Create = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
-    textAreaRef.current.focus();
+    // textAreaRef.current.focus();
     dsudwsu();
   }, [dsudwsu]);
 

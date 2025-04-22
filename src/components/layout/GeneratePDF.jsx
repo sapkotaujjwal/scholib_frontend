@@ -530,6 +530,7 @@ const GeneratePDF = ({ data, generate = false, closePrint = () => {} }) => {
   };
 
 
+
   if (generate) {
     generatePdf();
     closePrint();

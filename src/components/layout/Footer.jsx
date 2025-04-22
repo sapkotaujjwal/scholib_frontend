@@ -13,6 +13,7 @@ import {
   faLocationDot,
   faPhone,
 } from "@fortawesome/free-solid-svg-icons";
+import Reviews from "../staffs/admin/Reviews";
 
 const SocialIcon = ({ href, icon }) => {
   if (!href) return null;
@@ -136,7 +137,7 @@ const Footer = () => {
 
             {/* Social Media */}
             <div>
-              <h3 className="text-white font-semibold text-lg mb-6 ">
+              <h3 className="text-white text-center font-semibold text-lg mb-6 ">
                 Connect With Us
               </h3>
               <div className="grid grid-cols-4 gap-4">
@@ -153,6 +154,12 @@ const Footer = () => {
         </div>
 
         {/* review Section */}
+
+        <hr className="border-blue-600" />
+
+
+
+        <Reviews/>
 
 
         {/* Scholib Section */}
@@ -189,7 +196,7 @@ const Footer = () => {
                 </div>
                 <a
                   href="https://scholib.com"
-                  className="px-6 text-center py-2.5 min-w-[300px] bg-white text-blue-900 rounded-lg hover:bg-gray-700 transition-colors duration-300 text-sm font-semibold shadow-lg"
+                  className="px-6 text-center py-2.5 min-w-[300px] bg-white text-blue-900 rounded-lg hover:bg-gray-200 transition-colors duration-300 text-sm font-semibold shadow-lg"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

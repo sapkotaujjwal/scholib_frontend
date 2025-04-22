@@ -52,7 +52,8 @@ const ExamMarks = ({ students, newMarks, setNewMarks, updateExamInfo }) => {
                         {index + 1}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {students.find((std) => std._id === obj.student)?.name || 'N/A'}
+                        {students.find((std) => std._id === obj.student)
+                          ?.name || "N/A"}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-center">
                         <input
@@ -157,14 +158,27 @@ const ExamMarks = ({ students, newMarks, setNewMarks, updateExamInfo }) => {
               </label>
               <input
                 type="text"
-                value={newMarks.fullMarks || ""}
+                value={
+                  newMarks.fullMarks === null
+                    ? ""
+                    : newMarks.fullMarks.toString()
+                }
                 className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 onChange={(e) => {
                   const value = e.target.value;
-                  const numericValue =
-                    value === "" ? null : parseInt(value, 10);
-                  if (isNaN(numericValue)) return;
-                  setNewMarks({ ...newMarks, fullMarks: numericValue });
+                  // Handle empty input
+                  if (value === "") {
+                    setNewMarks({ ...newMarks, fullMarks: null });
+                    return;
+                  }
+
+                  // Parse the input value
+                  const numericValue = parseInt(value, 10);
+
+                  // Check if it's a valid number (including 0)
+                  if (!isNaN(numericValue)) {
+                    setNewMarks({ ...newMarks, fullMarks: numericValue });
+                  }
                 }}
               />
             </div>
@@ -172,16 +186,30 @@ const ExamMarks = ({ students, newMarks, setNewMarks, updateExamInfo }) => {
               <label className="block text-sm font-medium text-gray-700">
                 Practical
               </label>
+
               <input
                 type="text"
-                value={newMarks.fullMarks2 || ""}
+                value={
+                  newMarks.fullMarks2 === null
+                    ? ""
+                    : newMarks.fullMarks2.toString()
+                }
                 className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 onChange={(e) => {
                   const value = e.target.value;
-                  const numericValue =
-                    value === "" ? null : parseInt(value, 10);
-                  if (isNaN(numericValue)) return;
-                  setNewMarks({ ...newMarks, fullMarks2: numericValue });
+                  // Handle empty input
+                  if (value === "") {
+                    setNewMarks({ ...newMarks, fullMarks2: null });
+                    return;
+                  }
+
+                  // Parse the input value
+                  const numericValue = parseInt(value, 10);
+
+                  // Check if it's a valid number (including 0)
+                  if (!isNaN(numericValue)) {
+                    setNewMarks({ ...newMarks, fullMarks2: numericValue });
+                  }
                 }}
               />
             </div>

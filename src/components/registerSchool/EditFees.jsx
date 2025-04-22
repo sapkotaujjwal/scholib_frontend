@@ -9,7 +9,7 @@ import {
 import { SET_ALERT_GLOBAL } from "../../redux/AlertGlobalSlice";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faTrash } from "@fortawesome/free-solid-svg-icons";
 import Error from "../layout/error";
 import { UPDATE_COURSE_FEES } from "../../redux/HomeSlice";
 
@@ -72,6 +72,14 @@ const EditFees = ({ data, closeFunction = () => {} }) => {
     });
   };
 
+  const deleteFee = (index) => {
+    setCourseInfo((prev) => {
+      const newFees = [...prev.fees];
+      newFees.splice(index, 1); // Remove the fee at the specified index
+      return { ...prev, fees: newFees };
+    });
+  };
+
   return (
     <div
       className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
@@ -122,6 +130,12 @@ const EditFees = ({ data, closeFunction = () => {} }) => {
                     className="w-32 rounded-md border border-gray-300 p-2 focus:border-blue-500 focus:outline-none"
                     placeholder="Amount"
                   />
+                  <button
+                    className="bg-red-500 p-2 text-white hover:bg-red-600 rounded-2xl"
+                    onClick={() => deleteFee(index)}
+                  >
+                    <FontAwesomeIcon icon={faTrash} />
+                  </button>
                 </div>
               ))}
             </div>
