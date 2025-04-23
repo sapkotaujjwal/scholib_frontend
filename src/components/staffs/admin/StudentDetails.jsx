@@ -602,16 +602,6 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
     return totalAmt;
   }
 
-  function findAmountLeft() {
-    return (
-      findTotalFee() -
-      studentCourseData.paymentHistory.reduce(
-        (acc, hist) => acc + hist.amount,
-        0
-      )
-    );
-  }
-
   function findSectionByExamId(data, examId) {
     for (const course of data) {
       for (const group of course.groups) {
@@ -818,6 +808,12 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
     };
   }, []);
 
+  useEffect(() => {
+    document
+      .getElementById("studentDetailsContainer")
+      ?.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage]);
+
   return (
     <div className="noBootstrap">
       {studentCourseData && (
@@ -838,13 +834,20 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
 
           {student && !busStatus && !classInfo && !editStudent && (
             <div className="flex">
-
-<div className="topNav flex items-center justify-between lg:hidden w-full h-16 bg-gray-800 fixed z-10 px-6 top-0 left-0 text-white shadow-md">
- <button onClick={()=> setMainNav(true)}> <p className="text-2xl font-semibold cursor-pointer hover:text-gray-300 transition mb-0"><FontAwesomeIcon icon={faBars} /></p> </button>
- <button onClick={()=> closeFunction()}> <p className="text-md font-semibold cursor-pointer hover:text-gray-300 transition mb-0">Close</p> </button>
-</div>
-
-
+              <div className="topNav flex items-center justify-between lg:hidden w-full h-16 bg-gray-800 fixed z-10 px-6 top-0 left-0 text-white shadow-md">
+                <button onClick={() => setMainNav(true)}>
+                  {" "}
+                  <p className="text-2xl font-semibold cursor-pointer hover:text-gray-300 transition mb-0">
+                    <FontAwesomeIcon icon={faBars} />
+                  </p>{" "}
+                </button>
+                <button onClick={() => closeFunction()}>
+                  {" "}
+                  <p className="text-md font-semibold cursor-pointer hover:text-gray-300 transition mb-0">
+                    Close
+                  </p>{" "}
+                </button>
+              </div>
 
               {/* <!-- Sidebar --> */}
 
@@ -861,7 +864,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                   <li
                     onClick={() => {
                       setCurrentPage(1);
-                      setMainNav(false)
+                      setMainNav(false);
                     }}
                     className={`mb-4 p-3 rounded-md cursor-pointer hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105 hover:text-white ${
                       currentPage === 1 ? "bg-blue-700" : "bg-gray-700"
@@ -872,7 +875,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                   <li
                     onClick={() => {
                       setCurrentPage(2);
-                      setMainNav(false)
+                      setMainNav(false);
                     }}
                     className={`mb-4 p-3 rounded-md cursor-pointer hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105 hover:text-white ${
                       currentPage === 2 ? "bg-blue-700" : "bg-gray-700"
@@ -883,7 +886,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                   <li
                     onClick={() => {
                       setCurrentPage(3);
-                      setMainNav(false)
+                      setMainNav(false);
                     }}
                     className={`mb-4 p-3 rounded-md cursor-pointer hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105 hover:text-white ${
                       currentPage === 3 ? "bg-blue-700" : "bg-gray-700"
@@ -894,7 +897,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                   <li
                     onClick={() => {
                       setCurrentPage(4);
-                      setMainNav(false)
+                      setMainNav(false);
                     }}
                     className={`mb-4 p-3 rounded-md cursor-pointer hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105 hover:text-white ${
                       currentPage === 4 ? "bg-blue-700" : "bg-gray-700"
@@ -1139,32 +1142,29 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                       )}
 
                     {true && (
-
                       <>
-                      
-                      <select
-                        className="border text-sm min-w-[100px] border-gray-300 rounded-sm p-2 px-4 bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        onChange={(e) => {
-                          // alert(e.target.value);
-                          setStudentCourseData(
-                            studentMainData.session.find(
-                              (ses) => ses.courseId == e.target.value
-                            )
-                          );
-                        }}
-                      >
-                        {studentMainData.session.map((session, index) => (
-                          <option key={index} value={session.courseId}>
-                            {
-                              course.find((crc) => crc._id === session.courseId)
-                                .class
-                            }
-                          </option>
-                        ))}
-                      </select>
+                        <select
+                          className="border text-sm min-w-[100px] border-gray-300 rounded-sm p-2 px-4 bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          onChange={(e) => {
+                            // alert(e.target.value);
+                            setStudentCourseData(
+                              studentMainData.session.find(
+                                (ses) => ses.courseId == e.target.value
+                              )
+                            );
+                          }}
+                        >
+                          {studentMainData.session.map((session, index) => (
+                            <option key={index} value={session.courseId}>
+                              {
+                                course.find(
+                                  (crc) => crc._id === session.courseId
+                                ).class
+                              }
+                            </option>
+                          ))}
+                        </select>
                       </>
-
-
                     )}
                   </div>
 
@@ -2535,43 +2535,39 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
 
                             </select> */}
 
+                            <select
+                              className="w-full p-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+                              onChange={(e) => {
+                                if (!e.target.value) {
+                                  return;
+                                }
 
-<select
-  className="w-full p-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
-  onChange={(e) => {
-    if (!e.target.value) {
-      return;
-    }
-    
-    setSelectedBooksTaken([
-      ...selectedBooksTaken,
-      e.target.value,
-    ]);
-    
-    // Reset the select element to default value
-    e.target.value = "";
-  }}
-  value="" // Add this to control the component
->
-  <option value="" selected>
-    Select a book
-  </option>
-  {libraryDetails
-    .filter(
-      (book) =>
-        !selectedBooksTaken.find(
-          (bk) => book._id === bk
-        )
-    )
-    .map((book, index) => (
-      <option key={index} value={book._id}>
-        {book.book}
-      </option>
-    ))}
-</select>
+                                setSelectedBooksTaken([
+                                  ...selectedBooksTaken,
+                                  e.target.value,
+                                ]);
 
-
-
+                                // Reset the select element to default value
+                                e.target.value = "";
+                              }}
+                              value="" // Add this to control the component
+                            >
+                              <option value="" selected>
+                                Select a book
+                              </option>
+                              {libraryDetails
+                                .filter(
+                                  (book) =>
+                                    !selectedBooksTaken.find(
+                                      (bk) => book._id === bk
+                                    )
+                                )
+                                .map((book, index) => (
+                                  <option key={index} value={book._id}>
+                                    {book.book}
+                                  </option>
+                                ))}
+                            </select>
                           </div>
 
                           <div className="mb-5">

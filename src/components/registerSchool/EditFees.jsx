@@ -104,12 +104,12 @@ const EditFees = ({ data, closeFunction = () => {} }) => {
 
         {!loading && !error && (
           <>
-            <h5 className="text-xl font-semibold text-center mb-4">
+            <h5 className="text-xl font-semibold text-center mb-2">
               Edit Fee Structure
             </h5>
 
-            <p className=" text-red-600 text-center mb-3 text-sm">
-              Make sure to specify all amounts on a yearly basis
+            <p className=" text-red-500 text-center w300 mb-4 text-sm">
+              Make sure to specify all amounts on a yearly basis..
             </p>
 
             {/* Fee List */}

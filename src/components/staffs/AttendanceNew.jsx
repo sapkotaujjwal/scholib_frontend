@@ -3,9 +3,11 @@ import "./attendanceNew.scss";
 import {
   faCaretLeft,
   faCaretRight,
+  faCheckCircle,
   faCircleCheck,
   faFaceFrown,
   faGraduationCap,
+  faTimesCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from "react-redux";
@@ -57,7 +59,10 @@ const AttendanceNew = ({
 
   // Format date for comparison
   const formatDateString = (year, month, day) => {
-    return `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    return `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(
+      2,
+      "0"
+    )}`;
   };
 
   const handleStatusChange = (id, status) => {
@@ -157,6 +162,41 @@ const AttendanceNew = ({
         <div className="main-content flex1">
           <div className="attendance-table">
             <hr />
+
+            <div className="bg-white rounded-xl shadow-md p-4 mb-4 border border-gray-200">
+              <div className="flex items-center justify-between">
+                <p className="font-semibold text-gray-700 text-base mb-0">
+                  Status :
+                </p>
+                <div className="flex items-center gap-2">
+                  {workingDates.includes(
+                    formatDateString(
+                      calenderDate.year,
+                      calenderDate.month,
+                      calenderDate.day
+                    )
+                  ) ? (
+                    <>
+                      <FontAwesomeIcon
+                        icon={faCheckCircle}
+                        className="text-green-500 text-lg"
+                      />
+                      <span className="font-medium text-green-600">Taken</span>
+                    </>
+                  ) : (
+                    <>
+                      <FontAwesomeIcon
+                        icon={faTimesCircle}
+                        className="text-red-500 text-lg"
+                      />
+                      <span className="font-medium text-red-600">
+                        Not Taken
+                      </span>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
 
             {!(
               workingDates.includes(
@@ -353,7 +393,7 @@ const AttendanceNew = ({
 
                   if (isFuture) {
                     dayClasses += " text-gray-300 cursor-not-allowed";
-                  } else if (!isWorkDay) {
+                  } else if (!isWorkDay && !isToday) {
                     dayStyle = {
                       backgroundColor: isSelectedDay ? "#b91c1c" : "",
                       color: isSelectedDay ? "white" : "#dc2626",
@@ -361,7 +401,7 @@ const AttendanceNew = ({
                   } else {
                     dayClasses += isSelectedDay
                       ? " bg-blue-500 text-white"
-                      : " text-gray-700";
+                      : " text-green-700";
                   }
 
                   return (

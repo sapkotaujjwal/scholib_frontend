@@ -184,7 +184,7 @@ const Students = () => {
       />
 
       {currentStudent && (
-        <div className="student-details-container2212 custom-scrollbar">
+        <div id="studentDetailsContainer" className="student-details-container2212 custom-scrollbar">
           <StudentDetails
             _id={currentStudent}
             students={students}

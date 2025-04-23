@@ -169,7 +169,11 @@ const Attendance = () => {
 
         if (response.data.success) {
           dispatch(SET_ALERT_GLOBAL(response.data));
-          getStudents()
+
+          setCurrentSection((prevSection) => ({
+            ...prevSection,
+            workingDates: [...prevSection.workingDates, date],
+          }));
         } else {
           dispatch(SET_ALERT_GLOBAL(response.data));
         }
@@ -301,16 +305,17 @@ const Attendance = () => {
       {courses && courses.length > 0 && (
         <div className="inside-content">
           <div className="centerOne">
-
-
             <div
               className="shadow1 py-4
             flex1 justify-end"
             >
               <div className="mt-3 flex gap-4 w-full min-w-[60%] max-w-[100%] mx-3 flex-wrap px-[2%]">
-                <div className="flex-1 flex items-center" style={{flexBasis: '250px'}}>
+                <div
+                  className="flex-1 flex items-center"
+                  style={{ flexBasis: "250px" }}
+                >
                   <label className="font-medium mr-2 mb-0">Class :</label>
-                  <div className="relative flex-1"  >
+                  <div className="relative flex-1">
                     <select
                       className="w-full px-3 py-2 border rounded-md appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-[150px]"
                       value={currentClass?._id || ""}
@@ -333,7 +338,10 @@ const Attendance = () => {
                   </div>
                 </div>
 
-                <div className="flex-1 flex items-center" style={{flexBasis: '250px'}}>
+                <div
+                  className="flex-1 flex items-center"
+                  style={{ flexBasis: "250px" }}
+                >
                   <label className="font-medium mr-2 mb-0">Section :</label>
                   <div className="relative flex-1">
                     <select

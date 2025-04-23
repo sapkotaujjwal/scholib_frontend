@@ -140,7 +140,7 @@ const Footer = () => {
               <h3 className="text-white text-center font-semibold text-lg mb-6 ">
                 Connect With Us
               </h3>
-              <div className="grid grid-cols-4 gap-4">
+              <div className="grid grid-cols-4 gap-4 max-w-[80%] mx-auto">
                 <SocialIcon href={school?.social?.facebook} icon={faFacebook} />
                 <SocialIcon
                   href={school?.social?.instagram}
