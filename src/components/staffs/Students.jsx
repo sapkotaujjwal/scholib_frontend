@@ -35,7 +35,7 @@ const Students = () => {
 
   if (currentStudent) {
     document.body.classList.add("dshauda-hidden322");
-  } else {
+  } if(!currentStudent) {
     document.body.classList.remove("dshauda-hidden322");
   }
 
@@ -359,6 +359,8 @@ const Students = () => {
           )}
         </div>
       </div>
+
+      
     </div>
   );
 };

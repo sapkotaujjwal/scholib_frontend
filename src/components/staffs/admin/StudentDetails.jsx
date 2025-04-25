@@ -21,6 +21,7 @@ import {
   faCoins,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
+import Loading from "../../layout/loading";
 
 const StudentDetails = ({ _id, students, year, closeFunction }) => {
   const school = useSelector((state) => state.Home.school.payload);
@@ -63,6 +64,9 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
         }
       )
       .then((response) => {
+
+
+
         if (response.data.success) {
           const response1 = response.data.data;
 
@@ -102,6 +106,10 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
         }
       )
       .then((response) => {
+
+
+
+
         if (response.data.success) {
           response.data.data.course = StudentCourseInfo;
 
@@ -172,12 +180,6 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
   const [busStatus, setBusStatus] = useState(false);
   const [classInfo, setClassInfo] = useState(false);
   const cancelFeeRef = useRef(null);
-
-  if (busStatus || classInfo) {
-    document.body.classList.add("dshauda-hidden");
-  } else if (!busStatus && !classInfo) {
-    document.body.classList.remove("dshauda-hidden");
-  }
 
   function handlePayFees() {
     const remark = remarkRef.current.value;
@@ -814,8 +816,10 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
       ?.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentPage]);
 
+
   return (
     <div className="noBootstrap">
+
       {studentCourseData && (
         <>
           {!student && (
@@ -2651,6 +2655,9 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
           </div>
         </>
       )}
+
+
+
     </div>
   );
 };
