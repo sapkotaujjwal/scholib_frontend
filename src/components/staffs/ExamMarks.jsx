@@ -192,7 +192,7 @@ const ExamMarks = ({ students, newMarks, setNewMarks, updateExamInfo }) => {
                 value={
                   newMarks.fullMarks2 === null
                     ? ""
-                    : newMarks.fullMarks2.toString()
+                    : newMarks.fullMarks2?.toString()
                 }
                 className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 onChange={(e) => {

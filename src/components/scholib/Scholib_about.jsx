@@ -87,7 +87,7 @@ const Scholib_about = () => {
             </section>
           </section>
 
-          <section className="team">
+          <section className="team applyBootstrap">
             <h3 className="h4 w500 my-4 text-center">
               Meet our <span style={{ color: "#00BDD6" }}> Team </span>
             </h3>

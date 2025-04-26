@@ -3,7 +3,7 @@ import School from "./school";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Scholib from "./scholib/Scholib";
 import Login from "./layout/Login";
-import { GET_USER, GET_USER_SUCCESS, ERROR_REMOVE } from "../redux/UserSlice";
+import { GET_USER, GET_USER_SUCCESS, ERROR_REMOVE, GET_USER_FAIL } from "../redux/UserSlice";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -45,6 +45,7 @@ function App() {
           message: error.message,
           status: "Cannot communicate with the server",
         };
+        dispatch(GET_USER_FAIL(data));
 
         if (error.response) {
           // dispatch(GET_SCHOLIB_FAIL(error.response.data));
