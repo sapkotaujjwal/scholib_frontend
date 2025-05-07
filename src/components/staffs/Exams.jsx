@@ -579,9 +579,9 @@ const Exams = () => {
 
           {currentSubject && (
             <div className="each flex1 justify-end mb-3 pt-2 flex-wrap-reverse flex-grow-1 mt-3">
-              <div className="flex1 mr-3 mt-3">
+              <div className="flex1 mr-3 mt-3 ">
 
-                <p className="text-sm mb-0 w500 text-gray-500 mr-2"> Subject :</p>
+                <p className="text-md mb-0 w500 text-gray-600 mr-2 w-28"> Subject : </p>
                 <Dropdown2
                   title={currentSubject.subject}
                   options={allSubjects.map((each) => {

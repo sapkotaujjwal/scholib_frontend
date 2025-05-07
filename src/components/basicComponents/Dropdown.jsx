@@ -6,11 +6,11 @@ import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 const Dropdown = ({
   options = [
     {
-      title: "Option 1",
+      label: "Option 1",
       value: "Value 1",
     },
     {
-      title: "Option 2",
+      label: "Option 2",
       value: "Value 2",
     },
   ],
@@ -69,12 +69,9 @@ const Dropdown = ({
             <ul>
               {/* Map options to list items */}
               {options.map((obj, index) => (
-
                 <li key={index} className="each" onClick={handleSelect(index)}>
                   <p className="text-center py-2">{obj.label}</p>
                 </li>
-                
-
               ))}
             </ul>
           ) : (
@@ -85,11 +82,7 @@ const Dropdown = ({
         </div>
       )}
     </div>
-
   );
 };
 
 export default Dropdown;
-
-
-

@@ -198,8 +198,8 @@ const CreateCourses = ({ data, id, closeFunction = () => {} }) => {
             </div> */}
 
             <div
-              className={`individual flex1 ${progress === 3 ? "active" : ""}`}
-              onClick={() => setProgress(3)}
+              className={`individual flex1 ${progress === 2 ? "active" : ""}`}
+              onClick={() => setProgress(2)}
             >
               <div className="circle flex1"> 2 </div>
               <p className="h6"> Fees Info </p>
@@ -474,11 +474,11 @@ const CreateCourses = ({ data, id, closeFunction = () => {} }) => {
 
                             <div className="grouping">
                               <input
-                                className="inputAdv "
+                                className="inputAdv bg-gray-600 "
                                 type="text"
                                 placeholder="Add a new section"
                                 id={`sectionid235273${groupIndex}`}
-                                style={{ backgroundColor: "#CCCBCB" }}
+                                
                                 onKeyDown={(e) => {
                                   if (e.key === "Enter") {
                                     e.preventDefault(); // Prevent default Enter key behavior (e.g., form submission).
@@ -714,7 +714,7 @@ const CreateCourses = ({ data, id, closeFunction = () => {} }) => {
               </div>
             )}
 
-            {progress === 2 && (
+            {/* {progress === 2 && (
               <div className="form-content6">
                 <div className="each width4">
                   <p> Section </p>
@@ -737,9 +737,9 @@ const CreateCourses = ({ data, id, closeFunction = () => {} }) => {
                   />
                 </div>
               </div>
-            )}
+            )} */}
 
-            {progress === 3 && (
+            {progress === 2 && (
               <div className="form-content6">
                 <p
                   className="h7 text-center text-danger px-2"
@@ -826,10 +826,10 @@ const CreateCourses = ({ data, id, closeFunction = () => {} }) => {
               </button>
             )}
 
-            {progress !== 3 && (
+            {progress !== 2 && (
               <button
                 onClick={() => {
-                  if (progress < 3) {
+                  if (progress < 2) {
                     setProgress(progress + 1);
                   }
                 }}
@@ -840,7 +840,7 @@ const CreateCourses = ({ data, id, closeFunction = () => {} }) => {
               </button>
             )}
 
-            {progress === 3 && (
+            {progress === 2 && (
               <button
                 style={{ backgroundColor: "#00BDD6" }}
                 onClick={() => handleSubmit()}

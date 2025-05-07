@@ -319,706 +319,721 @@ const Admission = () => {
   }
 
   return (
-    <>
 
-    <div className="applyBootstrap">
-      {loading && <Loading />}
-      {studentAdmission && (
-        <Success
-          closeSuccess={() => {
-            setStudent(sampleSt);
-            dispatch(CLEAR_STUDENT_ADMISSION_DATA());
-          }}
-          data={{
-            status: studentAdmission.status,
-            message: studentAdmission.message,
-          }}
-        />
-      )}
-      {error && (
-        <Error
-          status={error.status}
-          message={error.message}
-          errorRemove={() => dispatch(ERROR_REMOVE())}
-        />
-      )}
+    <div className="">
+     <>
+      <div className="applyBootstrap">
+        {loading && <Loading />}
+        {studentAdmission && (
+          <Success
+            closeSuccess={() => {
+              setStudent(sampleSt);
+              dispatch(CLEAR_STUDENT_ADMISSION_DATA());
+            }}
+            data={{
+              status: studentAdmission.status,
+              message: studentAdmission.message,
+            }}
+          />
+        )}
+        {error && (
+          <Error
+            status={error.status}
+            message={error.message}
+            errorRemove={() => dispatch(ERROR_REMOVE())}
+          />
+        )}
 
-      {!studentAdmission && !loading && !error && (
-        <div className="ufevndsybds676">
-          <MetaData title={`${school.sName} || Admission `} />
+        {!studentAdmission && !loading && !error && (
+          <div className="ufevndsybds676">
+            <MetaData title={`${school.sName} || Admission `} />
 
-          <div className="main">
-            <section className="top">
-              <div className="element flex1">
-                <img src={formImg} alt="" />
-              </div>
+            <div className="main">
+              <section className="top">
+                <div className="element flex1">
+                  <img src={formImg} alt="" />
+                </div>
 
-              <div className="element">
-                <p className="h5 w600 heading text-center">
+                <div className="element">
+                  <p className="h5 w600 heading text-center">
+                    {" "}
+                    Form Instructions{" "}
+                  </p>
+
+                  <div
+                    className="instructions d-flex mt-4"
+                    style={{ width: "90%", flexDirection: "column" }}
+                  >
+                    {formInstructions.map((instruction, index) => (
+                      <div key={index} className="instruction-item">
+                        <FontAwesomeIcon
+                          icon={faCircleCheck}
+                          className="mx-2"
+                        />
+                        <p className="h6"> {instruction}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+
+              <div className="line"></div>
+
+              <section className="middle">
+                <p className="h5 w600 text-center f3"> Here To Go </p>
+                <p className="h6 w400 text-center f2 mx-4 my-4 text-secondary">
                   {" "}
-                  Form Instructions{" "}
+                  You can fill this form and pay the form charge and you will be
+                  admitted to {school.name} and your student id, school code and
+                  password will be sent to your phone number you provided in the
+                  form and you can login through scholib app or from schools
+                  website......{" "}
+                </p>
+              </section>
+
+              <div className="line"></div>
+
+              {/* for that legendary form component */}
+
+              <div className="our-form3636" ref={scrollRef}>
+                <p className="h5 w600 text-center" style={{ color: "#01BCD6" }}>
+                  {" "}
+                  Admission Form{" "}
                 </p>
 
-                <div
-                  className="instructions d-flex mt-4"
-                  style={{ width: "90%", flexDirection: "column" }}
-                >
-                  {formInstructions.map((instruction, index) => (
-                    <div key={index} className="instruction-item">
-                      <FontAwesomeIcon icon={faCircleCheck} className="mx-2" />
-                      <p className="h6"> {instruction}</p>
+                <div className="cProgress flex1 custom-scrollbar">
+                  <div
+                    className={`individual flex1 ${
+                      progress === 1 ? "active" : ""
+                    }`}
+                    onClick={() => setProgress(1)}
+                  >
+                    <div className="circle flex1"> 1 </div>
+                    <p className="h6"> Student Info</p>
+                    <p className="h6" style={{ color: "#434954" }}>
+                      {" "}
+                      {">"}{" "}
+                    </p>
+                  </div>
+
+                  <div
+                    className={`individual flex1 ${
+                      progress === 2 ? "active" : ""
+                    }`}
+                    onClick={() => setProgress(2)}
+                  >
+                    <div className="circle flex1"> 2 </div>
+                    <p className="h6"> Parent's Info</p>
+                    <p className="h6" style={{ color: "#434954" }}>
+                      {" "}
+                      {">"}{" "}
+                    </p>
+                  </div>
+
+                  <div
+                    className={`individual flex1 ${
+                      progress === 3 ? "active" : ""
+                    }`}
+                    onClick={() => setProgress(3)}
+                  >
+                    <div className="circle flex1"> 3 </div>
+                    <p className="h6"> Documents </p>
+                  </div>
+                </div>
+
+                {progress === 1 && (
+                  <div className="form-content6">
+                    <div className="each width2">
+                      <p> Full Name * </p>
+                      <input
+                        type="text"
+                        name=""
+                        value={student.name}
+                        placeholder="Mark Doe"
+                        onChange={(event) =>
+                          setStudent({ ...student, name: event.target.value })
+                        }
+                      />
                     </div>
-                  ))}
-                </div>
-              </div>
-            </section>
 
-            <div className="line"></div>
+                    <div className="each width1">
+                      <p> DOB (BS) y/m/d *</p>
 
-            <section className="middle">
-              <p className="h5 w600 text-center f3"> Here To Go </p>
-              <p className="h6 w400 text-center f2 mx-4 my-4 text-secondary">
-                {" "}
-                You can fill this form and pay the form charge and you will be
-                admitted to {school.name} and your student id, school code and
-                password will be sent to your phone number you provided in the
-                form and you can login through scholib app or from schools
-                website......{" "}
-              </p>
-            </section>
+                      <DatePicker
+                        data={student.dob}
+                        setData={(value) =>
+                          setStudent({ ...student, dob: value })
+                        }
+                      />
+                    </div>
 
-            <div className="line"></div>
+                    <div className="each width1">
+                      <p> Phone *</p>
+                      <input
+                        type="text"
+                        name=""
+                        value={student.phone}
+                        placeholder="9843562452"
+                        onChange={(event) =>
+                          setStudent({ ...student, phone: event.target.value })
+                        }
+                      />
+                    </div>
 
-            {/* for that legendary form component */}
+                    <div className="each width2">
+                      <p> Email *</p>
+                      <input
+                        type="text"
+                        name=""
+                        value={student.email}
+                        placeholder="ujjwal7289@gmail.com"
+                        onChange={(event) =>
+                          setStudent({ ...student, email: event.target.value })
+                        }
+                      />
+                    </div>
 
-            <div className="our-form3636" ref={scrollRef}>
-              <p className="h5 w600 text-center" style={{ color: "#01BCD6" }}>
-                {" "}
-                Admission Form{" "}
-              </p>
+                    <div className="each width1">
+                      <p> Class *</p>
+                      <div className="wobbler" style={{ padding: "0px 3px" }}>
+                        <Dropdown2
+                          options={course.map((crc) => {
+                            return {
+                              label: crc.class,
+                              value: crc._id,
+                            };
+                          })}
+                          title={
+                            student.course.class
+                              ? course.find(
+                                  (crc) => crc._id === student.course.class
+                                ).class
+                              : "Select Class"
+                          }
+                          onSelect={(a, b, _id) => {
+                            let courseFound = course.find((crc) => {
+                              return crc._id === _id;
+                            });
 
-              <div className="cProgress flex1 custom-scrollbar">
-                <div
-                  className={`individual flex1 ${
-                    progress === 1 ? "active" : ""
-                  }`}
-                  onClick={() => setProgress(1)}
-                >
-                  <div className="circle flex1"> 1 </div>
-                  <p className="h6"> Student Info</p>
-                  <p className="h6" style={{ color: "#434954" }}>
-                    {" "}
-                    {">"}{" "}
-                  </p>
-                </div>
+                            setStudent({
+                              ...student,
+                              course: {
+                                class: _id,
+                                group: `${
+                                  courseFound.groups.length === 1
+                                    ? courseFound.groups[0]._id
+                                    : ""
+                                }`,
+                              },
+                            });
+                          }}
+                        />
+                      </div>
+                    </div>
 
-                <div
-                  className={`individual flex1 ${
-                    progress === 2 ? "active" : ""
-                  }`}
-                  onClick={() => setProgress(2)}
-                >
-                  <div className="circle flex1"> 2 </div>
-                  <p className="h6"> Parent's Info</p>
-                  <p className="h6" style={{ color: "#434954" }}>
-                    {" "}
-                    {">"}{" "}
-                  </p>
-                </div>
+                    {student.course.class &&
+                      course
+                        .map((crc) => {
+                          if (crc.groups.length > 1) {
+                            return true;
+                          } else {
+                            return false;
+                          }
+                        })
+                        .includes(true) && (
+                        <div className="each width2">
+                          <p> Group *</p>
 
-                <div
-                  className={`individual flex1 ${
-                    progress === 3 ? "active" : ""
-                  }`}
-                  onClick={() => setProgress(3)}
-                >
-                  <div className="circle flex1"> 3 </div>
-                  <p className="h6"> Documents </p>
-                </div>
-              </div>
+                          <div className="checkbox-div">
+                            <ul>
+                              {course
+                                .find((crc) => crc._id === student.course.class)
+                                .groups.map((grp) => (
+                                  <li
+                                    style={{ cursor: "pointer" }}
+                                    key={grp._id}
+                                    onClick={() => {
+                                      setStudent({
+                                        ...student,
+                                        course: {
+                                          ...student.course,
+                                          group: grp._id,
+                                        },
+                                      });
+                                    }}
+                                  >
+                                    <input
+                                      type="radio"
+                                      name="group"
+                                      value={grp.value}
+                                      checked={grp._id === student.course.group}
+                                    />
+                                    {grp.name} (
+                                    {grp.subjects.map((sub) => {
+                                      return `${sub}, `;
+                                    })}
+                                    )
+                                  </li>
+                                ))}
+                            </ul>
+                          </div>
+                        </div>
+                      )}
 
-              {progress === 1 && (
-                <div className="form-content6">
-                  <div className="each width2">
-                    <p> Full Name * </p>
-                    <input
-                      type="text"
-                      name=""
-                      value={student.name}
-                      placeholder="Mark Doe"
-                      onChange={(event) =>
-                        setStudent({ ...student, name: event.target.value })
-                      }
-                    />
-                  </div>
-
-                  <div className="each width1">
-                    <p> DOB (BS) y/m/d *</p>
-
-                    <DatePicker
-                      data={student.dob}
-                      setData={(value) =>
-                        setStudent({ ...student, dob: value })
-                      }
-                    />
-                  </div>
-
-                  <div className="each width1">
-                    <p> Phone *</p>
-                    <input
-                      type="text"
-                      name=""
-                      value={student.phone}
-                      placeholder="9843562452"
-                      onChange={(event) =>
-                        setStudent({ ...student, phone: event.target.value })
-                      }
-                    />
-                  </div>
-
-                  <div className="each width2">
-                    <p> Email *</p>
-                    <input
-                      type="text"
-                      name=""
-                      value={student.email}
-                      placeholder="ujjwal7289@gmail.com"
-                      onChange={(event) =>
-                        setStudent({ ...student, email: event.target.value })
-                      }
-                    />
-                  </div>
-
-                  <div className="each width1">
-                    <p> Class *</p>
-                    <div className="wobbler" style={{ padding: "0px 3px" }}>
-                      <Dropdown2
-                        options={course.map((crc) => {
-                          return {
-                            label: crc.class,
-                            value: crc._id,
-                          };
-                        })}
-
-                        title={student.course.class ? course.find((crc)=> crc._id === student.course.class).class : 'Select Class'}
-
-                        
-
-                        onSelect={(a, b, _id) => {
-                          let courseFound = course.find((crc) => {
-                            return crc._id === _id;
-                          });
-
+                    <div className="each width2">
+                      <p> Address *</p>
+                      <input
+                        type="text"
+                        name=""
+                        value={student.address}
+                        placeholder="Buddhashanti 2 Budhabare Jhapa"
+                        onChange={(event) =>
                           setStudent({
                             ...student,
-                            course: {
-                              class: _id,
-                              group: `${
-                                courseFound.groups.length === 1
-                                  ? courseFound.groups[0]._id
-                                  : ""
-                              }`,
-                            },
-                          });
-                        }}
-                      />
-                    </div>
-                  </div>
-
-                  {student.course.class &&
-                    course
-                      .map((crc) => {
-                        if (crc.groups.length > 1) {
-                          return true;
-                        } else {
-                          return false;
+                            address: event.target.value,
+                          })
                         }
-                      })
-                      .includes(true) && (
-                      <div className="each width2">
-                        <p> Group *</p>
+                      />
+                    </div>
 
-                        <div className="checkbox-div">
-                          <ul>
-                            {course
-                              .find((crc) => crc._id === student.course.class)
-                              .groups.map((grp) => (
-                                <li
-                                  style={{ cursor: "pointer" }}
-                                  key={grp._id}
-                                  onClick={() => {
-                                    setStudent({
-                                      ...student,
-                                      course: {
-                                        ...student.course,
-                                        group: grp._id,
-                                      },
-                                    });
-                                  }}
-                                >
-                                  <input
-                                    type="radio"
-                                    name="group"
-                                    value={grp.value}
-                                    checked={grp._id === student.course.group}
-                                  />
-                                  {grp.name} (
-                                  {grp.subjects.map((sub) => {
-                                    return `${sub}, `;
-                                  })}
-                                  )
-                                </li>
-                              ))}
-                          </ul>
-                        </div>
+                    <div className="each width2">
+                      <p>Gender *</p>
+
+                      <div
+                        className="d-flex gender-div"
+                        style={{ marginTop: "8px", marginLeft: "3px" }}
+                      >
+                        <label
+                          className="d-flex"
+                          style={{
+                            margin: "0px 5px 0px 0px",
+                            cursor: "pointer",
+                          }}
+                        >
+                          <input
+                            type="radio"
+                            name="gender"
+                            value="Male"
+                            checked={student.gender === "Male"}
+                            onChange={() =>
+                              setStudent({ ...student, gender: "Male" })
+                            }
+                          />
+                          <p
+                            className="h6 w600"
+                            style={{ marginLeft: "5px", marginBottom: "0px" }}
+                          >
+                            Male
+                          </p>
+                        </label>
+
+                        <label
+                          className="d-flex"
+                          style={{ margin: "0px 10px", cursor: "pointer" }}
+                        >
+                          <input
+                            type="radio"
+                            name="gender"
+                            value="Female"
+                            checked={student.gender === "Female"}
+                            onChange={() =>
+                              setStudent({ ...student, gender: "Female" })
+                            }
+                          />
+                          <p
+                            className="h6 w600"
+                            style={{ marginLeft: "5px", marginBottom: "0px" }}
+                          >
+                            Female
+                          </p>
+                        </label>
+
+                        <label
+                          className="d-flex"
+                          style={{ margin: "0px 10px", cursor: "pointer" }}
+                        >
+                          <input
+                            type="radio"
+                            name="gender"
+                            value="Other"
+                            checked={student.gender === "Other"}
+                            onChange={() =>
+                              setStudent({ ...student, gender: "Other" })
+                            }
+                          />
+                          <p
+                            className="h6 w600"
+                            style={{ marginLeft: "5px", marginBottom: "0px" }}
+                          >
+                            Other
+                          </p>
+                        </label>
                       </div>
-                    )}
+                    </div>
 
-                  <div className="each width2">
-                    <p> Address *</p>
-                    <input
-                      type="text"
-                      name=""
-                      value={student.address}
-                      placeholder="Buddhashanti 2 Budhabare Jhapa"
-                      onChange={(event) =>
-                        setStudent({ ...student, address: event.target.value })
-                      }
-                    />
-                  </div>
+                    <div className="each width2">
+                      <p> Previous School Name </p>
+                      <input
+                        type="text"
+                        name=""
+                        value={student.psName}
+                        placeholder="Shree Kankai English Boarding School"
+                        onChange={(event) =>
+                          setStudent({ ...student, psName: event.target.value })
+                        }
+                      />
+                    </div>
 
-                  <div className="each width2">
-                    <p>Gender *</p>
+                    <div className="each width2">
+                      <p> Previous School Address </p>
+                      <input
+                        type="text"
+                        name=""
+                        value={student.psAddress}
+                        placeholder="Buddhashanti 2 Budhabare Jhapa"
+                        onChange={(event) =>
+                          setStudent({
+                            ...student,
+                            psAddress: event.target.value,
+                          })
+                        }
+                      />
+                    </div>
 
-                    <div
-                      className="d-flex gender-div"
-                      style={{ marginTop: "8px", marginLeft: "3px" }}
-                    >
-                      <label
-                        className="d-flex"
-                        style={{
-                          margin: "0px 5px 0px 0px",
-                          cursor: "pointer",
-                        }}
-                      >
-                        <input
-                          type="radio"
-                          name="gender"
-                          value="Male"
-                          checked={student.gender === "Male"}
-                          onChange={() =>
-                            setStudent({ ...student, gender: "Male" })
-                          }
-                        />
-                        <p
-                          className="h6 w600"
-                          style={{ marginLeft: "5px", marginBottom: "0px" }}
-                        >
-                          Male
-                        </p>
-                      </label>
-
-                      <label
-                        className="d-flex"
-                        style={{ margin: "0px 10px", cursor: "pointer" }}
-                      >
-                        <input
-                          type="radio"
-                          name="gender"
-                          value="Female"
-                          checked={student.gender === "Female"}
-                          onChange={() =>
-                            setStudent({ ...student, gender: "Female" })
-                          }
-                        />
-                        <p
-                          className="h6 w600"
-                          style={{ marginLeft: "5px", marginBottom: "0px" }}
-                        >
-                          Female
-                        </p>
-                      </label>
-
-                      <label
-                        className="d-flex"
-                        style={{ margin: "0px 10px", cursor: "pointer" }}
-                      >
-                        <input
-                          type="radio"
-                          name="gender"
-                          value="Other"
-                          checked={student.gender === "Other"}
-                          onChange={() =>
-                            setStudent({ ...student, gender: "Other" })
-                          }
-                        />
-                        <p
-                          className="h6 w600"
-                          style={{ marginLeft: "5px", marginBottom: "0px" }}
-                        >
-                          Other
-                        </p>
-                      </label>
+                    <div className="each width1">
+                      <p> GPA Last Year </p>
+                      <input
+                        type="text"
+                        name=""
+                        value={student.gpa}
+                        placeholder="2.8"
+                        onChange={(event) =>
+                          setStudent({ ...student, gpa: event.target.value })
+                        }
+                      />
                     </div>
                   </div>
+                )}
 
-                  <div className="each width2">
-                    <p> Previous School Name </p>
-                    <input
-                      type="text"
-                      name=""
-                      value={student.psName}
-                      placeholder="Shree Kankai English Boarding School"
-                      onChange={(event) =>
-                        setStudent({ ...student, psName: event.target.value })
-                      }
-                    />
+                {/* parents info is available here  */}
+
+                {progress === 2 && (
+                  <div className="form-content6">
+                    <div className="each width2">
+                      <p> Father's Name *</p>
+                      <input
+                        type="text"
+                        name=""
+                        value={student.fName}
+                        placeholder="John Doe"
+                        onChange={(event) =>
+                          setStudent({ ...student, fName: event.target.value })
+                        }
+                      />
+                    </div>
+
+                    <div className="each width2">
+                      <p> Mother's Name *</p>
+                      <input
+                        type="text"
+                        name=""
+                        value={student.mName}
+                        placeholder="Jane Doe"
+                        onChange={(event) =>
+                          setStudent({ ...student, mName: event.target.value })
+                        }
+                      />
+                    </div>
+
+                    <div className="each width2">
+                      <p> Contact No. *</p>
+                      <input
+                        type="text"
+                        name=""
+                        value={student.phone2}
+                        placeholder="9834627824"
+                        onChange={(event) =>
+                          setStudent({ ...student, phone2: event.target.value })
+                        }
+                      />
+                    </div>
+
+                    <div className="each width1">
+                      <p> Father's Profession </p>
+                      <input
+                        type="text"
+                        name=""
+                        value={student.fProfession}
+                        placeholder="Doctor"
+                        onChange={(event) =>
+                          setStudent({
+                            ...student,
+                            fProfession: event.target.value,
+                          })
+                        }
+                      />
+                    </div>
+
+                    <div className="each width1">
+                      <p> Mother's Profession </p>
+                      <input
+                        type="text"
+                        name=""
+                        value={student.mProfession}
+                        placeholder="Pilot"
+                        onChange={(event) =>
+                          setStudent({
+                            ...student,
+                            mProfession: event.target.value,
+                          })
+                        }
+                      />
+                    </div>
                   </div>
+                )}
 
-                  <div className="each width2">
-                    <p> Previous School Address </p>
-                    <input
-                      type="text"
-                      name=""
-                      value={student.psAddress}
-                      placeholder="Buddhashanti 2 Budhabare Jhapa"
-                      onChange={(event) =>
-                        setStudent({
-                          ...student,
-                          psAddress: event.target.value,
-                        })
-                      }
-                    />
-                  </div>
+                {/* // fw last things to wrap up */}
 
-                  <div className="each width1">
-                    <p> GPA Last Year </p>
-                    <input
-                      type="text"
-                      name=""
-                      value={student.gpa}
-                      placeholder="2.8"
-                      onChange={(event) =>
-                        setStudent({ ...student, gpa: event.target.value })
-                      }
-                    />
-                  </div>
-                </div>
-              )}
+                {progress === 3 && (
+                  <div className="form-content6">
+                    <div className="each width1">
+                      <div className="selectImage">
+                        <p className="h6 w500"> Student's Photo </p>
+                        {!student.photo1 && (
+                          <img
+                            src={addImage}
+                            alt=""
+                            onClick={() => photo1Ref.current.click()}
+                          />
+                        )}
 
-              {/* parents info is available here  */}
+                        {student.photo1 && (
+                          <img
+                            src={URL.createObjectURL(student.photo1)}
+                            alt=""
+                            onClick={() => photo1Ref.current.click()}
+                          />
+                        )}
 
-              {progress === 2 && (
-                <div className="form-content6">
-                  <div className="each width2">
-                    <p> Father's Name *</p>
-                    <input
-                      type="text"
-                      name=""
-                      value={student.fName}
-                      placeholder="John Doe"
-                      onChange={(event) =>
-                        setStudent({ ...student, fName: event.target.value })
-                      }
-                    />
-                  </div>
+                        <input
+                          ref={photo1Ref}
+                          type="file"
+                          name="image"
+                          accept="image/*"
+                          onChange={(e) => {
+                            const selectedFile =
+                              e.target.files && e.target.files[0];
 
-                  <div className="each width2">
-                    <p> Mother's Name *</p>
-                    <input
-                      type="text"
-                      name=""
-                      value={student.mName}
-                      placeholder="Jane Doe"
-                      onChange={(event) =>
-                        setStudent({ ...student, mName: event.target.value })
-                      }
-                    />
-                  </div>
+                            if (selectedFile) {
+                              setStudent({ ...student, photo1: selectedFile });
+                            }
+                          }}
+                          className="d-none"
+                        />
 
-                  <div className="each width2">
-                    <p> Contact No. *</p>
-                    <input
-                      type="text"
-                      name=""
-                      value={student.phone2}
-                      placeholder="9834627824"
-                      onChange={(event) =>
-                        setStudent({ ...student, phone2: event.target.value })
-                      }
-                    />
-                  </div>
-
-                  <div className="each width1">
-                    <p> Father's Profession </p>
-                    <input
-                      type="text"
-                      name=""
-                      value={student.fProfession}
-                      placeholder="Doctor"
-                      onChange={(event) =>
-                        setStudent({
-                          ...student,
-                          fProfession: event.target.value,
-                        })
-                      }
-                    />
-                  </div>
-
-                  <div className="each width1">
-                    <p> Mother's Profession </p>
-                    <input
-                      type="text"
-                      name=""
-                      value={student.mProfession}
-                      placeholder="Pilot"
-                      onChange={(event) =>
-                        setStudent({
-                          ...student,
-                          mProfession: event.target.value,
-                        })
-                      }
-                    />
-                  </div>
-                </div>
-              )}
-
-              {/* // fw last things to wrap up */}
-
-              {progress === 3 && (
-                <div className="form-content6">
-                  <div className="each width1">
-                    <div className="selectImage">
-                      <p className="h6 w500"> Student's Photo </p>
-                      {!student.photo1 && (
-                        <img
-                          src={addImage}
-                          alt=""
+                        <button
+                          className="btn btn-secondary"
                           onClick={() => photo1Ref.current.click()}
-                        />
-                      )}
-
-                      {student.photo1 && (
-                        <img
-                          src={URL.createObjectURL(student.photo1)}
-                          alt=""
-                          onClick={() => photo1Ref.current.click()}
-                        />
-                      )}
-
-                      <input
-                        ref={photo1Ref}
-                        type="file"
-                        name="image"
-                        accept="image/*"
-                        onChange={(e) => {
-                          const selectedFile =
-                            e.target.files && e.target.files[0];
-
-                          if (selectedFile) {
-                            setStudent({ ...student, photo1: selectedFile });
-                          }
-                        }}
-                        className="d-none"
-                      />
-
-                      <button
-                        className="btn btn-secondary"
-                        onClick={() => photo1Ref.current.click()}
-                      >
-                        <FontAwesomeIcon
-                          style={{ marginRight: "6px", fontSize: "13px" }}
-                          icon={faPen}
-                        />
-                        {student.photo1 ? "Change Image" : "Select Image"}
-                      </button>
+                        >
+                          <FontAwesomeIcon
+                            style={{ marginRight: "6px", fontSize: "13px" }}
+                            icon={faPen}
+                          />
+                          {student.photo1 ? "Change Image" : "Select Image"}
+                        </button>
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="each width1">
-                    <div className="selectImage">
-                      <p className="h6 w500"> Student's Government Document </p>
-                      {!student.photo2 && (
-                        <img
-                          src={addImage}
-                          alt=""
+                    <div className="each width1">
+                      <div className="selectImage">
+                        <p className="h6 w500">
+                          {" "}
+                          Student's Government Document{" "}
+                        </p>
+                        {!student.photo2 && (
+                          <img
+                            src={addImage}
+                            alt=""
+                            onClick={() => photo2Ref.current.click()}
+                          />
+                        )}
+
+                        {student.photo2 && (
+                          <img
+                            src={URL.createObjectURL(student.photo2)}
+                            alt=""
+                            onClick={() => photo2Ref.current.click()}
+                          />
+                        )}
+
+                        <input
+                          ref={photo2Ref}
+                          type="file"
+                          name="image"
+                          accept="image/*"
+                          onChange={(e) => {
+                            const selectedFile =
+                              e.target.files && e.target.files[0];
+
+                            if (selectedFile) {
+                              setStudent({ ...student, photo2: selectedFile });
+                            }
+                          }}
+                          className="d-none"
+                        />
+
+                        <button
+                          className="btn btn-secondary"
                           onClick={() => photo2Ref.current.click()}
-                        />
-                      )}
-
-                      {student.photo2 && (
-                        <img
-                          src={URL.createObjectURL(student.photo2)}
-                          alt=""
-                          onClick={() => photo2Ref.current.click()}
-                        />
-                      )}
-
-                      <input
-                        ref={photo2Ref}
-                        type="file"
-                        name="image"
-                        accept="image/*"
-                        onChange={(e) => {
-                          const selectedFile =
-                            e.target.files && e.target.files[0];
-
-                          if (selectedFile) {
-                            setStudent({ ...student, photo2: selectedFile });
-                          }
-                        }}
-                        className="d-none"
-                      />
-
-                      <button
-                        className="btn btn-secondary"
-                        onClick={() => photo2Ref.current.click()}
-                      >
-                        <FontAwesomeIcon
-                          style={{ marginRight: "6px", fontSize: "13px" }}
-                          icon={faPen}
-                        />
-                        {student.photo2 ? "Change Image" : "Select Image"}
-                      </button>
+                        >
+                          <FontAwesomeIcon
+                            style={{ marginRight: "6px", fontSize: "13px" }}
+                            icon={faPen}
+                          />
+                          {student.photo2 ? "Change Image" : "Select Image"}
+                        </button>
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="each width1">
-                    <div className="selectImage">
-                      <p className="h6 w500"> Previous Class Certificate </p>
-                      {!student.photo3 && (
-                        <img
-                          src={addImage}
-                          alt=""
+                    <div className="each width1">
+                      <div className="selectImage">
+                        <p className="h6 w500"> Previous Class Certificate </p>
+                        {!student.photo3 && (
+                          <img
+                            src={addImage}
+                            alt=""
+                            onClick={() => photo3Ref.current.click()}
+                          />
+                        )}
+
+                        {student.photo3 && (
+                          <img
+                            src={URL.createObjectURL(student.photo3)}
+                            alt=""
+                            onClick={() => photo3Ref.current.click()}
+                          />
+                        )}
+
+                        <input
+                          ref={photo3Ref}
+                          type="file"
+                          name="image"
+                          accept="image/*"
+                          onChange={(e) => {
+                            const selectedFile =
+                              e.target.files && e.target.files[0];
+
+                            if (selectedFile) {
+                              setStudent({ ...student, photo3: selectedFile });
+                            }
+                          }}
+                          className="d-none"
+                        />
+
+                        <button
+                          className="btn btn-secondary"
                           onClick={() => photo3Ref.current.click()}
+                        >
+                          <FontAwesomeIcon
+                            style={{ marginRight: "6px", fontSize: "13px" }}
+                            icon={faPen}
+                          />
+                          {student.photo3 ? "Change Image" : "Select Image"}
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="each width1">
+                      <div className="selectImage">
+                        <p className="h6 w500"> Character Certificate </p>
+                        {!student.photo4 && (
+                          <img
+                            src={addImage}
+                            alt=""
+                            onClick={() => photo4Ref.current.click()}
+                          />
+                        )}
+
+                        {student.photo4 && (
+                          <img
+                            src={URL.createObjectURL(student.photo4)}
+                            alt=""
+                            onClick={() => photo4Ref.current.click()}
+                          />
+                        )}
+
+                        <input
+                          ref={photo4Ref}
+                          type="file"
+                          name="image"
+                          accept="image/*"
+                          onChange={(e) => {
+                            const selectedFile =
+                              e.target.files && e.target.files[0];
+
+                            if (selectedFile) {
+                              setStudent({ ...student, photo4: selectedFile });
+                            }
+                          }}
+                          className="d-none"
                         />
-                      )}
 
-                      {student.photo3 && (
-                        <img
-                          src={URL.createObjectURL(student.photo3)}
-                          alt=""
-                          onClick={() => photo3Ref.current.click()}
-                        />
-                      )}
-
-                      <input
-                        ref={photo3Ref}
-                        type="file"
-                        name="image"
-                        accept="image/*"
-                        onChange={(e) => {
-                          const selectedFile =
-                            e.target.files && e.target.files[0];
-
-                          if (selectedFile) {
-                            setStudent({ ...student, photo3: selectedFile });
-                          }
-                        }}
-                        className="d-none"
-                      />
-
-                      <button
-                        className="btn btn-secondary"
-                        onClick={() => photo3Ref.current.click()}
-                      >
-                        <FontAwesomeIcon
-                          style={{ marginRight: "6px", fontSize: "13px" }}
-                          icon={faPen}
-                        />
-                        {student.photo3 ? "Change Image" : "Select Image"}
-                      </button>
+                        <button
+                          className="btn btn-secondary"
+                          onClick={() => photo4Ref.current.click()}
+                        >
+                          <FontAwesomeIcon
+                            style={{ marginRight: "6px", fontSize: "13px" }}
+                            icon={faPen}
+                          />
+                          {student.photo4 ? "Change Image" : "Select Image"}
+                        </button>
+                      </div>
                     </div>
                   </div>
+                )}
 
-                  <div className="each width1">
-                    <div className="selectImage">
-                      <p className="h6 w500"> Character Certificate </p>
-                      {!student.photo4 && (
-                        <img
-                          src={addImage}
-                          alt=""
-                          onClick={() => photo4Ref.current.click()}
-                        />
-                      )}
+                <div className="buttons my-4 d-flex justify-content-end">
+                  <button
+                    className="btn btn-secondary mx-3"
+                    style={{ width: "130px" }}
+                    onClick={() => handlePrevious()}
+                    disabled={progress === 1}
+                  >
+                    Previous
+                  </button>
 
-                      {student.photo4 && (
-                        <img
-                          src={URL.createObjectURL(student.photo4)}
-                          alt=""
-                          onClick={() => photo4Ref.current.click()}
-                        />
-                      )}
+                  <button
+                    className={`btn btn-primary ${
+                      progress === 3 ? "d-none" : ""
+                    }`}
+                    style={{ width: "130px" }}
+                    onClick={() => handleNext()}
+                    disabled={progress === 3}
+                  >
+                    Next
+                  </button>
 
-                      <input
-                        ref={photo4Ref}
-                        type="file"
-                        name="image"
-                        accept="image/*"
-                        onChange={(e) => {
-                          const selectedFile =
-                            e.target.files && e.target.files[0];
-
-                          if (selectedFile) {
-                            setStudent({ ...student, photo4: selectedFile });
-                          }
-                        }}
-                        className="d-none"
-                      />
-
-                      <button
-                        className="btn btn-secondary"
-                        onClick={() => photo4Ref.current.click()}
-                      >
-                        <FontAwesomeIcon
-                          style={{ marginRight: "6px", fontSize: "13px" }}
-                          icon={faPen}
-                        />
-                        {student.photo4 ? "Change Image" : "Select Image"}
-                      </button>
-                    </div>
-                  </div>
+                  <button
+                    className={`btn btn-primary ${
+                      progress !== 3 ? "d-none" : ""
+                    }`}
+                    style={{ width: "130px" }}
+                    onClick={() => handleFinalSubmit()}
+                  >
+                    Submit
+                  </button>
                 </div>
-              )}
-
-              <div className="buttons my-4 d-flex justify-content-end">
-                <button
-                  className="btn btn-secondary mx-3"
-                  style={{ width: "130px" }}
-                  onClick={() => handlePrevious()}
-                  disabled={progress === 1}
-                >
-                  Previous
-                </button>
-
-                <button
-                  className={`btn btn-primary ${
-                    progress === 3 ? "d-none" : ""
-                  }`}
-                  style={{ width: "130px" }}
-                  onClick={() => handleNext()}
-                  disabled={progress === 3}
-                >
-                  Next
-                </button>
-
-                <button
-                  className={`btn btn-primary ${
-                    progress !== 3 ? "d-none" : ""
-                  }`}
-                  style={{ width: "130px" }}
-                  onClick={() => handleFinalSubmit()}
-                >
-                  Submit
-                </button>
               </div>
             </div>
           </div>
-        </div>
-      )}
-
-</div>
+        )}
+      </div>
     </>
+
+    
+    
+    </div>
   );
 };
 
