@@ -225,7 +225,7 @@ const Account = () => {
         {courses.length === 0 ? (
           <div className="mx-[2%] my-8">
             <hr />
-            <p className="text-center text-lg font-medium text-gray-600 my-4">
+            <p className="text-center text-md font-medium text-gray-500 my-4">
               No courses available
             </p>
             <hr />

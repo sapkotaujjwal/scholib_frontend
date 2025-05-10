@@ -11,6 +11,7 @@ import Scholib_about from "./Scholib_about";
 import { useSelector } from "react-redux";
 
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import RegisterSchool from "../registerSchool/RegisterSchool";
 
 const Scholib = () => {
   const history = useHistory();
@@ -37,6 +38,7 @@ const Scholib = () => {
           <Switch>
             <Route exact path="/" component={Scholib_home} />
             <Route exact path="/about" component={Scholib_about} />
+            <Route exact path="/register" component={RegisterSchool} />
 
             <Route path="" component={NotFound} />
           </Switch>

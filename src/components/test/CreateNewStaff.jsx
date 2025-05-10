@@ -354,7 +354,7 @@ const CreateNewStaff = ({
   }
 
   return (
-    <div className="CreateNewStaff36268 flex1">
+    <div className="CreateNewStaff36268 flex1 applyBootstrap">
       {loading && <Loading />}
       {isSuccess && (
         <Success

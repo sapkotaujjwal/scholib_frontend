@@ -8,7 +8,7 @@ const Loading = () => {
     <div className="flex justify-center items-center h-[100%] bg-gray-100 fixed top-0 left-0 w-[100vw] z-[99999] p-2">
       <div className="w-full max-w-md p-6 bg-white shadow-lg rounded-lg flex flex-col items-center">
 
-          <div className="mb-4">
+          <div className="mb-1">
             <img
               src={'https://scholib.com/images/logo.png'}
               alt="Scholib Logo"
@@ -18,9 +18,9 @@ const Loading = () => {
 
         <div className="text-center">
           <p className="text-lg font-semibold text-gray-700">Loading...</p>
-          <div className="loader mt-4 w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+          <div className="loader mt-4 w-8 mb-6 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
         </div>
-        <p className="text-gray-500 text-sm mt-6 text-center">Your request is being processed...
+        <p className="text-gray-500 text-sm text-center">Your request is being processed...
           <br /> Please wait a moment.....</p>
       </div>
     </div>

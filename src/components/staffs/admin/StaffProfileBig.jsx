@@ -143,6 +143,8 @@ const StaffProfileBig = ({ id, closeFunction, removed = false }) => {
   return (
     <div className="meTop268113">
       {admin && (
+
+
         <div className="profile8633 custom-scrollbar">
           {edit && (
             <CreateNewStaff
@@ -187,8 +189,10 @@ const StaffProfileBig = ({ id, closeFunction, removed = false }) => {
                 <section className="myInfo">
                   {user && user.role === "Administrator" && (
                     <div className="remove-wrapper-div">
+
+                      <div className="hidden md:block">
                       <button
-                        className="btn text-danger very-right"
+                        className=" btn text-danger very-right"
                         onClick={() =>
                           dispatch(
                             SET_CONFIRM_GLOBAL({
@@ -208,6 +212,8 @@ const StaffProfileBig = ({ id, closeFunction, removed = false }) => {
 
                         {`${removed ? "Add Staff" : "Remove Staff"}`}
                       </button>
+
+                      </div>
                     </div>
                   )}
 
@@ -358,6 +364,8 @@ const StaffProfileBig = ({ id, closeFunction, removed = false }) => {
             </div>
           </div>
         </div>
+
+
       )}
     </div>
   );

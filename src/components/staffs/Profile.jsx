@@ -5,213 +5,163 @@ import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faGraduationCap,
-  faLocation,
+  faLocationDot,
   faPen,
   faPhone,
+  faUser,
+  faCalendarAlt,
+  faVenusMars,
+  faSchool,
+  faIdCard,
 } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import userImg from "../../images/user.png";
-
 import CreateNewStaff from "../test/CreateNewStaff";
+
+const InfoRow = ({ icon, label, value }) => (
+  <div className="flex items-start gap-3 py-2 border-b last:border-none">
+    <FontAwesomeIcon icon={icon} className="text-gray-500 mt-1" />
+    <div>
+      <small className="text-gray-500">{label}</small>
+      <p className="text-sm text-gray-800 font-medium">{value || "N/A"}</p>
+    </div>
+  </div>
+);
 
 const Profile = () => {
   const user = useSelector((state) => state.User.user.payload);
-
-  const [admin, setAdmin] = useState(user ? user : null);
+  const [admin, setAdmin] = useState(user || null);
+  const [edit, setEdit] = useState(false);
 
   useEffect(() => {
-    if (user) {
-      setAdmin(user);
-    }
+    if (user) setAdmin(user);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [user]);
 
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  });
+    document.body.classList.toggle("dshauda-hidden", edit);
+  }, [edit]);
 
-  const [edit, setEdit] = useState(false);
-
-  if (edit ) {
-    document.body.classList.add("dshauda-hidden");
-  } else if (!edit ) {
-    document.body.classList.remove("dshauda-hidden");
-  }
-
+  if (!admin) return null;
 
   return (
     <>
-    <div className="applyBootstrap">
-      {admin && (
-        <div className="profile2638">
-          <MetaData
-            title={`${user && user.role ? "Staff" : "Student"} || Profile`}
-          />
+      <MetaData title={`${admin.role || "User"} || Profile`} />
+      {edit && (
+        <CreateNewStaff
+          data={{ ...admin }}
+          closeFunction={() => setEdit(false)}
+          title={"Update Your Profile"}
+          selfUpdate
+        />
+      )}
 
-          {edit && (
-            <CreateNewStaff
-              data={{ ...admin }}
-              closeFunction={() => setEdit(!edit)}
-              title={"Update Your Profile"}
-              selfUpdate={true}
-            />
-          )}
+      <div className="bg-gray-50 min-h-screen py-5 px-1 md:px-10">
+        <div className="max-w-6xl mx-auto bg-white rounded-xl shadow-lg p-6">
+          {/* Header */}
+          <div className="flex justify-between items-center mb-6">
+            <div className="flex items-center gap-4">
+              <img
+                src={admin.pPhoto?.secure_url || userImg}
+                alt={admin.name}
+                className="w-28 h-28 rounded-full object-cover border-4 border-white shadow-md"
+              />
+              <div>
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-800">
+                  {admin.name}
+                </h2>
+                <p className="text-sm text-gray-500 mb-0 w500">
+                  {admin.title || "—"}
+                </p>
+                <span className="inline-block mt-1 bg-blue-100 text-blue-700 text-xs px-3 py-1 rounded-full">
+                  {admin.role || "User"}
+                </span>
+              </div>
+            </div>
 
-          <div className="profile-very-top">
-            <div className="ourContent">
-              <div className="cover">
-                <img
-                  src="https://cdn.pixabay.com/photo/2016/11/01/18/38/background-1789175_1280.png"
-                  alt=""
+            {/* <button
+              onClick={() => setEdit(true)}
+              className=" flex items-center gap-2 bg-blue-600 text-white text-sm px-4 py-2 rounded-md hover:bg-blue-700 transition"
+            >
+              <FontAwesomeIcon icon={faPen} />
+              Edit Profile
+            </button> */}
+
+
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* Left Column */}
+            <div className="md:col-span-2 space-y-6">
+              {/* About */}
+              <div className="bg-gray-100 p-4 rounded-lg shadow-sm">
+                <h3 className="text-lg font-semibold text-gray-700 mb-2">
+                  About
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  {admin.about || "No description available."}
+                </p>
+              </div>
+
+              {/* Personal Details */}
+              <div className="bg-white p-4 rounded-lg shadow-sm border">
+                <h3 className="text-lg font-semibold text-gray-700 mb-4">
+                  Personal Details
+                </h3>
+                <InfoRow icon={faUser} label="Full Name" value={admin.name} />
+                <InfoRow
+                  icon={faVenusMars}
+                  label="Gender"
+                  value={admin.gender}
+                />
+                <InfoRow
+                  icon={faCalendarAlt}
+                  label="Date of Birth (BS)"
+                  value={admin.dob}
+                />
+                <InfoRow icon={faIdCard} label="Title" value={admin.title} />
+              </div>
+
+              {/* Contact Info */}
+              <div className="bg-white p-4 rounded-lg shadow-sm border">
+                <h3 className="text-lg font-semibold text-gray-700 mb-4">
+                  Contact Information
+                </h3>
+                <InfoRow icon={faEnvelope} label="Email" value={admin.email} />
+                <InfoRow icon={faPhone} label="Phone" value={admin.phone} />
+                <InfoRow
+                  icon={faLocationDot}
+                  label="Address"
+                  value={admin.address}
+                />
+                <InfoRow
+                  icon={faGraduationCap}
+                  label="Qualification"
+                  value={admin.qualification}
                 />
               </div>
-
-              <div className="buttons d-flex">
-                <button
-                  className="btn text-success"
-                  onClick={() => setEdit(!edit)}
-                >
-                  <FontAwesomeIcon
-                    style={{ marginRight: "5px" }}
-                    icon={faPen}
-                  />{" "}
-                  Edit Profile
-                </button>
-              </div>
-
-              <div className="content">
-                <section className="myInfo">
-                  <div className="upper d-flex">
-                    <div className="image">
-                      {/* <img src={admin.pPhoto.secure_url} alt="" /> */}
-
-                      <img
-                        src={user.pPhoto ? user.pPhoto.secure_url : userImg}
-                        alt=""
-                      />
-                    </div>
-                    <div className="info ms-2">
-                      <p className="h6 text-secondary w600"> {admin.name} </p>
-                      <p className="h7"> {admin.title} </p>
-                    </div>
-                  </div>
-
-                  <hr style={{ marginTop: "30px" }} />
-
-                  <div className="below flex4">
-                    <div className="left each">
-                      <p>
-                        {" "}
-                        <FontAwesomeIcon
-                          icon={faGraduationCap}
-                          style={{ marginRight: "6px" }}
-                        />{" "}
-                        {admin.qualification}
-                      </p>
-                      <p>
-                        {" "}
-                        <FontAwesomeIcon
-                          icon={faLocation}
-                          style={{ marginRight: "6px" }}
-                        />{" "}
-                        {admin.address}
-                      </p>
-                    </div>
-                    <div className="right each">
-                      <p>
-                        {" "}
-                        <FontAwesomeIcon
-                          icon={faPhone}
-                          style={{ marginRight: "6px" }}
-                        />{" "}
-                        {admin.phone}
-                      </p>
-                      <p>
-                        {" "}
-                        <FontAwesomeIcon
-                          icon={faEnvelope}
-                          style={{ marginRight: "6px" }}
-                        />{" "}
-                        {admin.email}
-                      </p>
-                    </div>
-                  </div>
-                </section>
-              </div>
             </div>
-          </div>
 
-          <div className="about-parent d-flex">
-            <div className="each">
-              <section className="about-box">
-                <p className="h5 w600"> About </p>
-                <hr />
-
-                <p className="lastP px-3" style={{ minWidth: "40vw" }}>
-                  {admin.about}
-                </p>
-              </section>
-            </div>
-            <div className="each select flex1">
-              <div className="alone">
-                <p className="h6"> School Code : </p>
-                <p className="h6 wbg"> {admin.schoolCode} </p>
-              </div>
-
-              <div className="alone">
-                <p className="h6"> Login Id : </p>
-                <p className="h6 wbg"> {admin.loginId} </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="inputForms2829">
-            <div className="form-content6">
-              <div className="each width2">
-                <p> Full Name </p>
-                <p className="likeInput"> {admin.name} </p>
-              </div>
-
-              <div className="each width2">
-                <p> Title </p>
-                <p className="likeInput"> {admin.title} </p>
-              </div>
-
-              <div className="each width2">
-                <p> Email </p>
-                <p className="likeInput"> {admin.email} </p>
-              </div>
-
-              <div className="each width2">
-                <p> Phone </p>
-                <p className="likeInput"> {admin.phone} </p>
-              </div>
-
-              <div className="each width4">
-                <p> Address </p>
-                <p className="likeInput">{admin.address} </p>
-              </div>
-
-              <div className="each width2">
-                <p>Gender</p>
-                <p className="likeInput"> {admin.gender} </p>
-              </div>
-
-              <div className="each width2">
-                <p> DOB (y/m/d) BS </p>
-                <p className="likeInput"> {admin.dob} </p>
-              </div>
-
-              <div className="each width4">
-                <p> Qualification </p>
-                <p className="likeInput"> {admin.qualification} </p>
+            {/* Right Column */}
+            <div className="space-y-6">
+              <div className="bg-white p-4 rounded-lg shadow-sm border">
+                <h3 className="text-lg font-semibold text-gray-700 mb-4">
+                  System Information
+                </h3>
+                <InfoRow
+                  icon={faSchool}
+                  label="School Code"
+                  value={admin.schoolCode}
+                />
+                <InfoRow
+                  icon={faIdCard}
+                  label="Login ID"
+                  value={admin.loginId}
+                />
               </div>
             </div>
           </div>
         </div>
-      )}
       </div>
     </>
   );

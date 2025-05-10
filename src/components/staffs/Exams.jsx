@@ -409,7 +409,7 @@ const Exams = () => {
                       className="w-[50%] md:w-[240px] bg-white text-gray-600 hover:bg-gray-200 rounded-lg py-2 px-3 shadow1 transition-all duration-200 flex items-center justify-center space-x-2 mx-2"
                     >
                       <i className="fas fa-plus-circle"></i>
-                      <span className="font-medium text-sm">Create New Exam</span>
+                      <span className="font-medium text-sm">Create Exam</span>
                     </button>
                     <button
                       onClick={() =>
@@ -581,7 +581,7 @@ const Exams = () => {
             <div className="each flex1 justify-end mb-3 pt-2 flex-wrap-reverse flex-grow-1 mt-3">
               <div className="flex1 mr-3 mt-3 ">
 
-                <p className="text-md mb-0 w500 text-gray-600 mr-2 w-28"> Subject : </p>
+                <p className="text-md mb-0 w500 text-gray-600 mr-2"> Subject : </p>
                 <Dropdown2
                   title={currentSubject.subject}
                   options={allSubjects.map((each) => {

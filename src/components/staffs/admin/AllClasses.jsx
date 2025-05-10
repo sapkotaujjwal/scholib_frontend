@@ -65,12 +65,32 @@ const AllClasses = ({
 
         {/* Footer */}
         <div className="px-6 py-4 border-t bg-gray-50">
-          <button
+          {/* <button
             onClick={handleDoneClick}
+            disabled={selectedOnes.length === 0}
             className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors"
           >
             {btnText}
-          </button>
+          </button> */}
+
+
+
+                  <button
+          onClick={handleDoneClick}
+          disabled={selectedOnes.length === 0}
+          className={`w-full py-2 px-4 rounded transition-colors ${
+            selectedOnes.length === 0
+              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+              : "bg-blue-500 text-white hover:bg-blue-600"
+          }`}
+        >
+          {btnText}
+        </button>
+
+
+
+
+
         </div>
       </div>
     </div>

@@ -29,7 +29,7 @@ const Success = ({ closeSuccess, data }) => {
           <p className="h7 mt-4"> Proceed to your activity.. </p>
           <button
             type="button"
-            class="bg-gray-300 px-5 py-3 rounded-md text-md hover:bg-gray-400"
+            class="bg-gray-300 px-5 py-2 rounded-md text-md hover:bg-gray-400"
             onClick={closeThisSuccess}
           >
             Close

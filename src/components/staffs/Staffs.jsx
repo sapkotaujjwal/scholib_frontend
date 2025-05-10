@@ -2,11 +2,9 @@ import React, { useEffect, useState } from "react";
 import "./staffs.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faEnvelope,
-  faLocationDot,
-  faPhone,
+
   faPlus,
-  faUserTie,
+
 } from "@fortawesome/free-solid-svg-icons";
 import CreateNewStaff from "../test/CreateNewStaff";
 import axios from "axios";
@@ -92,7 +90,7 @@ const Staffs = () => {
       )}
 
       {staffs && (
-        <div className="sInside27">
+        <div className="sInside27 ">
           <div className="veryTop">
             <div className="flex flex-col p-4 bg-white shadow1 rounded-lg">
               <p className="text-xl font-semibold text-[#133189]">Staffs</p>
@@ -125,7 +123,7 @@ const Staffs = () => {
               )}
           </div>
 
-          <div className="my-3  px-[2%]">
+          <div className="my-3 px-[2%]">
             <StaffTable
               loading={loading}
               error={error}

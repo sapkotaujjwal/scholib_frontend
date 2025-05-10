@@ -116,32 +116,33 @@ const Classes = () => {
     document.body.classList.remove("dshauda-hidden321");
   }
 
-
   // Add this useEffect to update currentClass when courses changes
-useEffect(() => {
-  if (courses.length > 0) {
-    // Find the current course ID in the updated courses array
-    if (currentClass) {
-      const updatedCourse = courses.find(course => course._id === currentClass._id);
-      if (updatedCourse) {
-        setCurrentClass(updatedCourse);
+  useEffect(() => {
+    if (courses.length > 0) {
+      // Find the current course ID in the updated courses array
+      if (currentClass) {
+        const updatedCourse = courses.find(
+          (course) => course._id === currentClass._id
+        );
+        if (updatedCourse) {
+          setCurrentClass(updatedCourse);
+        } else {
+          // If current course no longer exists, default to first course
+          setCurrentClass(courses[0]);
+        }
       } else {
-        // If current course no longer exists, default to first course
         setCurrentClass(courses[0]);
       }
-    } else {
-      setCurrentClass(courses[0]);
     }
-  }
-}, [courses]);
+  }, [courses]);
 
-// Update allSections useEffect to properly depend on currentClass
-useEffect(() => {
-  if (currentClass) {
-    const sectionIds = getAllSectionIds();
-    setAllSections(sectionIds);
-  }
-}, [currentClass]);
+  // Update allSections useEffect to properly depend on currentClass
+  useEffect(() => {
+    if (currentClass) {
+      const sectionIds = getAllSectionIds();
+      setAllSections(sectionIds);
+    }
+  }, [currentClass]);
 
   return (
     <>
@@ -196,12 +197,22 @@ useEffect(() => {
         <div className="first-top">
           <p className="h4 w600 mb-3 pb-2"> All Classes</p>
           <div className="buttons">
-            <button onClick={() => setSessionTree(true)} className="me-3">
-              {" "}
-              Session Table{" "}
-            </button>
-            <button className="mx-3" onClick={() => setNewClass(true)}>Add New Class</button>
+            {/* Session Table Button */}
             <button
+              disabled={school.course.length === 0}
+              onClick={() => setSessionTree(true)}
+              className={`me-3 ${
+                school.course.length === 0
+                  ? "bg-gray-200 text-gray-500 opacity-60 cursor-not-allowed"
+                  : "hover:bg-gray-100"
+              }`}
+            >
+              Session Table
+            </button>
+
+            {/* Start New Session Button */}
+            <button
+              disabled={school.course.length === 0}
               onClick={() =>
                 setAllClasses({
                   title: "Start New Session",
@@ -209,9 +220,17 @@ useEffect(() => {
                   handleGetSelectedOnes: startNewSession,
                 })
               }
-              className="ms-3"
+              className={`mx-3 px-4 py-2 rounded-md font-medium transition-colors ${
+                school.course.length === 0
+                  ? "bg-gray-300 text-gray-500 opacity-60 cursor-not-allowed"
+                  : ""
+              }`}
             >
               Start New Session
+            </button>
+
+            <button className="" onClick={() => setNewClass(true)}>
+              Add New Class
             </button>
           </div>
         </div>
