@@ -79,13 +79,13 @@ const Profile = () => {
               </div>
             </div>
 
-            {/* <button
+            <button
               onClick={() => setEdit(true)}
-              className=" flex items-center gap-2 bg-blue-600 text-white text-sm px-4 py-2 rounded-md hover:bg-blue-700 transition"
+              className="hidden  md:flex items-center gap-2 bg-blue-600 text-white text-sm px-4 py-2 rounded-md hover:bg-blue-700 transition"
             >
               <FontAwesomeIcon icon={faPen} />
               Edit Profile
-            </button> */}
+            </button>
 
 
           </div>
@@ -93,6 +93,20 @@ const Profile = () => {
           <div className="grid md:grid-cols-3 gap-6">
             {/* Left Column */}
             <div className="md:col-span-2 space-y-6">
+
+
+<div className="flex1 justify-end">
+
+                          <button
+              onClick={() => setEdit(true)}
+              className="flex1  md:hidden items-center gap-2 w-full bg-blue-600 text-white text-sm px-4 py-2 rounded-md hover:bg-blue-700 transition"
+            >
+              <FontAwesomeIcon icon={faPen} />
+              Edit Profile
+            </button>
+</div>
+
+
               {/* About */}
               <div className="bg-gray-100 p-4 rounded-lg shadow-sm">
                 <h3 className="text-lg font-semibold text-gray-700 mb-2">

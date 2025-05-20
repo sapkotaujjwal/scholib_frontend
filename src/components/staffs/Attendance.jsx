@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import "./attendance.scss";
 import { useDispatch, useSelector } from "react-redux";
 import MetaData from "../layout/MetaData";
@@ -224,7 +224,7 @@ const Attendance = () => {
 
               <hr />
 
-              <div className="absentStudents">
+              <div className="absentStudents shadow1">
                 <DataTable
                   data={students
                     .map((student, index) => {

@@ -64,9 +64,6 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
         }
       )
       .then((response) => {
-
-
-
         if (response.data.success) {
           const response1 = response.data.data;
 
@@ -106,10 +103,6 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
         }
       )
       .then((response) => {
-
-
-
-
         if (response.data.success) {
           response.data.data.course = StudentCourseInfo;
 
@@ -816,10 +809,8 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
       ?.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentPage]);
 
-
   return (
     <div className="noBootstrap">
-
       {studentCourseData && (
         <>
           {!student && (
@@ -2479,6 +2470,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                               <label className="block mb-2 font-medium">
                                 Return Date
                               </label>
+
                               <DatePicker
                                 data={dateToReturn}
                                 setData={(a) => {
@@ -2655,9 +2647,6 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
           </div>
         </>
       )}
-
-
-
     </div>
   );
 };

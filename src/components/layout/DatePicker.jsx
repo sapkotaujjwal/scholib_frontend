@@ -1,24 +1,36 @@
 import { useState, useEffect } from "react";
 import { parseDate } from "../../tools/dateTool";
 
-const DatePicker = ({ data = '0000/00/00', setData =()=>{} }) => {
-
-  if(!data){
-    data = '0000/00/00'
-  }
-  const date = parseDate(data);
-
-
-  const [year, setYear] = useState(date.year);
-  const [month, setMonth] = useState(String(date.month).padStart(2, '0'));
-  const [day, setDay] = useState(String(date.day).padStart(2, '0'));
-  
-
+const DatePicker = ({ data = "0000/00/00", setData = () => {} }) => {
+  // Add effect to update internal state when data prop changes
   useEffect(() => {
-    if (year && month && day ) {
+    if (data) {
+      const parsedDate = parseDate(data);
+      setYear(parsedDate.year);
+      setMonth(String(parsedDate.month).padStart(2, "0"));
+      setDay(String(parsedDate.day).padStart(2, "0"));
+    } else {
+      // Set default values if data is null/undefined
+      setYear("");
+      setMonth("");
+      setDay("");
+    }
+  }, [data]); // This effect runs when data prop changes
+
+  // Process the initial date
+  const defaultDate = data || "0000/00/00";
+  const parsedDate = parseDate(defaultDate);
+
+  const [year, setYear] = useState(parsedDate.year);
+  const [month, setMonth] = useState(String(parsedDate.month).padStart(2, "0"));
+  const [day, setDay] = useState(String(parsedDate.day).padStart(2, "0"));
+
+  // When internal state changes, update the parent component
+  useEffect(() => {
+    if (year && month && day) {
       setData(`${year}/${month}/${day}`);
     }
-  }, [year, month, day]);
+  }, [year, month, day, setData]);
 
   const generateYears = () => {
     const years = [];
@@ -35,7 +47,8 @@ const DatePicker = ({ data = '0000/00/00', setData =()=>{} }) => {
   };
 
   const generateDays = () => {
-    return Array.from({ length: 32 }, (_, i) =>
+    // Generate days 1-31
+    return Array.from({ length: 31 }, (_, i) =>
       (i + 1).toString().padStart(2, "0")
     );
   };
