@@ -19,10 +19,7 @@ import Gallery from "./gallery/Gallery";
 import Admission from "./admission/Admission";
 import NotFound from "./layout/NotFound";
 
-import {
-  ANOTHER_SCHOOL_OPEN,
-  SAME_SCHOOL_OPEN,
-} from "../redux/UserSlice";
+import { ANOTHER_SCHOOL_OPEN, SAME_SCHOOL_OPEN } from "../redux/UserSlice";
 import {
   GET_ALL_COURSES_SUCCESS,
   GET_COURSE,
@@ -53,7 +50,6 @@ function School() {
   const school = useSelector((state) => state.Home.school.payload);
 
   useEffect(() => {
-
     dispatch(GET_SCHOOL());
     axios
       .get(`${process.env.REACT_APP_API_URL}/basic/${schoolCode}`, {
@@ -86,8 +82,7 @@ function School() {
   }, [dispatch, schoolCode]);
 
   useEffect(() => {
-
-    if(!school) return;
+    if (!school) return;
 
     dispatch(GET_COURSE());
 
@@ -213,7 +208,6 @@ function School() {
       {school && !loading && course && !error && (
         <Switch>
           {/* school's basic routes */}
-
 
           <Route
             exact

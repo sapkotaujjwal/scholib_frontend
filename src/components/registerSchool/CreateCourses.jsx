@@ -23,6 +23,7 @@ const CreateCourses = ({ data, id, closeFunction = () => {} }) => {
       ? data
       : {
           class: "",
+          duration: 12,
           seatsAvailable: 999,
           subjects: [],
           groups: [],
@@ -222,6 +223,22 @@ const CreateCourses = ({ data, id, closeFunction = () => {} }) => {
                       setCourseInfo({
                         ...courseInfo,
                         class: event.target.value,
+                      })
+                    }
+                  />
+                </div>
+
+                                <div className="each width2">
+                  <p> Duration ( Months ) </p>
+                  <input
+                    type="number"
+                    name=""
+                    value={courseInfo.duration}
+                    placeholder="999"
+                    onChange={(event) =>
+                      setCourseInfo({
+                        ...courseInfo,
+                        duration: event.target.value,
                       })
                     }
                   />
