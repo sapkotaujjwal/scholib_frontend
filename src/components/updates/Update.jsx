@@ -10,6 +10,7 @@ import axios from "axios";
 import { SET_ALERT_GLOBAL } from "../../redux/AlertGlobalSlice";
 import Create from "./Create";
 import { SET_BIGIMAGE } from "../../redux/BigImageSlice";
+import { getDateTimeFromISO } from "../../tools/newDateTool";
 
 // Confirmation Dialog Component
 const ConfirmDialog = ({ onConfirm, onCancel }) => (
@@ -194,7 +195,7 @@ const Update = ({ update }) => {
 
         <div className="mb-4">
           <p className="text-sm text-gray-600">
-            Posted on {update.date} at {update.time}
+            Posted on {getDateTimeFromISO(update.date).date} at {getDateTimeFromISO(update.date).time}
           </p>
           <p className="text-sm text-gray-600">Visible to : Everyone</p>
         </div>

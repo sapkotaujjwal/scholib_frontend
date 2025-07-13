@@ -5,15 +5,17 @@ import { SET_ALERT_GLOBAL } from "../../../redux/AlertGlobalSlice";
 import { GET_ACCOUNTS } from "../../../redux/HomeSlice";
 import Graph from "../../basicComponents/Graph";
 import { parseDate } from "../../../tools/dateTool";
-import { 
-  faMoneyCheckDollar, 
-  faCaretLeft, 
+import {
+  faMoneyCheckDollar,
+  faCaretLeft,
   faCaretRight,
   faUsers,
   faUserTie,
-  faChartLine
+  faChartLine,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { getDateTimeFromISO } from "../../../tools/newDateTool";
+import Calendar from "../../layout/Calendar";
 
 const AnalyticsOverview = () => {
   const dispatch = useDispatch();
@@ -26,9 +28,18 @@ const AnalyticsOverview = () => {
   const [todaySales, setTodaySales] = useState(0);
 
   const shortMonths = [
-    "Baisakh", "Jestha", "Asar", "Shrawan", "Bhadra",
-    "Ashwin", "Kartik", "Mangsir", "Poush", "Magh",
-    "Falgun", "Chaitra"
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
   ];
 
   function formatDateToString(dateString) {
@@ -39,28 +50,30 @@ const AnalyticsOverview = () => {
     return `${year}/${month}/${day}`;
   }
 
-  function convertTo12Hour(time) {
-    let [hours, minutes, seconds] = time.split(":");
-    hours = parseInt(hours, 10);
-    const ampm = hours >= 12 ? "PM" : "AM";
-    hours = hours % 12 || 12;
-    return `${hours}:${minutes}:${seconds} ${ampm}`;
+  function convertTo12Hour(utcDate) {
+    let date = new Date(utcDate);
+
+    return date.toLocaleTimeString("en-US", {
+      hour12: true,
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
   }
 
   useEffect(() => {
     if (accounts.length === 0) {
-      axios.get(
-        `${process.env.REACT_APP_API_URL}/admin/${school.schoolCode}/accounts/info`,
-        {
-          params: {},
-          withCredentials: true,
-        }
-      )
+      axios
+        .get(
+          `${process.env.REACT_APP_API_URL}/admin/${school.schoolCode}/accounts/info`,
+          {
+            params: {},
+            withCredentials: true,
+          }
+        )
         .then((response) => {
           if (response.data.success) {
-
-            console.log(response.data)
-
+            console.log(response.data);
 
             const paymentData = response.data.data.paymentHistory.map(
               (ind, index) => ({
@@ -71,8 +84,10 @@ const AnalyticsOverview = () => {
                   (sta) => sta._id === ind.approvedBy
                 ).name,
                 method: ind.method,
-                time: convertTo12Hour(ind.time),
-                student: students.find((sta) => sta._id === ind.student)?.name || "N/A",
+                time: convertTo12Hour(ind.date),
+                student:
+                  students.find((sta) => sta._id === ind.student)?.name ||
+                  "N/A",
               })
             );
             dispatch(GET_ACCOUNTS(paymentData));
@@ -149,8 +164,10 @@ const AnalyticsOverview = () => {
     <div className="min-h-screen md:bg-gray-50 sm:p-0 md:p-6 rounded-md">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-800">Analytics Overview</h1>
-        <p className="text-sm text-gray-600 w500 bg-gray-100 rounded-md p-3 mt-2">Today : {date}</p>
+        {/* <h1 className="text-2xl font-bold text-gray-800">Analytics Overview</h1> */}
+        <p className="text-sm text-gray-600 w500 bg-gray-100 rounded-md p-3 mt-2">
+          Today : {getDateTimeFromISO(date).date}
+        </p>
       </div>
 
       {/* Stats Grid */}
@@ -159,7 +176,10 @@ const AnalyticsOverview = () => {
         <div className="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow">
           <div className="flex items-center space-x-4">
             <div className="bg-blue-100 p-3 rounded-lg">
-              <FontAwesomeIcon icon={faMoneyCheckDollar} className="text-blue-600 text-xl" />
+              <FontAwesomeIcon
+                icon={faMoneyCheckDollar}
+                className="text-blue-600 text-xl"
+              />
             </div>
             <div>
               <p className="text-sm text-gray-600">Total Fees Collected</p>
@@ -174,7 +194,10 @@ const AnalyticsOverview = () => {
         <div className="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow">
           <div className="flex items-center space-x-4">
             <div className="bg-green-100 p-3 rounded-lg">
-              <FontAwesomeIcon icon={faChartLine} className="text-green-600 text-xl" />
+              <FontAwesomeIcon
+                icon={faChartLine}
+                className="text-green-600 text-xl"
+              />
             </div>
             <div>
               <p className="text-sm text-gray-600">Last 10 Days</p>
@@ -189,7 +212,10 @@ const AnalyticsOverview = () => {
         <div className="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow">
           <div className="flex items-center space-x-4">
             <div className="bg-purple-100 p-3 rounded-lg">
-              <FontAwesomeIcon icon={faUsers} className="text-purple-600 text-xl" />
+              <FontAwesomeIcon
+                icon={faUsers}
+                className="text-purple-600 text-xl"
+              />
             </div>
             <div>
               <p className="text-sm text-gray-600">Total Students</p>
@@ -204,7 +230,10 @@ const AnalyticsOverview = () => {
         <div className="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow">
           <div className="flex items-center space-x-4">
             <div className="bg-orange-100 p-3 rounded-lg">
-              <FontAwesomeIcon icon={faUserTie} className="text-orange-600 text-xl" />
+              <FontAwesomeIcon
+                icon={faUserTie}
+                className="text-orange-600 text-xl"
+              />
             </div>
             <div>
               <p className="text-sm text-gray-600">Total Staff</p>
@@ -218,7 +247,9 @@ const AnalyticsOverview = () => {
 
       {/* Monthly Sales Graph */}
       <div className="bg-white rounded-xl shadow-sm sm:p-0 md:p-6 mb-8">
-        <h2 className="text-xl font-semibold text-gray-800 mb-6">Monthly Sales Data</h2>
+        <h2 className="text-xl font-semibold text-gray-800 mb-6">
+          Monthly Sales Data
+        </h2>
         <Graph
           categories={shortMonths}
           data={calculateMonthlyTotals(accounts)}
@@ -227,73 +258,91 @@ const AnalyticsOverview = () => {
 
       {/* Daily Sales Calendar */}
       <div className="bg-white rounded-xl shadow-sm p-6">
-        <h2 className="text-xl font-semibold text-gray-800 mb-6">Daily Sales Data</h2>
-        
+        <h2 className="text-xl font-semibold text-gray-800 mb-6">
+          Daily Sales Data
+        </h2>
+
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Calendar */}
-          <div className="flex-1">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold">
-                {shortMonths[calenderDate.month - 1]} {calenderDate.year}
-              </h3>
-              <div className="flex space-x-4">
-                <button 
-                  className="p-2 hover:bg-gray-100 rounded-full"
-                  onClick={() => {
-                    setCalenderDate((prevDate) => ({
-                      ...prevDate,
-                      month: prevDate.month === 1 ? 1 : prevDate.month - 1,
-                    }));
-                  }}
-                >
-                  <FontAwesomeIcon icon={faCaretLeft} />
-                </button>
-                <button 
-                  className="p-2 hover:bg-gray-100 rounded-full"
-                  onClick={() => {
-                    setCalenderDate((prevDate) => ({
-                      ...prevDate,
-                      month: prevDate.month === 12 ? 12 : prevDate.month + 1,
-                    }));
-                  }}
-                >
-                  <FontAwesomeIcon icon={faCaretRight} />
-                </button>
-              </div>
-            </div>
 
-            <div className="grid grid-cols-7 gap-2">
-              {[...Array(32)].map((_, i) => (
-                <button
-                  key={i}
-                  className={`
+          {false && (
+            <div className="flex-1">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-semibold">
+                  {shortMonths[calenderDate.month - 1]} {calenderDate.year}
+                </h3>
+                <div className="flex space-x-4">
+                  <button
+                    className="p-2 hover:bg-gray-100 rounded-full"
+                    onClick={() => {
+                      setCalenderDate((prevDate) => ({
+                        ...prevDate,
+                        month: prevDate.month === 1 ? 1 : prevDate.month - 1,
+                      }));
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faCaretLeft} />
+                  </button>
+                  <button
+                    className="p-2 hover:bg-gray-100 rounded-full"
+                    onClick={() => {
+                      setCalenderDate((prevDate) => ({
+                        ...prevDate,
+                        month: prevDate.month === 12 ? 12 : prevDate.month + 1,
+                      }));
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faCaretRight} />
+                  </button>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-7 gap-2">
+                {[...Array(32)].map((_, i) => (
+                  <button
+                    key={i}
+                    className={`
                     aspect-square rounded-lg p-2 text-center
                     hover:bg-blue-50 transition-colors
-                    ${i === calenderDate.day - 1 
-                      ? "bg-blue-500 text-white hover:bg-blue-600" 
-                      : "bg-gray-50"}
+                    ${
+                      i === calenderDate.day - 1
+                        ? "bg-blue-500 text-white hover:bg-blue-600"
+                        : "bg-gray-50"
+                    }
                   `}
-                  onClick={() => {
-                    setCalenderDate((prevDate) => ({
-                      ...prevDate,
-                      day: i + 1,
-                    }));
-                  }}
-                >
-                  {i + 1}
-                </button>
-              ))}
+                    onClick={() => {
+                      setCalenderDate((prevDate) => ({
+                        ...prevDate,
+                        day: i + 1,
+                      }));
+                    }}
+                  >
+                    {i + 1}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
+
+          <Calendar
+            calenderDate={calenderDate}
+            setCalenderDate={setCalenderDate}
+            shortMonths={shortMonths}
+          />
 
           {/* Daily Summary */}
           <div className="flex-1 bg-gray-50 rounded-xl p-6">
             <div className="flex items-center space-x-4">
               <div className="bg-blue-100 p-4 rounded-lg">
-                <FontAwesomeIcon icon={faMoneyCheckDollar} className="text-blue-600 text-2xl" />
+                <FontAwesomeIcon
+                  icon={faMoneyCheckDollar}
+                  className="text-blue-600 text-2xl"
+                />
               </div>
               <div>
-                <p className="text-2xl font-bold text-gray-800">Rs. {todaySales}</p>
+                <p className="text-2xl font-bold text-gray-800">
+                  Rs. {todaySales}
+                </p>
                 <p className="text-gray-600">Total Sales for Selected Date</p>
               </div>
             </div>

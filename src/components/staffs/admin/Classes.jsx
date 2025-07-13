@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "./classes.scss";
 import CreateCourses from "../../registerSchool/CreateCourses";
 import DataTable from "../../layout/Table";
 import { faCircleCheck } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import Dropdown from "../../basicComponents/Dropdown";
 import { useDispatch, useSelector } from "react-redux";
 import SessionTree from "../../registerSchool/SessionTree";
@@ -12,6 +10,17 @@ import AllClasses from "./AllClasses";
 import axios from "axios";
 import { SET_ALERT_GLOBAL } from "../../../redux/AlertGlobalSlice";
 import EditSubjectTeacher from "../../registerSchool/EditSubjectTeacher";
+import {
+  Check,
+  Users,
+  BookOpen,
+  DollarSign,
+  Settings,
+  Plus,
+  Play,
+  Table,
+  GraduationCap,
+} from "lucide-react";
 
 const Classes = () => {
   const courses = useSelector((state) => state.Course.course.payload.course);
@@ -145,10 +154,11 @@ const Classes = () => {
   }, [currentClass]);
 
   return (
-    <>
+    <div className="min-h-screen ">
+      {/* Loading Overlay - Original Logic Preserved */}
       {loading && (
         <div
-          className="cover-all flex1 bg-white"
+          className="fixed inset-0 bg-white bg-opacity-90 flex items-center justify-center z-50"
           style={{
             width: "100vw",
             height: "100vh",
@@ -158,20 +168,19 @@ const Classes = () => {
             zIndex: "99999",
           }}
         >
-          <div
-            className="spinner-container flex1"
-            style={{ width: "100%", height: "80vh" }}
-          >
+          <div className="text-center">
             <div
-              className="spinner-border text-primary my-4 loading452"
+              className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"
               role="status"
             >
               <span className="sr-only">Loading...</span>
             </div>
+            <p className="mt-4 text-gray-600">Loading...</p>
           </div>
         </div>
       )}
 
+      {/* Original Modal Components - Logic Preserved */}
       {newClass && (
         <CreateCourses closeFunction={() => setNewClass(!newClass)} />
       )}
@@ -193,211 +202,320 @@ const Classes = () => {
           closeFunction={() => setEditSubjectTeachers(false)}
         />
       )}
-      <div className="classes-admin-tool">
-        <div className="first-top">
-          <p className="h4 w600 mb-3 pb-2"> All Classes</p>
-          <div className="buttons">
-            {/* Session Table Button */}
-            <button
-              disabled={school.course.length === 0}
-              onClick={() => setSessionTree(true)}
-              className={`me-3 ${
-                school.course.length === 0
-                  ? "bg-gray-200 text-gray-500 opacity-60 cursor-not-allowed"
-                  : "hover:bg-gray-100"
-              }`}
-            >
-              Session Table
-            </button>
 
-            {/* Start New Session Button */}
-            <button
-              disabled={school.course.length === 0}
-              onClick={() =>
-                setAllClasses({
-                  title: "Start New Session",
-                  btnText: "Start New Session",
-                  handleGetSelectedOnes: startNewSession,
-                })
-              }
-              className={`mx-3 px-4 py-2 rounded-md font-medium transition-colors ${
-                school.course.length === 0
-                  ? "bg-gray-300 text-gray-500 opacity-60 cursor-not-allowed"
-                  : ""
-              }`}
-            >
-              Start New Session
-            </button>
+      {/* Main Content */}
+      <div className=" mx-auto lg:px-4">
+        {/* Header Section */}
+        <div className="hidden lg:block mb-8">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+            {/* Action Buttons - Original Logic Preserved */}
+            <div className="hidden lg:flex flex-wrap gap-3">
+              <button
+                disabled={school.course.length === 0}
+                onClick={() => setSessionTree(true)}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
+                  school.course.length === 0
+                    ? "bg-gray-200 text-gray-500 cursor-not-allowed opacity-60"
+                    : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-300 shadow-sm hover:shadow-md"
+                }`}
+              >
+                <Table className="w-4 h-4" />
+                Session Table
+              </button>
 
-            <button className="" onClick={() => setNewClass(true)}>
-              Add New Class
-            </button>
+              <button
+                disabled={school.course.length === 0}
+                onClick={() =>
+                  setAllClasses({
+                    title: "Start New Session",
+                    btnText: "Start New Session",
+                    handleGetSelectedOnes: startNewSession,
+                  })
+                }
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
+                  school.course.length === 0
+                    ? "bg-gray-300 text-gray-500 cursor-not-allowed opacity-60"
+                    : "bg-green-500 text-white hover:bg-green-600 shadow-sm hover:shadow-md"
+                }`}
+              >
+                <Play className="w-4 h-4" />
+                Start New Session
+              </button>
+
+              <button
+                onClick={() => setNewClass(true)}
+                className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg font-medium hover:bg-blue-600 transition-all shadow-sm hover:shadow-md"
+              >
+                <Plus className="w-4 h-4" />
+                Add New Class
+              </button>
+            </div>
           </div>
         </div>
 
-        {courses.length > 0 && (
-          <div className="flex justify-center flex-wrap gap-3 py-4 shadow1 mt-8 rounded-md mb-2">
-            {courses.map((course) => (
+        {courses.length > 0 ? (
+          <div className="mb-8">
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                <GraduationCap className="w-5 h-5 text-blue-500" />
+                Select Class
+              </h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                {courses.map((course) => (
+                  <button
+                    key={course._id}
+                    onClick={() => setCurrentClass(course)}
+                    className={`group relative p-4 rounded-lg border-2 transition-all duration-200 hover:transform hover:scale-105 ${
+                      currentClass && currentClass._id === course._id
+                        ? "border-blue-500 bg-blue-50 shadow-md"
+                        : "border-gray-200 hover:border-gray-300 hover:bg-gray-50"
+                    }`}
+                  >
+                    <div className="text-center">
+                      <div
+                        className={`w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2 ${
+                          currentClass && currentClass._id === course._id
+                            ? "bg-blue-500 text-white"
+                            : "bg-gray-100 text-gray-600 group-hover:bg-gray-200"
+                        }`}
+                      >
+                        <BookOpen className="w-6 h-6" />
+                      </div>
+                      <p
+                        className={`font-medium ${
+                          currentClass && currentClass._id === course._id
+                            ? "text-blue-700"
+                            : "text-gray-700"
+                        }`}
+                      >
+                        {course.class}
+                      </p>
+                    </div>
+                    {currentClass && currentClass._id === course._id && (
+                      <div className="absolute -top-1 -right-1 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                        <Check className="w-3 h-3 text-white" />
+                      </div>
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="mb-8">
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center">
+              <BookOpen className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+              <h3 className="text-lg font-medium text-gray-900 mb-2">
+                No Classes Available
+              </h3>
+              <p className="text-gray-500 mb-6">
+                Get started by creating your first class
+              </p>
               <button
-                key={course._id}
-                onClick={() => setCurrentClass(course)}
-                className={`
-      h-20 w-28 rounded border transition-all
-      ${
-        currentClass._id === course._id
-          ? "border-blue-500 bg-blue-100 text-blue-700"
-          : "border-gray-200 hover:border-gray-300 hover:bg-gray-50"
-      }
-    `}
+                onClick={() => setNewClass(true)}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 text-white rounded-lg font-medium hover:bg-blue-600 transition-all"
               >
-                <span className="text-sm">{course.class}</span>
+                <Plus className="w-4 h-4" />
+                Create First Class
               </button>
-            ))}
+            </div>
           </div>
         )}
 
-        {courses.length === 0 && (
-          <>
-            <hr />
-            <p className="h6 text-center mx-2 text-secondary my-3">
-              No courses available
-            </p>
-            <hr />
-          </>
-        )}
-
+        {/* Class Details - Original Logic Preserved */}
         {currentClass && (
-          <section className="class-info">
-            <p className="h5 w600 mb-3 pt-2 ms-1"> Class Info </p>
-
-            <div className="info-container flex2">
-              <div className="left-info">
-                <div className="m-left232">
-                  <div className="stylish">
-                    <p className="h6 w500"> Class : {currentClass.class} </p>
+          <div className="grid lg:grid-cols-3 gap-8">
+            {/* Left Column - Class Overview */}
+            <div className="lg:col-span-1 space-y-6">
+              {/* Class Info Card */}
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <BookOpen className="w-5 h-5 text-blue-600" />
                   </div>
-                  <p className="h6 w600 my-3">
-                    {" "}
-                    Rs.{" "}
-                    {currentClass.fees.reduce(
-                      (sum, fee) => sum + fee.amount,
-                      0
-                    )}{" "}
-                    /year{" "}
-                  </p>
-
-                  <p
-                    className="h6 w600 text-center py-2"
-                    style={{ backgroundColor: "#DEE0E7", borderRadius: "3px" }}
-                  >
-                    {" "}
-                    Fee Structure{" "}
-                  </p>
-
-                  <div className="table-my my-2 max-w-[94vw] overflow-auto">
-                    <DataTable
-                      data={currentClass.fees.map((fee) => {
-                        return {
-                          title: fee.title,
-                          amount: fee.amount,
-                        };
-                      })}
-                      fields={["Title", "Amount Rs."]}
-                    />
+                  <div>
+                    <h3 className="font-semibold text-gray-900">
+                      {currentClass.class}
+                    </h3>
+                    <p className="text-sm text-gray-500">Class Information</p>
                   </div>
                 </div>
 
-                <div className="left-student max-w-[94vw] overflow-auto">
-                  <p
-                    className="h6 w600 text-center py-2"
-                    style={{ backgroundColor: "#DEE0E7", borderRadius: "3px" }}
-                  >
-                    Students
-                  </p>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                    <span className="text-sm font-medium text-gray-700">
+                      Annual Fee
+                    </span>
+                    <span className="text-lg font-semibold text-gray-900">
+                      Rs.{" "}
+                      {currentClass.fees.reduce(
+                        (sum, fee) => sum + fee.amount,
+                        0
+                      )}
+                    </span>
+                  </div>
 
-                  {students && (
-                    <div className="table-my my-2">
-                      <DataTable
-                        data={students
-                          .filter(
-                            (student) =>
-                              student.course.class === currentClass._id &&
-                              student.course.section === currentSection._id
-                          )
-                          .map((student, index) => ({
-                            sn: index + 1,
-                            name: student.name,
-                          }))}
-                        fields={["SN", "Student Name"]}
-                      />
-                    </div>
-                  )}
+                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                    <span className="text-sm font-medium text-gray-700">
+                      Total Seats
+                    </span>
+                    <span className="text-lg font-semibold text-gray-900">
+                      {currentClass.seatsAvailable}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                    <span className="text-sm font-medium text-gray-700">
+                      Occupied
+                    </span>
+                    <span className="text-lg font-semibold text-gray-900">
+                      {
+                        students.filter(
+                          (student) =>
+                            student.course.class === currentClass._id &&
+                            student.course.section === currentSection._id
+                        ).length
+                      }
+                    </span>
+                  </div>
                 </div>
               </div>
 
-              <div className="right-info">
-                {/* <button className="btn btn-secondary"> Edit Class </button> */}
+              {/* Fee Structure - Original Logic Preserved */}
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <DollarSign className="w-5 h-5 text-green-500" />
+                  Fee Structure
+                </h3>
+                <div className="max-w-[94vw] overflow-auto">
+                  <DataTable
+                    data={currentClass.fees.map((fee) => {
+                      return {
+                        title: fee.title,
+                        amount: fee.amount,
+                      };
+                    })}
+                    fields={["Title", "Amount Rs."]}
+                  />
+                </div>
+              </div>
 
-                <div className="inside-right" style={{ marginTop: "50px" }}>
-                  <p className="h6 w600">
-                    {" "}
-                    <FontAwesomeIcon
-                      style={{ marginRight: "5px", color: "#107A34" }}
-                      icon={faCircleCheck}
-                    />{" "}
-                    General Information{" "}
-                  </p>
+              {/* Students List - Original Logic Preserved */}
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <Users className="w-5 h-5 text-indigo-500" />
+                  Students
+                </h3>
 
-                  <div className="inputForms2829">
-                    <div className="form-content6">
-                      <div className="each width2">
-                        <p> Class </p>
-                        <p className="likeInput"> {currentClass.class} </p>
-                      </div>
+                {students && currentSection && (
+                  <div className="max-w-[94vw] overflow-auto">
+                    <DataTable
+                      data={students
+                        .filter(
+                          (student) =>
+                            student.course.class === currentClass._id &&
+                            student.course.section === currentSection._id
+                        )
+                        .map((student, index) => ({
+                          sn: index + 1,
+                          name: student.name,
+                        }))}
+                      fields={["SN", "Student Name"]}
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
 
-                      <div className="each width2">
-                        <p> Section </p>
-                        <div className="wobbler" style={{ padding: "0px 3px" }}>
-                          <Dropdown
-                            options={allSections.map((sec) => {
-                              return {
-                                label: sec.name,
-                              };
-                            })}
-                            title={currentSection.name}
-                            onSelect={handleDropdownChange}
-                          />
-                        </div>
-                      </div>
+            {/* Right Column - Detailed Information */}
+            <div className="lg:col-span-2 space-y-6">
+              {/* General Information Card */}
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <FontAwesomeIcon
+                    style={{ marginRight: "5px", color: "#107A34" }}
+                    icon={faCircleCheck}
+                  />
+                  General Information
+                </h3>
 
-                      <div className="each width2">
-                        <p> Total Seats </p>
-                        <p className="likeInput">
-                          {" "}
-                          {currentClass.seatsAvailable}{" "}
-                        </p>
-                      </div>
-
-                      <div className="each width2">
-                        <p> Occupied </p>
-                        <p className="likeInput"> {"Specify Later"} </p>
-                      </div>
-
-                      <div className="each width4">
-                        <p> Left </p>
-                        <p className="likeInput">{" Specity Later "}</p>
-                      </div>
+                <div className="grid md:grid-cols-2 gap-4 mb-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Class
+                    </label>
+                    <div className="p-3 bg-gray-50 rounded-lg border">
+                      <span className="text-gray-900 font-medium">
+                        {currentClass.class}
+                      </span>
                     </div>
                   </div>
 
-                  <p
-                    className="h6 w600 text-center py-2"
-                    style={{ backgroundColor: "#DEE0E7", borderRadius: "3px" }}
-                  >
-                    Subjects
-                  </p>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Section
+                    </label>
+                    <div className="p-0">
+                      <select
+                        id="section-select"
+                        className="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        value={currentSection?._id || ""}
+                        onChange={(e) => handleDropdownChange(e.target.value)}
+                      >
+                        <option value="" disabled>
+                          Select Section
+                        </option>
+                        {allSections.map((sec) => (
+                          <option key={sec._id} value={sec._id}>
+                            {sec.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
 
-                  <div className="table-my my-2 max-w-[94vw] overflow-auto">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Total Seats
+                    </label>
+                    <div className="p-3 bg-gray-50 rounded-lg border">
+                      <span className="text-gray-900 font-medium">
+                        {currentClass.seatsAvailable}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Occupied
+                    </label>
+                    <div className="p-3 bg-gray-50 rounded-lg border">
+                      <span className="text-gray-900 font-medium">
+                        Specify Later
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Subjects & Teachers - Original Logic Preserved */}
+              {currentSection && (
+                <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                  <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
+                    <h4 className="font-semibold text-gray-900 flex items-center gap-2">
+                      <BookOpen className="w-5 h-5 text-purple-500" />
+                      Subjects
+                    </h4>
+                    <button
+                      onClick={() => setEditSubjectTeachers(true)}
+                      className="hidden ml-auto lg:flex items-center gap-2 px-4 py-2 text-sm bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all shadow-sm hover:shadow-md"
+                    >
+                      <Settings className="w-4 h-4" />
+                      Edit Subject Teachers
+                    </button>
+                  </div>
+
+                  <div className="max-w-[94vw] overflow-auto">
                     <DataTable
                       data={currentSection.subjects.map((sub) => {
                         return {
@@ -408,21 +526,13 @@ const Classes = () => {
                       fields={["Subject", "Teacher"]}
                     />
                   </div>
-
-                  <button
-                    className="btn btn-secondary my-3 button-edit-teacher"
-                    onClick={() => setEditSubjectTeachers(true)}
-                  >
-                    {" "}
-                    Edit Subject Teachers
-                  </button>
                 </div>
-              </div>
+              )}
             </div>
-          </section>
+          </div>
         )}
       </div>
-    </>
+    </div>
   );
 };
 
