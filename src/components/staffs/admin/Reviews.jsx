@@ -178,7 +178,7 @@ const Reviews = () => {
 
         {/* Review Form */}
         {reviewWrite && (
-          <div className="w-full backdrop-blur-md rounded-md p-6 mb-8 animate-fade-in shadow1">
+          <div className="w-full backdrop-blur-md rounded-md p-3 lg:p-6 mb-8 animate-fade-in shadow1">
             <h3 className="text-lg font-semibold text-white mb-4">
               Share Your Experience
             </h3>

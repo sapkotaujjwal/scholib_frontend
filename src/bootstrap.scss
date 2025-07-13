@@ -213,9 +213,7 @@
     display: inline-block;
     margin-bottom: 0.5rem;
   }
-  button {
-    border-radius: 0;
-  }
+
 
   button,
   input,
@@ -224,7 +222,7 @@
   textarea {
     margin: 0;
     font-family: inherit;
-    font-size: inherit;
+    // font-size: inherit;
     line-height: inherit;
   }
   button,

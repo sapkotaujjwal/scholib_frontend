@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare, faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPenToSquare,
+  faTrash,
+  faPlus,
+} from "@fortawesome/free-solid-svg-icons";
 import { SET_ALERT_GLOBAL } from "../../../redux/AlertGlobalSlice";
 import { DELETE_FAQ, ADD_FAQ, EDIT_FAQ } from "../../../redux/HomeSlice";
 import {
@@ -39,7 +43,7 @@ const Faq = () => {
         `${process.env.REACT_APP_API_URL}/admin/${school.schoolCode}/faq/${data._id}`,
         { withCredentials: true }
       );
-      
+
       if (response.data.success) {
         dispatch(DELETE_FAQ(data._id));
         dispatch(SET_ALERT_GLOBAL(response.data));
@@ -84,61 +88,92 @@ const Faq = () => {
     }
   };
 
+  if (newFaq) {
+    document.body.classList.add("dshauda-hidden");
+  } else {
+    document.body.classList.remove("dshauda-hidden");
+  }
+
   return (
     <div className="container mx-auto sm:px-0 md:px-4 py-8">
       {/* Modal for Add/Edit FAQ */}
       {newFaq && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center" style={{zIndex: 999}}>
-          <div className="bg-white rounded-lg p-6 w-full max-w-2xl">
-            <h2 className="text-xl font-semibold text-center mb-6 p-3 shadow1 rounded-md">
-              {editFaq._id ? "Edit FAQ" : "Add New FAQ"}
-            </h2>
+        <div
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
+          style={{ zIndex: 999 }}
+        >
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[94vh] overflow-hidden flex flex-col transform transition-all duration-300 scale-100 animate-in">
+            {/* Header */}
+            <div className="relative px-6 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-t-2xl flex-shrink-0">
+              <h2 className="text-lg font-semibold text-white text-center">
+                {editFaq._id ? "✏️ Edit FAQ" : "➕ Add New FAQ"}
+              </h2>
+              <div className="absolute inset-0 bg-white/10 rounded-t-2xl"></div>
+            </div>
 
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-bold text-gray-700 mb-2 ms-2">
-                  Question:
+            {/* Form Content - Scrollable */}
+            <div className="px-6 py-5 space-y-5 flex-1 overflow-y-auto">
+              {/* Question Field */}
+              <div className="group">
+                <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-3">
+                  <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                  Question
                 </label>
-                <textarea
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  rows="4"
-                  placeholder="Enter Question..."
-                  value={editFaq.question}
-                  onChange={(e) =>
-                    setEditFaq({ ...editFaq, question: e.target.value })
-                  }
-                />
+                <div className="relative">
+                  <textarea
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 resize-none bg-gray-50 focus:bg-white"
+                    rows="4"
+                    placeholder="What would you like to know? Ask your question here..."
+                    value={editFaq.question}
+                    onChange={(e) =>
+                      setEditFaq({ ...editFaq, question: e.target.value })
+                    }
+                  />
+                  <div className="absolute bottom-3 right-3 text-xs text-gray-400">
+                    {editFaq.question.length}/500
+                  </div>
+                </div>
               </div>
 
-              <div>
-                <label className="block text-sm font-bold text-gray-700 mb-2 ms-2">
-                  Answer:
+              {/* Answer Field */}
+              <div className="group">
+                <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-3">
+                  <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                  Answer
                 </label>
-                <textarea
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  rows="6"
-                  placeholder="Enter Answer..."
-                  value={editFaq.answer}
-                  onChange={(e) =>
-                    setEditFaq({ ...editFaq, answer: e.target.value })
-                  }
-                />
+                <div className="relative">
+                  <textarea
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-green-500 focus:ring-4 focus:ring-green-100 transition-all duration-200 resize-none bg-gray-50 focus:bg-white"
+                    rows="5"
+                    placeholder="Provide a clear and helpful answer..."
+                    value={editFaq.answer}
+                    onChange={(e) =>
+                      setEditFaq({ ...editFaq, answer: e.target.value })
+                    }
+                  />
+                  <div className="absolute bottom-3 right-3 text-xs text-gray-400">
+                    {editFaq.answer.length}/1000
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="mt-6 flex justify-between space-x-4 p-3 shadow1 rounded-md">
-              <button
-                className="px-4 py-2 text-gray-600 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors w-[50%]"
-                onClick={() => setNewFaq(false)}
-              >
-                Cancel
-              </button>
-              <button
-                className="px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-colors w-[50%]"
-                onClick={addNewFaq}
-              >
-                {editFaq._id ? "Update" : "Submit"}
-              </button>
+            {/* Action Buttons */}
+            <div className="px-6 py-4 bg-gray-50 rounded-b-2xl border-t border-gray-100 flex-shrink-0">
+              <div className="flex gap-3">
+                <button
+                  className="flex-1 px-4 py-2 text-sm text-gray-700 bg-white border-2 border-gray-200 rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 font-medium shadow-sm"
+                  onClick={() => setNewFaq(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="flex-1 px-4 py-2 text-sm text-white bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl transform hover:scale-105"
+                  onClick={addNewFaq}
+                >
+                  {editFaq._id ? "Update FAQ" : "Create FAQ"}
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -146,7 +181,9 @@ const Faq = () => {
 
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl p-3 bg-gray-100 rounded-lg font-bold text-gray-900">FAQ</h1>
+        <h1 className="text-2xl p-3 bg-gray-100 rounded-lg font-bold text-gray-900">
+          FAQ
+        </h1>
         <button
           className="px-5 md:px-20  py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors flex items-center space-x-2"
           onClick={() => {

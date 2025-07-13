@@ -193,7 +193,7 @@ const Admission = () => {
             </div>
           </div>
 
-          <div className="bg-gray-50 rounded-lg mx-[2%] p-3 mb-3 flex items-center gap-3 ">
+          <div className="bg-gray-50 rounded-lg mx-[2%] p-3 mb-3 flex items-center gap-3">
             <label
               htmlFor="search"
               className="whitespace-nowrap font-medium text-gray-700 dark:text-gray-300 mb-0"

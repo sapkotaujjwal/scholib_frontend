@@ -346,7 +346,7 @@ const Classes = () => {
                     <span className="text-sm font-medium text-gray-700">
                       Annual Fee
                     </span>
-                    <span className="text-lg font-semibold text-gray-900">
+                    <span className="text-sm font-semibold text-gray-900">
                       Rs.{" "}
                       {currentClass.fees.reduce(
                         (sum, fee) => sum + fee.amount,
@@ -359,7 +359,7 @@ const Classes = () => {
                     <span className="text-sm font-medium text-gray-700">
                       Total Seats
                     </span>
-                    <span className="text-lg font-semibold text-gray-900">
+                    <span className="text-sm font-semibold text-gray-900">
                       {currentClass.seatsAvailable}
                     </span>
                   </div>

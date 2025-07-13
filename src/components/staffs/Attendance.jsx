@@ -297,7 +297,7 @@ const Attendance = () => {
 
       <div className="inside-content">
         <div className="flex flex-col p-4 bg-white shadow1 rounded-lg mx-[2%]">
-          <p className="text-xl font-semibold text-[#133189]">Students</p>
+          <p className="text-xl font-semibold text-[#133189]">Attendance</p>
           <p className="text-sm text-gray-600">{school.name}</p>
         </div>
       </div>

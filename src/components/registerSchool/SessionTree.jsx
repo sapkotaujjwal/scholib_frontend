@@ -81,7 +81,7 @@ const SessionTree = ({ closeFunction = () => {} }) => {
       <div className="bg-white rounded-lg shadow-lg w-full max-w-2xl px-3 py-6 overflow-y-auto max-h-[90vh] custom-scrollbar">
         <div className="flex justify-between items-center border-b pb-4">
           <h2 className="text-lg font-semibold text-gray-700 mx-auto">
-            Session Tree
+            Session Table
           </h2>
           <button
             className="text-gray-500 hover:text-gray-700"
