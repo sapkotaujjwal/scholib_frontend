@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./attendanceNew.scss";
 import {
   faCaretLeft,
@@ -11,7 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from "react-redux";
-import { isSameDate, parseDate } from "../../tools/dateTool";
+import { isSameDate } from "../../tools/dateTool";
 
 const AttendanceNew = ({
   students = [],
@@ -19,13 +19,24 @@ const AttendanceNew = ({
   addAsAbsent,
   workingDates,
 }) => {
-  const date = useSelector((state) => state.Other.date);
-  const [calenderDate, setCalenderDate] = useState(parseDate(date));
+  const rawDate = useSelector((state) => state.Other.date);
+
+  // Convert ISO date to YYYY-MM-DD format
+  const date = rawDate.includes("T") ? rawDate.split("T")[0] : rawDate;
+
+  const [calenderDate, setCalenderDate] = useState(() => {
+    const [year, month, day] = date.split("-").map(Number);
+    return { year, month, day };
+  });
   const [attendanceData, setAttendanceData] = useState([]);
 
-  // Function to check if a date is in the future compared to current date
   const isFutureDate = (dateToCheck) => {
-    const currentDate = parseDate(date);
+    const [currentYear, currentMonth, currentDay] = date.split("-").map(Number);
+    const currentDate = {
+      year: currentYear,
+      month: currentMonth,
+      day: currentDay,
+    };
 
     // Compare years first
     if (dateToCheck.year > currentDate.year) return true;
@@ -50,11 +61,16 @@ const AttendanceNew = ({
 
   // Function to check if a date is a working date
   const isWorkingDate = (year, month, day) => {
-    // Format month and day to ensure they match the format in workingDates
     const formattedMonth = month < 10 ? `0${month}` : `${month}`;
     const formattedDay = day < 10 ? `0${day}` : `${day}`;
     const dateStr = `${year}-${formattedMonth}-${formattedDay}`;
-    return workingDates && workingDates.includes(dateStr);
+
+    return (
+      workingDates &&
+      workingDates.some(
+        (d) => new Date(d).toISOString().slice(0, 10) === dateStr
+      )
+    );
   };
 
   // Format date for comparison
@@ -64,6 +80,26 @@ const AttendanceNew = ({
       "0"
     )}`;
   };
+
+  // Get current selected date as formatted string
+  const selectedDateString = formatDateString(
+    calenderDate.year,
+    calenderDate.month,
+    calenderDate.day
+  );
+
+  // Check if attendance has been taken for the selected date
+  const isAttendanceTaken =
+    workingDates &&
+    workingDates.some(
+      (d) => new Date(d).toISOString().slice(0, 10) === selectedDateString
+    );
+
+  // Check if selected date is today
+  const isToday = date === selectedDateString;
+
+  // Determine if we should show the attendance table
+  const shouldShowAttendanceTable = isAttendanceTaken || isToday;
 
   const handleStatusChange = (id, status) => {
     setAttendanceData(
@@ -90,14 +126,7 @@ const AttendanceNew = ({
           status:
             std.absentdays &&
             std.absentdays.some((absent) =>
-              isSameDate(
-                absent.date,
-                formatDateString(
-                  calenderDate.year,
-                  calenderDate.month,
-                  calenderDate.day
-                )
-              )
+              isSameDate(absent.date, selectedDateString)
             )
               ? "Absent"
               : "Present",
@@ -114,47 +143,25 @@ const AttendanceNew = ({
     );
   }, [attendanceData]);
 
-  // Get the number of days in the current month
+  // Get the number of days in the current month (using Gregorian calendar)
   const getDaysInMonth = (year, month) => {
-    // For Nepali calendar, hardcode the days per month
-    const daysInMonth = {
-      1: 32, // Baisakh
-      2: 32, // Jestha
-      3: 32, // Asar
-      4: 32, // Shrawan
-      5: 32, // Bhadra
-      6: 32, // Ashwin
-      7: 32, // Kartik
-      8: 32, // Mangsir
-      9: 32, // Poush
-      10: 32, // Magh
-      11: 32, // Falgun
-      12: 32, // Chaitra
-    };
-    return daysInMonth[month] || 30; // Default to 30 if not found
+    return new Date(year, month, 0).getDate();
   };
 
   const shortMonths = [
-    "Baisakh", // Baisakh
-    "Jestha", // Jestha
-    "Asar", // Asar
-    "Shrawan", // Shrawan
-    "Bhadra", // Bhadra
-    "Ashwin", // Ashwin
-    "Kartik", // Kartik
-    "Mangsir", // Mangsir
-    "Poush", // Poush
-    "Magh", // Magh
-    "Falgun", // Falgun
-    "Chaitra", // Chaitra
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
-
-  // console.log(date ,
-  //   formatDateString(
-  //     calenderDate.year,
-  //     calenderDate.month,
-  //     calenderDate.day
-  //   ))
 
   return (
     <div className="allWrapupAttendanceNew">
@@ -163,19 +170,14 @@ const AttendanceNew = ({
           <div className="attendance-table">
             <hr />
 
+            {/* Status Card - Shows if attendance is taken or not */}
             <div className="bg-white rounded-xl shadow-md p-4 mb-4 border border-gray-200">
               <div className="flex items-center justify-between">
                 <p className="font-semibold text-gray-700 text-base mb-0">
                   Status :
                 </p>
                 <div className="flex items-center gap-2">
-                  {workingDates.includes(
-                    formatDateString(
-                      calenderDate.year,
-                      calenderDate.month,
-                      calenderDate.day
-                    )
-                  ) ? (
+                  {isAttendanceTaken ? (
                     <>
                       <FontAwesomeIcon
                         icon={faCheckCircle}
@@ -198,129 +200,90 @@ const AttendanceNew = ({
               </div>
             </div>
 
-            {!(
-              workingDates.includes(
-                formatDateString(
-                  calenderDate.year,
-                  calenderDate.month,
-                  calenderDate.day
-                )
-              ) ||
-              date ===
-                formatDateString(
-                  calenderDate.year,
-                  calenderDate.month,
-                  calenderDate.day
-                )
-            ) && (
-              <div className="bg-gray-100 rounded-md p-3 md:min-h-[400px] sm:min-h-3  flex1">
+            {/* Show message when attendance is not available */}
+            {!shouldShowAttendanceTable && (
+              <div className="bg-gray-100 rounded-md p-3 md:min-h-[400px] sm:min-h-3 flex1">
                 <p className="text-sm mb-0 text-red-600 text-center">
-                  {" "}
-                  Attendance Not Taken{" "}
+                  Attendance Not Taken
                 </p>
               </div>
             )}
 
-            {(workingDates.includes(
-              formatDateString(
-                calenderDate.year,
-                calenderDate.month,
-                calenderDate.day
-              )
-            ) ||
-              date ===
-                formatDateString(
-                  calenderDate.year,
-                  calenderDate.month,
-                  calenderDate.day
-                )) && (
-              <div className="w-full max-w-[94vw] overflow-x-auto shadow1 rounded-md">
-                <table className="min-w-full bg-white border border-gray-200 rounded-lg">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
-                        &nbsp;&nbsp;&nbsp; SN &nbsp;&nbsp;&nbsp;
-                      </th>
-                      <th
-                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b"
-                        style={{ textAlign: "left" }}
-                      >
-                        Name
-                      </th>
-                      <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
-                        Present
-                      </th>
-                      <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
-                        Absent
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
-                    {attendanceData.map((student, index) => (
-                      <tr key={student.id} className="hover:bg-gray-50">
-                        <td className="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500 border-b">
-                          {index + 1}
-                        </td>
-                        <td
-                          className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 border-b text-left"
+            {/* Show attendance table when available */}
+            {shouldShowAttendanceTable && (
+              <>
+                <div className="w-full max-w-[94vw] overflow-x-auto shadow1 rounded-md">
+                  <table className="min-w-full bg-white border border-gray-200 rounded-lg">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
+                          &nbsp;&nbsp;&nbsp; SN &nbsp;&nbsp;&nbsp;
+                        </th>
+                        <th
+                          className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b"
                           style={{ textAlign: "left" }}
                         >
-                          {student.name}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-center border-b">
-                          <input
-                            type="radio"
-                            checked={student.status === "Present"}
-                            onChange={() =>
-                              handleStatusChange(student.id, "Present")
-                            }
-                            className="form-radio h-4 w-4 text-green-600 focus:ring-green-500 cursor-pointer"
-                          />
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-center border-b">
-                          <input
-                            type="radio"
-                            // checked={student.status === "Absent"}
-
-                            checked={student.status === "Absent"}
-                            onChange={() =>
-                              handleStatusChange(student.id, "Absent")
-                            }
-                            className="form-radio h-4 w-4 cursor-pointer"
-                            style={{ accentColor: "#dc2626" }}
-                          />
-                        </td>
+                          Name
+                        </th>
+                        <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
+                          Present
+                        </th>
+                        <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
+                          Absent
+                        </th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
+                    </thead>
+                    <tbody className="bg-white divide-y divide-gray-200">
+                      {attendanceData.map((student, index) => (
+                        <tr key={student.id} className="hover:bg-gray-50">
+                          <td className="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500 border-b">
+                            {index + 1}
+                          </td>
+                          <td
+                            className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 border-b text-left"
+                            style={{ textAlign: "left" }}
+                          >
+                            {student.name}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-center border-b">
+                            <input
+                              type="radio"
+                              checked={student.status === "Present"}
+                              onChange={() =>
+                                handleStatusChange(student.id, "Present")
+                              }
+                              className="form-radio h-4 w-4 text-green-600 focus:ring-green-500 cursor-pointer"
+                            />
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-center border-b">
+                            <input
+                              type="radio"
+                              checked={student.status === "Absent"}
+                              onChange={() =>
+                                handleStatusChange(student.id, "Absent")
+                              }
+                              className="form-radio h-4 w-4 cursor-pointer"
+                              style={{ accentColor: "#dc2626" }}
+                            />
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
 
-            {(workingDates.includes(
-              formatDateString(
-                calenderDate.year,
-                calenderDate.month,
-                calenderDate.day
-              )
-            ) ||
-              date ===
-                formatDateString(
-                  calenderDate.year,
-                  calenderDate.month,
-                  calenderDate.day
-                )) && (
-              <div className="submit-button">
-                <button
-                  className="btn btn-secondary my-3"
-                  onClick={() => {
-                    addAsAbsent();
-                  }}
-                >
-                  {" "}
-                  Submit{" "}
-                </button>
-              </div>
+                {/* Submit button */}
+                <div className="submit-button">
+                  <button
+                    className="btn btn-secondary my-3"
+                    onClick={() => {
+                      addAsAbsent();
+                    }}
+                  >
+                    Submit
+                  </button>
+                </div>
+              </>
             )}
           </div>
 
@@ -335,10 +298,17 @@ const AttendanceNew = ({
                     className="text-gray-600 hover:text-gray-800 cursor-pointer"
                     icon={faCaretLeft}
                     onClick={() => {
-                      setCalenderDate((prevDate) => ({
-                        ...prevDate,
-                        month: prevDate.month === 1 ? 1 : prevDate.month - 1,
-                      }));
+                      setCalenderDate((prevDate) => {
+                        let newMonth = prevDate.month - 1;
+                        let newYear = prevDate.year;
+
+                        if (newMonth < 1) {
+                          newMonth = 12;
+                          newYear = prevDate.year - 1;
+                        }
+
+                        return { ...prevDate, month: newMonth, year: newYear };
+                      });
                     }}
                   />
                   <FontAwesomeIcon
@@ -346,9 +316,19 @@ const AttendanceNew = ({
                     icon={faCaretRight}
                     onClick={() => {
                       setCalenderDate((prevDate) => {
-                        const newMonth =
-                          prevDate.month === 12 ? 12 : prevDate.month + 1;
-                        const newDate = { ...prevDate, month: newMonth };
+                        let newMonth = prevDate.month + 1;
+                        let newYear = prevDate.year;
+
+                        if (newMonth > 12) {
+                          newMonth = 1;
+                          newYear = prevDate.year + 1;
+                        }
+
+                        const newDate = {
+                          ...prevDate,
+                          month: newMonth,
+                          year: newYear,
+                        };
 
                         // Don't allow navigating to future months
                         if (isFutureDate({ ...newDate, day: 1 })) {
@@ -372,7 +352,7 @@ const AttendanceNew = ({
                   const day = i + 1;
                   const isSelectedDay = day === calenderDate.day;
                   const todayParts = date.split("-").map(Number);
-                  const isToday =
+                  const isTodayDate =
                     day === todayParts[2] &&
                     calenderDate.month === todayParts[1] &&
                     calenderDate.year === todayParts[0];
@@ -381,6 +361,7 @@ const AttendanceNew = ({
                     month: calenderDate.month,
                     day: day,
                   });
+
                   const isWorkDay = isWorkingDate(
                     calenderDate.year,
                     calenderDate.month,
@@ -393,7 +374,7 @@ const AttendanceNew = ({
 
                   if (isFuture) {
                     dayClasses += " text-gray-300 cursor-not-allowed";
-                  } else if (!isWorkDay && !isToday) {
+                  } else if (!isWorkDay && !isTodayDate) {
                     dayStyle = {
                       backgroundColor: isSelectedDay ? "#b91c1c" : "",
                       color: isSelectedDay ? "white" : "#dc2626",

@@ -1,26 +1,17 @@
-import NepaliDate from "nepali-date";
-
 export function busPriceCalculator(
-  date = "2081-10-17",
+  date = "2024-12-30",
   dataArray,
   priceArray,
-  date2 = "2081-01-01"
+  date2 = "2024-01-01"
 ) {
 
   const getDaysDifference = (date2, date1) => {
-    // Helper function to convert a Nepali date string to an AD date
-    const convertNepaliToAD = (nepaliDateString) => {
-      const nepaliDate = new NepaliDate(nepaliDateString);
-
-      return nepaliDate.getEnglishDate(); // Returns a Date object
-    };
-
-    // Convert both Nepali dates to AD
-    const adDate1 = convertNepaliToAD(date1);
-    const adDate2 = convertNepaliToAD(date2);
+    // Convert date strings to Date objects
+    const dateObj1 = new Date(date1);
+    const dateObj2 = new Date(date2);
 
     // Calculate the difference in milliseconds
-    const differenceInMilliseconds = adDate1 - adDate2;
+    const differenceInMilliseconds = dateObj1 - dateObj2;
 
     // Convert milliseconds to days
     const differenceInDays = Math.floor(
@@ -41,30 +32,46 @@ export function busPriceCalculator(
       let startDate = start;
 
       // Adjust startDate if it's earlier than date2
-      if (getDaysDifference(startDate, date2) > 0) {
+      if (getDaysDifference(startDate, date2) < 0) {
         startDate = date2;
       }
 
       let endDate = end ? end : date; // Use provided end date or default to "date"
 
-      amounts.forEach((each, index) => {
+      // Sort amounts by date to ensure proper order
+      const sortedAmounts = [...amounts].sort((a, b) => 
+        getDaysDifference(a.date, b.date)
+      );
+
+      sortedAmounts.forEach((each, index) => {
         const currentAmountStart = each.date;
-        const nextAmountStart = amounts[index + 1]
-          ? amounts[index + 1].date
+        const nextAmountStart = sortedAmounts[index + 1]
+          ? sortedAmounts[index + 1].date
           : null;
 
+        // Skip if current amount period starts after our end date
+        if (getDaysDifference(currentAmountStart, endDate) > 0) {
+          return;
+        }
+
+        // Skip if next amount period starts before our start date
+        if (nextAmountStart && getDaysDifference(nextAmountStart, startDate) <= 0) {
+          return;
+        }
+
         // Determine the effective start and end for the current amount bracket
-        const effectiveStart =
-          currentAmountStart > startDate ? currentAmountStart : startDate;
-        const effectiveEnd =
-          nextAmountStart && nextAmountStart < endDate
-            ? nextAmountStart
-            : endDate;
+        const effectiveStart = getDaysDifference(currentAmountStart, startDate) > 0 
+          ? currentAmountStart 
+          : startDate;
+        
+        const effectiveEnd = nextAmountStart && getDaysDifference(nextAmountStart, endDate) < 0
+          ? nextAmountStart
+          : endDate;
 
-        // Calculate days only within the specific bracket
-        const interval = getDaysDifference(effectiveStart, effectiveEnd);
+        // Calculate days within this bracket (inclusive)
+        const interval = getDaysDifference(effectiveEnd, effectiveStart);
 
-        if (interval > 0) {
+        if (interval >= 0) {
           totalPrice += (each.amount / 30) * (interval + 1);
         }
       });
