@@ -35,12 +35,16 @@ export function busPriceCalculator(
 
       let endDate = end ? end : date; // Use provided end date or default to "date"
 
-      amounts.forEach((each, index) => {
+      // Sort amounts by date first (ascending order)
+      const sortedAmounts = amounts
+        .slice()
+        .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+      sortedAmounts.forEach((each, index) => {
         const currentAmountStart = each.date;
-        const nextAmountStart = amounts[index + 1]
-          ? amounts[index + 1].date
+        const nextAmountStart = sortedAmounts[index + 1]
+          ? sortedAmounts[index + 1].date
           : null;
-          
 
         // Determine the effective start and end for the current amount bracket
         const effectiveStart =
@@ -53,14 +57,10 @@ export function busPriceCalculator(
         // Calculate days only within the specific bracket
         const interval = getDaysDifference(effectiveStart, effectiveEnd);
 
-
         if (interval > 0) {
-          totalPrice += (each.amount / 30) * (interval + 1);
+          totalPrice += (each.amount / 30) * (interval > 0 ? interval : 1);
         }
       });
-
-
-      
     }
   });
 

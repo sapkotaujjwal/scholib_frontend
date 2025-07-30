@@ -144,8 +144,6 @@ const BusStatus = ({
     "2025-01-01"
   );
 
-  console.log(school.busFee);
-
   return (
     <div className="busmdaidna flex1 applyBootstrap">
       <div className="vmainqqw custom-scrollbar">
