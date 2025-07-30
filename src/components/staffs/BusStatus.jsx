@@ -141,14 +141,14 @@ const BusStatus = ({
     date,
     data.bus,
     school.busFee,
-    "2081-01-01"
+    "2025-01-01"
   );
 
+  console.log(school.busFee);
 
   return (
     <div className="busmdaidna flex1 applyBootstrap">
       <div className="vmainqqw custom-scrollbar">
-
         <div className="closeContainer">
           <div className="close flex1" onClick={closeFunction}>
             <FontAwesomeIcon icon={faXmark} />
@@ -275,12 +275,9 @@ const BusStatus = ({
                     Select Place :
                   </p> */}
 
-                  <div
-                    className="inttt w-full px-3"
-                   
-                  >
+                  <div className="inttt w-full px-3">
                     <Dropdown2
-                    nullOption={true}
+                      nullOption={true}
                       options={placeOptions}
                       title={`Select Place`}
                       onSelect={(a, b, c) => setBusPlace(c)}

@@ -581,7 +581,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
         date,
         studentCourseData.bus,
         school.busFee,
-        "2081-01-01"
+        "2025-01-01"
       )
     );
   }
@@ -1452,7 +1452,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                     date,
                                     studentCourseData.bus,
                                     school.busFee,
-                                    "2081-01-01"
+                                    "2025-01-01"
                                   )}
                                 </span>
                               </div>
@@ -1505,7 +1505,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                             date,
                                             [ind],
                                             school.busFee,
-                                            "2081-01-01"
+                                            "2025-01-01"
                                           )}
                                         </td>
                                         <td className="px-4 py-2 text-sm text-gray-800">
@@ -1830,7 +1830,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                       date,
                                       studentCourseData.bus,
                                       school.busFee,
-                                      "2081-01-01"
+                                      "2025-01-01"
                                     )}
                                   </span>
                                 </div>
