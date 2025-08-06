@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./exams.scss";
 import { useDispatch, useSelector } from "react-redux";
 import MetaData from "../layout/MetaData";

@@ -22,6 +22,11 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import Loading from "../../layout/loading";
+import {
+  convertTo12HourClock,
+  extractDateTime,
+  parseDate,
+} from "../../../tools/dateTool";
 
 const StudentDetails = ({ _id, students, year, closeFunction }) => {
   const school = useSelector((state) => state.Home.school.payload);
@@ -1932,10 +1937,10 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                           className="odd:bg-white even:bg-gray-50 hover:bg-gray-100 transition"
                                         >
                                           <td className="p-3 border-b min-w-[120px]">
-                                            {payment.date}
+                                            {extractDateTime(payment.date).date}
                                           </td>
                                           <td className="p-3 border-b min-w-[120px]">
-                                            {payment.time}
+                                            {extractDateTime(payment.date).time}
                                           </td>
                                           <td className="p-3 border-b font-medium min-w-[100px] text-gray-900">
                                             Rs. {payment.amount}
@@ -2016,7 +2021,10 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                           className="odd:bg-white even:bg-gray-50 hover:bg-gray-100 transition"
                                         >
                                           <td className="p-3 border-b">
-                                            {discount.date}
+                                            {
+                                              extractDateTime(discount.date)
+                                                .date
+                                            }
                                           </td>
 
                                           <td className="p-3 border-b font-medium text-gray-900">
@@ -2093,7 +2101,7 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                         className="odd:bg-white even:bg-gray-50 hover:bg-gray-100 transition"
                                       >
                                         <td className="p-3 border-b">
-                                          {discount.date}
+                                          {extractDateTime(discount.date).date}
                                         </td>
 
                                         <td className="p-3 border-b font-medium text-gray-900">
@@ -2498,38 +2506,6 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                             <label className="block mb-2 text-sm font-medium text-gray-600">
                               Select Book to Return
                             </label>
-                            {/* <select
-                              className="w-full p-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
-                              onChange={(e) => {
-                                if (!e.target.value) {
-                                  return;
-                                }
-
-                                setSelectedBooksTaken([
-                                  ...selectedBooksTaken,
-                                  e.target.value,
-                                ]);
-                              }}
-                            >
-                              <option value="" selected>
-                                Select a book
-                              </option>
-
-                              {libraryDetails
-                                .filter(
-                                  (book) =>
-                                    !selectedBooksTaken.find(
-                                      (bk) => book._id === bk
-                                    )
-                                )
-                                .map((book, index) => (
-                                  <option key={index} value={book._id}>
-                                    {book.book}
-                                  </option>
-                                ))}
-
-
-                            </select> */}
 
                             <select
                               className="w-full p-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
@@ -2543,10 +2519,9 @@ const StudentDetails = ({ _id, students, year, closeFunction }) => {
                                   e.target.value,
                                 ]);
 
-                                // Reset the select element to default value
                                 e.target.value = "";
                               }}
-                              value="" // Add this to control the component
+                              value=""
                             >
                               <option value="" selected>
                                 Select a book
