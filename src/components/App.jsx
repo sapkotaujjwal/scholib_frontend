@@ -2,7 +2,6 @@ import "./app.scss";
 import School from "./school";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Scholib from "./scholib/Scholib";
-import Login from "./layout/Login";
 import { GET_USER, GET_USER_SUCCESS, ERROR_REMOVE, GET_USER_FAIL } from "../redux/UserSlice";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -96,7 +95,6 @@ function App() {
       {success && !error && (
         <Switch>
           <Route path="/school/:schoolCode" component={School} />
-          <Route exact path="/login" component={Login} />
           <Route path="/" component={Scholib} />
 
           <Route path="" component={NotFound} />

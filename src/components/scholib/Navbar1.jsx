@@ -63,13 +63,13 @@ const Navbar1 = () => {
               <p className="h4"> | </p>
 
               <li>
-                <Link
+                <a
                   onClick={toggleNavbar}
-                  to={`/login`}
-                  className={currentPath === `/login` ? "active" : ""}
+                  href="http://localhost:3000/login"
+                  className=""
                 >
                   Login
-                </Link>
+                </a>
               </li>
             </ul>
           </div>

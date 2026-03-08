@@ -116,9 +116,9 @@ const Header = () => {
         <div className="right flex2">
           {!(user && user.schoolCode == schoolCode) && (
             <div className="login_div flex2">
-              <Link to="/login" onClick={handleLinkClick}>
+              <a href="http://localhost:3000/login" onClick={handleLinkClick}>
                 LOGIN
-              </Link>
+              </a>
               <p className="h6">
                 <FontAwesomeIcon icon={faLock} />
               </p>
