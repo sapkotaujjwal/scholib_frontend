@@ -136,7 +136,7 @@ const Update = ({ update }) => {
           <div className="flex items-center space-x-3">
             <img
               src={
-                school.logo.secure_url || "https://scholib.com/images/logo.png"
+                school.logo.secure_url || "https://res.cloudinary.com/dodvbotgd/image/upload/v1772985830/logo_abstract_h4obh9.png"
               }
               alt="Profile"
               className="w-12 h-12 rounded-full object-cover"

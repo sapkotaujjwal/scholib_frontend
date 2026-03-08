@@ -10,7 +10,7 @@ const Loading = () => {
 
           <div className="mb-1">
             <img
-              src={'https://scholib.com/images/logo.png'}
+              src={'https://res.cloudinary.com/dodvbotgd/image/upload/v1772985830/logo_abstract_h4obh9.png'}
               alt="Scholib Logo"
               className="w-24 h-24 object-contain"
             />
